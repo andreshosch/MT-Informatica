@@ -1,0 +1,22 @@
+.izquierda{
+    width: 30%;
+    background-color: red;
+}
+
+.centro{
+    width: 30%;
+    margin-left: 5%;
+    margin-right: 5%;
+    background-color: green;
+}
+
+.derecha{
+    width: 30%;
+    background-color: yellow;
+}
+
+.footer{
+    width: 100%;
+    height:auto;
+    display: flex;
+}
