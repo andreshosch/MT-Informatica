@@ -8,6 +8,8 @@ import { FooterComponent } from './components/footer/footer.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { OfertasCalientesComponent } from './components/ofertas-calientes/ofertas-calientes.component';
 import { ProductosComponent } from './components/productos/productos.component';
+import { GestionProductosComponent } from './components/gestion-productos/gestion-productos.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -16,11 +18,13 @@ import { ProductosComponent } from './components/productos/productos.component';
     FooterComponent,
     NavbarComponent,
     OfertasCalientesComponent,
-    ProductosComponent
+    ProductosComponent,
+    GestionProductosComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    NgbModule
   ],
   providers: [],
   bootstrap: [AppComponent]
