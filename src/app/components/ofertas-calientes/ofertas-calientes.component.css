@@ -1,0 +1,10 @@
+.fondoCarrousel{
+    background-color: lightgrey;
+    padding-top: 15px;
+    text-align: center;
+}
+
+.fondoCarrousel img{
+    width: 250px;
+    height: 250px;
+}
