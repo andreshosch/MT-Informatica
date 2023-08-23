@@ -1,0 +1,32 @@
+<div class="login" *ngIf="login">
+    <form action="">
+        <label>Usuario</label>
+        <input type="text">
+        <label>Clave</label>
+        <input type="password">
+        <button type="submit">Ingresar</button>
+    </form>
+    <button onclick="irARegistro()">Quiero registrarme</button>
+</div>
+<div class="registro" *ngIf="!login">
+    <form action="">
+        <label>Usuario</label>
+        <input type="text">
+        <label>Clave</label>
+        <input type="password">
+        <label>Mail</label>
+        <input type="email">
+
+        <label>DNI</label>
+        <input type="text">
+        <label>CUIT</label>
+        <input type="text">
+
+        <label>Telefono</label>
+        <input type="email">
+        <label>Situación Fiscal</label>
+        <option value="Consumidor final"></option>
+        <button type="submit">Solicitar Registro</button>
+    </form>
+    <button onclick="irALogin()">Cancelar</button>
+</div>

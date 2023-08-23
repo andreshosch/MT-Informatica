@@ -10,6 +10,7 @@ import { OfertasCalientesComponent } from './components/ofertas-calientes/oferta
 import { ProductosComponent } from './components/productos/productos.component';
 import { GestionProductosComponent } from './components/gestion-productos/gestion-productos.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { LoginyregistroComponent } from './components/loginyregistro/loginyregistro.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     NavbarComponent,
     OfertasCalientesComponent,
     ProductosComponent,
-    GestionProductosComponent
+    GestionProductosComponent,
+    LoginyregistroComponent
   ],
   imports: [
     BrowserModule,
