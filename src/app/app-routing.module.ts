@@ -5,6 +5,8 @@ import { IndexComponent } from './components/index/index.component';
 import { LoginyregistroComponent } from './components/loginyregistro/loginyregistro.component';
 
 const routes: Routes = [
+  {path:'',component:IndexComponent},
+  {path:'contacto',component:ContactoComponent}
 ];
 
 

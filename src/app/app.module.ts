@@ -21,7 +21,9 @@ import { IndexComponent } from './components/index/index.component';
     FooterComponent,
     NavbarComponent,
     OfertasCalientesComponent,
-    ProductosComponent
+    ProductosComponent,
+    ContactoComponent,
+    IndexComponent
   ],
   imports: [
     BrowserModule,
