@@ -11,6 +11,8 @@ import { ProductosComponent } from './components/productos/productos.component';
 import { GestionProductosComponent } from './components/gestion-productos/gestion-productos.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { LoginyregistroComponent } from './components/loginyregistro/loginyregistro.component';
+import { ContactoComponent } from './components/contacto/contacto.component';
+import { IndexComponent } from './components/index/index.component';
 
 @NgModule({
   declarations: [
@@ -19,9 +21,7 @@ import { LoginyregistroComponent } from './components/loginyregistro/loginyregis
     FooterComponent,
     NavbarComponent,
     OfertasCalientesComponent,
-    ProductosComponent,
-    GestionProductosComponent,
-    LoginyregistroComponent
+    ProductosComponent
   ],
   imports: [
     BrowserModule,
