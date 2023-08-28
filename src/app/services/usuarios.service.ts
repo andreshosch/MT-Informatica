@@ -18,6 +18,7 @@ export class UsuariosService {
 
   createUser(usuario: Usuario): Promise<any>{
     return this.firestore.collection('Usuarios').add(usuario)
+    
   }
 
 
