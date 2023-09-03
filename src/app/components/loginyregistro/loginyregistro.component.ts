@@ -17,7 +17,7 @@ export class LoginyregistroComponent {
   }
 
   ngOnInit(){
-    // this.getUsuarios()
+    this.getUsuarios()
     // this.getSolicitudes()
   }
 
@@ -27,6 +27,7 @@ export class LoginyregistroComponent {
   }
 
   irARegistro(){
+    console.log("ingrese al login")
     this.login=false
   }
 
@@ -36,25 +37,27 @@ export class LoginyregistroComponent {
       doc.forEach((element: any) => {
         this.listUsuario.push(element)
       })
+      console.log(`Usuario: ${JSON.stringify(this.listUsuario)}`)
     })
-    console.log(`Usuario: ${this.listUsuario}`)
+    
   }
 
   getSolicitudes(){
 
   }
 
-  creacion(){
-    const unUsuario: Usuario = {
-      dni: 29560756,
-      nombre: "Cristian",
-      apellido: "Alessandria",
-      celular: 3425289289,
-      domicilio: "Matacos 4242",
-      mail: "cale@ssan.com",
-    }
+  // creacion(){
+  //   console.log('Ingresando')
+  //   const unUsuario: Usuario = {
+  //     dni: 29560756,
+  //     nombre: "Cristian",
+  //     apellido: "Alessandria",
+  //     celular: 3425289289,
+  //     domicilio: "Matacos 4242",
+  //     mail: "cale@ssan.com",
+  //   }
 
-    this._usuarioService.createUser(unUsuario);
-  }
+  //   this._usuarioService.createUser(unUsuario);
+  // }
 
 }
