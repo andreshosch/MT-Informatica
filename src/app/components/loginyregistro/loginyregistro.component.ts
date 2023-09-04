@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { UsuariosService } from 'src/app/services/usuarios.service';
 import { Usuario } from 'src/app/models/usuario';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-loginyregistro',
@@ -11,8 +12,19 @@ export class LoginyregistroComponent {
 
   login: boolean = true
   listUsuario: Usuario[] = []
+  formRegistro: FormGroup
 
-  constructor(private _usuarioService: UsuariosService){
+  constructor(private _usuarioService: UsuariosService, private fb:FormBuilder){
+    this.formRegistro = this.fb.group({
+      nombre:['',Validators.required],
+      apellido:['',Validators.required],
+      password:['',Validators.required],
+      email:['',Validators.required],
+      dni:['',Validators.required],      
+      cuit:['',Validators.required],  
+      domicilio:['',Validators.required],
+      telefono:['',Validators.required],
+    })
 
   }
 
@@ -27,7 +39,6 @@ export class LoginyregistroComponent {
   }
 
   irARegistro(){
-    console.log("ingrese al login")
     this.login=false
   }
 
@@ -35,7 +46,11 @@ export class LoginyregistroComponent {
     this._usuarioService.getUsers().subscribe(doc => {
       this.listUsuario = []
       doc.forEach((element: any) => {
-        this.listUsuario.push(element)
+        // this.listUsuario.push(element)
+        this.listUsuario.push({
+          id: element.payload.doc.id,
+          ... element.payload.doc.data()
+        })
       })
       console.log(`Usuario: ${JSON.stringify(this.listUsuario)}`)
     })
@@ -46,18 +61,38 @@ export class LoginyregistroComponent {
 
   }
 
-  // creacion(){
-  //   console.log('Ingresando')
-  //   const unUsuario: Usuario = {
-  //     dni: 29560756,
-  //     nombre: "Cristian",
-  //     apellido: "Alessandria",
-  //     celular: 3425289289,
-  //     domicilio: "Matacos 4242",
-  //     mail: "cale@ssan.com",
-  //   }
+  creacion(){
+    console.log('Ingresando')
+    const unUsuario: Usuario = {
+      dni: 29560560,
+      nombre: "Cristian",
+      apellido: "Alex",
+      celular: 3425289289,
+      domicilio: "Japon 224",
+      mail: "cale@ssan.com",
+      password: "Tomate12"
+    }
 
-  //   this._usuarioService.createUser(unUsuario);
-  // }
+    this._usuarioService.createUser(unUsuario);
+  }
+
+  creacion2(){
+    console.log('creacion 2')
+    const unUsuario: Usuario = {
+      dni: 11057648,
+      nombre: "Andy",
+      apellido: "Summer",
+      celular: 3426348751,
+      domicilio: "Narnia 900",
+      mail: "andy@gmail.com",
+      password: "destino2023"
+    }
+
+    this._usuarioService.createSolicitud(unUsuario);
+  }
+
+  solicitarAlta(){
+
+  }
 
 }

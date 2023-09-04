@@ -1,0 +1,17 @@
+.login{
+    display: flex;
+    flex-direction: column;
+}
+
+.formInicio{
+    display: flex;
+    flex-direction: column;
+    width: 40%;
+    margin-left: 30%;
+}
+
+.ingreso{
+    width: 40%;
+    margin-left: 30%;
+    margin-top: 15px;
+}

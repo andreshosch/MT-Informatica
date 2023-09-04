@@ -21,5 +21,10 @@ export class UsuariosService {
     
   }
 
+  createSolicitud(usuario: Usuario): Promise<any>{
+    return this.firestore.collection('Solicitudes').add(usuario)
+    
+  }
+
 
 }
