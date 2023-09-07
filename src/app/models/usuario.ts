@@ -17,7 +17,6 @@ export class Usuario{
         this.mail = mail
         this.cuit = cuit
         this.password = password
-
     }
 
 }
