@@ -9,7 +9,7 @@
     <button class="ingreso" (click)="irARegistro()">Quiero registrarme</button>
 </div>
 <div class="registro" *ngIf="!login">
-    <form [formGroup]="solicitudUsuario" class="formInicio" (ngSubmit)="solicitarAlta()">
+    <form [formGroup]="formRegistro" class="formInicio" (ngSubmit)="solicitarAlta()">
         <label>Nombre</label>
         <input type="text" formControlName="nombre">
         <label>Apellido</label>

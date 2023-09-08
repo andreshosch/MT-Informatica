@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgbCarouselConfig } from '@ng-bootstrap/ng-bootstrap';
 import { Producto } from 'src/app/models/producto';
 import { ProductosService } from 'src/app/services/productos.service';
@@ -12,9 +13,17 @@ import { ProductosService } from 'src/app/services/productos.service';
 export class GestionProductosComponent {
 
   productosHot: any[] = []
+  altaProd:FormGroup
 
-  constructor(private _productosService: ProductosService){
-
+  constructor(private _productosService: ProductosService, private fb: FormBuilder){
+    this.altaProd = this.fb.group({
+      nombre: ['', Validators.required],
+      rubro: ['', Validators.required],
+      subrubro: ['', Validators.required],
+      descripcion: ['', Validators.required],
+      precio: ['', Validators.required],
+      imagen: ['', Validators.required],
+    })
   }
 
 
@@ -48,7 +57,8 @@ export class GestionProductosComponent {
       rubro: "video",
       subrubro: "camara",
       imagen: "https://http2.mlstatic.com/D_NQ_NP_2X_645359-MLA46557837279_062021-F.webp",
-      descripcion: "safan dentro de todo"}
+      descripcion: "safan dentro de todo"
+    }
 
     this._productosService.createProduct(unProducto)
 

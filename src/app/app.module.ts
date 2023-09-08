@@ -18,6 +18,7 @@ import { environment } from './environment/environment';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { DatePipe } from '@angular/common';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -39,12 +40,14 @@ import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
     AppRoutingModule,
     NgbModule,
     AngularFireModule.initializeApp(environment.firebase),
-    AngularFirestoreModule
+    AngularFirestoreModule,
+    ReactiveFormsModule
   ],
   exports: [
     // SharedModule,
     AngularFireModule,
     AngularFireAuthModule,
+    ReactiveFormsModule
   ],
   providers: [
     // DatePipe,
