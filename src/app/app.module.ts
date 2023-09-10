@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
+import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { EncabezadoComponent } from './components/encabezado/encabezado.component';
@@ -14,6 +14,7 @@ import { LoginyregistroComponent } from './components/loginyregistro/loginyregis
 import { ContactoComponent } from './components/contacto/contacto.component';
 import { IndexComponent } from './components/index/index.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -23,12 +24,14 @@ import { IndexComponent } from './components/index/index.component';
     OfertasCalientesComponent,
     ProductosComponent,
     ContactoComponent,
-    IndexComponent
+    IndexComponent,
+    LoginyregistroComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    NgbModule
+    NgbModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

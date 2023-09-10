@@ -1,1 +1,21 @@
-<p>productos works!</p>
+<h3 class="titleProductos">NUESTROS PRODUCTOS</h3>
+<div class="card" style="width: 18rem" *ngFor="let productos of arrProductos">
+    <img src={{productos.imagenes[0]}} class="card-img-top" alt="...">
+    <div class="card-body">
+      <h5 class="card-title">{{productos.nombre}}</h5>
+      <p class="card-text">{{productos.categoria}}</p>
+      <p class="card-marca">{{productos.marca}}</p>
+      <p class="card-precio">U$S {{productos.pvp_usd}}</p>
+    </div>
+    <div class="card-body">
+      <a href={{productos.link}} class="card-link" target="_blank">Ver Producto</a>
+    </div>
+  </div>
+  <nav aria-label="Page navigation example">
+     <ul class="pagination justify-content-center">
+     
+      <li class="page-item"><a class="page-link" href="#">{{this.pages1}}</a></li>
+      
+    </ul> 
+  </nav>
+ 
