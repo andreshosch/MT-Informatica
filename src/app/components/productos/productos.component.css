@@ -1,0 +1,14 @@
+.titleProductos{
+  color: blue;
+  text-align: center;
+  padding-top: 2rem;
+}
+.card{
+  display: inline-block;
+  margin-right: 1%;
+  margin-bottom: 1%;
+  width: 18rem;
+  max-width: 100%; 
+  max-height: 100%;
+  
+}
