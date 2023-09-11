@@ -13,6 +13,7 @@ export class LoginyregistroComponent {
   login: boolean = true
   listUsuario: Usuario[] = []
   formRegistro: FormGroup
+  loginUsr: FormGroup
 
   constructor(private _usuarioService: UsuariosService, private fb:FormBuilder){
     this.formRegistro = this.fb.group({
@@ -52,7 +53,11 @@ export class LoginyregistroComponent {
           ... element.payload.doc.data()
         })
       })
-      console.log(`Usuario: ${JSON.stringify(this.listUsuario)}`)
+      
+      for(let j=0; j< this.listUsuario.length; j++){
+        console.log(`Usuario: ${this.listUsuario[j].mail}`)
+        console.log(`Pass: ${this.listUsuario[j].password}`)
+      }
     })
     
   }

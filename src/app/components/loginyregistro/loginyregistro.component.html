@@ -1,9 +1,9 @@
 <div class="login" *ngIf="login">
-    <form class="formInicio" action="">
+    <form [formGroup]="loginUsr" class="formInicio" action="">
         <label>Usuario</label>
-        <input type="text">
+        <input type="text" formControlName="usuario">
         <label>Clave</label>
-        <input type="password">
+        <input type="password" formControlName="contrasena">
         <button type="submit">Ingresar</button>
     </form>
     <button class="ingreso" (click)="irARegistro()">Quiero registrarme</button>
