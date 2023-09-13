@@ -17,9 +17,49 @@
       </li>
     </div>
     <li class="nav-item">
-      <a class="nav-link" href="#">Inicio</a>
+      <a (click)="habilitarLogin()" class="nav-link">Inicio</a>
     </li>
     <li class="nav-item">
       <a class="nav-link" href="#">Carrito</a>
     </li>
   </ul>
+
+  <div class="confirmation-dialog" *ngIf="loginProgress">
+    <div class="dialog-content">
+        <div class="login" *ngIf="login">
+            <form [formGroup]="loginUsr" class="formInicio" action="">
+                <label>Usuario</label>
+                <input type="text" formControlName="usuario">
+                <label>Clave</label>
+                <input type="password" formControlName="contrasena">
+                <button type="submit">Ingresar</button>
+            </form>
+            <button class="ingreso" (click)="irARegistro()">Quiero registrarme</button>
+            <button (click)="cerrarLogin()">Cerrar</button>
+        </div>
+        <div class="registro" *ngIf="!login">
+            <form [formGroup]="formRegistro" class="formInicio" (ngSubmit)="solicitarAlta()">
+                <label>Nombre</label>
+                <input type="text" formControlName="nombre">
+                <label>Apellido</label>
+                <input type="text" formControlName="apellido">
+                <label>Clave</label>
+                <input type="password" formControlName="password">
+                <label>Mail</label>
+                <input type="email" formControlName="email">
+        
+                <label>DNI</label>
+                <input type="text" formControlName="dni">
+                <label>CUIT</label>
+                <input type="text" formControlName="cuit">
+                <label>Domicilio</label>
+                <input type="text" formControlName="domicilio">
+                <label>Telefono</label>
+                <input type="email" formControlName="email">
+                
+                <button type="submit">Solicitar Registro</button>
+            </form>
+            <button class="ingreso" (click)="irALogin()">Cancelar</button>
+        </div>
+    </div>
+</div>

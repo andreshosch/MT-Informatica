@@ -1,24 +1,121 @@
+<app-encabezado></app-encabezado>
+<app-navbar></app-navbar>
+
+<div class="formatoArticulos">
+    <h3>Articulos actuales</h3>
+    <div class="galeriaCard">
+        <div *ngFor="let articulo of productosHot">
+        
+            <div class="card">
+                <img src="{{articulo.imagen}}" alt="">
+                <h6>Articulo: {{articulo.nombre}}</h6>
+                <h6>Precio: {{articulo.precio}}</h6>
+                <div>
+                    <button (click)="modificar(articulo.id)">Modificar</button>
+                    <button (click)="borrarPorId(articulo.id)">Borrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="formAgregar" *ngIf="modalActivo">
+    <div>
+        <h3>Modificar producto</h3>
+        <div>
+            <form [formGroup]="modificarProd" (ngSubmit)="agregarProd('m')"> 
+            
+                <mat-grid-list cols="4" rowHeight="70px" style="margin-top: 8%; margin-right: 6%;">
+                    <mat-grid-tile [colspan]="2" [rowspan]="1">
+                        <mat-form-field>
+                            <mat-label>Nombre</mat-label>
+                            <input matInput formControlName="nombreM">
+                        </mat-form-field>
+                    </mat-grid-tile>
+                    <mat-grid-tile [colspan]="2" [rowspan]="1">
+                        <mat-form-field>
+                            <mat-label>Precio</mat-label>
+                            <input matInput formControlName="precioM">
+                        </mat-form-field>
+                    </mat-grid-tile>
+                    <mat-grid-tile [colspan]="2" [rowspan]="1">
+                        <mat-form-field>
+                            <mat-label>Rubro</mat-label>
+                            <input matInput formControlName="rubroM">
+                        </mat-form-field>
+                    </mat-grid-tile>
+                    <mat-grid-tile [colspan]="2" [rowspan]="1">
+                        <mat-form-field>
+                            <mat-label>Subrubro</mat-label>
+                            <input matInput formControlName="subrubroM">
+                        </mat-form-field>
+                    </mat-grid-tile>
+                    <mat-grid-tile [colspan]="2" [rowspan]="1">
+                        <mat-form-field>
+                            <mat-label>Descripción</mat-label>
+                            <input matInput formControlName="descripcionM">
+                        </mat-form-field>
+                    </mat-grid-tile>
+                    <mat-grid-tile [colspan]="2" [rowspan]="1">
+                        <mat-form-field>
+                            <mat-label>Imagen</mat-label>
+                            <input matInput formControlName="imagenM">
+                        </mat-form-field>
+                    </mat-grid-tile>
+                </mat-grid-list>
+                <button  type="submit" mat-raised-button color="primary" style="float: center;margin-bottom: 40px;">Actualizar</button>  
+                <button  (click)="cerrarModal()" type="text" mat-raised-button color="primary" style="float: center;margin-bottom: 40px;">Cancelar</button>  
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="formAgregar" *ngIf="!modalActivo">
+    <h3>Agregar productos</h3>
+    <div>
+        <form [formGroup]="altaProd" (ngSubmit)="agregarProd('a')"> 
+            <mat-grid-list cols="4" rowHeight="70px" style="margin-top: 8%; margin-right: 6%;">
+                <mat-grid-tile [colspan]="2" [rowspan]="1">
+                    <mat-form-field>
+                        <mat-label>Nombre</mat-label>
+                        <input matInput formControlName="nombre">
+                    </mat-form-field>
+                </mat-grid-tile>
+                <mat-grid-tile [colspan]="2" [rowspan]="1">
+                    <mat-form-field>
+                        <mat-label>Precio</mat-label>
+                        <input matInput formControlName="precio">
+                    </mat-form-field>
+                </mat-grid-tile>
+                <mat-grid-tile [colspan]="2" [rowspan]="1">
+                    <mat-form-field>
+                        <mat-label>Rubro</mat-label>
+                        <input matInput formControlName="rubro">
+                    </mat-form-field>
+                </mat-grid-tile>
+                <mat-grid-tile [colspan]="2" [rowspan]="1">
+                    <mat-form-field>
+                        <mat-label>Subrubro</mat-label>
+                        <input matInput formControlName="subrubro">
+                    </mat-form-field>
+                </mat-grid-tile>
+                <mat-grid-tile [colspan]="2" [rowspan]="1">
+                    <mat-form-field>
+                        <mat-label>Descripción</mat-label>
+                        <input matInput formControlName="descripcion">
+                    </mat-form-field>
+                </mat-grid-tile>
+                <mat-grid-tile [colspan]="2" [rowspan]="1">
+                    <mat-form-field>
+                        <mat-label>Imagen</mat-label>
+                        <input matInput formControlName="imagen">
+                    </mat-form-field>
+                </mat-grid-tile>
+            </mat-grid-list>
+            <button  type="submit" mat-raised-button color="primary" style="float: center;margin-bottom: 40px;">Aceptar</button>  
+        </form>
+    </div>
+</div>
 
 
-<!-- 
-<form [formGroup]="altaProd" class="formInicio" (ngSubmit)="agregarProd()">
-    <label>Nombre</label>
-    <input type="text" formControlName="nombre">
-    <label>Apellido</label>
-    <input type="text" formControlName="apellido">
-    <label>Clave</label>
-    <input type="password" formControlName="password">
-    <label>Mail</label>
-    <input type="email" formControlName="email">
 
-    <label>DNI</label>
-    <input type="text" formControlName="dni">
-    <label>CUIT</label>
-    <input type="text" formControlName="cuit">
-    <label>Domicilio</label>
-    <input type="text" formControlName="domicilio">
-    <label>Telefono</label>
-    <input type="email" formControlName="email">
-    
-    <button type="submit">Solicitar Registro</button>
-</form> -->

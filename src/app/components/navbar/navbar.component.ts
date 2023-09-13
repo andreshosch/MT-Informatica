@@ -8,5 +8,10 @@ import { Component } from '@angular/core';
 export class NavbarComponent {
 
   usrAdmin: boolean = true
+  loginProgress: boolean = false
+
+  habilitarLogin(){
+    this.loginProgress = true
+  }
 
 }

@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { NgbCarouselConfig } from '@ng-bootstrap/ng-bootstrap';
 import { Producto } from 'src/app/models/producto';
 import { ProductosService } from 'src/app/services/productos.service';
 
@@ -14,6 +13,10 @@ export class GestionProductosComponent {
 
   productosHot: any[] = []
   altaProd:FormGroup
+  modificarProd: FormGroup
+  modalActivo: boolean = false
+  idProducto: string
+
 
   constructor(private _productosService: ProductosService, private fb: FormBuilder){
     this.altaProd = this.fb.group({
@@ -24,15 +27,24 @@ export class GestionProductosComponent {
       precio: ['', Validators.required],
       imagen: ['', Validators.required],
     })
+
+    this.modificarProd = this.fb.group({
+      nombreM: ['', Validators.required],
+      rubroM: ['', Validators.required],
+      subrubroM: ['', Validators.required],
+      descripcionM: ['', Validators.required],
+      precioM: ['', Validators.required],
+      imagenM: ['', Validators.required],
+    })
   }
 
 
   ngOnInit(){
-    
+    this.getProductos()
   }
 
   ngAfterView(){
-    this.getProductos()
+    
   }
 
   getProductos(){
@@ -45,25 +57,60 @@ export class GestionProductosComponent {
           ... element.payload.doc.data()
         })
       })
+      console.log(this.productosHot)
     })
   }
 
-  agregarProd(){
-
-    console.log('Ingresando a crear producto')
-    const unProducto: Producto = {
-      nombre: "Camara niños",
-      precio: 256,
-      rubro: "video",
-      subrubro: "camara",
-      imagen: "https://http2.mlstatic.com/D_NQ_NP_2X_645359-MLA46557837279_062021-F.webp",
-      descripcion: "safan dentro de todo"
+  agregarProd(tipo){
+    if(tipo == 'a'){
+      const unProducto: Producto = {
+        nombre: this.altaProd.get('nombre').value,
+        precio: this.altaProd.get('precio').value,
+        rubro: this.altaProd.get('rubro').value,
+        subrubro: this.altaProd.get('subrubro').value,
+        imagen: this.altaProd.get('imagen').value,
+        descripcion: this.altaProd.get('descripcion').value
+      }
+      this._productosService.createProduct(unProducto) 
+    }else{
+      const unProducto: Producto = {
+        nombre: this.modificarProd.get('nombreM').value,
+        precio: this.modificarProd.get('precioM').value,
+        rubro: this.modificarProd.get('rubroM').value,
+        subrubro: this.modificarProd.get('subrubroM').value,
+        imagen: this.modificarProd.get('imagenM').value,
+        descripcion: this.modificarProd.get('descripcionM').value
+      }
+      this._productosService.updateProduct(this.idProducto, unProducto) 
     }
-
-    this._productosService.createProduct(unProducto)
-
+    
+    
     
   }
 
+  borrarPorId(articulo){
+    console.log(`articulo: ${articulo}`)
+    this._productosService.deleteProduct(articulo)
+  }
+
+  modificar(articulo){
+    this.modalActivo = true
+    this.idProducto = articulo
+
+    this._productosService.getProductById(articulo).subscribe(data => {
+      this.modificarProd.setValue({
+        nombreM: data.nombre,
+        precioM: data.precio,
+        rubroM: data.rubro,
+        subrubroM: data.subrubro,
+        imagenM: data.imagen,
+        descripcionM: data.descripcion
+      })
+    })
+  }
+
+  cerrarModal(){
+    this.modalActivo=false
+  }
 
 }
