@@ -58,13 +58,7 @@ export class LoginyregistroComponent {
           ... element.payload.doc.data()
         })
       })
-      
-      for(let j=0; j< this.listUsuario.length; j++){
-        console.log(`Usuario: ${this.listUsuario[j].mail}`)
-        console.log(`Pass: ${this.listUsuario[j].password}`)
-      }
-    })
-    
+    }) 
   }
 
   getSolicitudes(){

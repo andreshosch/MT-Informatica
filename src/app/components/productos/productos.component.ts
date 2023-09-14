@@ -25,8 +25,10 @@ ngOnInit(){
   this.productosServices.getAllProducts(requestData).subscribe
    (response=>{
    this.arrProductos=response['resultado']
+   console.table(`prod ${JSON.stringify(this.arrProductos.length)}`)
     this.pages=response['paginador'];
     this.pages1=Math.ceil(this.pages.total/20)
   })
+  
  }
 }

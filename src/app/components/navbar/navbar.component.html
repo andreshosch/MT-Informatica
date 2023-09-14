@@ -27,15 +27,27 @@
   <div class="confirmation-dialog" *ngIf="loginProgress">
     <div class="dialog-content">
         <div class="login" *ngIf="login">
-            <form [formGroup]="loginUsr" class="formInicio" action="">
-                <label>Usuario</label>
-                <input type="text" formControlName="usuario">
-                <label>Clave</label>
-                <input type="password" formControlName="contrasena">
-                <button type="submit">Ingresar</button>
-            </form>
-            <button class="ingreso" (click)="irARegistro()">Quiero registrarme</button>
-            <button (click)="cerrarLogin()">Cerrar</button>
+          <form [formGroup]="loginUsr" (ngSubmit)="ingresoUsr()"> 
+            <mat-grid-list cols="4" rowHeight="70px" style="margin-top: 8%; margin-right: 6%;">
+                <mat-grid-tile [colspan]="4" [rowspan]="1">
+                    <mat-form-field>
+                        <mat-label>Usuario</mat-label>
+                        <input matInput formControlName="usuario">
+                    </mat-form-field>
+                </mat-grid-tile>
+                <mat-grid-tile [colspan]="4" [rowspan]="1">
+                    <mat-form-field>
+                        <mat-label>Contraseña</mat-label>
+                        <input matInput formControlName="contrasena">
+                    </mat-form-field>
+                </mat-grid-tile>
+            </mat-grid-list>
+            <button  type="submit" mat-raised-button color="primary" style="float: center;margin-bottom: 40px;">Aceptar</button>  
+          </form>
+          <button (click)="irARegistro()" mat-raised-button color="primary" style="float: center;margin-bottom: 20px;">Registrarme</button>  
+          <button (click)="cerrarLogin()" mat-raised-button color="primary" style="float: center;margin-bottom: 20px;">Cancelar</button>  
+            
+          
         </div>
         <div class="registro" *ngIf="!login">
             <form [formGroup]="formRegistro" class="formInicio" (ngSubmit)="solicitarAlta()">
