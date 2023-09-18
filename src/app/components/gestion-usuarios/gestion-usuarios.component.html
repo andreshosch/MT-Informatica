@@ -1,0 +1,40 @@
+<app-encabezado></app-encabezado>
+<app-navbar></app-navbar>
+
+<div class="formatoArticulos">
+    <h3>Solicitudes pendientes</h3>
+    <div class="galeriaCard">
+        <div *ngFor="let solicitud of usuariosEnEspera">
+        
+            <div class="card">
+                <h6>DNI: {{solicitud.dni}}</h6>
+                <h6>Nombre: {{solicitud.nombre}}</h6>
+                <h6>Apellido: {{solicitud.apellido}}</h6>
+                <h6>Mail: {{solicitud.mail}}</h6>
+                <div>
+                    <button (click)="aceptarUsr(solicitud.id)">Aceptar</button>
+                    <button (click)="eliminarSolicitudPorId(solicitud.id)">Eliminar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<br><br><br>
+<div class="formatoArticulos">
+    <h3>Usuarios registrados</h3>
+    <div class="galeriaCard">
+        <div *ngFor="let usuario of usuariosRegistrados">
+        
+            <div class="card">
+                <h6>DNI: {{usuario.dni}}</h6>
+                <h6>Nombre: {{usuario.nombre}}</h6>
+                <h6>Apellido: {{usuario.apellido}}</h6>
+                <h6>Mail: {{usuario.mail}}</h6>
+                <div>
+                    <button (click)="modificarUsr(usuario.id)">Modificar</button>
+                    <button (click)="eliminarUsrPorId(usuario.id)">Eliminar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

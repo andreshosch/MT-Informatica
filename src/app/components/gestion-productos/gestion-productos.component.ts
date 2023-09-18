@@ -51,7 +51,6 @@ export class GestionProductosComponent {
     this._productosService.getProducts().subscribe(doc => {
       this.productosHot = []
       doc.forEach((element: any) => {
-        // this.listUsuario.push(element)
         this.productosHot.push({
           id: element.payload.doc.id,
           ... element.payload.doc.data()

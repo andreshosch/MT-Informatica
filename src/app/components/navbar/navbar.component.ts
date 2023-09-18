@@ -29,6 +29,16 @@ export class NavbarComponent {
       usuario: ['', Validators.required],
       contrasena: ['', Validators.required],
     })
+
+    this.formRegistro = this.fb.group({
+      nombre: ['', Validators.required],
+      contrasena: ['', Validators.required],
+      mail: ['', Validators.required],
+      telefono: ['', Validators.required],
+      dni: ['', Validators.required],
+      domicilio: ['', Validators.required],
+      apellido: ['', Validators.required],
+    })
   }
 
   getUsuarios(){
@@ -47,11 +57,7 @@ export class NavbarComponent {
   ingresoUsr(){
     this.usuario = this.loginUsr.get('usuario').value
     this.contrasena = this.loginUsr.get('contrasena').value
-    console.log(`Usuario: ${this.usuario}`)
-    console.log(`Contraseña: ${this.contrasena}`)
     for (let j=0; j < this.listUsuario.length; j++){
-      console.log(`Usuario en J: ${this.listUsuario[j].dni}`)
-      console.log(`Contraseña en J : ${this.listUsuario[j].password}`)
       if(this.listUsuario[j].dni == this.usuario){
         if(this.listUsuario[j].password === this.contrasena){
           console.log('Ingresaste correctamente')
@@ -78,5 +84,23 @@ export class NavbarComponent {
   irARegistro(){
     this.login=false
   }
+  
+  solicitarAlta(){
+    //Validar si existe DNI
+    const unaSolicitud: Usuario = {
+      nombre: this.formRegistro.get('nombre').value,
+      apellido: this.formRegistro.get('apellido').value,
+      dni: this.formRegistro.get('dni').value,
+      celular: this.formRegistro.get('telefono').value,
+      mail: this.formRegistro.get('mail').value,
+      domicilio: this.formRegistro.get('domicilio').value,
+      password: this.formRegistro.get('contrasena').value,
+    }
+    console.log(`Creando una nueva solicitud ${JSON.stringify(unaSolicitud)}`)
+    this._usuarioService.createSolicitud(unaSolicitud)
+    this.formRegistro.reset()
+    //enviar mensaje de exito de solicitud
+    this.loginProgress=false
 
+  }
 }

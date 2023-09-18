@@ -22,7 +22,7 @@ import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SharedModule } from './shared/shared.module';
-
+import { GestionUsuariosComponent } from './components/gestion-usuarios/gestion-usuarios.component';
 
 
 @NgModule({
@@ -36,7 +36,8 @@ import { SharedModule } from './shared/shared.module';
     ContactoComponent,
     IndexComponent,
     GestionProductosComponent,
-    LoginyregistroComponent
+    LoginyregistroComponent,
+    GestionUsuariosComponent,
   ],
   imports: [
     BrowserModule,
