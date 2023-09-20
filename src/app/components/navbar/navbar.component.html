@@ -21,10 +21,13 @@
         <a class="nav-link" href="./gestionUsr">Gestión de usuarios</a>
       </li>
     </div>
-    <li class="nav-item">
-      <a (click)="habilitarLogin()" class="nav-link">Inicio</a>
+    <li *ngIf="!hayUsuario" class="nav-item">
+      <a (click)="habilitarLogin()" class="nav-link">LogIn</a>
     </li>
-    <li class="nav-item">
+    <li *ngIf="hayUsuario" class="nav-item">
+      <a (click)="desloguear()" class="nav-link">LogOut</a>
+    </li>
+    <li *ngIf="hayUsuario" class="nav-item">
       <a class="nav-link" href="#">Carrito</a>
     </li>
   </ul>

@@ -4,6 +4,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {MatGridListModule} from '@angular/material/grid-list';
 import {MatButtonModule} from '@angular/material/button';
+import {MatIconModule} from '@angular/material/icon';
 
 @NgModule({
     declarations: [],
@@ -11,13 +12,15 @@ import {MatButtonModule} from '@angular/material/button';
       MatFormFieldModule,
       MatInputModule,
       MatGridListModule,
-      MatButtonModule
+      MatButtonModule,
+      MatIconModule
     ],
     exports: [
       MatFormFieldModule,
       MatInputModule,
       MatGridListModule,
-      MatButtonModule
+      MatButtonModule,
+      MatIconModule
     ]
   })
   export class SharedModule { }

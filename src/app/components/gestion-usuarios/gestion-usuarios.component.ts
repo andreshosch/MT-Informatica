@@ -35,9 +35,9 @@ getSolicitudes() {
         ... element.payload.doc.data()
       })
     })
-    console.log(`Usuarios registrados: ${JSON.stringify(this.usuariosRegistrados)}`)
   })
 }
+
 getUsuarios() {
   this._usuariosService.getSolicitudes().subscribe(doc => {
     this.usuariosEnEspera = []
@@ -47,7 +47,6 @@ getUsuarios() {
         ... element.payload.doc.data()
       })
     })
-    console.log(`Usuarios en Espera: ${JSON.stringify(this.usuariosEnEspera)}`)
   })
 }
 
@@ -71,7 +70,7 @@ aceptarUsr(id:string){
     }
     this._usuariosService.createUser(unUsuario)
     console.log(`Se creo el usuario: ${JSON.stringify(unUsuario)}`)
-    // this._usuariosService.deleteSolicitudPorId(id)
+    this._usuariosService.deleteSolicitudPorId(id)
     console.log(`Se borró el usuario: ${id}`)
     // this.sendWhatsapp("Cristian","TuHermana@hotmail.com")
 
@@ -79,12 +78,12 @@ aceptarUsr(id:string){
 
 eliminarSolicitudPorId(id:string){
   console.log(`Solicitud a eliminar: ${id}`)
-    // this._usuariosService.deleteSolicitudPorId(id)
+  this._usuariosService.deleteSolicitudPorId(id)
 }
 
 eliminarUsrPorId(id: string){
   console.log(`Usuario a eliminar: ${id}`)
-  // this._usuariosService.deleteUsrPorId(id)
+  this._usuariosService.deleteUsrPorId(id)
 }
 
 

@@ -7,13 +7,15 @@
         <div *ngFor="let solicitud of usuariosEnEspera">
         
             <div class="card">
-                <h6>DNI: {{solicitud.dni}}</h6>
+                <h6><strong>DNI: </strong>{{solicitud.dni}}</h6>
                 <h6>Nombre: {{solicitud.nombre}}</h6>
                 <h6>Apellido: {{solicitud.apellido}}</h6>
                 <h6>Mail: {{solicitud.mail}}</h6>
+                <h6>Telefono: {{solicitud.celular}}</h6>
+                <h6>Domicilio: {{solicitud.domicilio}}</h6>
                 <div>
-                    <button (click)="aceptarUsr(solicitud.id)">Aceptar</button>
-                    <button (click)="eliminarSolicitudPorId(solicitud.id)">Eliminar</button>
+                    <button (click)="aceptarUsr(solicitud.id)" mat-raised-button color="primary">Aceptar</button>  
+                    <button (click)="eliminarSolicitudPorId(solicitud.id)" mat-raised-button color="primary">Eliminar</button>
                 </div>
             </div>
         </div>
