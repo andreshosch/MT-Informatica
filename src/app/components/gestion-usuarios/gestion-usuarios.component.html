@@ -35,7 +35,7 @@
                 <h6>Telefono: {{usuario.celular}}</h6>
                 <h6>Domicilio: {{usuario.domicilio}}</h6>
                 <div>
-                    <button (click)="blanquearClave(usuario.id)" mat-raised-button color="primary">Setear Password</button>
+                    <button (click)="blanquearClave(usuario)" mat-raised-button color="primary">Setear Password</button>
                     <button (click)="eliminarUsr(usuario.id)" mat-raised-button color="primary">Eliminar</button>
                 </div>
             </div>
@@ -61,6 +61,17 @@
             <button mat-raised-button color="primary"
                 (click)="confirmSol()">Confirmar</button>
             <button mat-raised-button color="primary" (click)="cancelSol()">Cancelar</button>
+        </div>
+    </div>
+</div>
+
+<div class="confirmation-dialog" *ngIf="showConfirmationDialogModificacion">
+    <div class="dialog-content">
+        <h4>¿Está seguro que desea setear la clave?</h4>
+        <div style="text-align: center;">
+            <button mat-raised-button color="primary"
+                (click)="confirmUpdate()">Confirmar</button>
+            <button mat-raised-button color="primary" (click)="cancelUpdate()">Cancelar</button>
         </div>
     </div>
 </div>

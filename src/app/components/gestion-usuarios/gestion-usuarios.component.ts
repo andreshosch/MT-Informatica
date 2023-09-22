@@ -15,8 +15,12 @@ usuariosRegistrados: any[] = []
 usuariosEnEspera: any[] = []
 showConfirmationDialogUsuario: boolean = false
 showConfirmationDialogSolicitud: boolean = false
+showConfirmationDialogModificacion: boolean = false
 usuarioAEliminar: string = ""
 solicitudAEliminar: string = ""
+usuarioAModificar: Usuario
+idUsuarioAModificar: string = ""
+usuarioUpdate: Usuario
 
 
 constructor(private _usuariosService: UsuariosService){
@@ -115,6 +119,31 @@ cancelSol(){
 confirmSol(){
   this.eliminarSolicitudPorId(this.solicitudAEliminar)
   this.showConfirmationDialogSolicitud=false
+}
+
+blanquearClave(id){
+  this.showConfirmationDialogModificacion = true
+  this.usuarioAModificar = id
+  this.idUsuarioAModificar = id.id
+  console.log(this.usuarioAModificar)
+}
+
+cancelUpdate(){
+  this.showConfirmationDialogModificacion = false
+}
+
+confirmUpdate(){
+  this.usuarioUpdate = {
+    dni: this.usuarioAModificar.dni,
+    nombre: this.usuarioAModificar.nombre,
+    apellido: this.usuarioAModificar.apellido,
+    domicilio: this.usuarioAModificar.domicilio,
+    celular: this.usuarioAModificar.celular,
+    mail: this.usuarioAModificar.mail,
+    password: "MTInformatica1"
+  }
+  this._usuariosService.updateUsr(this.idUsuarioAModificar, this.usuarioUpdate)
+  this.showConfirmationDialogModificacion = false
 }
 
 

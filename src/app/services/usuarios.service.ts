@@ -43,5 +43,10 @@ export class UsuariosService {
     return this.firestore.collection('Solicitudes').doc(id).valueChanges()
   }
 
+  updateUsr(id: string, usuario: any): Promise<any> {
+    
+    return this.firestore.collection('Usuarios').doc(id).update(usuario);
+  }
+
 
 }
