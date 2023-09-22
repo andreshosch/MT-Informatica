@@ -13,7 +13,10 @@ export class GestionUsuariosComponent {
 
 usuariosRegistrados: any[] = []
 usuariosEnEspera: any[] = []
-// nuevoUsuario: Usuario
+showConfirmationDialogUsuario: boolean = false
+showConfirmationDialogSolicitud: boolean = false
+usuarioAEliminar: string = ""
+solicitudAEliminar: string = ""
 
 
 constructor(private _usuariosService: UsuariosService){
@@ -84,6 +87,34 @@ eliminarSolicitudPorId(id:string){
 eliminarUsrPorId(id: string){
   console.log(`Usuario a eliminar: ${id}`)
   this._usuariosService.deleteUsrPorId(id)
+}
+
+eliminarUsr(id_usr){
+  this.showConfirmationDialogUsuario = true
+  this.usuarioAEliminar = id_usr
+}
+
+eliminarSolicitud(id_usr){
+  this.showConfirmationDialogSolicitud = true
+  this.solicitudAEliminar = id_usr
+}
+
+cancel(){
+  this.showConfirmationDialogUsuario = false
+}
+
+confirm(){
+  this.eliminarUsrPorId(this.usuarioAEliminar)
+  this.showConfirmationDialogUsuario=false
+}
+
+cancelSol(){
+  this.showConfirmationDialogSolicitud = false
+}
+
+confirmSol(){
+  this.eliminarSolicitudPorId(this.solicitudAEliminar)
+  this.showConfirmationDialogSolicitud=false
 }
 
 
