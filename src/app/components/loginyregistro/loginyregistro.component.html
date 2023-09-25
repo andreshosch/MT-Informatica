@@ -1,41 +1,82 @@
-<!-- <div class="confirmation-dialog" *ngIf="loginProgress">
+<div class="confirmation-dialog" *ngIf="loginProgress">
     <div class="dialog-content">
         <div class="login" *ngIf="login">
-            <form [formGroup]="loginUsr" class="formInicio" action="">
-                <label>Usuario</label>
-                <input type="text" formControlName="usuario">
-                <label>Clave</label>
-                <input type="password" formControlName="contrasena">
-                <button type="submit">Ingresar</button>
-            </form>
-            <button class="ingreso" (click)="irARegistro()">Quiero registrarme</button>
-            <button (click)="cerrarLogin()">Cerrar</button>
+          <form [formGroup]="loginUsr" (ngSubmit)="ingresoUsr()"> 
+            <mat-grid-list cols="4" rowHeight="70px" style="margin-top: 8%; margin-right: 6%;">
+                <mat-grid-tile [colspan]="4" [rowspan]="1">
+                    <mat-form-field>
+                        <mat-label>Usuario</mat-label>
+                        <input matInput formControlName="usuario">
+                    </mat-form-field>
+                </mat-grid-tile>
+                <mat-grid-tile [colspan]="4" [rowspan]="1">
+                    <mat-form-field>
+                        <mat-label>Contraseña</mat-label>
+                        <input matInput formControlName="contrasena">
+                    </mat-form-field>
+                </mat-grid-tile>
+            </mat-grid-list>
+            <div class="centrado">
+              <button  type="submit" mat-raised-button color="primary" style="margin-bottom: 40px;">Ingresar</button>  
+            </div>
+          </form>
+          <div class="registroycancel">
+            <button (click)="irARegistro()" mat-raised-button color="primary">Registrarme</button>  
+            <button (click)="cerrarLogin()" mat-raised-button color="primary">Cancelar</button>  
+          </div>
+          
+            
+          
         </div>
         <div class="registro" *ngIf="!login">
             <form [formGroup]="formRegistro" class="formInicio" (ngSubmit)="solicitarAlta()">
-                <label>Nombre</label>
-                <input type="text" formControlName="nombre">
-                <label>Apellido</label>
-                <input type="text" formControlName="apellido">
-                <label>Clave</label>
-                <input type="password" formControlName="password">
-                <label>Mail</label>
-                <input type="email" formControlName="email">
-
-                <label>DNI</label>
-                <input type="text" formControlName="dni">
-                <label>CUIT</label>
-                <input type="text" formControlName="cuit">
-                <label>Domicilio</label>
-                <input type="text" formControlName="domicilio">
-                <label>Telefono</label>
-                <input type="email" formControlName="email">
-                
-                <button type="submit">Solicitar Registro</button>
+              <mat-grid-list cols="8" rowHeight="70px" style="margin-top: 8%; margin-right: 6%;">
+                <mat-grid-tile [colspan]="4" [rowspan]="1">
+                    <mat-form-field>
+                        <mat-label>Nombre</mat-label>
+                        <input matInput formControlName="nombre">
+                    </mat-form-field>
+                </mat-grid-tile>
+                <mat-grid-tile [colspan]="4" [rowspan]="1">
+                    <mat-form-field>
+                        <mat-label>Contraseña</mat-label>
+                        <input matInput formControlName="contrasena">
+                    </mat-form-field>
+                </mat-grid-tile>
+                <mat-grid-tile [colspan]="4" [rowspan]="1">
+                  <mat-form-field>
+                      <mat-label>Apellido</mat-label>
+                      <input matInput formControlName="apellido">
+                  </mat-form-field>
+              </mat-grid-tile>
+              <mat-grid-tile [colspan]="4" [rowspan]="1">
+                  <mat-form-field>
+                      <mat-label>Email</mat-label>
+                      <input matInput formControlName="mail">
+                  </mat-form-field>
+              </mat-grid-tile>
+              <mat-grid-tile [colspan]="4" [rowspan]="1">
+                <mat-form-field>
+                    <mat-label>DNI</mat-label>
+                    <input matInput formControlName="dni">
+                </mat-form-field>
+              </mat-grid-tile>
+              <mat-grid-tile [colspan]="4" [rowspan]="1">
+                <mat-form-field>
+                    <mat-label>Domicilio</mat-label>
+                    <input matInput formControlName="domicilio">
+                </mat-form-field>
+              </mat-grid-tile>
+              <mat-grid-tile [colspan]="4" [rowspan]="1">
+                <mat-form-field>
+                    <mat-label>Telefono</mat-label>
+                    <input matInput formControlName="telefono">
+                </mat-form-field>
+              </mat-grid-tile>
+            </mat-grid-list>
+            <button type="submit" mat-raised-button color="primary">Registrarme</button>  
             </form>
-            <button class="ingreso" (click)="irALogin()">Cancelar</button>
+            <button class="ingreso" (click)="irALogin()" mat-raised-button color="primary">Cancelar</button>  
         </div>
     </div>
-</div> -->
-
-<!-- <button (click)="creacion()" >Crear</button> -->
+</div>

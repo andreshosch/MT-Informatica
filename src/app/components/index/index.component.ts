@@ -7,4 +7,6 @@ import { Component } from '@angular/core';
 })
 export class IndexComponent {
 
+  pruebaLogin:boolean = true
+
 }

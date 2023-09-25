@@ -10,11 +10,16 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class LoginyregistroComponent {
 
+  usrAdmin: boolean = false
+  loginProgress: boolean = false
   login: boolean = true
+  hayUsuario: boolean = false
   listUsuario: Usuario[] = []
-  formRegistro: FormGroup
+  usuariosRegistrados: Usuario[] = []
   loginUsr: FormGroup
-  loginProgress: boolean = true;
+  formRegistro: FormGroup
+  usuario: number;
+  contrasena: string;
 
   constructor(private _usuarioService: UsuariosService, private fb:FormBuilder){
     this.formRegistro = this.fb.group({
@@ -32,20 +37,7 @@ export class LoginyregistroComponent {
 
   ngOnInit(){
     this.getUsuarios()
-    // this.getSolicitudes()
-  }
-
-  cerrarLogin(){
-    this.loginProgress = false
-  }
-
-
-  irALogin(){
-    this.login=true
-  }
-
-  irARegistro(){
-    this.login=false
+    this.getSolicitudes()
   }
 
   getUsuarios(){
@@ -61,42 +53,104 @@ export class LoginyregistroComponent {
     }) 
   }
 
-  getSolicitudes(){
-
+  getSolicitudes() {
+    this._usuarioService.getSolicitudes().subscribe(doc => {
+      this.usuariosRegistrados = []
+      doc.forEach((element: any) => {
+        this.usuariosRegistrados.push({
+          id: element.payload.doc.id,
+          ... element.payload.doc.data()
+        })
+      })
+    })
   }
 
-  creacion(){
-    console.log('Ingresando')
-    const unUsuario: Usuario = {
-      dni: 29560560,
-      nombre: "Cristian",
-      apellido: "Alex",
-      celular: 3425289289,
-      domicilio: "Japon 224",
-      mail: "cale@ssan.com",
-      password: "Tomate12"
+  ingresoUsr(){
+    this.usuario = this.loginUsr.get('usuario').value
+    this.contrasena = this.loginUsr.get('contrasena').value
+    for (let j=0; j < this.listUsuario.length; j++){
+      if(this.listUsuario[j].dni == this.usuario){
+        if(this.listUsuario[j].password === this.contrasena){
+          console.log('Ingresaste correctamente')
+          this.hayUsuario = true
+          //reemplazar por los DNI de Mariano u Natalia
+          if((this.usuario == 29560560)||(this.usuario == 29560560)){
+            this.usrAdmin = true
+          }
+          this.loginProgress = false
+          this.loginUsr.reset()
+        }else{
+          console.log('Error en ingreso')
+        }
+      }
     }
-
-    this._usuarioService.createUser(unUsuario);
   }
 
-  creacion2(){
-    console.log('creacion 2')
-    const unUsuario: Usuario = {
-      dni: 11057648,
-      nombre: "Andy",
-      apellido: "Summer",
-      celular: 3426348751,
-      domicilio: "Narnia 900",
-      mail: "andy@gmail.com",
-      password: "destino2023"
-    }
-
-    this._usuarioService.createSolicitud(unUsuario);
+  habilitarLogin(){
+    this.loginProgress = true
   }
 
+  desloguear(){
+    this.hayUsuario=false
+    this.usrAdmin=false
+  }
+
+  cerrarLogin(){
+    this.loginProgress = false
+  }
+
+  irALogin(){
+    this.login=true
+  }
+
+  irARegistro(){
+    this.login=false
+  }
+  
+  
   solicitarAlta(){
+    let dniSolicitud = this.formRegistro.get('dni').value;
+    let resultado = "x"
+    //Chequeamos si es un usuario registrado
+    for (let j=0; j < this.listUsuario.length; j++){
+      if(this.listUsuario[j].dni == dniSolicitud){
+        resultado = "El DNI ya está asociado a un cliente"
+        j = this.listUsuario.length
+      }
+    }
+    //Chequeamos si existe una solicitud pendiente con ese DNI
+    if (resultado === "x"){
+      for (let j=0; j < this.usuariosRegistrados.length; j++){
+        if(this.usuariosRegistrados[j].dni == dniSolicitud){
+          resultado = "Ya existe una solicitud pendiente con este DNI"
+          j = this.usuariosRegistrados.length
+        }
+      }
+    }
+
+    if(resultado === "x"){
+      const unaSolicitud: Usuario = {
+        nombre: this.formRegistro.get('nombre').value,
+        apellido: this.formRegistro.get('apellido').value,
+        dni: this.formRegistro.get('dni').value,
+        celular: this.formRegistro.get('telefono').value,
+        mail: this.formRegistro.get('mail').value,
+        domicilio: this.formRegistro.get('domicilio').value,
+        password: this.formRegistro.get('contrasena').value,
+      }
+      
+      console.log(`Creando una nueva solicitud ${JSON.stringify(unaSolicitud)}`)
+      this._usuarioService.createSolicitud(unaSolicitud)
+      this.formRegistro.reset()
+      //enviar mensaje de exito de solicitud
+      this.loginProgress=false
+      this.login=true
+    } else{
+      //Dar aviso correspondiente por falla
+      console.log(resultado)
+    }
 
   }
+
 
 }
