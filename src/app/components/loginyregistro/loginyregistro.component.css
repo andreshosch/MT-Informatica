@@ -1,4 +1,4 @@
-/* .login{
+.login{
     display: flex;
     flex-direction: column;
 }
@@ -6,8 +6,8 @@
 .formInicio{
     display: flex;
     flex-direction: column;
-    width: 40%;
-    margin-left: 30%;
+    width: 90%;
+    margin-left: 5%;
 }
 
 .ingreso{
@@ -34,4 +34,24 @@
     padding: 20px;
     border-radius: 4px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  } */
+    width: 30%;
+  }
+
+  .centrado{
+    text-align: center;
+  }
+
+  .centrado button{
+    width: 40%;
+  }
+
+
+ .registroycancel{
+    display: flex;
+    flex-direction: row;
+    justify-content:space-around
+ }
+
+  .registroycancel button{
+    width: 30%;
+  }

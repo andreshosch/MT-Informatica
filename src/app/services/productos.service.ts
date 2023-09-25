@@ -16,9 +16,10 @@ export class ProductosService {
     this.baseUrl="https://clientes.elit.com.ar/v1/api/productos?limit=20&offset="
     
   }
-  getAllProducts(data:any):Observable<any> {
+  getAllProducts(data:any, limite: number):Observable<any> {
     
     return this.http.post(`${this.baseUrl}${100}`,data);
+    // return this.http.post(`${this.baseUrl}${limite}`,data);
 }
 
 
