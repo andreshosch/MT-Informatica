@@ -14,6 +14,7 @@ export class LoginyregistroComponent {
   listUsuario: Usuario[] = []
   formRegistro: FormGroup
   loginUsr: FormGroup
+  loginProgress: boolean = true;
 
   constructor(private _usuarioService: UsuariosService, private fb:FormBuilder){
     this.formRegistro = this.fb.group({
@@ -32,6 +33,10 @@ export class LoginyregistroComponent {
   ngOnInit(){
     this.getUsuarios()
     // this.getSolicitudes()
+  }
+
+  cerrarLogin(){
+    this.loginProgress = false
   }
 
 
@@ -53,13 +58,7 @@ export class LoginyregistroComponent {
           ... element.payload.doc.data()
         })
       })
-      
-      for(let j=0; j< this.listUsuario.length; j++){
-        console.log(`Usuario: ${this.listUsuario[j].mail}`)
-        console.log(`Pass: ${this.listUsuario[j].password}`)
-      }
-    })
-    
+    }) 
   }
 
   getSolicitudes(){

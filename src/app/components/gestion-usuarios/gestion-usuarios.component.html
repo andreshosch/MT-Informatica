@@ -1,0 +1,77 @@
+<app-encabezado></app-encabezado>
+<app-navbar></app-navbar>
+
+<div class="formatoArticulos">
+    <h3>Solicitudes pendientes</h3>
+    <div class="galeriaCard">
+        <div *ngFor="let solicitud of usuariosEnEspera">
+        
+            <div class="card">
+                <h6><strong>DNI: </strong>{{solicitud.dni}}</h6>
+                <h6>Nombre: {{solicitud.nombre}}</h6>
+                <h6>Apellido: {{solicitud.apellido}}</h6>
+                <h6>Mail: {{solicitud.mail}}</h6>
+                <h6>Telefono: {{solicitud.celular}}</h6>
+                <h6>Domicilio: {{solicitud.domicilio}}</h6>
+                <div>
+                    <button (click)="aceptarUsr(solicitud.id)" mat-raised-button color="primary">Aceptar</button>  
+                    <button (click)="eliminarSolicitud(solicitud.id)" mat-raised-button color="primary">Eliminar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<br><br><br>
+<div class="formatoArticulos">
+    <h3>Usuarios registrados</h3>
+    <div class="galeriaCard">
+        <div *ngFor="let usuario of usuariosRegistrados">
+        
+            <div class="card">
+                <h6>DNI: {{usuario.dni}}</h6>
+                <h6>Nombre: {{usuario.nombre}}</h6>
+                <h6>Apellido: {{usuario.apellido}}</h6>
+                <h6>Mail: {{usuario.mail}}</h6>
+                <h6>Telefono: {{usuario.celular}}</h6>
+                <h6>Domicilio: {{usuario.domicilio}}</h6>
+                <div>
+                    <button (click)="blanquearClave(usuario)" mat-raised-button color="primary">Setear Password</button>
+                    <button (click)="eliminarUsr(usuario.id)" mat-raised-button color="primary">Eliminar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="confirmation-dialog" *ngIf="showConfirmationDialogUsuario">
+    <div class="dialog-content">
+        <h4>¿Está seguro que desea eliminar el usuario?</h4>
+        <div style="text-align: center;">
+            <button mat-raised-button color="primary"
+                (click)="confirm()">Confirmar</button>
+            <button mat-raised-button color="primary" (click)="cancel()">Cancelar</button>
+        </div>
+    </div>
+</div>
+
+<div class="confirmation-dialog" *ngIf="showConfirmationDialogSolicitud">
+    <div class="dialog-content">
+        <h4>¿Está seguro que desea eliminar la solicitud?</h4>
+        <div style="text-align: center;">
+            <button mat-raised-button color="primary"
+                (click)="confirmSol()">Confirmar</button>
+            <button mat-raised-button color="primary" (click)="cancelSol()">Cancelar</button>
+        </div>
+    </div>
+</div>
+
+<div class="confirmation-dialog" *ngIf="showConfirmationDialogModificacion">
+    <div class="dialog-content">
+        <h4>¿Está seguro que desea setear la clave?</h4>
+        <div style="text-align: center;">
+            <button mat-raised-button color="primary"
+                (click)="confirmUpdate()">Confirmar</button>
+            <button mat-raised-button color="primary" (click)="cancelUpdate()">Cancelar</button>
+        </div>
+    </div>
+</div>

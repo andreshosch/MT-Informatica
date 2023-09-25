@@ -20,8 +20,9 @@ import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { DatePipe } from '@angular/common';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { ReactiveFormsModule } from '@angular/forms';
-
-
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { SharedModule } from './shared/shared.module';
+import { GestionUsuariosComponent } from './components/gestion-usuarios/gestion-usuarios.component';
 
 
 @NgModule({
@@ -34,7 +35,9 @@ import { ReactiveFormsModule } from '@angular/forms';
     ProductosComponent,
     ContactoComponent,
     IndexComponent,
-    LoginyregistroComponent
+    GestionProductosComponent,
+    LoginyregistroComponent,
+    GestionUsuariosComponent,
   ],
   imports: [
     BrowserModule,
@@ -43,13 +46,15 @@ import { ReactiveFormsModule } from '@angular/forms';
     HttpClientModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    SharedModule,
+    BrowserAnimationsModule
   ],
   exports: [
-    // SharedModule,
     AngularFireModule,
     AngularFireAuthModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    SharedModule
   ],
   providers: [
     // DatePipe,

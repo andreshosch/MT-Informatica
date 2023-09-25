@@ -21,9 +21,31 @@ export class UsuariosService {
     
   }
 
+
+  getSolicitudes(): Observable<any> {
+    return this.firestore.collection('Solicitudes').snapshotChanges()
+  }
+
   createSolicitud(usuario: Usuario): Promise<any>{
     return this.firestore.collection('Solicitudes').add(usuario)
     
+  }
+
+  deleteSolicitudPorId(id: string): Promise<any> {
+    return this.firestore.collection('Solicitudes').doc(id).delete();
+  }
+
+  deleteUsrPorId(id: string): Promise<any> {
+    return this.firestore.collection('Usuarios').doc(id).delete();
+  }
+
+  getSolicitudesById(id:string): Observable<any> {
+    return this.firestore.collection('Solicitudes').doc(id).valueChanges()
+  }
+
+  updateUsr(id: string, usuario: any): Promise<any> {
+    
+    return this.firestore.collection('Usuarios').doc(id).update(usuario);
   }
 
 

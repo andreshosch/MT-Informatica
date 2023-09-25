@@ -4,6 +4,7 @@
     </li>
     <li class="nav-item">
       <a class="nav-link" href="#">Nosotros</a>
+      
     </li>
     <li class="nav-item">
       <a class="nav-link" href="./contacto">Contactos</a>
@@ -16,10 +17,101 @@
         <a class="nav-link" href="./gestion">Gestión de productos</a>
       </li>
     </div>
-    <li class="nav-item">
-      <a class="nav-link" href="#">Inicio</a>
+    <div *ngIf="usrAdmin">
+      <li class="nav-item">
+        <a class="nav-link" href="./gestionUsr">Gestión de usuarios</a>
+      </li>
+    </div>
+    <li *ngIf="!hayUsuario" class="nav-item">
+      <a (click)="habilitarLogin()" class="nav-link">LogIn</a>
     </li>
-    <li class="nav-item">
+    <li *ngIf="hayUsuario" class="nav-item">
+      <a (click)="desloguear()" class="nav-link">LogOut</a>
+    </li>
+    <li *ngIf="hayUsuario" class="nav-item">
       <a class="nav-link" href="#">Carrito</a>
     </li>
   </ul>
+
+  <div class="confirmation-dialog" *ngIf="loginProgress">
+    <div class="dialog-content">
+        <div class="login" *ngIf="login">
+          <form [formGroup]="loginUsr" (ngSubmit)="ingresoUsr()"> 
+            <mat-grid-list cols="4" rowHeight="70px" style="margin-top: 8%; margin-right: 6%;">
+                <mat-grid-tile [colspan]="4" [rowspan]="1">
+                    <mat-form-field>
+                        <mat-label>Usuario</mat-label>
+                        <input matInput formControlName="usuario">
+                    </mat-form-field>
+                </mat-grid-tile>
+                <mat-grid-tile [colspan]="4" [rowspan]="1">
+                    <mat-form-field>
+                        <mat-label>Contraseña</mat-label>
+                        <input matInput formControlName="contrasena">
+                    </mat-form-field>
+                </mat-grid-tile>
+            </mat-grid-list>
+            <div class="centrado">
+              <button  type="submit" mat-raised-button color="primary" style="margin-bottom: 40px;">Ingresar</button>  
+            </div>
+          </form>
+          <div class="registroycancel">
+            <button (click)="irARegistro()" mat-raised-button color="primary">Registrarme</button>  
+            <button (click)="cerrarLogin()" mat-raised-button color="primary">Cancelar</button>  
+          </div>
+          
+            
+          
+        </div>
+        <div class="registro" *ngIf="!login">
+            <form [formGroup]="formRegistro" class="formInicio" (ngSubmit)="solicitarAlta()">
+              <mat-grid-list cols="8" rowHeight="70px" style="margin-top: 8%; margin-right: 6%;">
+                <mat-grid-tile [colspan]="4" [rowspan]="1">
+                    <mat-form-field>
+                        <mat-label>Nombre</mat-label>
+                        <input matInput formControlName="nombre">
+                    </mat-form-field>
+                </mat-grid-tile>
+                <mat-grid-tile [colspan]="4" [rowspan]="1">
+                    <mat-form-field>
+                        <mat-label>Contraseña</mat-label>
+                        <input matInput formControlName="contrasena">
+                    </mat-form-field>
+                </mat-grid-tile>
+                <mat-grid-tile [colspan]="4" [rowspan]="1">
+                  <mat-form-field>
+                      <mat-label>Apellido</mat-label>
+                      <input matInput formControlName="apellido">
+                  </mat-form-field>
+              </mat-grid-tile>
+              <mat-grid-tile [colspan]="4" [rowspan]="1">
+                  <mat-form-field>
+                      <mat-label>Email</mat-label>
+                      <input matInput formControlName="mail">
+                  </mat-form-field>
+              </mat-grid-tile>
+              <mat-grid-tile [colspan]="4" [rowspan]="1">
+                <mat-form-field>
+                    <mat-label>DNI</mat-label>
+                    <input matInput formControlName="dni">
+                </mat-form-field>
+              </mat-grid-tile>
+              <mat-grid-tile [colspan]="4" [rowspan]="1">
+                <mat-form-field>
+                    <mat-label>Domicilio</mat-label>
+                    <input matInput formControlName="domicilio">
+                </mat-form-field>
+              </mat-grid-tile>
+              <mat-grid-tile [colspan]="4" [rowspan]="1">
+                <mat-form-field>
+                    <mat-label>Telefono</mat-label>
+                    <input matInput formControlName="telefono">
+                </mat-form-field>
+              </mat-grid-tile>
+            </mat-grid-list>
+            <button type="submit" mat-raised-button color="primary">Registrarme</button>  
+            </form>
+            <button class="ingreso" (click)="irALogin()" mat-raised-button color="primary">Cancelar</button>  
+        </div>
+    </div>
+</div>

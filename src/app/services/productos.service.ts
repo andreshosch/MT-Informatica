@@ -28,7 +28,18 @@ getProducts(): Observable<any> {
 
 createProduct(producto: Producto): Promise<any>{
   return this.firestore.collection('Productos').add(producto)
-  
+}
+
+deleteProduct(id: string): Promise<any> {
+  return this.firestore.collection('Productos').doc(id).delete();
+}
+
+getProductById(id:string): Observable<any> {
+  return this.firestore.collection('Productos').doc(id).valueChanges()
+}
+
+updateProduct(id: string, cliente: any): Promise<any> {
+  return this.firestore.collection('Productos').doc(id).update(cliente);
 }
 
 }

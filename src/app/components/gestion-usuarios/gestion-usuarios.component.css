@@ -1,19 +1,24 @@
-.login{
+.galeriaCard{
     display: flex;
-    flex-direction: column;
-}
-
-.formInicio{
-    display: flex;
-    flex-direction: column;
+    flex-wrap:wrap;
+    justify-content: space-around;
     width: 90%;
     margin-left: 5%;
+    background-color: chocolate;
+    text-align: center;
+
 }
 
-.ingreso{
-    width: 40%;
-    margin-left: 30%;
-    margin-top: 15px;
+.formatoArticulos{
+    text-align: center;
+    margin-top: 25px;
+}
+
+.card{
+    width: 300px;
+    margin: 10px;
+    padding-bottom: 10px;
+    background-color: lightgrey
 }
 
 .confirmation-dialog {
@@ -34,24 +39,16 @@
     padding: 20px;
     border-radius: 4px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    width: 30%;
   }
-
-  .centrado{
-    text-align: center;
+  
+  .dialog-content h3 {
+    margin-top: 0;
   }
-
-  .centrado button{
-    width: 40%;
+  
+  .dialog-content p {
+    margin-bottom: 10px;
   }
-
-
- .registroycancel{
-    display: flex;
-    flex-direction: row;
-    justify-content:space-around
- }
-
-  .registroycancel button{
-    width: 30%;
+  
+  .dialog-content button {
+    margin-right: 10px;
   }
