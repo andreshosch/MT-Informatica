@@ -12,35 +12,35 @@
     <li class="nav-item">
       <a class="nav-link" href="#">Servicios</a>
     </li>
-    <!-- <div *ngIf="usrAdmin"> -->
-      <div>
+    <div *ngIf="usrAdmin">
+    
       <li class="nav-item">
         <a class="nav-link" href="./gestion">Gestión de productos</a>
       </li>
     </div>
-    <!-- <div *ngIf="usrAdmin"> -->
-      <div>
+    <div *ngIf="usrAdmin">
+      
       <li class="nav-item">
         <a class="nav-link" href="./gestionUsr">Gestión de usuarios</a>
       </li>
     </div>
-    <!-- <li *ngIf="!hayUsuario" class="nav-item"> -->
-      <li class="nav-item">
-      <!-- <a (click)="habilitarLogin()" class="nav-link">LogIn</a> -->
-      <a class="nav-link">LogIn</a>
+    <li *ngIf="!hayUsuario" class="nav-item">
+      
+      <a (click)="habilitarLogin()" class="nav-link">LogIn</a>
+      
     </li>
-    <!-- <li *ngIf="hayUsuario" class="nav-item"> -->
-      <li class="nav-item">
-      <!-- <a (click)="desloguear()" class="nav-link">LogOut</a> -->
-      <a class="nav-link">LogOut</a>
+    <li *ngIf="hayUsuario" class="nav-item">
+      
+      <a (click)="desloguear()" class="nav-link">LogOut</a>
+      
     </li>
-    <!-- <li *ngIf="hayUsuario" class="nav-item"> -->
-      <li class="nav-item">
+    <li *ngIf="hayUsuario" class="nav-item">
+      
       <a class="nav-link" href="#">Carrito</a>
     </li>
   </ul>
-<!-- 
-  <div class="confirmation-dialog" *ngIf="loginProgress">
+
+  <!-- <div class="confirmation-dialog" *ngIf="loginProgress">
     <div class="dialog-content">
         <div class="login" *ngIf="login">
           <form [formGroup]="loginUsr" (ngSubmit)="ingresoUsr()"> 

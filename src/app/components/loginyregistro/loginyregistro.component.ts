@@ -38,6 +38,7 @@ export class LoginyregistroComponent {
   ngOnInit(){
     this.getUsuarios()
     this.getSolicitudes()
+    console.log('ingrese en el puto login')
   }
 
   getUsuarios(){
