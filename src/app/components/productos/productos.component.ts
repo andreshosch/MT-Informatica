@@ -26,6 +26,8 @@ ngOnInit(){
     "token": "oyhl04axaro"
   }
 
+ 
+
   this.productosServices.getAllProducts(requestData, 100).subscribe
    (response=>{
       this.arrProductos=response['resultado']
@@ -64,4 +66,5 @@ ngOnInit(){
   // traerTodo(){
   //   this.traerTodos()
   // }
+
 }

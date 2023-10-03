@@ -1,7 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { Usuario } from 'src/app/models/usuario';
 import { UsuariosService } from 'src/app/services/usuarios.service';
-
+import { MatTableDataSource } from '@angular/material/table';
+import { MatSort } from '@angular/material/sort';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSnackBar } from '@angular/material/snack-bar';
+// import { MatSnackBar } from '@angular/material/snack-bar';
 
 
 @Component({
@@ -9,6 +13,7 @@ import { UsuariosService } from 'src/app/services/usuarios.service';
   templateUrl: './gestion-usuarios.component.html',
   styleUrls: ['./gestion-usuarios.component.css']
 })
+
 export class GestionUsuariosComponent {
 
 usuariosRegistrados: any[] = []
@@ -22,9 +27,14 @@ usuarioAModificar: Usuario
 idUsuarioAModificar: string = ""
 usuarioUpdate: Usuario
 
+private paginator: MatPaginator; 
+private sort: MatSort;
 
-constructor(private _usuariosService: UsuariosService){
+displayedColumns: string[] = ['nombre', 'apellido','dni','telefono','domicilio','mail','acciones'];
+dataSource!: MatTableDataSource<any>;
 
+constructor(private _usuariosService: UsuariosService, private _snackBar: MatSnackBar){
+  this.dataSource = new MatTableDataSource(this.usuariosRegistrados);
 }
 
 ngOnInit(){
@@ -32,10 +42,32 @@ ngOnInit(){
   this.getSolicitudes()
 }
 
+@ViewChild(MatSort) set matSort(ms: MatSort) {
+  this.sort = ms;
+  this.setDataSourceAttributes();
+
+
+}
+
+@ViewChild(MatPaginator) set matPaginator(mp: MatPaginator) {
+this.paginator = mp;
+this.paginator._intl.itemsPerPageLabel='Clientes por Página'
+this.paginator._intl.firstPageLabel="Primera Página"
+this.paginator._intl.previousPageLabel="Página Anterior"
+this.paginator._intl.nextPageLabel='Siguiente Página'
+this.paginator._intl.lastPageLabel="Última Página"
+this.setDataSourceAttributes();
+}
+
+setDataSourceAttributes() {
+this.dataSource.paginator = this.paginator;
+this.dataSource.sort = this.sort;
+}
 
 getSolicitudes() {
   this._usuariosService.getUsers().subscribe(doc => {
     this.usuariosRegistrados = []
+    this.dataSource = new MatTableDataSource(this.usuariosRegistrados)
     doc.forEach((element: any) => {
       this.usuariosRegistrados.push({
         id: element.payload.doc.id,
