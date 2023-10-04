@@ -10,12 +10,11 @@ import { OfertasCalientesComponent } from './components/ofertas-calientes/oferta
 import { ProductosComponent } from './components/productos/productos.component';
 import { GestionProductosComponent } from './components/gestion-productos/gestion-productos.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { LoginyregistroComponent } from './components/loginyregistro/loginyregistro.component';
 import { ContactoComponent } from './components/contacto/contacto.component';
 import { IndexComponent } from './components/index/index.component';
 
 import { AngularFireModule } from '@angular/fire/compat';
-import { environment } from './environment/environment';
+import { environment } from 'src/environment/environment'
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { DatePipe } from '@angular/common';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
@@ -23,6 +22,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SharedModule } from './shared/shared.module';
 import { GestionUsuariosComponent } from './components/gestion-usuarios/gestion-usuarios.component';
+import { LoginComponent } from './components/login/login.component';
 
 
 @NgModule({
@@ -36,8 +36,8 @@ import { GestionUsuariosComponent } from './components/gestion-usuarios/gestion-
     ContactoComponent,
     IndexComponent,
     GestionProductosComponent,
-    LoginyregistroComponent,
     GestionUsuariosComponent,
+    LoginComponent,
   ],
   imports: [
     BrowserModule,
