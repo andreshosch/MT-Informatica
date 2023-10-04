@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import{HttpClient} from '@angular/common/http'
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 
 import { AngularFirestore } from '@angular/fire/compat/firestore'
 import { Producto } from '../models/producto';
@@ -11,17 +11,16 @@ import { Producto } from '../models/producto';
 export class ProductosService {
 
   private baseUrl: string
+  baseUrl1: string
 
   constructor(private http:HttpClient, private firestore: AngularFirestore) { 
-    this.baseUrl="https://clientes.elit.com.ar/v1/api/productos?limit=20&offset="
-    
+    this.baseUrl="https://clientes.elit.com.ar/v1/api/productos?limit="
+        
   }
-  getAllProducts(data:any, limite: number):Observable<any> {
-    
-    return this.http.post(`${this.baseUrl}${100}`,data);
-    // return this.http.post(`${this.baseUrl}${limite}`,data);
-}
 
+getArrayProducts(data:any,limit:number,offset:number):Observable<any>{
+  return this.http.post(`${this.baseUrl}${limit}&offset=${offset}`,data);
+}
 
 getProducts(): Observable<any> {
   return this.firestore.collection('Productos').snapshotChanges()
