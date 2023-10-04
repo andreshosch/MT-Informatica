@@ -3,7 +3,6 @@
     <a *ngIf="esAdmin" class="nav-link" href="./gestion">Gestion de Productos</a>
     <a *ngIf="!habilitar" class="nav-link" (click)="habilitarLogin()">Login</a>
     <a *ngIf="habilitar" class="nav-link" (click)="desloguear()" class="nav-link">LogOut</a>
-    <mat-icon>delete</mat-icon>
     <a *ngIf="hayUsuario" class="nav-link" class="nav-link">Carrito</a>
 </div>
 

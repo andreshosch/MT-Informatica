@@ -14,7 +14,7 @@ import { ContactoComponent } from './components/contacto/contacto.component';
 import { IndexComponent } from './components/index/index.component';
 
 import { AngularFireModule } from '@angular/fire/compat';
-import { environment } from '../environment/environment';
+import { environment } from 'src/environment/environment'
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { DatePipe } from '@angular/common';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';

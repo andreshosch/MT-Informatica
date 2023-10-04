@@ -154,6 +154,7 @@ confirmSol(){
 }
 
 blanquearClave(id){
+  console.log(`id: ${id}`)
   this.showConfirmationDialogModificacion = true
   this.usuarioAModificar = id
   this.idUsuarioAModificar = id.id
@@ -175,6 +176,7 @@ confirmUpdate(){
     password: "MTInformatica1"
   }
   this._usuariosService.updateUsr(this.idUsuarioAModificar, this.usuarioUpdate)
+  alert("Nueva clave de usuario: MTInformatica1")
   this.showConfirmationDialogModificacion = false
 }
 

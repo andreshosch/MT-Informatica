@@ -44,8 +44,28 @@ export class LoginComponent {
 ngOnInit(){
   this.getUsuarios()
   this.getSolicitudes()
+  this.usuarioLogueado()
 }
 
+usuarioLogueado(){
+  let arregloLS = JSON.parse(localStorage.getItem("hayUsuario"));
+  if (arregloLS){
+    // const fechaActual = new Date()
+    // const fechaEnSegundos = fechaActual.getTime() / 1000
+    // const fechaAlmacenada = arregloLS[2].getTime() / 1000
+
+    // if((fechaEnSegundos - fechaAlmacenada) > 60 * 60){
+    //   console.log("paso mucho tiempo")
+    // }else{
+    //   console.log("esta habilitado aun")
+    // }
+
+    console.log(`arreglo traido: ${arregloLS}`)  
+    this.hayUsuario = true
+    this.habilitar=true
+    this.esAdmin = (arregloLS[1] == "true")
+  }
+}
 
 habilitarLogin(){
   this.loginProgress = true
@@ -55,6 +75,7 @@ desloguear(){
   this.hayUsuario=false
   this.esAdmin=false
   this.habilitar=false
+  localStorage.removeItem("hayUsuario");
 }
 
 cerrarLogin(){
@@ -95,6 +116,7 @@ getSolicitudes() {
 }
 
 ingresoUsr(){
+  let arregloLS = []
   this.usuario = this.loginUsr.get('usuario').value
   this.contrasena = this.loginUsr.get('contrasena').value
   for (let j=0; j < this.listUsuario.length; j++){
@@ -102,12 +124,21 @@ ingresoUsr(){
       if(this.listUsuario[j].password === this.contrasena){
         this.hayUsuario = true
         this.habilitar=true
+        arregloLS.push(this.usuario)
+        j = this.listUsuario.length
         //reemplazar por los DNI de Mariano u Natalia
         if((this.usuario == 29560560)||(this.usuario == 29560560)){
           this.esAdmin = true
+          arregloLS.push("true")
+        }else{
+          arregloLS.push("false")
         }
         this.loginProgress = false
         this.loginUsr.reset()
+        let fecha = new Date()
+        arregloLS.push(fecha)
+        console.table(`arregloLS: ${arregloLS}`)
+        localStorage.setItem("hayUsuario", JSON.stringify(arregloLS));
       }else{
         console.log('Error en ingreso')
       }
