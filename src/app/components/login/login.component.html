@@ -3,7 +3,7 @@
     <a *ngIf="esAdmin" class="nav-link" href="./gestion">Gestion de Productos</a>
     <a *ngIf="!habilitar" class="nav-link" (click)="habilitarLogin()">Login</a>
     <a *ngIf="habilitar" class="nav-link" (click)="desloguear()" class="nav-link">LogOut</a>
-    <a *ngIf="hayUsuario" class="nav-link" class="nav-link">Carrito</a>
+    <a *ngIf="hayUsuario" class="nav-link" (click)="verCarrito()" class="nav-link">Carrito</a>
 </div>
 
 
@@ -84,5 +84,31 @@
             </form>
             <button class="ingreso" (click)="irALogin()" mat-raised-button color="primary">Cancelar</button>  
         </div>
+    </div>
+</div>
+
+
+<div class="confirmation-dialog" *ngIf="carritoHabilitado">
+    <div class="modalCarrito">
+
+        <div>
+            <h2>Carrito</h2>
+            <div class="contenedorCart">
+                <div class="losProductos">izquierda</div>
+                <div class="resumenCarrito">
+                    <h4>Resumen</h4>
+                    <div class="container ">
+                        <span>Productos: </span>
+                        <span>8</span>
+                    </div>
+                    <div>
+                        <span>Costo Total:</span>
+                        <span>$8500</span>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+        <button (click)="ocultarCarrito()">Cerrar</button>
     </div>
 </div>
