@@ -33,20 +33,9 @@ private sort: MatSort;
 displayedColumns: string[] = ['nombre', 'apellido','dni','telefono','domicilio','mail','acciones'];
 dataSource!: MatTableDataSource<any>;
 
-constructor(private _usuariosService: UsuariosService, private _snackBar: MatSnackBar){
-  this.dataSource = new MatTableDataSource(this.usuariosRegistrados);
-}
-
-ngOnInit(){
-  this.getUsuarios()
-  this.getSolicitudes()
-}
-
 @ViewChild(MatSort) set matSort(ms: MatSort) {
   this.sort = ms;
   this.setDataSourceAttributes();
-
-
 }
 
 @ViewChild(MatPaginator) set matPaginator(mp: MatPaginator) {
@@ -62,6 +51,15 @@ this.setDataSourceAttributes();
 setDataSourceAttributes() {
 this.dataSource.paginator = this.paginator;
 this.dataSource.sort = this.sort;
+}
+
+constructor(private _usuariosService: UsuariosService, private _snackBar: MatSnackBar){
+  this.dataSource = new MatTableDataSource(this.usuariosRegistrados);
+}
+
+ngOnInit(){
+  this.getUsuarios()
+  this.getSolicitudes()
 }
 
 getSolicitudes() {

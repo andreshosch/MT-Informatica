@@ -10,6 +10,7 @@ import { UsuariosService } from 'src/app/services/usuarios.service';
 })
 export class LoginComponent {
 
+  //Inicio Login
   esAdmin: boolean = false
   habilitar: boolean = false
   hayUsuario: boolean = false
@@ -21,6 +22,11 @@ export class LoginComponent {
   loginUsr: FormGroup
   usuario: number;
   contrasena: string;
+  //Fin Login
+
+  //Inicio Carrito
+  carritoHabilitado: boolean =false
+  //Fin Carrito
 
   constructor(private _usuarioService: UsuariosService, private fb:FormBuilder){
 
@@ -50,9 +56,15 @@ ngOnInit(){
 usuarioLogueado(){
   let arregloLS = JSON.parse(localStorage.getItem("hayUsuario"));
   if (arregloLS){
-    // const fechaActual = new Date()
-    // const fechaEnSegundos = fechaActual.getTime() / 1000
-    // const fechaAlmacenada = arregloLS[2].getTime() / 1000
+    const fechaActual = new Date()
+    const fechaEnSegundos = fechaActual.getTime()
+    const fechaAlmacenada = new Date(arregloLS[2])
+    const fechaAlmDif = fechaAlmacenada.getTime()
+    const tiempoTotal = fechaEnSegundos - fechaAlmDif
+    const calculo = (Math.floor(tiempoTotal))
+
+    console.log(`diferencia ${calculo}`)
+
 
     // if((fechaEnSegundos - fechaAlmacenada) > 60 * 60){
     //   console.log("paso mucho tiempo")
@@ -187,5 +199,16 @@ solicitarAlta(){
     console.log(resultado)
   }
 }
+
+//Inicio sección Carrito
+verCarrito(){
+  this.carritoHabilitado = true
+}
+
+ocultarCarrito(){
+  this.carritoHabilitado = false
+}
+
+//Fin sección Carrito
 
 }
