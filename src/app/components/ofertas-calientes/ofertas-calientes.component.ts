@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 import { NgbCarouselConfig } from '@ng-bootstrap/ng-bootstrap';
 import { ProductosService } from 'src/app/services/productos.service';
+import { DataService } from 'src/app/services/data.service';
+import { Producto } from 'src/app/models/producto';
+import { first } from 'rxjs';
 
 @Component({
   selector: 'app-ofertas-calientes',
@@ -10,29 +13,10 @@ import { ProductosService } from 'src/app/services/productos.service';
 export class OfertasCalientesComponent {
 
   productosHot: any[] = []
+  elProducto: Producto
+  idProducto: string
 
-  // productosHot: any[] = [
-  //   {
-  //     nombre: "Auricular Axion Strem",
-  //     precio: "95",
-  //     rubro: "audio",
-  //     subrubro: "auriculares",
-  //     img: "https://http2.mlstatic.com/D_NQ_NP_2X_930027-MLA71145394601_082023-F.webp",
-  //     descripcion: "son una garcha"
-  //   },
-  //   {
-  //     nombre: "Camara niños",
-  //     precio: "256",
-  //     rubro: "video",
-  //     subrubro: "camara",
-  //     img: "https://http2.mlstatic.com/D_NQ_NP_2X_645359-MLA46557837279_062021-F.webp",
-  //     descripcion: "safan dentro de todo"
-  //   }
-  // ]
-
-
-
-  constructor(private _config: NgbCarouselConfig, private _productoService: ProductosService){
+  constructor(private _config: NgbCarouselConfig, private _productoService: ProductosService, private dataService: DataService){
     _config.interval = 2000;
     _config.pauseOnHover = true;
     _config.showNavigationArrows = false;
@@ -53,6 +37,14 @@ export class OfertasCalientesComponent {
         })
       })
     })
+  }
+
+  agregarAlCarrito(addProducto: Producto, idProd: string) {
+    const producto = { addProducto };
+    // Suscribirse al observable y actualizar la lista de productos
+    this.dataService.productos$.pipe(first()).subscribe(productos => {
+      this.dataService.actualizarProductos([...productos, producto]);
+    });
   }
 
 }

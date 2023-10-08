@@ -23,6 +23,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SharedModule } from './shared/shared.module';
 import { GestionUsuariosComponent } from './components/gestion-usuarios/gestion-usuarios.component';
 import { LoginComponent } from './components/login/login.component';
+import { CarritoComponent } from './components/carrito/carrito.component';
 
 
 @NgModule({
@@ -38,6 +39,7 @@ import { LoginComponent } from './components/login/login.component';
     GestionProductosComponent,
     GestionUsuariosComponent,
     LoginComponent,
+    CarritoComponent,
   ],
   imports: [
     BrowserModule,
