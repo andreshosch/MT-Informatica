@@ -10,6 +10,7 @@ export class CarritoComponent {
 
   productos: any[] = [];
   total: number=0
+  monto: number = 0
 
   //Inicio Carrito
   carritoHabilitado: boolean =false
@@ -24,6 +25,13 @@ export class CarritoComponent {
        this.dataService.productos$.subscribe(productos => {
         this.productos = productos;
         this.total = this.productos.length
+        this.monto = 0
+        for(let j=0; j < this.total; j++){
+          console.log(`el precio: ${JSON.stringify(productos[j])}`)
+          console.log(`Largo: ${productos.length}`)
+          this.monto = this.monto + parseInt(productos[j].addProducto.precio)
+        }
+        console.log(`Monton: ${this.monto}`)
       });
   }
 

@@ -11,7 +11,7 @@
             <h2>Carrito</h2>
             <div class="contenedorCart">
                 <div class="losProductos">izquierda
-                    <div *ngFor="let producto of productos">{{ producto.rubro }}</div>
+                    <div *ngFor="let producto of productos">{{ producto.addProducto.rubro }}</div>
                     <button>SSS</button>
                 </div>
                 <div class="resumenCarrito">
@@ -22,7 +22,7 @@
                     </div>
                     <div class="container ">
                         <span>Costo Total:</span>
-                        <span>$8500</span>
+                        <span>$ {{monto}}</span>
                     </div>
                     
                 </div>
