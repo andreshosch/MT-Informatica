@@ -35,5 +35,10 @@
   
   .losProductos{
     width: 70%;
-    background-color: green;
+    background-color: yellow;
   }
+
+.card img{
+  width: 100px;
+  height: 100px;
+}

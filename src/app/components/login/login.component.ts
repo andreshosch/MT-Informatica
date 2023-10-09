@@ -60,22 +60,16 @@ usuarioLogueado(){
     const fechaEnSegundos = fechaActual.getTime()
     const fechaAlmacenada = new Date(arregloLS[2])
     const fechaAlmDif = fechaAlmacenada.getTime()
-    const tiempoTotal = fechaEnSegundos - fechaAlmDif
-    const calculo = (Math.floor(tiempoTotal))
-
-    console.log(`diferencia ${calculo}`)
-
-
-    // if((fechaEnSegundos - fechaAlmacenada) > 60 * 60){
-    //   console.log("paso mucho tiempo")
-    // }else{
-    //   console.log("esta habilitado aun")
-    // }
-
-    console.log(`arreglo traido: ${arregloLS}`)  
-    this.hayUsuario = true
-    this.habilitar=true
-    this.esAdmin = (arregloLS[1] == "true")
+    const tiempoLogin = Math.round((fechaEnSegundos - fechaAlmDif) / 1000)
+    
+    if(tiempoLogin < 3600){
+      this.hayUsuario = true
+      this.habilitar=true
+      this.esAdmin = (arregloLS[1] == "true")
+    }else{
+      this.desloguear()
+    }
+    
   }
 }
 
