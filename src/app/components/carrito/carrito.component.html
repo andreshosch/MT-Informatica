@@ -10,9 +10,25 @@
         <div>
             <h2>Carrito</h2>
             <div class="contenedorCart">
-                <div class="losProductos">izquierda
-                    <div *ngFor="let producto of productos">{{ producto.addProducto.rubro }}</div>
-                    <button>SSS</button>
+                <div class="losProductos container">
+                    <div *ngFor="let producto of productos" class="card">
+                        <img src="{{ producto.addProducto.imagen }}">
+                        {{ producto.addProducto.nombre }}
+                        <div>
+                            <!-- <table>
+                                <th>Costo unidad</th>
+                                <td>{{ producto.addProducto.precio }}</td>
+                                <th>Costo total</th>
+                                
+                            </table> -->
+
+                  
+                        </div>
+                        <button>-</button>
+                        <label>0</label>
+                        <button>+</button>
+                        <button>Eliminar</button>
+                    </div>
                 </div>
                 <div class="resumenCarrito">
                     <h4>Resumen</h4>

@@ -27,11 +27,8 @@ export class CarritoComponent {
         this.total = this.productos.length
         this.monto = 0
         for(let j=0; j < this.total; j++){
-          console.log(`el precio: ${JSON.stringify(productos[j])}`)
-          console.log(`Largo: ${productos.length}`)
           this.monto = this.monto + parseInt(productos[j].addProducto.precio)
         }
-        console.log(`Monton: ${this.monto}`)
       });
   }
 
