@@ -62,16 +62,16 @@
 }
 
 
-.contenedorCart{
+/* .contenedorCart{
   display: flex;
 }
 
 .losProductos{
   width: 70%;
   background-color: green;
-}
+} */
 
-.resumenCarrito{
+/* .resumenCarrito{
   width: 25%;
   background-color: red;
   margin-left: 3%;
@@ -87,4 +87,4 @@
   border-radius: 4px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   width: 90%;
-}
+} */

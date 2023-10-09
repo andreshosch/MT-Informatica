@@ -3,7 +3,8 @@
     <a *ngIf="esAdmin" class="nav-link" href="./gestion">Gestion de Productos</a>
     <a *ngIf="!habilitar" class="nav-link" (click)="habilitarLogin()">Login</a>
     <a *ngIf="habilitar" class="nav-link" (click)="desloguear()" class="nav-link">LogOut</a>
-    <a *ngIf="hayUsuario" class="nav-link" (click)="verCarrito()" class="nav-link">Carrito</a>
+    <!-- <a *ngIf="hayUsuario" class="nav-link" (click)="verCarrito()" class="nav-link">Carrito</a> -->
+    <app-carrito *ngIf="hayUsuario" class="nav-link"></app-carrito>
 </div>
 
 
@@ -88,7 +89,7 @@
 </div>
 
 
-<div class="confirmation-dialog" *ngIf="carritoHabilitado">
+<!-- <div class="confirmation-dialog" *ngIf="carritoHabilitado">
     <div class="modalCarrito">
 
         <div>
@@ -111,4 +112,4 @@
         </div>
         <button (click)="ocultarCarrito()">Cerrar</button>
     </div>
-</div>
+</div> -->

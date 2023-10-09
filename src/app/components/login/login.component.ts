@@ -24,9 +24,9 @@ export class LoginComponent {
   contrasena: string;
   //Fin Login
 
-  //Inicio Carrito
-  carritoHabilitado: boolean =false
-  //Fin Carrito
+  // //Inicio Carrito
+  // carritoHabilitado: boolean =false
+  // //Fin Carrito
 
   constructor(private _usuarioService: UsuariosService, private fb:FormBuilder){
 
@@ -200,15 +200,15 @@ solicitarAlta(){
   }
 }
 
-//Inicio sección Carrito
-verCarrito(){
-  this.carritoHabilitado = true
-}
+// //Inicio sección Carrito
+// verCarrito(){
+//   this.carritoHabilitado = true
+// }
 
-ocultarCarrito(){
-  this.carritoHabilitado = false
-}
+// ocultarCarrito(){
+//   this.carritoHabilitado = false
+// }
 
-//Fin sección Carrito
+// //Fin sección Carrito
 
 }
