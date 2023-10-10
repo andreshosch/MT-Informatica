@@ -78,13 +78,14 @@ loadFirstPage(){
     else {
       this.lastPage()
     }
+     
   }
 
   afterPage() {
     this.arrProductsPages = []
     this.numberPages -= 1;
     this.max = ((this.numberPages) * 10) * 2;
-    this.min = (this.min) - 20
+    this.min = (this.max) - 20
     let j = 0;
     do
       for (let i = this.min; i < this.max; i++) {
@@ -92,6 +93,7 @@ loadFirstPage(){
         j += 1;
       }
     while (j < 20)
+   
   }
   firstPage() {
     this.arrProductsPages = []
@@ -102,19 +104,23 @@ loadFirstPage(){
     for (let i = this.min; i < this.max; i++) {
       this.arrProductsPages[i] = this.arrProducts[i]
     }
+       
   }
 
   lastPage() {
     this.arrProductsPages = []
     this.numberPages = Math.ceil(this.arrProducts.length / 20);
     let finalPage = (this.numberPages - 1) * 20;
+    this.min =  finalPage
+    console.log("el mino es "+this.min)
     this.max = this.arrProducts.length;
-    this.min = this.max - 20
+    
     let j = 0;
     for (let i = 0; i < (this.arrProducts.length - finalPage); i++) {
       this.arrProductsPages[i] = this.arrProducts[this.min]
-
       this.min++
     }
+      
   }
+  
 }
