@@ -18,12 +18,14 @@ export class ProductosComponent {
   lengthPages: number
   min: number;
   max: number;
+  productSearch = '';
+  filterArray: any[] = [];
   requestData = {
     "user_id": '22181',
     "token": "oyhl04axaro"
   }
 
- 
+
 
   constructor(private productosServices: ProductosService) {
   }
@@ -31,14 +33,14 @@ export class ProductosComponent {
 
   ngOnInit() {
     this.arrayProducts()
-    }
+  }
 
-loadFirstPage(){
- this.arrProductsPages=[]
-    for (let i=0;i<20;i++){
-      this.arrProductsPages[i]=this.arrProducts[i]
+  loadFirstPage() {
+    this.arrProductsPages = []
+    for (let i = 0; i < 20; i++) {
+      this.arrProductsPages[i] = this.arrProducts[i]
     }
- }
+  }
 
   arrayProducts() {
     this.productosServices.getArrayProducts(this.requestData, 1, 100).subscribe
@@ -54,7 +56,7 @@ loadFirstPage(){
               this.loadFirstPage()
             })
         }
-        
+
       })
   }
 
@@ -78,7 +80,7 @@ loadFirstPage(){
     else {
       this.lastPage()
     }
-     
+
   }
 
   afterPage() {
@@ -93,7 +95,7 @@ loadFirstPage(){
         j += 1;
       }
     while (j < 20)
-   
+
   }
   firstPage() {
     this.arrProductsPages = []
@@ -104,23 +106,56 @@ loadFirstPage(){
     for (let i = this.min; i < this.max; i++) {
       this.arrProductsPages[i] = this.arrProducts[i]
     }
-       
+
   }
 
   lastPage() {
     this.arrProductsPages = []
     this.numberPages = Math.ceil(this.arrProducts.length / 20);
     let finalPage = (this.numberPages - 1) * 20;
-    this.min =  finalPage
-    console.log("el mino es "+this.min)
+    this.min = finalPage
+    console.log("el mino es " + this.min)
     this.max = this.arrProducts.length;
-    
+
     let j = 0;
     for (let i = 0; i < (this.arrProducts.length - finalPage); i++) {
       this.arrProductsPages[i] = this.arrProducts[this.min]
       this.min++
     }
-      
+
   }
-  
+  // filterItems() {
+  //   this.searchResults = this.arrProducts.filter(item =>
+  //     item.marca.toLowerCase().includes(this.searchTerm.toLowerCase())
+  //   );
+  //   console.log(this.searchResults)
+  // }
+
+  // filterItems() {
+  //   this.searchResults = this.arrProducts.filter(item => {
+  //     for (const key in item) {
+  //       if (typeof item[key] === 'string' && item[key].toLowerCase().includes(this.searchTerm.toLowerCase())) {
+  //      console.log("hola")
+  //       }
+        
+  //     }
+      
+  //   });
+  //   console.log(this.searchResults)
+  // }
+
+  filterProducts(){
+    this.filterArray = this.arrProducts.filter((objeto) => {
+      return Object.values(objeto).some((product) => {
+        if (typeof product === 'string') {
+          return product.toLowerCase().includes(this.productSearch.toLowerCase());
+        }
+        return false;
+      });
+    });
+    console.log(this.filterArray)
+  }
 }
+  
+
+  

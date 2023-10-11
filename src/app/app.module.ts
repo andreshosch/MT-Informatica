@@ -12,7 +12,7 @@ import { GestionProductosComponent } from './components/gestion-productos/gestio
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ContactoComponent } from './components/contacto/contacto.component';
 import { IndexComponent } from './components/index/index.component';
-
+import { FormsModule } from '@angular/forms';
 import { AngularFireModule } from '@angular/fire/compat';
 import { environment } from 'src/environment/environment'
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
@@ -43,6 +43,7 @@ import { CarritoComponent } from './components/carrito/carrito.component';
     LoginComponent,
     CarritoComponent,
     
+    
    
   ],
   imports: [
@@ -54,7 +55,8 @@ import { CarritoComponent } from './components/carrito/carrito.component';
     AngularFirestoreModule,
     ReactiveFormsModule,
     SharedModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    FormsModule
   ],
   exports: [
     AngularFireModule,
