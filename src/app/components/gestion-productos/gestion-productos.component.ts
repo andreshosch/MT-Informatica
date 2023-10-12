@@ -68,7 +68,8 @@ export class GestionProductosComponent {
         rubro: this.altaProd.get('rubro').value,
         subrubro: this.altaProd.get('subrubro').value,
         imagen: this.altaProd.get('imagen').value,
-        descripcion: this.altaProd.get('descripcion').value
+        descripcion: this.altaProd.get('descripcion').value,
+        cantidad: 1
       }
       this._productosService.createProduct(unProducto) 
     }else{
@@ -78,12 +79,11 @@ export class GestionProductosComponent {
         rubro: this.modificarProd.get('rubroM').value,
         subrubro: this.modificarProd.get('subrubroM').value,
         imagen: this.modificarProd.get('imagenM').value,
-        descripcion: this.modificarProd.get('descripcionM').value
+        descripcion: this.modificarProd.get('descripcionM').value,
+        cantidad: 1
       }
       this._productosService.updateProduct(this.idProducto, unProducto) 
     }
-    
-    
     
   }
 
