@@ -1,6 +1,7 @@
 
 <input type="text" [(ngModel)]="productSearch" placeholder="Ingrese una palabra clave">
  <button (click)="filterProducts()">Buscar</button> 
+ <button (click)="cleanFilters()">Limpiar filtros</button> 
 <h3 class="titleProductos" >NUESTROS PRODUCTOS</h3>
 <!-- <button (click)="traerTodo()">Traer</button> -->
   <div class="card" style="width: 18rem" *ngFor="let productos of arrProductsPages">
@@ -16,19 +17,19 @@
     </div>
   </div>
   <nav aria-label="Page navigation example" style="display: flex; justify-content: center;">
-     <!-- <ul class="pagination justify-content-center" *ngIf="filterArray.length>0">
+     <ul class="pagination justify-content-center" *ngIf="filterArray.length>0">
       <li class="page-item"><a class="page-link" [class.disabled]="this.numberPages==1"(click)="firstPage(filterArray)"><<</a></li>
       <li class="page-item"><a class="page-link "[class.disabled]="this.numberPages==1"(click)="afterPage(filterArray)"><</a></li>
       <li class="page-item"><a class="page-link">{{this.numberPages}}</a></li>
-      <li class="page-item"><a class="page-link"[class.disabled]="this.numberPages==20"(click)="nextPage(filterArray)">></a></li>
-      <li class="page-item"><a class="page-link" (click)="lastPage(filterArray)"[class.disabled]="this.numberPages==20">>></a></li>    
-    </ul>  -->
+      <li class="page-item"><a class="page-link"[class.disabled]="this.numberPages==numberPages.length"(click)="nextPage(filterArray)">></a></li>
+      <li class="page-item"><a class="page-link" (click)="lastPage(filterArray)"[class.disabled]="this.numberPages==numberPages.length">>></a></li>    
+    </ul> 
     <ul class="pagination justify-content-center" *ngIf="filterArray.length===0">
       <li class="page-item"><a class="page-link" [class.disabled]="this.numberPages==1"(click)="firstPage(arrProducts)"><<</a></li>
       <li class="page-item"><a class="page-link "[class.disabled]="this.numberPages==1"(click)="afterPage(arrProducts)"><</a></li>
       <li class="page-item"><a class="page-link">{{this.numberPages}}</a></li>
-      <li class="page-item"><a class="page-link"[class.disabled]="this.numberPages==this.numberPages.length"(click)="nextPage(arrProducts)">></a></li>
-      <li class="page-item"><a class="page-link" (click)="lastPage(arrProducts)"[class.disabled]="this.numberPages==this.numberPages.length">>></a></li>    
+      <li class="page-item"><a class="page-link"[class.disabled]="this.numberPages==numberPages.length"(click)="nextPage(arrProducts)">></a></li>
+      <li class="page-item"><a class="page-link" (click)="lastPage(arrProducts)"[class.disabled]="this.numberPages==numberPages.length">>></a></li>    
     </ul> 
   </nav>
 

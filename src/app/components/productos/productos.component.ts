@@ -12,7 +12,7 @@ export class ProductosComponent {
   arrPaginador: any[]
   arrProducts: any[] = []
   arrProductsPages: any[] = []
-  numberPages = 1
+  numberPages :any= 1
   numberPagesTotal: number
   pages: any
   lengthPages: number
@@ -35,11 +35,21 @@ export class ProductosComponent {
     this.arrayProducts()
   }
 
-  loadFirstPage() {
+  loadFirstPage(products:any) {
     this.arrProductsPages = []
-    for (let i = 0; i < 20; i++) {
-      this.arrProductsPages[i] = this.arrProducts[i]
+    if (products.length>20){
+      for (let i = 0; i < 20; i++) {
+        this.arrProductsPages[i] = products[i]
+      }
     }
+    else{
+      for (let i = 0; i < products.length; i++) {
+        this.arrProductsPages[i] = products[i]
+      }
+      this.numberPages=1
+    }
+    
+    
   }
 
   arrayProducts() {
@@ -47,24 +57,25 @@ export class ProductosComponent {
       (response => {
         this.pages = response['paginador'];
         this.lengthPages = this.pages.total
-
+       if(this.filterArray.length===0)
+       {
         for (let i = 1; i <= this.lengthPages; i += 100) {
           this.productosServices.getArrayProducts(this.requestData, 100, i).subscribe
             (response => {
               this.arrProductos = response['resultado']
               this.arrProducts.push(...this.arrProductos)
-              this.loadFirstPage()
+              this.loadFirstPage(this.arrProducts)
             })
         }
-console.log(this.arrProducts)
-console.log(this.filterArray)
+       }
       })
   }
 
   nextPage(products:any) {
-   products = []
+   this.arrProductsPages = []
+   let numberPages = Math.ceil(products.length / 20);
     this.numberPages += 1;
-    if (this.numberPages < 20) {
+    if (this.numberPages < numberPages) {
       this.min = (((this.numberPages - 2) * 10) * 2 + 20);
       this.max = (this.min) + 20
       let j = 0;
@@ -76,16 +87,17 @@ console.log(this.filterArray)
           this.arrProductsPages[j] = products[i]
           j += 1;
         }
-      while (j < 20)
+      while (j < numberPages)
     }
     else {
       this.lastPage(products)
     }
-
+    console.log("minimo " +this.min)
+    console.log("maximo " +this.max)
   }
 
   afterPage(products:any) {
-    products = []
+    this.arrProductsPages = []
     this.numberPages -= 1;
     this.max = ((this.numberPages) * 10) * 2;
     this.min = (this.max) - 20
@@ -96,10 +108,11 @@ console.log(this.filterArray)
         j += 1;
       }
     while (j < 20)
-
+    console.log("minimo " +this.min)
+    console.log("maximo " +this.max)
   }
   firstPage(products:any) {
-    products = []
+    this.arrProductsPages = []
     this.numberPages = 1;
     this.min = 0;
     this.max = 20
@@ -107,7 +120,8 @@ console.log(this.filterArray)
     for (let i = this.min; i < this.max; i++) {
       this.arrProductsPages[i] = products[i]
     }
-
+    console.log("minimo " +this.min)
+    console.log("maximo " +this.max)
   }
 
   lastPage(products:any) {
@@ -115,18 +129,19 @@ console.log(this.filterArray)
     this.numberPages = Math.ceil(products.length / 20);
     let finalPage = (this.numberPages - 1) * 20;
     this.min = finalPage
-    console.log("el mino es " + this.min)
     this.max = products.length;
-
+    console.log("minimo " +this.min)
+    console.log("maximo " +this.max)
     let j = 0;
-    for (let i = 0; i < (this.arrProducts.length - finalPage); i++) {
-      this.arrProductsPages[i] = this.arrProducts[this.min]
+    for (let i = 0; i < (products.length - finalPage); i++) {
+      this.arrProductsPages[i] = products[this.min]
       this.min++
     }
-
+    
   }
  
   filterProducts(){
+    this.numberPages=1
     this.filterArray = this.arrProducts.filter((objeto) => {
       return Object.values(objeto).some((product) => {
         if (typeof product === 'string') {
@@ -135,8 +150,16 @@ console.log(this.filterArray)
         return false;
       });
     });
+    this.loadFirstPage(this.filterArray)
     console.log(this.filterArray)
   }
+
+cleanFilters(){
+  this.filterArray=[]
+  this.productSearch=''
+  this.numberPages=1
+  this.loadFirstPage(this.arrProductos)
+}  
 }
   
 
