@@ -12,22 +12,41 @@
             <div class="contenedorCart">
                 <div class="losProductos container">
                     <div *ngFor="let producto of productos" class="card">
-                        <img src="{{ producto.addProducto.imagen }}">
-                        {{ producto.addProducto.nombre }}
-                        <div>
-                            <!-- <table>
-                                <th>Costo unidad</th>
-                                <td>{{ producto.addProducto.precio }}</td>
-                                <th>Costo total</th>
-                                
-                            </table> -->
-
-                  
+                        <div class="carrito">
+                            <div class="izquierda">
+                                <div class="carroImagen">
+                                    <img src="{{ producto.addProducto.imagen }}">
+                                </div>
+                            </div>
+                            <div class="derecha">
+                                <div class="derArriba">
+                                    <div class="carroNombre">
+                                        {{ producto.addProducto.nombre }}
+                                    </div>
+                                    <div class="carroDescripcion">
+                                        {{ producto.addProducto.descripcion }}
+                                    </div>
+                                </div>
+                                <div class="derAbajo">
+                                    <div class="carritoPrecioU">
+                                        <th>Precio unitario</th>
+                                        <td>{{ producto.addProducto.precio }}</td> 
+                                    </div>
+                                    <div class="carritoPrecioT">
+                                        <th>Costo total</th>
+                                        <td>{{ producto.addProducto.precio * 3 }}</td>
+                                    </div>
+                                    <div class="carritoBotonera">
+                                        <button>-</button>
+                                        <label id="cotización">0</label>
+                                        <button>+</button>
+                                    </div>
+                                    <div class="carritoEliminar">
+                                        <button (click)="quitarProd(producto.addProducto.id)">Eliminar</button>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <button>-</button>
-                        <label>0</label>
-                        <button>+</button>
-                        <button>Eliminar</button>
                     </div>
                 </div>
                 <div class="resumenCarrito">
@@ -45,6 +64,5 @@
             </div>
         </div>
         <button (click)="ocultarCarrito()">Cerrar</button>
-        <button (click)="verCart()">Ver carrito</button>
     </div>
 </div>

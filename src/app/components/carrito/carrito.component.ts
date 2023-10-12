@@ -32,10 +32,6 @@ export class CarritoComponent {
       });
   }
 
-  verCart(){
-    console.log(JSON.stringify(this.productos))
-  }  
-
 //Inicio sección Carrito
 verCarrito(){
   this.carritoHabilitado = true
@@ -45,6 +41,15 @@ ocultarCarrito(){
   this.carritoHabilitado = false
 }
 
+
+quitarProd(quitarElem: string){
+
+
+
+  const index = this.productos.findIndex(obj => obj.addProducto.id === quitarElem)
+  console.log(`index: ${index}`)
+  this.productos.splice(index, 1)
+}
 //Fin sección Carrito
 
 }
