@@ -56,66 +56,67 @@ export class ProductosComponent {
               this.loadFirstPage()
             })
         }
-
+console.log(this.arrProducts)
+console.log(this.filterArray)
       })
   }
 
-  nextPage() {
-    this.arrProductsPages = []
+  nextPage(products:any) {
+   products = []
     this.numberPages += 1;
     if (this.numberPages < 20) {
       this.min = (((this.numberPages - 2) * 10) * 2 + 20);
       this.max = (this.min) + 20
       let j = 0;
-      if (this.max > this.arrProducts.length) {
-        this.max = this.arrProducts.length
+      if (this.max > products.length) {
+        this.max = products.length
       }
       do
         for (let i = this.min; i < this.max; i++) {
-          this.arrProductsPages[j] = this.arrProducts[i]
+          this.arrProductsPages[j] = products[i]
           j += 1;
         }
       while (j < 20)
     }
     else {
-      this.lastPage()
+      this.lastPage(products)
     }
 
   }
 
-  afterPage() {
-    this.arrProductsPages = []
+  afterPage(products:any) {
+    products = []
     this.numberPages -= 1;
     this.max = ((this.numberPages) * 10) * 2;
     this.min = (this.max) - 20
     let j = 0;
     do
       for (let i = this.min; i < this.max; i++) {
-        this.arrProductsPages[j] = this.arrProducts[i]
+        this.arrProductsPages[j] = products[i]
         j += 1;
       }
     while (j < 20)
 
   }
-  firstPage() {
-    this.arrProductsPages = []
+  firstPage(products:any) {
+    products = []
     this.numberPages = 1;
     this.min = 0;
     this.max = 20
     let j = 0;
     for (let i = this.min; i < this.max; i++) {
-      this.arrProductsPages[i] = this.arrProducts[i]
+      this.arrProductsPages[i] = products[i]
     }
 
   }
 
-  lastPage() {
+  lastPage(products:any) {
     this.arrProductsPages = []
-    this.numberPages = Math.ceil(this.arrProducts.length / 20);
+    this.numberPages = Math.ceil(products.length / 20);
     let finalPage = (this.numberPages - 1) * 20;
     this.min = finalPage
     console.log("el mino es " + this.min)
-    this.max = this.arrProducts.length;
+    this.max = products.length;
 
     let j = 0;
     for (let i = 0; i < (this.arrProducts.length - finalPage); i++) {
@@ -124,26 +125,7 @@ export class ProductosComponent {
     }
 
   }
-  // filterItems() {
-  //   this.searchResults = this.arrProducts.filter(item =>
-  //     item.marca.toLowerCase().includes(this.searchTerm.toLowerCase())
-  //   );
-  //   console.log(this.searchResults)
-  // }
-
-  // filterItems() {
-  //   this.searchResults = this.arrProducts.filter(item => {
-  //     for (const key in item) {
-  //       if (typeof item[key] === 'string' && item[key].toLowerCase().includes(this.searchTerm.toLowerCase())) {
-  //      console.log("hola")
-  //       }
-        
-  //     }
-      
-  //   });
-  //   console.log(this.searchResults)
-  // }
-
+ 
   filterProducts(){
     this.filterArray = this.arrProducts.filter((objeto) => {
       return Object.values(objeto).some((product) => {
