@@ -32,14 +32,14 @@
                                         <th>Precio unitario</th>
                                         <td>{{ producto.addProducto.precio }}</td> 
                                     </div>
+                                    <div class="carritoBotonera">
+                                        <button (click)="restarUno(producto.addProducto.id)">-</button>
+                                        <label id="cotización">{{producto.addProducto.cantidad}}</label>
+                                        <button (click)="sumarUno(producto.addProducto.id)">+</button>
+                                    </div>
                                     <div class="carritoPrecioT">
                                         <th>Costo total</th>
-                                        <td>{{ producto.addProducto.precio * 3 }}</td>
-                                    </div>
-                                    <div class="carritoBotonera">
-                                        <button>-</button>
-                                        <label id="cotización">0</label>
-                                        <button>+</button>
+                                        <td>{{ producto.addProducto.precio * producto.addProducto.cantidad }}</td>
                                     </div>
                                     <div class="carritoEliminar">
                                         <button (click)="quitarProd(producto.addProducto.id)">Eliminar</button>

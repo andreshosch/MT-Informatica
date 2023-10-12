@@ -21,20 +21,13 @@ export class CarritoComponent {
   }
 
   ngOnInit(){
-       // Suscribirse al Observable del servicio para recibir actualizaciones
-       this.dataService.productos$.subscribe(productos => {
-        this.productos = productos;
-        this.total = this.productos.length
-        this.monto = 0
-        for(let j=0; j < this.total; j++){
-          this.monto = this.monto + parseInt(productos[j].addProducto.precio)
-        }
-      });
+    this.actualizarResumen()
   }
 
 //Inicio sección Carrito
 verCarrito(){
   this.carritoHabilitado = true
+  this.actualizarResumen()
 }
 
 ocultarCarrito(){
@@ -43,13 +36,44 @@ ocultarCarrito(){
 
 
 quitarProd(quitarElem: string){
-
-
-
   const index = this.productos.findIndex(obj => obj.addProducto.id === quitarElem)
-  console.log(`index: ${index}`)
   this.productos.splice(index, 1)
+  this.actualizarResumen()
 }
-//Fin sección Carrito
+
+
+sumarUno(idAgregar: string){
+  for (let j=0; j < this.productos.length; j++){
+    if(this.productos[j].addProducto.id === idAgregar){
+      this.productos[j].addProducto.cantidad ++;
+      this.actualizarResumen()
+      j = this.productos.length
+    }
+  }
+}
+
+restarUno(idQuitar: string){
+  for (let j=0; j < this.productos.length; j++){
+    if(this.productos[j].addProducto.id === idQuitar){
+      if(this.productos[j].addProducto.cantidad > 1){
+        this.productos[j].addProducto.cantidad --;
+        this.actualizarResumen()
+      }
+      j = this.productos.length
+    }
+  }
+}
+
+actualizarResumen(){
+  this.dataService.productos$.subscribe(productos => {
+    this.productos = productos;
+    this.total = 0
+    this.monto = 0
+    for(let j=0; j < this.productos.length; j++){
+      this.monto = this.monto + (parseInt(productos[j].addProducto.precio) * parseInt(productos[j].addProducto.cantidad))
+      this.total = this.total + parseInt(productos[j].addProducto.cantidad)
+    }
+  });
+}
 
 }

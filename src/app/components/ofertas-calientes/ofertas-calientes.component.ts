@@ -39,12 +39,22 @@ export class OfertasCalientesComponent {
     })
   }
 
+  //*******Version que anda
+  // agregarAlCarrito(addProducto: Producto, idProd: string) {
+  //   const producto = { addProducto };
+  //   this.dataService.productos$.pipe(first()).subscribe(productos => {
+  //       this.dataService.actualizarProductos([...productos, producto]);
+  //   });
+  // }
+  //*******Version que anda
+
   agregarAlCarrito(addProducto: Producto, idProd: string) {
     const producto = { addProducto };
-    // Suscribirse al observable y actualizar la lista de productos
     this.dataService.productos$.pipe(first()).subscribe(productos => {
-      this.dataService.actualizarProductos([...productos, producto]);
+        this.dataService.actualizarProductos([...productos], [producto], idProd);
     });
   }
+
+
 
 }
