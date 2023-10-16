@@ -11,13 +11,6 @@ export class DataService {
 
   constructor() { }
 
-  //******Version que anda 
-  // actualizarProductos(productos: any[]) {
-  //   console.log(`los productos: ${JSON.stringify(productos)}`)
-  //   this.productosSubject.next(productos);
-  // }
-  //******Version que anda 
-
   async actualizarProductos(productos: any[], producto: any[], idProd: string) {
     let agregar: boolean = true
 

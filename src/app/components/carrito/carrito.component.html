@@ -1,8 +1,7 @@
-<a (click)="verCarrito()">Carroooo</a>
-
-<ul>
-    <li *ngFor="let producto of productos">{{ producto.nombre }}</li>
-  </ul>
+<div class="carroYcantidad">
+    <a (click)="verCarrito()"><mat-icon>shopping_cart</mat-icon> </a>
+    <span class="nav-link">{{ total }}</span>
+</div>
 
 <div class="confirmation-dialog" *ngIf="carritoHabilitado">
     <div class="modalCarrito">
@@ -42,7 +41,7 @@
                                         <td>{{ producto.addProducto.precio * producto.addProducto.cantidad }}</td>
                                     </div>
                                     <div class="carritoEliminar">
-                                        <button (click)="quitarProd(producto.addProducto.id)">Eliminar</button>
+                                        <button (click)="quitarProd(producto.addProducto.id)"><mat-icon>delete</mat-icon></button>
                                     </div>
                                 </div>
                             </div>
