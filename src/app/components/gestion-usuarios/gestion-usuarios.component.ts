@@ -5,7 +5,6 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSnackBar } from '@angular/material/snack-bar';
-// import { MatSnackBar } from '@angular/material/snack-bar';
 
 
 @Component({
@@ -27,11 +26,13 @@ usuarioAModificar: Usuario
 idUsuarioAModificar: string = ""
 usuarioUpdate: Usuario
 
-private paginator: MatPaginator; 
-private sort: MatSort;
+
 
 displayedColumns: string[] = ['nombre', 'apellido','dni','telefono','domicilio','mail','acciones'];
 dataSource!: MatTableDataSource<any>;
+
+private paginator: MatPaginator; 
+private sort: MatSort;
 
 @ViewChild(MatSort) set matSort(ms: MatSort) {
   this.sort = ms;

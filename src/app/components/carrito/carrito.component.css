@@ -2,6 +2,7 @@
     width: 25%;
     background-color: red;
     margin-left: 3%;
+    margin-top: 25px;
   }
   
   .resumenCarrito h4{
@@ -14,6 +15,7 @@
     border-radius: 4px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     width: 90%;
+    text-align: center;
   }
 
   .confirmation-dialog {
@@ -35,11 +37,16 @@
   
   .losProductos{
     width: 70%;
+    text-align: center;
   }
 
   .carroYcantidad{
     display: flex;
   }
+
+.card{
+  margin-top: 25px;
+}
 
 .card img{
   width: 100px;
@@ -70,16 +77,21 @@
   height: 130px;
 }
 
+.carroImagen img{
+  display: flex;
+  justify-content: center;
+}
+
 .carroNombre{
   width: 30%;
   height: 60px;
-  background-color: lightcoral;
+  /* background-color: lightcoral; */
 }
 
 .carroDescripcion{
   width: 70%;
   height: 60px;
-  background-color: aquamarine;
+  /* background-color: aquamarine; */
 }
 
 .derAbajo{
@@ -92,25 +104,36 @@
 .carritoPrecioU{
   width: 30%;
   height: 70px;
-  background-color: lightcyan;
+  /* background-color: lightcyan; */
+}
+
+.carritoPrecioU table{
+  width: 100%;
 }
 
 .carritoPrecioT{
   width: 30%;
   height: 70px;
-  background-color: lightgrey
+  /* background-color: lightgrey; */
 }
 
-.carritoBotonera{
+.carritoPrecioT table{
+  width: 100%;
+}
+
+.carritoBotonera {
   width: 25%;
   height: 70px;
-  background-color: lightpink;
+  /* background-color: lightpink; */
+}
+.carritoBotonera button {
+  margin: 0 5px; 
 }
 
 .carritoEliminar{
   width: 15%;
   height: 70px;
-  background-color: lightgreen;
+  /* background-color: lightgreen; */
 }
 
 .formatoCol{
@@ -145,3 +168,16 @@
   display: flex;
   flex-direction: row;
 }
+
+.ordenCeldas{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.buttonClose{
+  text-align: center;
+  justify-content: center;
+  margin-top: 25px;
+}
+

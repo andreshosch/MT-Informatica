@@ -5,7 +5,6 @@
 
 <div class="confirmation-dialog" *ngIf="carritoHabilitado">
     <div class="modalCarrito">
-
         <div>
             <h2>Carrito</h2>
             <div class="contenedorCart">
@@ -19,28 +18,64 @@
                             </div>
                             <div class="derecha">
                                 <div class="derArriba">
-                                    <div class="carroNombre">
-                                        {{ producto.addProducto.nombre }}
+                                    <div class="carroNombre ordenCeldas">
+                                        <table>
+                                            <tr>
+                                                <th>Producto</th>
+                                            </tr>
+                                            <tr>
+                                                <td>{{ producto.addProducto.nombre }}</td>
+                                            </tr>
+                                        </table>
                                     </div>
-                                    <div class="carroDescripcion">
-                                        {{ producto.addProducto.descripcion }}
+                                    <div class="carroDescripcion ordenCeldas">
+                                        <table>
+                                            <tr>
+                                                <th>Descripción</th>
+                                            </tr>
+                                            <tr>
+                                                <td>{{ producto.addProducto.descripcion }}</td>
+                                            </tr>
+                                        </table>
                                     </div>
                                 </div>
                                 <div class="derAbajo">
-                                    <div class="carritoPrecioU">
-                                        <th>Precio unitario</th>
-                                        <td>{{ producto.addProducto.precio }}</td> 
+                                    <div class="carritoPrecioU ordenCeldas">
+                                        <table>
+                                            <tr>
+                                                <th>Precio unitario</th>
+                                            </tr>
+                                            <tr>
+                                                <td>{{ producto.addProducto.precio }}</td>
+                                            </tr>
+                                        </table>
                                     </div>
-                                    <div class="carritoBotonera">
-                                        <button (click)="restarUno(producto.addProducto.id)">-</button>
-                                        <label id="cotización">{{producto.addProducto.cantidad}}</label>
-                                        <button (click)="sumarUno(producto.addProducto.id)">+</button>
+
+                                    <div class="carritoBotonera ordenCeldas">
+                                        <table>
+                                            <tr>
+                                                <th>Cantidad</th>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <button (click)="restarUno(producto.addProducto.id)">-</button>
+                                                    <label id="cotización">{{producto.addProducto.cantidad}}</label>
+                                                    <button (click)="sumarUno(producto.addProducto.id)">+</button>
+                                                </td>
+                                            </tr>
+                                        </table>
                                     </div>
-                                    <div class="carritoPrecioT">
-                                        <th>Costo total</th>
-                                        <td>{{ producto.addProducto.precio * producto.addProducto.cantidad }}</td>
+                                    <div class="carritoPrecioT ordenCeldas">
+                                        <table>
+                                            <tr>
+                                                <th>Costo total</th>
+                                            </tr>
+                                            <tr>
+                                                <td>{{ producto.addProducto.precio * producto.addProducto.cantidad }}</td>
+                                            </tr>
+                                        </table>
                                     </div>
-                                    <div class="carritoEliminar">
+                                    <div class="carritoEliminar ordenCeldas">
                                         <button (click)="quitarProd(producto.addProducto.id)"><mat-icon>delete</mat-icon></button>
                                     </div>
                                 </div>
@@ -50,18 +85,44 @@
                 </div>
                 <div class="resumenCarrito">
                     <h4>Resumen</h4>
-                    <div class="container">
+
+                    <div class="ordenCeldas">
+                        <table>
+                            <tr>
+                                <th>Cantidad Items:</th>
+                            </tr>
+                            <tr>
+                                <td>{{ total }}</td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <!-- <div class="container">
                         <span>Productos: </span>
                         <span>{{total}}</span>
+                    </div> -->
+
+                    <div class="ordenCeldas">
+                        <table>
+                            <tr>
+                                <th>Costo Total:</th>
+                            </tr>
+                            <tr>
+                                <td>$ {{ monto }}</td>
+                            </tr>
+                        </table>
                     </div>
-                    <div class="container ">
+
+                    <!-- <div class="container ">
                         <span>Costo Total:</span>
                         <span>$ {{monto}}</span>
-                    </div>
+                    </div> -->
                     
                 </div>
             </div>
         </div>
-        <button (click)="ocultarCarrito()">Cerrar</button>
+        <div class="buttonClose">
+            <button (click)="ocultarCarrito()" mat-raised-button color="primary">Cerrar</button>  
+        </div>
     </div>
 </div>
