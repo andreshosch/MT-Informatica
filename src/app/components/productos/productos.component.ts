@@ -11,6 +11,7 @@ export class ProductosComponent {
   arrProductos: any[] = []
   arrPaginador: any[]
   arrProducts: any[] = []
+  arrCategory:any[]=[]
   arrProductsPages: any[] = []
   numberPages :any= 1
   numberPagesTotal: number
@@ -48,8 +49,6 @@ export class ProductosComponent {
       }
       this.numberPages=1
     }
-    
-    
   }
 
   arrayProducts() {
@@ -64,13 +63,23 @@ export class ProductosComponent {
             (response => {
               this.arrProductos = response['resultado']
               this.arrProducts.push(...this.arrProductos)
+              for(let i=0;i<this.arrProductos.length;i++)
+              {
+               this.arrCategory.push({
+                categoria:this.arrProductos[i].categoria,
+                sub_categoria:this.arrProductos[i].sub_categoria
+                
+               })
+              }
               this.loadFirstPage(this.arrProducts)
             })
         }
+      
        }
       })
+    
+      console.log(this.arrCategory)
   }
-
   nextPage(products:any) {
    this.arrProductsPages = []
    let numberPages = Math.ceil(products.length / 20);
