@@ -5,14 +5,16 @@ export class Producto{
     subrubro: string;
     descripcion: string;
     precio: number;
+    cantidad?: number
 
-    constructor(imagen:string, nombre: string, rubro: string, subrubro: string, descripcion: string, precio: number){
+    constructor(imagen:string, nombre: string, rubro: string, subrubro: string, descripcion: string, precio: number, cantidad: number){
         this.descripcion = descripcion;
         this.imagen = imagen;
         this.nombre = nombre;
         this.rubro = rubro;
         this.subrubro = subrubro;
         this.precio = precio;
+        this.cantidad = cantidad;
     }
 
 }
