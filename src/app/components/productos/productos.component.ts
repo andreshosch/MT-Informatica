@@ -1,5 +1,9 @@
 
 import { Component } from '@angular/core';
+import { NgbCarouselConfig } from '@ng-bootstrap/ng-bootstrap';
+import { first } from 'rxjs';
+import { Producto } from 'src/app/models/producto';
+import { DataService } from 'src/app/services/data.service';
 import { ProductosService } from 'src/app/services/productos.service';
 
 @Component({
@@ -26,13 +30,24 @@ export class ProductosComponent {
     "user_id": '22181',
     "token": "oyhl04axaro"
   }
-  
-  constructor(private productosServices: ProductosService) {
+
+  //Inicio Productos destacados
+  productosHot: any[] = []
+  elProducto: Producto
+  idProducto: string
+  // Fin Productos destacados
+
+
+  constructor(private productosServices: ProductosService, private _config: NgbCarouselConfig, private dataService: DataService) {
+    _config.interval = 2000;
+    _config.pauseOnHover = true;
+    _config.showNavigationArrows = false;
   }
 
 
   ngOnInit() {
     this.arrayProducts()
+    this.getProductos()
   }
 
   loadFirstPage(products:any) {
@@ -203,6 +218,39 @@ cleanFilters(){
   this.numberPages=1
   this.loadFirstPage(this.arrProductos)
 }  
+
+//Inicio Productos destacados
+getProductos(){
+  this.productosServices.getProducts().subscribe(doc => {
+    this.productosHot = []
+    doc.forEach((element: any) => {
+      
+      // this.arrProducts.push({
+      //   id: element.payload.doc.id,
+      //   ... element.payload.doc.data()
+      // })
+      if(element.payload.doc.data().destacado === 'true'){
+        this.productosHot.push({
+          id: element.payload.doc.id,
+          ... element.payload.doc.data()
+        })
+      }
+    })
+    this.loadFirstPage(this.arrProducts)
+  })
+}
+
+agregarAlCarrito(addProducto: Producto, idProd: string) {
+  const producto = { addProducto };
+  this.dataService.productos$.pipe(first()).subscribe(productos => {
+      this.dataService.actualizarProductos([...productos], [producto], idProd);
+  });
+}
+
+
+//Fin Productos destacados
+
+
 }
   
 

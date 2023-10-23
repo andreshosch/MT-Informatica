@@ -3,7 +3,7 @@
 
 <div class="formatoArticulos">
     <h3>Articulos actuales</h3>
-    <div class="galeriaCard">
+    <div class="galeriaCard container">
         <div *ngFor="let articulo of productosHot">
         
             <div class="card">
@@ -58,8 +58,23 @@
                     </mat-grid-tile>
                     <mat-grid-tile [colspan]="2" [rowspan]="1">
                         <mat-form-field>
+                            <mat-label>Marca</mat-label>
+                            <input matInput formControlName="marcaM">
+                        </mat-form-field>
+                    </mat-grid-tile>
+                    <mat-grid-tile [colspan]="2" [rowspan]="1">
+                        <mat-form-field>
                             <mat-label>Imagen</mat-label>
                             <input matInput formControlName="imagenM">
+                        </mat-form-field>
+                    </mat-grid-tile>
+                    <mat-grid-tile [colspan]="2" [rowspan]="1">
+                        <mat-form-field>
+                            <mat-label>Destacado</mat-label>
+                            <mat-select formControlName="destacadoM">
+                                <mat-option value="true">True</mat-option>
+                                <mat-option value="false">False</mat-option>
+                            </mat-select>
                         </mat-form-field>
                     </mat-grid-tile>
                 </mat-grid-list>
@@ -107,8 +122,23 @@
                 </mat-grid-tile>
                 <mat-grid-tile [colspan]="2" [rowspan]="1">
                     <mat-form-field>
+                        <mat-label>Marca</mat-label>
+                        <input matInput formControlName="marca">
+                    </mat-form-field>
+                </mat-grid-tile>
+                <mat-grid-tile [colspan]="2" [rowspan]="1">
+                    <mat-form-field>
                         <mat-label>Imagen</mat-label>
                         <input matInput formControlName="imagen">
+                    </mat-form-field>
+                </mat-grid-tile>
+                <mat-grid-tile [colspan]="2" [rowspan]="1">
+                    <mat-form-field>
+                        <mat-label>Destacado</mat-label>
+                        <mat-select formControlName="destacado">
+                            <mat-option value="true">True</mat-option>
+                            <mat-option value="false">False</mat-option>
+                        </mat-select>
                     </mat-form-field>
                 </mat-grid-tile>
             </mat-grid-list>

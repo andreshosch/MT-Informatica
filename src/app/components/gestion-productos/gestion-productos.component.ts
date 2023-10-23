@@ -4,6 +4,7 @@ import { Producto } from 'src/app/models/producto';
 import { ProductosService } from 'src/app/services/productos.service';
 
 
+
 @Component({
   selector: 'app-gestion-productos',
   templateUrl: './gestion-productos.component.html',
@@ -26,6 +27,8 @@ export class GestionProductosComponent {
       descripcion: ['', Validators.required],
       precio: ['', Validators.required],
       imagen: ['', Validators.required],
+      destacado: ['', Validators.required],
+      marca: ['', Validators.required],
     })
 
     this.modificarProd = this.fb.group({
@@ -35,6 +38,8 @@ export class GestionProductosComponent {
       descripcionM: ['', Validators.required],
       precioM: ['', Validators.required],
       imagenM: ['', Validators.required],
+      destacadoM: ['', Validators.required],
+      marcaM: ['', Validators.required],
     })
   }
 
@@ -69,9 +74,13 @@ export class GestionProductosComponent {
         subrubro: this.altaProd.get('subrubro').value,
         imagen: this.altaProd.get('imagen').value,
         descripcion: this.altaProd.get('descripcion').value,
+        destacado: this.altaProd.get('destacado').value,
+        marca: this.altaProd.get('marca').value,
         cantidad: 1
       }
       this._productosService.createProduct(unProducto) 
+      this.altaProd.reset()
+      alert('Producto dado de alta correctamente... BORRAR')
     }else{
       const unProducto: Producto = {
         nombre: this.modificarProd.get('nombreM').value,
@@ -80,15 +89,18 @@ export class GestionProductosComponent {
         subrubro: this.modificarProd.get('subrubroM').value,
         imagen: this.modificarProd.get('imagenM').value,
         descripcion: this.modificarProd.get('descripcionM').value,
+        destacado: this.modificarProd.get('destacadoM').value,
+        marca: this.modificarProd.get('marcaM').value,
         cantidad: 1
       }
       this._productosService.updateProduct(this.idProducto, unProducto) 
+      this.modalActivo=false
+      alert('Producto modificado correctamente... BORRAR')
     }
     
   }
 
   borrarPorId(articulo){
-    console.log(`articulo: ${articulo}`)
     this._productosService.deleteProduct(articulo)
   }
 
@@ -103,7 +115,9 @@ export class GestionProductosComponent {
         rubroM: data.rubro,
         subrubroM: data.subrubro,
         imagenM: data.imagen,
-        descripcionM: data.descripcion
+        descripcionM: data.descripcion,
+        destacadoM: data.destacado,
+        marcaM: data.marca,
       })
     })
   }
