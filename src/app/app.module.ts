@@ -6,7 +6,6 @@ import { AppComponent } from './app.component';
 import { EncabezadoComponent } from './components/encabezado/encabezado.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
-import { OfertasCalientesComponent } from './components/ofertas-calientes/ofertas-calientes.component';
 import { ProductosComponent } from './components/productos/productos.component';
 import { GestionProductosComponent } from './components/gestion-productos/gestion-productos.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -26,15 +25,12 @@ import { LoginComponent } from './components/login/login.component';
 import { CarritoComponent } from './components/carrito/carrito.component';
 
 
-
-
 @NgModule({
   declarations: [
     AppComponent,
     EncabezadoComponent,
     FooterComponent,
     NavbarComponent,
-    OfertasCalientesComponent,
     ProductosComponent,
     ContactoComponent,
     IndexComponent,

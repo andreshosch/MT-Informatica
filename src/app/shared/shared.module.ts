@@ -9,6 +9,7 @@ import {MatTableModule} from '@angular/material/table'
 import {MatPaginatorModule} from '@angular/material/paginator'
 import {MatSortModule} from '@angular/material/sort';
 import {MatSnackBarModule} from '@angular/material/snack-bar'
+import { MatSelectModule } from '@angular/material/select';
 
 
 @NgModule({
@@ -22,7 +23,8 @@ import {MatSnackBarModule} from '@angular/material/snack-bar'
       MatTableModule,
       MatPaginatorModule,
       MatSortModule,
-      MatSnackBarModule
+      MatSnackBarModule,
+      MatSelectModule
     ],
     exports: [
       MatFormFieldModule,
@@ -33,7 +35,8 @@ import {MatSnackBarModule} from '@angular/material/snack-bar'
       MatTableModule,
       MatPaginatorModule,
       MatSortModule,
-      MatSnackBarModule
+      MatSnackBarModule,
+      MatSelectModule
     ]
   })
   export class SharedModule { }

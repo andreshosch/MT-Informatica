@@ -12,3 +12,17 @@
   max-height: 100%;
   
 }
+
+/* Inicio Productos destacados */
+.fondoCarrousel{
+  background-color: lightgrey;
+  padding-top: 15px;
+  padding-bottom: 35px;
+  text-align: center;
+}
+
+.fondoCarrousel img{
+  width: 250px;
+  height: 250px;
+}
+/* Fin Productos destacados */
