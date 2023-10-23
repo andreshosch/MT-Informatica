@@ -12,6 +12,7 @@ export class ProductosComponent {
   arrPaginador: any[]
   arrProducts: any[] = []
   arrCategory:any[]=[]
+  uniqueCategory:any[]=[]
   arrProductsPages: any[] = []
   numberPages :any= 1
   numberPagesTotal: number
@@ -25,9 +26,7 @@ export class ProductosComponent {
     "user_id": '22181',
     "token": "oyhl04axaro"
   }
-
-
-
+  
   constructor(private productosServices: ProductosService) {
   }
 
@@ -51,35 +50,70 @@ export class ProductosComponent {
     }
   }
 
-  arrayProducts() {
-    this.productosServices.getArrayProducts(this.requestData, 1, 100).subscribe
-      (response => {
-        this.pages = response['paginador'];
-        this.lengthPages = this.pages.total
-       if(this.filterArray.length===0)
-       {
-        for (let i = 1; i <= this.lengthPages; i += 100) {
-          this.productosServices.getArrayProducts(this.requestData, 100, i).subscribe
-            (response => {
-              this.arrProductos = response['resultado']
-              this.arrProducts.push(...this.arrProductos)
-              for(let i=0;i<this.arrProductos.length;i++)
-              {
-               this.arrCategory.push({
-                categoria:this.arrProductos[i].categoria,
-                sub_categoria:this.arrProductos[i].sub_categoria
-                
-               })
-              }
-              this.loadFirstPage(this.arrProducts)
-            })
-        }
-      
-       }
-      })
+  arrayProducts(){
+     for (let i = 0; i < 100; i++) {
+      const producto = {
+        marca: `Marca${(Math.random() * 5).toFixed(0)}`,
+        nombre: `Producto${i + 1}`,
+        categoria: `Categoría${(Math.random() * 6).toFixed(0)}`,
+        sub_categoria: `Subcategoría${Math.floor(Math.random() * 10) + 1}`,
+        imagen: `imagen${i + 1}.jpg`,
+        ppv_usd: (Math.random() * 500).toFixed(2)
+      };
+      this.arrProducts.push(producto);
+    }
     
-      console.log(this.arrCategory)
+    for (let i = 0; i < this.arrProducts.length; i++) {
+      this.arrCategory.push({
+        categoria: this.arrProducts[i].categoria,
+        sub_categoria: this.arrProducts[i].sub_categoria,
+        marca:this.arrProducts[i].marca
+      })
+    }
+
+this.deleteRepetead()
   }
+
+  deleteRepetead() {
+    const uniqueObjects = new Set();
+    const uniqueData = this.arrCategory.filter((obj) => {
+      const objString = JSON.stringify(obj);
+      if (!uniqueObjects.has(objString)) {
+        uniqueObjects.add(objString);
+        return true;
+      }
+      return false;
+    });
+    console.log(uniqueData)
+  }
+
+
+  // arrayProducts() {
+  //   this.productosServices.getArrayProducts(this.requestData, 1, 100).subscribe
+  //     (response => {
+  //       this.pages = response['paginador'];
+  //       this.lengthPages = this.pages.total
+  //       if (this.filterArray.length === 0) {
+  //         for (let i = 1; i <= this.lengthPages; i += 100) {
+  //           this.productosServices.getArrayProducts(this.requestData, 100, i).subscribe
+  //             (response => {
+  //               this.arrProductos = response['resultado']
+  //               this.arrProducts.push(...this.arrProductos)
+  //               for (let i = 0; i < this.arrProductos.length; i++) {
+  //                 this.arrCategory.push({
+  //                   categoria: this.arrProductos[i].categoria,
+  //                   sub_categoria: this.arrProductos[i].sub_categoria
+
+  //                 })
+  //               }
+  //               this.loadFirstPage(this.arrProducts)
+  //             })
+  //         }
+
+  //       }
+  //     })
+  //   console.log(this.arrCategory)
+  // }
   nextPage(products:any) {
    this.arrProductsPages = []
    let numberPages = Math.ceil(products.length / 20);
