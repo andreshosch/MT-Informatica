@@ -18,22 +18,34 @@
 <!-- Fin Productos destacados -->
 
 <input type="input" [(ngModel)]="productSearch" placeholder="Ingrese una palabra clave">
-<input type="search">
- <button (click)="filterProducts()">Buscar</button> 
+ 
+  <select [(ngModel)]="categorySearch" (change)="updateSubCategories()">
+    <option value="">Selecciona una categoría</option>
+    <option *ngFor="let categoria of categorias" [value]="categoria">{{categoria}}</option>
+  </select>
+   <select [(ngModel)]="subCategorySearch">
+    <option value="">Selecciona una subcategoría</option>
+    <option *ngFor="let subCategoria of subCategoryFilter" [value]="subCategoria">{{subCategoria}}</option>
+  </select>
+  <select [(ngModel)]="marcaSearch">
+    <option value="">Selecciona una Marca</option>
+    <option *ngFor="let marca of marca" [value]="marca">{{marca}}</option>
+  </select> 
+  <button (click)="filterProducts()">Buscar</button> 
  <button (click)="cleanFilters()">Limpiar filtros</button> 
 <h3 class="titleProductos" >NUESTROS PRODUCTOS</h3>
 <!-- <button (click)="traerTodo()">Traer</button> -->
   <div class="card" style="width: 18rem" *ngFor="let productos of arrProductsPages">
-    <img src={{productos.imagenes[0]}} class="card-img-top" alt="...">
+     <img src={{productos.imagenes[0]}} class="card-img-top" alt="...">
     <div class="card-body">
       <h5 class="card-title">{{productos.nombre}}</h5>
       <p class="card-text">{{productos.categoria}}</p>
       <p class="card-marca">{{productos.marca}}</p>
       <p class="card-precio">U$S {{productos.pvp_usd}}</p>
     </div>
-    <div class="card-body">
+    <!-- <div class="card-body">
       <a href={{productos.link}} class="card-link" target="_blank">Ver Producto</a>
-    </div>
+    </div> -->
   </div>
   <nav aria-label="Page navigation example" style="display: flex; justify-content: center;">
      <ul class="pagination justify-content-center" *ngIf="filterArray.length>0">

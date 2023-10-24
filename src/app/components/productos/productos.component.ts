@@ -15,16 +15,20 @@ export class ProductosComponent {
   arrProductos: any[] = []
   arrPaginador: any[]
   arrProducts: any[] = []
-  arrCategory:any[]=[]
-  uniqueCategory:any[]=[]
+  arrCategory: any[] = []
   arrProductsPages: any[] = []
-  numberPages :any= 1
+  subCategoryFilter:any[]=[]
+  numberPages: any = 1
   numberPagesTotal: number
   pages: any
   lengthPages: number
   min: number;
   max: number;
+  marcaSearch=''
+  categoriasUnicas:any
   productSearch = '';
+  subCategorySearch = '';
+  categorySearch= ''
   filterArray: any[] = [];
   requestData = {
     "user_id": '22181',
@@ -50,88 +54,89 @@ export class ProductosComponent {
     this.getProductos()
   }
 
-  loadFirstPage(products:any) {
+  loadFirstPage(products: any) {
     this.arrProductsPages = []
-    if (products.length>20){
+    if (products.length > 20) {
       for (let i = 0; i < 20; i++) {
         this.arrProductsPages[i] = products[i]
       }
     }
-    else{
+    else {
       for (let i = 0; i < products.length; i++) {
         this.arrProductsPages[i] = products[i]
       }
-      this.numberPages=1
+      this.numberPages = 1
     }
   }
 
-  arrayProducts(){
-     for (let i = 0; i < 100; i++) {
-      const producto = {
-        marca: `Marca${(Math.random() * 5).toFixed(0)}`,
-        nombre: `Producto${i + 1}`,
-        categoria: `Categoría${(Math.random() * 6).toFixed(0)}`,
-        sub_categoria: `Subcategoría${Math.floor(Math.random() * 10) + 1}`,
-        imagen: `imagen${i + 1}.jpg`,
-        ppv_usd: (Math.random() * 500).toFixed(2)
-      };
-      this.arrProducts.push(producto);
-    }
-    
-    for (let i = 0; i < this.arrProducts.length; i++) {
-      this.arrCategory.push({
-        categoria: this.arrProducts[i].categoria,
-        sub_categoria: this.arrProducts[i].sub_categoria,
-        marca:this.arrProducts[i].marca
+  //   arrayProducts(){
+  //      for (let i = 0; i < 400; i++) {
+  //       const producto = {
+  //         marca: `Marca${(Math.random() * 5).toFixed(0)}`,
+  //         nombre: `Producto${i + 1}`,
+  //         categoria: `Categoría${(Math.random() * 6).toFixed(0)}`,
+  //         sub_categoria: `Subcategoría${Math.floor(Math.random() * 10) + 1}`,
+  //         imagen: `imagen${i + 1}.jpg`,
+  //         ppv_usd: (Math.random() * 500).toFixed(2)
+  //       };
+  //       this.arrProducts.push(producto);
+
+  //     }
+  //     this.loadFirstPage(this.arrProducts)
+  //     for (let i = 0; i < this.arrProducts.length; i++) {
+  //       this.arrCategory.push({
+  //         categoria: this.arrProducts[i].categoria,
+  //         sub_categoria: this.arrProducts[i].sub_categoria,
+  //         marca:this.arrProducts[i].marca
+  //       })
+  //     }
+
+  // this.deleteRepetead()
+  //   }
+
+   deleteRepetead(array:any[]) {
+     const uniqueObjects = new Set();
+     const uniqueData = array.filter((obj) => {
+       const objString = JSON.stringify(obj);
+       if (!uniqueObjects.has(objString)) {
+         uniqueObjects.add(objString);
+         return true;
+       }
+       return false;
+     });
+console.log(array)
+   }
+
+
+  arrayProducts() {
+    this.productosServices.getArrayProducts(this.requestData, 1, 100).subscribe
+      (response => {
+        this.pages = response['paginador'];
+        this.lengthPages = this.pages.total
+        if (this.filterArray.length === 0) {
+          for (let i = 1; i <= this.lengthPages; i += 100) {
+            this.productosServices.getArrayProducts(this.requestData, 100, i).subscribe
+              (response => {
+                this.arrProductos = response['resultado']
+                this.arrProducts.push(...this.arrProductos)
+                for (let i = 0; i < this.arrProductos.length; i++) {
+                  // this.arrCategory.push({
+                  //   categoria: this.arrProducts[i].categoria,
+                  //   sub_categoria: this.arrProducts[i].sub_categoria,
+                  //   marca: this.arrProducts[i].marca
+                  // })
+                }
+
+                this.loadFirstPage(this.arrProducts)
+                console.log(this.arrCategory)
+              })
+          }
+        }
       })
-    }
-
-this.deleteRepetead()
   }
-
-  deleteRepetead() {
-    const uniqueObjects = new Set();
-    const uniqueData = this.arrCategory.filter((obj) => {
-      const objString = JSON.stringify(obj);
-      if (!uniqueObjects.has(objString)) {
-        uniqueObjects.add(objString);
-        return true;
-      }
-      return false;
-    });
-    console.log(uniqueData)
-  }
-
-
-  // arrayProducts() {
-  //   this.productosServices.getArrayProducts(this.requestData, 1, 100).subscribe
-  //     (response => {
-  //       this.pages = response['paginador'];
-  //       this.lengthPages = this.pages.total
-  //       if (this.filterArray.length === 0) {
-  //         for (let i = 1; i <= this.lengthPages; i += 100) {
-  //           this.productosServices.getArrayProducts(this.requestData, 100, i).subscribe
-  //             (response => {
-  //               this.arrProductos = response['resultado']
-  //               this.arrProducts.push(...this.arrProductos)
-  //               for (let i = 0; i < this.arrProductos.length; i++) {
-  //                 this.arrCategory.push({
-  //                   categoria: this.arrProductos[i].categoria,
-  //                   sub_categoria: this.arrProductos[i].sub_categoria
-
-  //                 })
-  //               }
-  //               this.loadFirstPage(this.arrProducts)
-  //             })
-  //         }
-
-  //       }
-  //     })
-  //   console.log(this.arrCategory)
-  // }
-  nextPage(products:any) {
-   this.arrProductsPages = []
-   let numberPages = Math.ceil(products.length / 20);
+  nextPage(products: any) {
+    this.arrProductsPages = []
+    let numberPages = Math.ceil(products.length / 20);
     this.numberPages += 1;
     if (this.numberPages < numberPages) {
       this.min = (((this.numberPages - 2) * 10) * 2 + 20);
@@ -150,11 +155,11 @@ this.deleteRepetead()
     else {
       this.lastPage(products)
     }
-    console.log("minimo " +this.min)
-    console.log("maximo " +this.max)
+    console.log("minimo " + this.min)
+    console.log("maximo " + this.max)
   }
 
-  afterPage(products:any) {
+  afterPage(products: any) {
     this.arrProductsPages = []
     this.numberPages -= 1;
     this.max = ((this.numberPages) * 10) * 2;
@@ -166,10 +171,10 @@ this.deleteRepetead()
         j += 1;
       }
     while (j < 20)
-    console.log("minimo " +this.min)
-    console.log("maximo " +this.max)
+    console.log("minimo " + this.min)
+    console.log("maximo " + this.max)
   }
-  firstPage(products:any) {
+  firstPage(products: any) {
     this.arrProductsPages = []
     this.numberPages = 1;
     this.min = 0;
@@ -178,80 +183,130 @@ this.deleteRepetead()
     for (let i = this.min; i < this.max; i++) {
       this.arrProductsPages[i] = products[i]
     }
-    console.log("minimo " +this.min)
-    console.log("maximo " +this.max)
+    console.log("minimo " + this.min)
+    console.log("maximo " + this.max)
   }
 
-  lastPage(products:any) {
+  lastPage(products: any) {
     this.arrProductsPages = []
     this.numberPages = Math.ceil(products.length / 20);
     let finalPage = (this.numberPages - 1) * 20;
     this.min = finalPage
     this.max = products.length;
-    console.log("minimo " +this.min)
-    console.log("maximo " +this.max)
+    console.log("minimo " + this.min)
+    console.log("maximo " + this.max)
     let j = 0;
     for (let i = 0; i < (products.length - finalPage); i++) {
       this.arrProductsPages[i] = products[this.min]
       this.min++
     }
-    
+
   }
- 
-  filterProducts(){
-    this.numberPages=1
-    this.filterArray = this.arrProducts.filter((objeto) => {
-      return Object.values(objeto).some((product) => {
-        if (typeof product === 'string') {
-          return product.toLowerCase().includes(this.productSearch.toLowerCase());
-        }
-        return false;
+
+  filterProducts() {
+    this.numberPages = 1
+    if (this.productSearch!=''){
+      this.filterArray = this.arrProducts.filter((objeto) => {
+        return Object.values(objeto).some((product) => {
+          if (typeof product === 'string') {
+            return product.toLowerCase().includes(this.productSearch.toLowerCase());
+          }
+          return false;
+        });
       });
-    });
+    }
+    else{
+      this.filterArray = this.arrProducts.filter((objeto) => {
+        return Object.values(objeto).some((product) => {
+          if (typeof product === 'string') {
+            const productLower = product.toLowerCase();
+            if(this.marcaSearch!= ''){
+              return productLower.includes(this.marcaSearch.toLowerCase());
+            }
+            else if(this.subCategorySearch ==''){
+              return productLower.includes(this.categorySearch.toLowerCase());
+            }
+            else{
+              return productLower.includes(this.subCategorySearch.toLowerCase());
+            }
+          }
+          return false;
+        });
+      });
+    }
     this.loadFirstPage(this.filterArray)
     console.log(this.filterArray)
   }
-
-cleanFilters(){
-  this.filterArray=[]
-  this.productSearch=''
-  this.numberPages=1
-  this.loadFirstPage(this.arrProductos)
-}  
-
-//Inicio Productos destacados
-getProductos(){
-  this.productosServices.getProducts().subscribe(doc => {
-    this.productosHot = []
-    doc.forEach((element: any) => {
-      
-      // this.arrProducts.push({
-      //   id: element.payload.doc.id,
-      //   ... element.payload.doc.data()
-      // })
-      if(element.payload.doc.data().destacado === 'true'){
-        this.productosHot.push({
-          id: element.payload.doc.id,
-          ... element.payload.doc.data()
-        })
-      }
-    })
+  cleanFilters() {
+    this.filterArray = []
+    this.productSearch = ''
+    this.categorySearch=''
+    this.subCategorySearch=''
+    this.marcaSearch=''
+    
+    this.numberPages = 1
     this.loadFirstPage(this.arrProducts)
-  })
-}
 
-agregarAlCarrito(addProducto: Producto, idProd: string) {
-  const producto = { addProducto };
-  this.dataService.productos$.pipe(first()).subscribe(productos => {
+  }
+
+  //Inicio Productos destacados
+  getProductos() {
+    this.productosServices.getProducts().subscribe(doc => {
+      this.productosHot = []
+      doc.forEach((element: any) => {
+
+        // this.arrProducts.push({
+        //   id: element.payload.doc.id,
+        //   ... element.payload.doc.data()
+        // })
+        if (element.payload.doc.data().destacado === 'true') {
+          this.productosHot.push({
+            id: element.payload.doc.id,
+            ...element.payload.doc.data()
+          })
+        }
+      })
+      this.loadFirstPage(this.arrProducts)
+    })
+  }
+
+  agregarAlCarrito(addProducto: Producto, idProd: string) {
+    const producto = { addProducto };
+    this.dataService.productos$.pipe(first()).subscribe(productos => {
       this.dataService.actualizarProductos([...productos], [producto], idProd);
-  });
+    });
+  }
+  //Fin Productos destacados
+ 
+    
+  // obteber array con las categorias
+
+    get categorias():any[]{
+    const categoriasUnicas = [...new Set(this.arrProducts.map(producto => producto.categoria))];
+    categoriasUnicas.sort();
+    return categoriasUnicas
+}
+
+get marca(): any[] {
+  const marcaUnicas = [...new Set(this.arrProducts.map(producto => producto.marca))];
+  marcaUnicas.sort();
+  return marcaUnicas;
+}
+
+updateSubCategories() {
+  this.subCategoryFilter = this.arrProducts.filter(
+    (subcategoria) => subcategoria.categoria === this.categorySearch
+  );
+  this.subCategoryFilter = Array.from(new Set(this.subCategoryFilter));
+  this.subCategoryFilter=[...new Set(this.subCategoryFilter.map(producto => producto.sub_categoria))];
+  this.subCategoryFilter.sort();
+  }
 }
 
 
-//Fin Productos destacados
 
 
-}
-  
 
-  
+
+
+
