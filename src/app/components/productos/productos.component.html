@@ -17,19 +17,19 @@
 </ngb-carousel>
 <!-- Fin Productos destacados -->
 
-<input type="input" [(ngModel)]="productSearch" placeholder="Ingrese una palabra clave">
+<input type="input" [(ngModel)]="productSearch" placeholder="Ingrese una palabra clave" (input)="updateProductSearch()">
  
   <select [(ngModel)]="categorySearch" (change)="updateSubCategories()">
     <option value="">Selecciona una categoría</option>
-    <option *ngFor="let categoria of categorias" [value]="categoria">{{categoria}}</option>
+    <option *ngFor="let categoria of category" [value]="categoria">{{categoria}}</option>
   </select>
-   <select [(ngModel)]="subCategorySearch">
+   <select [(ngModel)]="subCategorySearch" (change)="updateBrand()">
     <option value="">Selecciona una subcategoría</option>
     <option *ngFor="let subCategoria of subCategoryFilter" [value]="subCategoria">{{subCategoria}}</option>
   </select>
-  <select [(ngModel)]="marcaSearch">
+  <select [(ngModel)]="brandSearch">
     <option value="">Selecciona una Marca</option>
-    <option *ngFor="let marca of marca" [value]="marca">{{marca}}</option>
+    <option *ngFor="let marca of brandFilter" [value]="marca">{{marca}}</option>
   </select> 
   <button (click)="filterProducts()">Buscar</button> 
  <button (click)="cleanFilters()">Limpiar filtros</button> 

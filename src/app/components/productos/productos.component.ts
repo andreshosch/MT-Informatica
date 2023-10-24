@@ -17,18 +17,24 @@ export class ProductosComponent {
   arrProducts: any[] = []
   arrCategory: any[] = []
   arrProductsPages: any[] = []
-  subCategoryFilter:any[]=[]
+  subCategoryFilter: any[] = []
+  brandFilter: any[] = []
   numberPages: any = 1
   numberPagesTotal: number
+  onlyCategory: any
+  onlySubCategory: any
+  onlyBrand: any
   pages: any
+  filteredItem: any
   lengthPages: number
   min: number;
   max: number;
-  marcaSearch=''
-  categoriasUnicas:any
+  marcaSearch = ''
+  categoriasUnicas: any
   productSearch = '';
   subCategorySearch = '';
-  categorySearch= ''
+  categorySearch = ''
+  brandSearch = ''
   filterArray: any[] = [];
   requestData = {
     "user_id": '22181',
@@ -68,7 +74,7 @@ export class ProductosComponent {
       this.numberPages = 1
     }
   }
-
+// FUNCION EN CASO DE QUE NO FUNCIONE LA API PARA GENERAR UN ARRAY ALEATORI DE 400 PRODUCTOS
   //   arrayProducts(){
   //      for (let i = 0; i < 400; i++) {
   //       const producto = {
@@ -94,18 +100,18 @@ export class ProductosComponent {
   // this.deleteRepetead()
   //   }
 
-   deleteRepetead(array:any[]) {
-     const uniqueObjects = new Set();
-     const uniqueData = array.filter((obj) => {
-       const objString = JSON.stringify(obj);
-       if (!uniqueObjects.has(objString)) {
-         uniqueObjects.add(objString);
-         return true;
-       }
-       return false;
-     });
-console.log(array)
-   }
+  deleteRepetead(array: any[]) {
+    const uniqueObjects = new Set();
+    const uniqueData = array.filter((obj) => {
+      const objString = JSON.stringify(obj);
+      if (!uniqueObjects.has(objString)) {
+        uniqueObjects.add(objString);
+        return true;
+      }
+      return false;
+    });
+    console.log(array)
+  }
 
 
   arrayProducts() {
@@ -119,14 +125,6 @@ console.log(array)
               (response => {
                 this.arrProductos = response['resultado']
                 this.arrProducts.push(...this.arrProductos)
-                for (let i = 0; i < this.arrProductos.length; i++) {
-                  // this.arrCategory.push({
-                  //   categoria: this.arrProducts[i].categoria,
-                  //   sub_categoria: this.arrProducts[i].sub_categoria,
-                  //   marca: this.arrProducts[i].marca
-                  // })
-                }
-
                 this.loadFirstPage(this.arrProducts)
                 console.log(this.arrCategory)
               })
@@ -205,7 +203,7 @@ console.log(array)
 
   filterProducts() {
     this.numberPages = 1
-    if (this.productSearch!=''){
+    if (this.productSearch != '') {
       this.filterArray = this.arrProducts.filter((objeto) => {
         return Object.values(objeto).some((product) => {
           if (typeof product === 'string') {
@@ -215,35 +213,31 @@ console.log(array)
         });
       });
     }
-    else{
+    else {
       this.filterArray = this.arrProducts.filter((objeto) => {
         return Object.values(objeto).some((product) => {
-          if (typeof product === 'string') {
-            const productLower = product.toLowerCase();
-            if(this.marcaSearch!= ''){
-              return productLower.includes(this.marcaSearch.toLowerCase());
-            }
-            else if(this.subCategorySearch ==''){
-              return productLower.includes(this.categorySearch.toLowerCase());
-            }
-            else{
-              return productLower.includes(this.subCategorySearch.toLowerCase());
-            }
+          if (typeof product === 'string') {    
+            return (
+              (!this.categorySearch || objeto.categoria === this.categorySearch) &&
+              (!this.subCategorySearch || objeto.sub_categoria === this.subCategorySearch) &&
+              (!this.brandSearch || objeto.marca === this.brandSearch)
+            );
           }
-          return false;
+          
         });
       });
     }
     this.loadFirstPage(this.filterArray)
     console.log(this.filterArray)
   }
+
   cleanFilters() {
     this.filterArray = []
     this.productSearch = ''
-    this.categorySearch=''
-    this.subCategorySearch=''
-    this.marcaSearch=''
-    
+    this.categorySearch = ''
+    this.subCategorySearch = ''
+    this.brandSearch=''
+
     this.numberPages = 1
     this.loadFirstPage(this.arrProducts)
 
@@ -277,31 +271,65 @@ console.log(array)
     });
   }
   //Fin Productos destacados
- 
-    
-  // obteber array con las categorias
 
-    get categorias():any[]{
-    const categoriasUnicas = [...new Set(this.arrProducts.map(producto => producto.categoria))];
-    categoriasUnicas.sort();
-    return categoriasUnicas
-}
 
-get marca(): any[] {
-  const marcaUnicas = [...new Set(this.arrProducts.map(producto => producto.marca))];
-  marcaUnicas.sort();
-  return marcaUnicas;
-}
+  // obteber array con las categorias subcategorias y marcas para la busqueda filtrada
 
-updateSubCategories() {
-  this.subCategoryFilter = this.arrProducts.filter(
-    (subcategoria) => subcategoria.categoria === this.categorySearch
-  );
-  this.subCategoryFilter = Array.from(new Set(this.subCategoryFilter));
-  this.subCategoryFilter=[...new Set(this.subCategoryFilter.map(producto => producto.sub_categoria))];
-  this.subCategoryFilter.sort();
+  get category(): any[] {
+    this.onlyCategory = [...new Set(this.arrProducts.map(producto => producto.categoria))];
+    this.onlyCategory.sort();
+    return this.onlyCategory
   }
+
+  get subCategory(): any[] {
+    this.onlySubCategory = [...new Set(this.arrProducts.map(producto => producto.sub_categoria))];
+    this.onlySubCategory.sort();
+    return this.onlySubCategory
+  }
+
+  get brand(): any[] {
+    this.onlyBrand = [...new Set(this.arrProducts.map(producto => producto.marca))];
+    this.onlyBrand.sort();
+    return this.onlyBrand;
+  }
+  //---------------------------------------------------------------------------------------------
+
+  // Funciones para relacionar los select con los datos a filtrar del array de productos
+
+  updateSubCategories() {
+    this.filterArray=[]
+    this.subCategorySearch=''
+    this.brandSearch=''
+    this.productSearch=''
+    this.subCategoryFilter = this.arrProducts.filter(
+      (subcategoria) => subcategoria.categoria === this.categorySearch
+    );
+    this.subCategoryFilter = Array.from(new Set(this.subCategoryFilter));
+    this.subCategoryFilter = [...new Set(this.subCategoryFilter.map(producto => producto.sub_categoria))];
+    this.subCategoryFilter.sort();
+  }
+
+  updateBrand() {
+    this.filterArray=[]
+    this.brandSearch=''
+    this.productSearch=''
+   
+    this.brandFilter = this.arrProducts.filter(
+      (brand) => brand.sub_categoria === this.subCategorySearch
+    );
+    this.brandFilter = Array.from(new Set(this.brandFilter));
+    this.brandFilter = [...new Set(this.brandFilter.map(producto => producto.marca))];
+    this.brandFilter.sort();
+  }
+updateProductSearch(){
+  this.filterArray=[]
+  this.categorySearch=''
+  this.subCategorySearch=''
+  this.brandSearch=''
 }
+}
+
+//---------------------------------------------------------------------------------------------
 
 
 
