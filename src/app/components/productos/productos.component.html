@@ -41,7 +41,18 @@
       <h5 class="card-title">{{productos.nombre}}</h5>
       <p class="card-text">{{productos.categoria}}</p>
       <p class="card-marca">{{productos.marca}}</p>
-      <p class="card-precio">U$S {{productos.pvp_usd}}</p>
+      <p class="card-precio">Imp. Interno: {{productos.impuesto_interno}} %</p>
+      <p class="card-precio">IVA: {{productos.iva}} %</p>
+      <p class="card-precio">Precio: U$S {{productos.pvp_usd}}</p>
+      <a href="#modal1">Ver Más...</a> 
+      <div id="modal1" class="modalmask">
+    <div class="modalbox movedown">
+        <a href="#close" title="Close" class="close">X</a>
+        <h2>{{productos.nombre}}</h2>
+        <p>{{productos.codigo_alfa}}</p>
+       
+    </div>
+</div>
     </div>
     <!-- <div class="card-body">
       <a href={{productos.link}} class="card-link" target="_blank">Ver Producto</a>
