@@ -74,7 +74,24 @@ export class ProductosComponent {
           this.productosServices.getArrayProducts(this.requestData, 100, i).subscribe
             (response => {
               this.arrProductos = response['resultado']
-              this.arrProducts.push(...this.arrProductos)
+              for (let p=0; p < this.arrProductos.length; p++){
+                const unProducto: Producto = {
+                  nombre: this.arrProductos[p].nombre,
+                  precio: this.arrProductos[p].precio,
+                  categoria: this.arrProductos[p].categoria,
+                  subcategoria: this.arrProductos[p].subcategoria,
+                  imagenes: this.arrProductos[p].imagenes,
+                  descripcion: this.arrProductos[p].descripcion,
+                  destacado: false,
+                  marca: this.arrProductos[p].marca,
+                  iva: this.arrProductos[p].iva,
+                  impuesto_interno: this.arrProductos[p].impuesto_interno,
+                  id: this.arrProductos[p].id,
+                  cantidad: 1
+                }
+                this.arrProducts.push(unProducto)
+              }
+              // this.arrProducts.push(...this.arrProductos)
               this.loadFirstPage(this.arrProducts)
             })
         }
@@ -178,10 +195,10 @@ getProductos(){
     this.productosHot = []
     doc.forEach((element: any) => {
       
-      // this.arrProducts.push({
-      //   id: element.payload.doc.id,
-      //   ... element.payload.doc.data()
-      // })
+      this.arrProducts.push({
+        id: element.payload.doc.id,
+        ... element.payload.doc.data()
+      })
       if(element.payload.doc.data().destacado === 'true'){
         this.productosHot.push({
           id: element.payload.doc.id,
