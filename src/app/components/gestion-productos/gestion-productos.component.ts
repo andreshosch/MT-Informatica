@@ -22,24 +22,28 @@ export class GestionProductosComponent {
   constructor(private _productosService: ProductosService, private fb: FormBuilder){
     this.altaProd = this.fb.group({
       nombre: ['', Validators.required],
-      rubro: ['', Validators.required],
-      subrubro: ['', Validators.required],
+      categoria: ['', Validators.required],
+      subcategoria: ['', Validators.required],
       descripcion: ['', Validators.required],
       precio: ['', Validators.required],
-      imagen: ['', Validators.required],
+      imagenes: ['', Validators.required],
       destacado: ['', Validators.required],
       marca: ['', Validators.required],
+      iva: ['', Validators.required],
+      impuesto_interno: ['', Validators.required],
     })
 
     this.modificarProd = this.fb.group({
       nombreM: ['', Validators.required],
-      rubroM: ['', Validators.required],
-      subrubroM: ['', Validators.required],
+      categoriaM: ['', Validators.required],
+      subcategoriaM: ['', Validators.required],
       descripcionM: ['', Validators.required],
       precioM: ['', Validators.required],
-      imagenM: ['', Validators.required],
+      imagenesM: ['', Validators.required],
       destacadoM: ['', Validators.required],
       marcaM: ['', Validators.required],
+      ivaM: ['', Validators.required],
+      impuesto_internoM: ['', Validators.required],
     })
   }
 
@@ -70,12 +74,14 @@ export class GestionProductosComponent {
       const unProducto: Producto = {
         nombre: this.altaProd.get('nombre').value,
         precio: this.altaProd.get('precio').value,
-        rubro: this.altaProd.get('rubro').value,
-        subrubro: this.altaProd.get('subrubro').value,
-        imagen: this.altaProd.get('imagen').value,
+        categoria: this.altaProd.get('categoria').value,
+        subcategoria: this.altaProd.get('subcategoria').value,
+        imagenes: this.altaProd.get('imagenes').value,
         descripcion: this.altaProd.get('descripcion').value,
         destacado: this.altaProd.get('destacado').value,
         marca: this.altaProd.get('marca').value,
+        iva: this.altaProd.get('iva').value,
+        impuesto_interno: this.altaProd.get('impuesto_interno').value,
         cantidad: 1
       }
       this._productosService.createProduct(unProducto) 
@@ -85,12 +91,14 @@ export class GestionProductosComponent {
       const unProducto: Producto = {
         nombre: this.modificarProd.get('nombreM').value,
         precio: this.modificarProd.get('precioM').value,
-        rubro: this.modificarProd.get('rubroM').value,
-        subrubro: this.modificarProd.get('subrubroM').value,
-        imagen: this.modificarProd.get('imagenM').value,
+        categoria: this.modificarProd.get('categoriaM').value,
+        subcategoria: this.modificarProd.get('subcategoriaM').value,
+        imagenes: this.modificarProd.get('imagenesM').value,
         descripcion: this.modificarProd.get('descripcionM').value,
         destacado: this.modificarProd.get('destacadoM').value,
         marca: this.modificarProd.get('marcaM').value,
+        iva: this.altaProd.get('ivaM').value,
+        impuesto_interno: this.altaProd.get('impuesto_internoM').value,
         cantidad: 1
       }
       this._productosService.updateProduct(this.idProducto, unProducto) 
@@ -112,12 +120,14 @@ export class GestionProductosComponent {
       this.modificarProd.setValue({
         nombreM: data.nombre,
         precioM: data.precio,
-        rubroM: data.rubro,
-        subrubroM: data.subrubro,
-        imagenM: data.imagen,
+        categoriaM: data.categoria,
+        subcategoriaM: data.subcategoria,
+        imagenesM: data.imagenes,
         descripcionM: data.descripcion,
         destacadoM: data.destacado,
         marcaM: data.marca,
+        ivaM: data.iva,
+        impuesto_internoM: data.impuesto_interno,
       })
     })
   }

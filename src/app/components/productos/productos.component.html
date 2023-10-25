@@ -2,13 +2,13 @@
 <ngb-carousel class="fondoCarrousel">
 	<ng-template *ngFor="let articulo of productosHot" ngbSlide>
 		<div class="picsum-img-wrapper">
-			<img src="{{articulo.imagen}}" alt="Random first slide" />
+			<img src="{{articulo.imagenes}}" alt="Random first slide" />
 		</div>
 		
 			<h3>Articulo: {{articulo.nombre}}</h3>
 			<p>Precio: {{articulo.precio}}</p>
-            <p>Rubro: {{articulo.rubro}} </p>
-            <p>SubRubro: {{articulo.subrubro}}</p>
+            <p>Rubro: {{articulo.categoria}} </p>
+            <p>SubRubro: {{articulo.subcategoria}}</p>
             <p>Descripcion: {{articulo.descripcion}} </p>
 
 			<button  (click)="agregarAlCarrito(articulo, articulo.id)">Agregar al carrito</button>
@@ -45,7 +45,8 @@
     </div>
     <!-- <div class="card-body">
       <a href={{productos.link}} class="card-link" target="_blank">Ver Producto</a>
-    </div> -->
+    </div>
+    <button  (click)="agregarAlCarrito(productos, productos.id)">Agregar al carrito</button>
   </div>
   <nav aria-label="Page navigation example" style="display: flex; justify-content: center;">
      <ul class="pagination justify-content-center" *ngIf="filterArray.length>0">
