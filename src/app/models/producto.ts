@@ -1,25 +1,32 @@
 export class Producto{
-    imagen: string;
+    imagenes: string[];
     nombre: string;
-    rubro: string;
-    subrubro: string;
+    categoria: string;
+    subcategoria: string;
     descripcion: string;
     precio: number;
     cantidad?: number;
-    destacado: boolean;
-    marca: string
+    destacado?: boolean;
+    marca: string;
+    iva: number;
+    impuesto_interno: number;
+    id?: string
 
 
-    constructor(imagen:string, nombre: string, rubro: string, subrubro: string, descripcion: string, precio: number, cantidad: number, destacado: boolean, marca: string){
+
+    constructor(imagenes:string[], nombre: string, categoria: string, subcategoria: string, descripcion: string, precio: number, cantidad: number, destacado: boolean, marca: string, iva: number, impuesto_interno: number, id?: string){
         this.descripcion = descripcion;
-        this.imagen = imagen;
+        this.imagenes = imagenes;
         this.nombre = nombre;
-        this.rubro = rubro;
-        this.subrubro = subrubro;
+        this.categoria = categoria;
+        this.subcategoria = subcategoria;
         this.precio = precio;
         this.cantidad = cantidad;
         this.destacado = destacado;
         this.marca = marca;
+        this.iva = iva;
+        this.impuesto_interno = impuesto_interno;
+        this.id= id;
     }
 
 }

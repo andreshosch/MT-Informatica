@@ -7,7 +7,7 @@
         <div *ngFor="let articulo of productosHot">
         
             <div class="card">
-                <img src="{{articulo.imagen}}" alt="">
+                <img src="{{articulo.imagenes[0]}}">
                 <h6>Articulo: {{articulo.nombre}}</h6>
                 <h6>Precio: {{articulo.precio}}</h6>
                 <div>
@@ -40,14 +40,26 @@
                     </mat-grid-tile>
                     <mat-grid-tile [colspan]="2" [rowspan]="1">
                         <mat-form-field>
-                            <mat-label>Rubro</mat-label>
-                            <input matInput formControlName="rubroM">
+                            <mat-label>Iva</mat-label>
+                            <input matInput formControlName="ivaM">
                         </mat-form-field>
                     </mat-grid-tile>
                     <mat-grid-tile [colspan]="2" [rowspan]="1">
                         <mat-form-field>
-                            <mat-label>Subrubro</mat-label>
-                            <input matInput formControlName="subrubroM">
+                            <mat-label>Impuesto_interno</mat-label>
+                            <input matInput formControlName="impuesto_internoM">
+                        </mat-form-field>
+                    </mat-grid-tile>
+                    <mat-grid-tile [colspan]="2" [rowspan]="1">
+                        <mat-form-field>
+                            <mat-label>Categoria</mat-label>
+                            <input matInput formControlName="categoriaM">
+                        </mat-form-field>
+                    </mat-grid-tile>
+                    <mat-grid-tile [colspan]="2" [rowspan]="1">
+                        <mat-form-field>
+                            <mat-label>Subcategoria</mat-label>
+                            <input matInput formControlName="subcategoriaM">
                         </mat-form-field>
                     </mat-grid-tile>
                     <mat-grid-tile [colspan]="2" [rowspan]="1">
@@ -65,7 +77,7 @@
                     <mat-grid-tile [colspan]="2" [rowspan]="1">
                         <mat-form-field>
                             <mat-label>Imagen</mat-label>
-                            <input matInput formControlName="imagenM">
+                            <input matInput formControlName="imagenesM">
                         </mat-form-field>
                     </mat-grid-tile>
                     <mat-grid-tile [colspan]="2" [rowspan]="1">
@@ -101,17 +113,28 @@
                         <mat-label>Precio</mat-label>
                         <input matInput formControlName="precio">
                     </mat-form-field>
-                </mat-grid-tile>
-                <mat-grid-tile [colspan]="2" [rowspan]="1">
+                </mat-grid-tile>. <mat-grid-tile [colspan]="2" [rowspan]="1">
                     <mat-form-field>
-                        <mat-label>Rubro</mat-label>
-                        <input matInput formControlName="rubro">
+                        <mat-label>Iva</mat-label>
+                        <input matInput formControlName="iva">
                     </mat-form-field>
                 </mat-grid-tile>
                 <mat-grid-tile [colspan]="2" [rowspan]="1">
                     <mat-form-field>
-                        <mat-label>Subrubro</mat-label>
-                        <input matInput formControlName="subrubro">
+                        <mat-label>Impuesto_interno</mat-label>
+                        <input matInput formControlName="impuesto_interno">
+                    </mat-form-field>
+                </mat-grid-tile>
+                <mat-grid-tile [colspan]="2" [rowspan]="1">
+                    <mat-form-field>
+                        <mat-label>Categoria</mat-label>
+                        <input matInput formControlName="categoria">
+                    </mat-form-field>
+                </mat-grid-tile>
+                <mat-grid-tile [colspan]="2" [rowspan]="1">
+                    <mat-form-field>
+                        <mat-label>Subcategoria</mat-label>
+                        <input matInput formControlName="subcategoria">
                     </mat-form-field>
                 </mat-grid-tile>
                 <mat-grid-tile [colspan]="2" [rowspan]="1">
@@ -129,7 +152,7 @@
                 <mat-grid-tile [colspan]="2" [rowspan]="1">
                     <mat-form-field>
                         <mat-label>Imagen</mat-label>
-                        <input matInput formControlName="imagen">
+                        <input matInput formControlName="imagenes">
                     </mat-form-field>
                 </mat-grid-tile>
                 <mat-grid-tile [colspan]="2" [rowspan]="1">
