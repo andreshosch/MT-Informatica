@@ -26,6 +26,7 @@ export class ProductosComponent {
   onlyBrand: any
   pages: any
   filteredItem: any
+  selectedProduct:any
   lengthPages: number
   min: number;
   max: number;
@@ -100,18 +101,18 @@ export class ProductosComponent {
   // this.deleteRepetead()
   //   }
 
-  deleteRepetead(array: any[]) {
-    const uniqueObjects = new Set();
-    const uniqueData = array.filter((obj) => {
-      const objString = JSON.stringify(obj);
-      if (!uniqueObjects.has(objString)) {
-        uniqueObjects.add(objString);
-        return true;
-      }
-      return false;
-    });
-    console.log(array)
-  }
+  // deleteRepetead(array: any[]) {
+  //   const uniqueObjects = new Set();
+  //   const uniqueData = array.filter((obj) => {
+  //     const objString = JSON.stringify(obj);
+  //     if (!uniqueObjects.has(objString)) {
+  //       uniqueObjects.add(objString);
+  //       return true;
+  //     }
+  //     return false;
+  //   });
+  //   console.log(array)
+  // }
 
 
   arrayProducts() {
@@ -130,7 +131,7 @@ export class ProductosComponent {
                   nombre: this.arrProductos[p].nombre,
                   precio: this.arrProductos[p].precio,
                   categoria: this.arrProductos[p].categoria,
-                  subcategoria: this.arrProductos[p].subcategoria,
+                  subcategoria: this.arrProductos[p].sub_categoria,
                   imagenes: this.arrProductos[p].imagenes,
                   descripcion: this.arrProductos[p].descripcion,
                   destacado: false,
@@ -144,6 +145,7 @@ export class ProductosComponent {
               }
               // this.arrProducts.push(...this.arrProductos)
               this.loadFirstPage(this.arrProducts)
+              
             })
         }
        }
@@ -236,7 +238,7 @@ export class ProductosComponent {
           if (typeof product === 'string') {    
             return (
               (!this.categorySearch || objeto.categoria === this.categorySearch) &&
-              (!this.subCategorySearch || objeto.sub_categoria === this.subCategorySearch) &&
+              (!this.subCategorySearch || objeto.subcategoria === this.subCategorySearch) &&
               (!this.brandSearch || objeto.marca === this.brandSearch)
             );
           }
@@ -299,7 +301,7 @@ getProductos(){
   }
 
   get subCategory(): any[] {
-    this.onlySubCategory = [...new Set(this.arrProducts.map(producto => producto.sub_categoria))];
+    this.onlySubCategory = [...new Set(this.arrProducts.map(producto => producto.subcategoria))];
     this.onlySubCategory.sort();
     return this.onlySubCategory
   }
@@ -322,7 +324,7 @@ getProductos(){
       (subcategoria) => subcategoria.categoria === this.categorySearch
     );
     this.subCategoryFilter = Array.from(new Set(this.subCategoryFilter));
-    this.subCategoryFilter = [...new Set(this.subCategoryFilter.map(producto => producto.sub_categoria))];
+    this.subCategoryFilter = [...new Set(this.subCategoryFilter.map(producto => producto.subcategoria))];
     this.subCategoryFilter.sort();
   }
 
@@ -332,7 +334,7 @@ getProductos(){
     this.productSearch=''
    
     this.brandFilter = this.arrProducts.filter(
-      (brand) => brand.sub_categoria === this.subCategorySearch
+      (brand) => brand.subcategoria === this.subCategorySearch
     );
     this.brandFilter = Array.from(new Set(this.brandFilter));
     this.brandFilter = [...new Set(this.brandFilter.map(producto => producto.marca))];
@@ -344,6 +346,10 @@ updateProductSearch(){
   this.subCategorySearch=''
   this.brandSearch=''
 }
+modal(producto:any){
+  this.selectedProduct=producto
+  }
+ 
 }
 
 //---------------------------------------------------------------------------------------------

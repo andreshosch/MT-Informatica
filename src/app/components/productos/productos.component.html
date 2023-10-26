@@ -36,29 +36,33 @@
 <h3 class="titleProductos" >NUESTROS PRODUCTOS</h3>
 <!-- <button (click)="traerTodo()">Traer</button> -->
   <div class="card" style="width: 18rem" *ngFor="let productos of arrProductsPages">
-     <img src={{productos.imagenes[0]}} class="card-img-top" alt="...">
+    <img src={{productos.imagenes[0]}} class="card-img-top" alt="...">
     <div class="card-body">
       <h5 class="card-title">{{productos.nombre}}</h5>
       <p class="card-text">{{productos.categoria}}</p>
       <p class="card-marca">{{productos.marca}}</p>
       <p class="card-precio">Imp. Interno: {{productos.impuesto_interno}} %</p>
       <p class="card-precio">IVA: {{productos.iva}} %</p>
-      <p class="card-precio">Precio: U$S {{productos.pvp_usd}}</p>
-      <a href="#modal1">Ver Más...</a> 
-      <div id="modal1" class="modalmask">
-    <div class="modalbox movedown">
-        <a href="#close" title="Close" class="close">X</a>
-        <h2>{{productos.nombre}}</h2>
-        <p>{{productos.codigo_alfa}}</p>
-       
+      <p class="card-precio">Precio: U$S {{productos.precio}}</p>
+      <a href="#modal1" (click)="modal(productos)">Ver Más...</a>
     </div>
-</div>
-    </div>
-    <!-- <div class="card-body">
-      <a href={{productos.link}} class="card-link" target="_blank">Ver Producto</a>
-    </div> -->
-    <button  (click)="agregarAlCarrito(productos, productos.id)">Agregar al carrito</button>
+    <button (click)="agregarAlCarrito(productos, productos.id)">Agregar al carrito</button>
   </div>
+  <!-- MODAL PARA MOSTRAR DATOS DE LA CARD -->
+  <div id="modal1" class="modalmask" *ngIf="selectedProduct">
+    <div class="modalbox movedown">
+      <a href="#close" title="Cerrar" class="close">X</a>
+      <div class="card-body">
+        <h4>{{selectedProduct.nombre}}</h4>
+        <img src={{selectedProduct.imagenes[0]}} class="card-img-top" style="width: 40%;height: 40%;" alt="...">      
+        <p class="card-precio">Imp. Interno: {{selectedProduct.impuesto_interno}} %</p>
+        <p class="card-precio">IVA: {{selectedProduct.iva}} %</p>
+        <p> Descripción: {{selectedProduct.descripcion}}</p>
+      </div>
+    </div>
+  </div>
+  <!-- ------------------------------------------------ -->
+
   <nav aria-label="Page navigation example" style="display: flex; justify-content: center;">
      <ul class="pagination justify-content-center" *ngIf="filterArray.length>0">
       <li class="page-item"><a class="page-link" [class.disabled]="this.numberPages==1"(click)="firstPage(filterArray)"><<</a></li>
