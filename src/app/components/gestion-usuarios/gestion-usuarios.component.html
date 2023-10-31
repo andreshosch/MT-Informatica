@@ -105,18 +105,12 @@
             <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
         </table>
         <mat-paginator 
-            [pageSizeOptions]="[5, 10, 25, 100]" 
+            [pageSizeOptions]="[5, 10, 25]" 
             [pageSize]="pageSize" 
             [pageIndex]="pageIndex" 
-            [length]="dataSource.data.length"
+            [length]="usuariosRegistrados.length"
             (page)="onPaginateChange($event)">
         </mat-paginator>
-        <!-- <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons aria-label="">
-        </mat-paginator> -->
-        <!-- <mat-paginator [pageSizeOptions]="[5, 10, 20]">
-        </mat-paginator> -->
 
     </div>
-
-
 </div>
