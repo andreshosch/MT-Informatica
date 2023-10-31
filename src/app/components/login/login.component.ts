@@ -2,7 +2,8 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Usuario } from 'src/app/models/usuario';
 import { UsuariosService } from 'src/app/services/usuarios.service';
-
+import { HttpClient } from '@angular/common/http';
+import { MailsService } from 'src/app/services/mails.service';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -15,6 +16,7 @@ export class LoginComponent {
   habilitar: boolean = false
   hayUsuario: boolean = false
   loginProgress: boolean = false
+  
   login: boolean= true
   formRegistro: FormGroup
   listUsuario: Usuario[] = []
@@ -22,10 +24,11 @@ export class LoginComponent {
   loginUsr: FormGroup
   usuario: number;
   contrasena: string;
+  
   //Fin Login
 
 
-  constructor(private _usuarioService: UsuariosService, private fb:FormBuilder){
+  constructor(private _usuarioService: UsuariosService, private _mailService:MailsService, private fb:FormBuilder,private http: HttpClient){
 
     this.loginUsr = this.fb.group({
       usuario: ['', Validators.required],
@@ -42,8 +45,9 @@ export class LoginComponent {
       domicilio:['',Validators.required],
       telefono:['',Validators.required],
     })
+    
   }
-
+ 
 ngOnInit(){
   this.getUsuarios()
   this.getSolicitudes()
@@ -151,6 +155,7 @@ ingresoUsr(){
 solicitarAlta(){
   let dniSolicitud = this.formRegistro.get('dni').value;
   let resultado = "x"
+ 
   //Chequeamos si es un usuario registrado
   for (let j=0; j < this.listUsuario.length; j++){
     if(this.listUsuario[j].dni == dniSolicitud){
@@ -177,12 +182,22 @@ solicitarAlta(){
       domicilio: this.formRegistro.get('domicilio').value,
       password: this.formRegistro.get('contrasena').value,
     }
-    
+    const formData:any=this.formRegistro.value
+    const formUrl='https://formspree.io/f/maygvrgw'
+    this._mailService.sendMails(formUrl,formData)
+    // this.http.post(formUrl, formData).subscribe(
+    // (response) => {
+    //   console.log('Formulario enviado con éxito', response);
+    // },
+    // (error) => {
+    //   console.error('Error al enviar el formulario', error);
+    // })
     this._usuarioService.createSolicitud(unaSolicitud)
     this.formRegistro.reset()
     //enviar mensaje de exito de solicitud
     this.loginProgress=false
     this.login=true
+   
   } else{
     //Dar aviso correspondiente por falla
     console.log(resultado)

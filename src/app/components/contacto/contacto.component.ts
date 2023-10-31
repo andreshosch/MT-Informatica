@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { MailsService } from 'src/app/services/mails.service';
 
 
 @Component({
@@ -9,20 +9,13 @@ import { HttpClient } from '@angular/common/http';
 })
 export class ContactoComponent {
  formData:any={}
- private formUrl='https://formspree.io/f/xrgvgvvq'
+ private formUrl='https://formspree.io/f/xjvqlndq'
 
-  constructor(private http: HttpClient) {
+  constructor(private _mailService:MailsService) {
 
   }
   submitForm() {
-    this.http.post(this.formUrl, this.formData).subscribe(
-      (response) => {
-        console.log('Formulario enviado con éxito', response);
-      },
-      (error) => {
-        console.error('Error al enviar el formulario', error);
-      }
-    )
+    this._mailService.sendMails(this.formUrl,this.formData)
   }
 }
 
