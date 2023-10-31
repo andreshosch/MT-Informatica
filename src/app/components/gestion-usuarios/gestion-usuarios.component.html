@@ -104,10 +104,17 @@
             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
             <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
         </table>
+        <mat-paginator 
+            [pageSizeOptions]="[5, 10, 25, 100]" 
+            [pageSize]="pageSize" 
+            [pageIndex]="pageIndex" 
+            [length]="dataSource.data.length"
+            (page)="onPaginateChange($event)">
+        </mat-paginator>
         <!-- <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons aria-label="">
         </mat-paginator> -->
-        <mat-paginator [pageSizeOptions]="[5, 10, 20]">
-        </mat-paginator>
+        <!-- <mat-paginator [pageSizeOptions]="[5, 10, 20]">
+        </mat-paginator> -->
 
     </div>
 

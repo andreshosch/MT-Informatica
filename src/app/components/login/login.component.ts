@@ -140,7 +140,6 @@ ingresoUsr(){
         this.loginUsr.reset()
         let fecha = new Date()
         arregloLS.push(fecha)
-        console.table(`arregloLS: ${arregloLS}`)
         localStorage.setItem("hayUsuario", JSON.stringify(arregloLS));
       }else{
         console.log('Error en ingreso')
@@ -179,7 +178,6 @@ solicitarAlta(){
       password: this.formRegistro.get('contrasena').value,
     }
     
-    console.log(`Creando una nueva solicitud ${JSON.stringify(unaSolicitud)}`)
     this._usuarioService.createSolicitud(unaSolicitud)
     this.formRegistro.reset()
     //enviar mensaje de exito de solicitud
