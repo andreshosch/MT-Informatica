@@ -31,7 +31,7 @@ usuarioUpdate: Usuario
 displayedColumns: string[] = ['nombre', 'apellido','dni','telefono','domicilio','mail','acciones'];
 dataSource!: MatTableDataSource<any>;
 
-private paginator: MatPaginator; 
+// private paginator: MatPaginator; 
 private sort: MatSort;
 
 @ViewChild(MatSort) set matSort(ms: MatSort) {
@@ -39,14 +39,26 @@ private sort: MatSort;
   this.setDataSourceAttributes();
 }
 
-@ViewChild(MatPaginator) set matPaginator(mp: MatPaginator) {
-this.paginator = mp;
-this.paginator._intl.itemsPerPageLabel='Clientes por Página'
-this.paginator._intl.firstPageLabel="Primera Página"
-this.paginator._intl.previousPageLabel="Página Anterior"
-this.paginator._intl.nextPageLabel='Siguiente Página'
-this.paginator._intl.lastPageLabel="Última Página"
-this.setDataSourceAttributes();
+// @ViewChild(MatPaginator) set matPaginator(mp: MatPaginator) {
+// this.paginator = mp;
+// this.paginator._intl.itemsPerPageLabel='Clientes por Página'
+// this.paginator._intl.firstPageLabel="Primera Página"
+// this.paginator._intl.previousPageLabel="Página Anterior"
+// this.paginator._intl.nextPageLabel='Siguiente Página'
+// this.paginator._intl.lastPageLabel="Última Página"
+// this.setDataSourceAttributes();
+// }
+
+@ViewChild(MatPaginator) paginator: MatPaginator;
+pageIndex = 0;
+pageSize = 10;
+
+// Método para manejar el cambio de página
+onPaginateChange(event) {
+  this.pageIndex = event.pageIndex;
+  this.pageSize = event.pageSize;
+
+  
 }
 
 setDataSourceAttributes() {
