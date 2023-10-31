@@ -1,12 +1,17 @@
 .resumenCarrito{
     width: 25%;
-    background-color: red;
+    background-color:lemonchiffon;
     margin-left: 3%;
     margin-top: 25px;
   }
   
   .resumenCarrito h4{
     text-align: center;
+  }
+
+  .resumenCarrito button{
+    margin-top: 5px;
+    width: 70%;
   }
   
   .modalCarrito {

@@ -5,7 +5,6 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { MatTableModule } from '@angular/material/table';
 
 @Component({
   selector: 'app-gestion-usuarios',
@@ -39,16 +38,6 @@ private sort: MatSort;
   this.setDataSourceAttributes();
 }
 
-// @ViewChild(MatPaginator) set matPaginator(mp: MatPaginator) {
-// this.paginator = mp;
-// this.paginator._intl.itemsPerPageLabel='Clientes por Página'
-// this.paginator._intl.firstPageLabel="Primera Página"
-// this.paginator._intl.previousPageLabel="Página Anterior"
-// this.paginator._intl.nextPageLabel='Siguiente Página'
-// this.paginator._intl.lastPageLabel="Última Página"
-// this.setDataSourceAttributes();
-// }
-
 @ViewChild(MatPaginator) paginator: MatPaginator;
 pageIndex = 0;
 pageSize = 10;
@@ -58,6 +47,18 @@ onPaginateChange(event) {
   this.pageIndex = event.pageIndex;
   this.pageSize = event.pageSize;
 
+    // Calcular el índice de inicio y final de los elementos que se deben mostrar
+    const startIndex = this.pageIndex * this.pageSize;
+    const endIndex = startIndex + this.pageSize;
+  
+    // Crear un nuevo array de elementos para la página actual
+    const pageItems = this.usuariosRegistrados.slice(startIndex, endIndex);
+  
+    // Actualizar el dataSource con los elementos de la página actual
+    this.dataSource.data = pageItems;
+
+    // Actualizar el length del paginator con la longitud total del arreglo
+    this.dataSource.paginator.length = this.usuariosRegistrados.length;
   
 }
 
@@ -73,6 +74,9 @@ constructor(private _usuariosService: UsuariosService, private _snackBar: MatSna
 ngOnInit(){
   this.getUsuarios()
   this.getSolicitudes()
+
+  this.dataSource = new MatTableDataSource(this.usuariosRegistrados);
+  this.dataSource.sort = this.sort;
 }
 
 getSolicitudes() {
@@ -122,7 +126,6 @@ aceptarUsr(id:string){
     console.log(`Se creo el usuario: ${JSON.stringify(unUsuario)}`)
     this._usuariosService.deleteSolicitudPorId(id)
     console.log(`Se borró el usuario: ${id}`)
-    // this.sendWhatsapp("Cristian","TuHermana@hotmail.com")
 
 }
 
@@ -190,36 +193,6 @@ confirmUpdate(){
   alert("Nueva clave de usuario: MTInformatica1")
   this.showConfirmationDialogModificacion = false
 }
-
-
-sendWhatsapp(name:string ,mail: string) {
-  const accountSid = 'ACb1200a8e555e9b41c8ec2323345c9a71'; 
-  const authToken = 'aaba967529c8b94c206edb89b15fb729'; 
-  
-  // client: this._unTwilio 
-  // const client = new Twilio(accountSid, authToken)
-
-  // client.messages
-  //   .create({
-  //       body: 'Your appointment is coming up on July 21 at 3PM',
-  //       from: 'whatsapp:+14155238886',
-  //       to: 'whatsapp:+5493425289170'
-  //   })
-  //   .then(message => console.log(message.sid))
-    
-
-    // const whatsAppOption={
-    //     from:"whatsapp:+14155238886",
-    //     to: "whatsapp:+5493425289170",
-    //     body:`Ingreso pedido de Nombre: ${name} Mail: ${mail}`
-    // }    
-    // try {
-    //   const info = client.messages.create(whatsAppOption);
-    //   console.log(info);
-    // }  catch(err) {
-    //   console.log('error')
-    // }
-  }
 
 
 }
