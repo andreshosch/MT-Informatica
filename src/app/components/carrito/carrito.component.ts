@@ -1,5 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { DataService } from 'src/app/services/data.service';
+import { PedidosService } from 'src/app/services/pedidos.service';
+import { Pedido } from 'src/app/models/pedido';
 
 @Component({
   selector: 'app-carrito',
@@ -11,17 +13,20 @@ export class CarritoComponent {
   productos: any[] = [];
   total: number=0
   monto: number = 0
+  
+  @Input() usuario:number
 
   //Inicio Carrito
   carritoHabilitado: boolean =false
   //Fin Carrito
 
-  constructor(private dataService: DataService){
+  constructor(private dataService: DataService,private pedidosService:PedidosService){
     
   }
 
   ngOnInit(){
     this.carritoGuardado()
+    console.log(this.usuario)
   }
 
   carritoGuardado(){
@@ -97,5 +102,15 @@ actualizarResumen(){
     }
   });
 }
+mostrarCarrito(){
+  // let unPedido:Pedido={
+  //   carrito:this.productos,
+  //   idUser:this.usuario
+  // }
 
+  let unPedido={nombre:"andres",
+  apellido:"hosch"}
+  console.log(unPedido)
+  this.pedidosService.createPedido(unPedido)
+}
 }

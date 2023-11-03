@@ -3,7 +3,7 @@
     <a *ngIf="esAdmin" class="nav-link" href="./gestion">Gestion de Productos</a>
     <a *ngIf="!habilitar" class="nav-link" (click)="habilitarLogin()">Login</a>
     <a *ngIf="habilitar" class="nav-link" (click)="desloguear()" class="nav-link">LogOut</a>
-    <app-carrito *ngIf="hayUsuario" class="nav-link"></app-carrito>
+    <app-carrito [usuario]="usuario" *ngIf="hayUsuario" class="nav-link"></app-carrito>
 </div>
 
 <div class="confirmation-dialog" *ngIf="loginProgress">

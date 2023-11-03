@@ -25,6 +25,7 @@ export class ProductosComponent {
   onlySubCategory: any
   onlyBrand: any
   pages: any
+  visible:number
   filteredItem: any
   selectedProduct:any
   lengthPages: number
@@ -153,9 +154,9 @@ export class ProductosComponent {
   }
   nextPage(products: any) {
     this.arrProductsPages = []
-    let numberPages = Math.ceil(products.length / 20);
+    let numberPage = Math.ceil(products.length / 20);
     this.numberPages += 1;
-    if (this.numberPages < numberPages) {
+    if (this.numberPages < numberPage) {
       this.min = (((this.numberPages - 2) * 10) * 2 + 20);
       this.max = (this.min) + 20
       let j = 0;
@@ -167,13 +168,12 @@ export class ProductosComponent {
           this.arrProductsPages[j] = products[i]
           j += 1;
         }
-      while (j < numberPages)
+      while (j < numberPage)
     }
     else {
       this.lastPage(products)
     }
-    console.log("minimo " + this.min)
-    console.log("maximo " + this.max)
+    console.log(products.length)
   }
 
   afterPage(products: any) {
@@ -188,8 +188,7 @@ export class ProductosComponent {
         j += 1;
       }
     while (j < 20)
-    console.log("minimo " + this.min)
-    console.log("maximo " + this.max)
+    console.log(this.numberPages)
   }
   firstPage(products: any) {
     this.arrProductsPages = []
@@ -200,8 +199,7 @@ export class ProductosComponent {
     for (let i = this.min; i < this.max; i++) {
       this.arrProductsPages[i] = products[i]
     }
-    console.log("minimo " + this.min)
-    console.log("maximo " + this.max)
+    console.log(products.length)
   }
 
   lastPage(products: any) {
@@ -210,14 +208,12 @@ export class ProductosComponent {
     let finalPage = (this.numberPages - 1) * 20;
     this.min = finalPage
     this.max = products.length;
-    console.log("minimo " + this.min)
-    console.log("maximo " + this.max)
     let j = 0;
     for (let i = 0; i < (products.length - finalPage); i++) {
       this.arrProductsPages[i] = products[this.min]
       this.min++
     }
-
+    console.log(products.length)
   }
 
   filterProducts() {
@@ -247,7 +243,6 @@ export class ProductosComponent {
       });
     }
     this.loadFirstPage(this.filterArray)
-    console.log(this.filterArray)
   }
 
   cleanFilters() {

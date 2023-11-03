@@ -7,10 +7,17 @@
   display: inline-block;
   margin-right: 1%;
   margin-bottom: 1%;
-  width: 18rem;
+  /* width: 18rem; */
   max-width: 100%; 
-  max-height: 100%;
-  
+  max-height:100%; 
+ 
+}
+
+.title{
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1; /* Limita a 2 renglones */
+  overflow: hidden;
 }
 
 /* Inicio Productos destacados */
