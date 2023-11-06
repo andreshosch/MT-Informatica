@@ -25,7 +25,10 @@ export class ProductosComponent {
   onlySubCategory: any
   onlyBrand: any
   pages: any
-  visible:number
+  visibleFirstPage:boolean=false
+  visibleAfterPage:boolean=false
+  visibleNextPage:boolean=false
+  visibleLastPage:boolean=false
   filteredItem: any
   selectedProduct:any
   lengthPages: number
@@ -73,8 +76,12 @@ export class ProductosComponent {
       for (let i = 0; i < products.length; i++) {
         this.arrProductsPages[i] = products[i]
       }
-      this.numberPages = 1
     }
+      this.numberPages = 1
+      this.visibleFirstPage=false
+      this.visibleAfterPage=false
+      this.visibleNextPage=true
+      this.visibleLastPage=true
   }
 // FUNCION EN CASO DE QUE NO FUNCIONE LA API PARA GENERAR UN ARRAY ALEATORI DE 400 PRODUCTOS
   //   arrayProducts(){
@@ -156,6 +163,18 @@ export class ProductosComponent {
     this.arrProductsPages = []
     let numberPage = Math.ceil(products.length / 20);
     this.numberPages += 1;
+    if (this.numberPages<=numberPage){
+      this.visibleFirstPage=true
+      this.visibleAfterPage=true
+      this.visibleNextPage=true
+      this.visibleLastPage=true
+    }
+    else{
+      this.visibleFirstPage=false
+      this.visibleAfterPage=false
+      this.visibleNextPage=true
+      this.visibleLastPage=true
+    }
     if (this.numberPages < numberPage) {
       this.min = (((this.numberPages - 2) * 10) * 2 + 20);
       this.max = (this.min) + 20
@@ -179,6 +198,18 @@ export class ProductosComponent {
   afterPage(products: any) {
     this.arrProductsPages = []
     this.numberPages -= 1;
+    if (this.numberPages==1){
+      this.visibleFirstPage=false
+      this.visibleAfterPage=false
+      this.visibleNextPage=true
+      this.visibleLastPage=true
+    }
+    else{
+      this.visibleFirstPage=true
+      this.visibleAfterPage=true
+      this.visibleNextPage=true
+      this.visibleLastPage=true
+    }
     this.max = ((this.numberPages) * 10) * 2;
     this.min = (this.max) - 20
     let j = 0;
@@ -193,6 +224,10 @@ export class ProductosComponent {
   firstPage(products: any) {
     this.arrProductsPages = []
     this.numberPages = 1;
+    this.visibleFirstPage=false
+    this.visibleAfterPage=false
+    this.visibleNextPage=true
+    this.visibleLastPage=true
     this.min = 0;
     this.max = 20
     let j = 0;
@@ -204,6 +239,10 @@ export class ProductosComponent {
 
   lastPage(products: any) {
     this.arrProductsPages = []
+    this.visibleFirstPage=true
+    this.visibleAfterPage=true
+    this.visibleNextPage=false
+    this.visibleLastPage=false
     this.numberPages = Math.ceil(products.length / 20);
     let finalPage = (this.numberPages - 1) * 20;
     this.min = finalPage
@@ -344,8 +383,8 @@ updateProductSearch(){
 modal(producto:any){
   this.selectedProduct=producto
   }
- 
-}
+ } 
+
 
 //---------------------------------------------------------------------------------------------
 

@@ -66,18 +66,18 @@
 
   <nav aria-label="Page navigation example" style="display: flex; justify-content: center;">
      <ul class="pagination justify-content-center" *ngIf="filterArray.length>0">
-      <li class="page-item"><a class="page-link" *ngIf="visible!=this.numberPages"(click)="firstPage(filterArray)"><<</a></li>
-      <li class="page-item"><a class="page-link "*ngIf="visible!=this.numberPages"(click)="afterPage(filterArray)"><</a></li>
+      <li class="page-item"><a class="page-link" *ngIf="visibleFirstPage" (click)="firstPage(filterArray)"><<</a></li>
+      <li class="page-item"><a class="page-link "*ngIf="visibleAfterPage"(click)="afterPage(filterArray)"><</a></li>
       <li class="page-item"><a class="page-link">{{this.numberPages}}</a></li>
-      <li class="page-item"><a class="page-link"*ngIf="visible!=19"(click)="nextPage(filterArray)">></a></li>
-      <li class="page-item"><a class="page-link" *ngIf="visible!=19"(click)="lastPage(filterArray)">>></a></li>    
+      <li class="page-item"><a class="page-link"*ngIf="visibleNextPage"(click)="nextPage(filterArray)">></a></li>
+      <li class="page-item"><a class="page-link" *ngIf="visibleLastPage"(click)="lastPage(filterArray)">>></a></li>    
     </ul> 
     <ul class="pagination justify-content-center" *ngIf="filterArray.length===0">
-      <li class="page-item"><a class="page-link" *ngIf="visible!=this.numberPages+1"(click)="firstPage(arrProducts)"><<</a></li>
-      <li class="page-item"><a class="page-link "*ngIf="visible!=this.numberPages+1"(click)="afterPage(arrProducts)"><</a></li>
+      <li class="page-item"><a class="page-link" *ngIf="visibleFirstPage"(click)="firstPage(arrProducts)"><<</a></li>
+      <li class="page-item"><a class="page-link "*ngIf="visibleAfterPage"(click)="afterPage(arrProducts)"><</a></li>
       <li class="page-item"><a class="page-link">{{this.numberPages}}</a></li>
-      <li class="page-item"><a class="page-link"*ngIf="visible!=19"(click)="nextPage(arrProducts)">></a></li>
-      <li class="page-item"><a class="page-link"*ngIf="visible!=19"(click)="lastPage(arrProducts)">>></a></li>    
+      <li class="page-item"><a class="page-link"*ngIf="visibleNextPage"(click)="nextPage(arrProducts)">></a></li>
+      <li class="page-item"><a class="page-link"*ngIf="visibleLastPage"(click)="lastPage(arrProducts)">>></a></li>    
     </ul> 
   </nav>
 
