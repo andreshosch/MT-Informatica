@@ -279,7 +279,7 @@ getProductos(){
 }
 
   agregarAlCarrito(addProducto: Producto, idProd: string) {
-    const producto = { addProducto };
+    const producto = {addProducto};
     this.dataService.productos$.pipe(first()).subscribe(productos => {
       this.dataService.actualizarProductos([...productos], [producto], idProd);
     });

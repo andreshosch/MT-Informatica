@@ -103,14 +103,14 @@ actualizarResumen(){
   });
 }
 mostrarCarrito(){
-  // let unPedido:Pedido={
-  //   carrito:this.productos,
-  //   idUser:this.usuario
-  // }
+   let unPedido:Pedido={
+     carrito:this.productos,
+     idUser:this.usuario
+   }
 
-  let unPedido={nombre:"andres",
-  apellido:"hosch"}
-  console.log(unPedido)
+  // let unPedido={nombre:"andres",
+  // apellido:"hosch"}
+  // console.log(unPedido)
   this.pedidosService.createPedido(unPedido)
 }
 }

@@ -10,7 +10,7 @@ export class PedidosService {
   prueba:any[]=[]
   constructor(private firestore: AngularFirestore){}
   
-  createPedido(pedido:any ): Promise<any>{  
+  createPedido(pedido:Pedido ): Promise<any>{  
     console.log(pedido)  
     return this.firestore.collection('Pedidos').add(pedido)
   }
