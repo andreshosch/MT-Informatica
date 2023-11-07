@@ -118,10 +118,10 @@
                         </div>
     
                         <br>
-                        <button mat-raised-button color="primary">Cargar Pedido</button>
+                        <button (click)="guardarPedido()" mat-raised-button color="primary">Cargar Pedido</button>
                         <br>
     
-                        <button mat-raised-button color="primary" id="checkout-btn">Checkout</button>
+                        <button id="checkout-btn">Checkout</button>
                         <!-- <button mat-raised-button color="primary">Pagar con Mercado Pago</button> -->
     
                         
@@ -137,7 +137,8 @@
             </div>
         </div>
     </div>
-    <script src="./index.js"></script>
+    <script src="/src/app/components/carrito/index.js"></script>
+    <!-- <script src="https://secure.mlstatic.com/sdk/javascript/v1/mercadopago.js"></script> -->
 </body>
 </html>
 

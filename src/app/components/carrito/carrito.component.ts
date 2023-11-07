@@ -24,6 +24,10 @@ export class CarritoComponent {
     this.carritoGuardado()
   }
 
+  guardarPedido(){
+    console.table(this.productos)
+  }
+
   carritoGuardado(){
     let elCarrito = JSON.parse(localStorage.getItem("hayCarrito"));
     if (elCarrito){
