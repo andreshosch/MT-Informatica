@@ -3,6 +3,7 @@
     <a *ngIf="esAdmin" class="nav-link" href="./gestion">Gestión de Productos</a>
     <a *ngIf="esAdmin" class="nav-link" href="./gestionPedido">Gestión de Pedidos</a>
     <a *ngIf="!habilitar" class="nav-link" (click)="habilitarLogin()">Login</a>
+    <a *ngIf="habilitar" class="nav-link userId">Usuario: {{this.usuario}}</a>
     <a *ngIf="habilitar" class="nav-link" (click)="desloguear()" href="">LogOut</a>
     <app-carrito [usuario]="usuario"[nombre]="nombre"[apellido]="apellido"[celular]="celular" *ngIf="hayUsuario" class="nav-link"></app-carrito>
 </div>
@@ -79,6 +80,45 @@
                             <input matInput formControlName="telefono">
                         </mat-form-field>
                     </mat-grid-tile>
+
+
+                    <mat-grid-tile [colspan]="4" [rowspan]="1">
+                        <mat-form-field>
+                            <mat-label>Provincia</mat-label>
+                            <input matInput formControlName="provincia">
+                        </mat-form-field>
+                    </mat-grid-tile>
+                    <mat-grid-tile [colspan]="4" [rowspan]="1">
+                        <mat-form-field>
+                            <mat-label>Localidad</mat-label>
+                            <input matInput formControlName="localidad">
+                        </mat-form-field>
+                    </mat-grid-tile>
+                    <mat-grid-tile [colspan]="4" [rowspan]="1">
+                        <mat-form-field>
+                            <mat-label>Codigo Postal</mat-label>
+                            <input matInput formControlName="codigoPostal">
+                        </mat-form-field>
+                    </mat-grid-tile>
+                    <mat-grid-tile [colspan]="4" [rowspan]="1">
+                        <mat-form-field>
+                            <mat-label>Observaciones</mat-label>
+                            <input matInput formControlName="observaciones">
+                        </mat-form-field>
+                    </mat-grid-tile>
+                    <mat-grid-tile [colspan]="4" [rowspan]="1">
+                        <mat-form-field>
+                            <mat-label>Situación Fiscal</mat-label>
+                            <mat-select formControlName="estadoFiscal">
+                                <mat-option value="ivaRespInscripto">IVA Responsable Inscripto</mat-option>
+                                <mat-option value="ivaExento">IVA Exento</mat-option>
+                                <mat-option value="monotributista">Monotributista</mat-option>
+                                <mat-option value="consumidorFinal">Consumidor final</mat-option>
+                                <mat-option value="indefinido">No lo sé</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </mat-grid-tile>
+
                 </mat-grid-list>
                 <button type="submit" mat-raised-button color="primary">Registrarme</button>  
             </form>
@@ -86,28 +126,3 @@
         </div>
     </div>
 </div>
-
-<!-- <div class="confirmation-dialog" *ngIf="carritoHabilitado">
-    <div class="modalCarrito">
-
-        <div>
-            <h2>Carrito</h2>
-            <div class="contenedorCart">
-                <div class="losProductos">izquierda</div>
-                <div class="resumenCarrito">
-                    <h4>Resumen</h4>
-                    <div class="container ">
-                        <span>Productos: </span>
-                        <span>8</span>
-                    </div>
-                    <div>
-                        <span>Costo Total:</span>
-                        <span>$8500</span>
-                    </div>
-                    
-                </div>
-            </div>
-        </div>
-        <button (click)="ocultarCarrito()">Cerrar</button>
-    </div>
-</div> -->

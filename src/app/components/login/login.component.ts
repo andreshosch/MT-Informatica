@@ -49,7 +49,12 @@ export class LoginComponent {
       dni:['',Validators.required],      
       cuit:['',Validators.required],  
       domicilio:['',Validators.required],
-      telefono:['',Validators.required],
+      telefono:['',Validators.required],      
+      provincia:['',Validators.required],
+      localidad:['',Validators.required],      
+      codigoPostal:['',Validators.required],  
+      observaciones:[''],
+      estadoFiscal:['',Validators.required],
     })
     
   }
@@ -191,6 +196,11 @@ solicitarAlta(){
       mail: this.formRegistro.get('mail').value,
       domicilio: this.formRegistro.get('domicilio').value,
       password: this.formRegistro.get('contrasena').value,
+      provincia: this.formRegistro.get('provincia').value,
+      localidad: this.formRegistro.get('localidad').value,
+      codigoPostal: this.formRegistro.get('codigoPostal').value,
+      observaciones: this.formRegistro.get('observaciones').value,
+      estadoFiscal: this.formRegistro.get('estadoFiscal').value,
     }
     const formData:any=this.formRegistro.value
     const formUrl='https://formspree.io/f/maygvrgw'

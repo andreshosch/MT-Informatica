@@ -13,6 +13,11 @@
                 <h6>Mail: {{solicitud.mail}}</h6>
                 <h6>Telefono: {{solicitud.celular}}</h6>
                 <h6>Domicilio: {{solicitud.domicilio}}</h6>
+                <h6>Provincia: {{solicitud.provincia}}</h6>
+                <h6>Localidad: {{solicitud.localidad}}</h6>
+                <h6>Codigo Postal: {{solicitud.codigoPostal}}</h6>
+                <h6>Situación Fiscal: {{solicitud.estadoFiscal}}</h6>
+                <h6>Observaciones: {{solicitud.observaciones}}</h6>
                 <div>
                     <button (click)="aceptarUsr(solicitud.id)" mat-raised-button color="primary">Aceptar</button>  
                     <button (click)="eliminarSolicitud(solicitud.id)" mat-raised-button color="primary">Eliminar</button>
@@ -88,11 +93,35 @@
                 <th mat-header-cell *matHeaderCellDef mat-sort-header>Telefono</th>
                 <td mat-cell *matCellDef="let element"> {{element.celular}} </td>
             </ng-container>
-        
-        
+             
             <ng-container matColumnDef="domicilio" >
                 <th mat-header-cell *matHeaderCellDef mat-sort-header>Domicilio</th>
                 <td mat-cell *matCellDef="let element"> {{element.domicilio}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="provincia" >
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Provincia</th>
+                <td mat-cell *matCellDef="let element"> {{element.provincia}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="localidad" >
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Localidad</th>
+                <td mat-cell *matCellDef="let element"> {{element.localidad}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="codigoPostal" >
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Codigo Postal</th>
+                <td mat-cell *matCellDef="let element"> {{element.codigoPostal}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="estadoFiscal" >
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Situación fiscal</th>
+                <td mat-cell *matCellDef="let element"> {{element.estadoFiscal}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="observaciones" >
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Observaciones</th>
+                <td mat-cell *matCellDef="let element"> {{element.observaciones}} </td>
             </ng-container>
         
             <ng-container matColumnDef="acciones" >

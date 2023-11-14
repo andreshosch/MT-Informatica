@@ -28,7 +28,7 @@ usuarioUpdate: Usuario
 
 
 
-displayedColumns: string[] = ['nombre', 'apellido','dni','telefono','domicilio','mail','acciones'];
+displayedColumns: string[] = ['nombre','apellido','dni','telefono','domicilio','mail','provincia','localidad','codigoPostal','estadoFiscal','observaciones','acciones'];
 dataSource!: MatTableDataSource<any>;
 
 // private paginator: MatPaginator; 
@@ -123,7 +123,12 @@ aceptarUsr(id:string){
       domicilio: this.usuariosEnEspera[posicion].domicilio,
       mail: this.usuariosEnEspera[posicion].mail,
       // cuit: this.usuariosEnEspera[posicion].cuit,
-      password: this.usuariosEnEspera[posicion].password
+      password: this.usuariosEnEspera[posicion].password,
+      provincia: this.usuariosEnEspera[posicion].provincia,
+      localidad: this.usuariosEnEspera[posicion].localidad,
+      codigoPostal: this.usuariosEnEspera[posicion].codigoPostal,
+      observaciones: this.usuariosEnEspera[posicion].observaciones,
+      estadoFiscal: this.usuariosEnEspera[posicion].estadoFiscal,
     }
     this._usuariosService.createUser(unUsuario)
     console.log(`Se creo el usuario: ${JSON.stringify(unUsuario)}`)
@@ -190,7 +195,12 @@ confirmUpdate(){
     domicilio: this.usuarioAModificar.domicilio,
     celular: this.usuarioAModificar.celular,
     mail: this.usuarioAModificar.mail,
-    password: "MTInformatica1"
+    password: "MTInformatica1",
+    provincia: this.usuarioAModificar.provincia,
+    localidad: this.usuarioAModificar.localidad,
+    codigoPostal: this.usuarioAModificar.codigoPostal,
+    observaciones: this.usuarioAModificar.observaciones,
+    estadoFiscal: this.usuarioAModificar.estadoFiscal,
   }
   this._usuariosService.updateUsr(this.idUsuarioAModificar, this.usuarioUpdate)
   alert("Nueva clave de usuario: MTInformatica1")
