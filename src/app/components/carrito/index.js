@@ -1,16 +1,21 @@
+document.addEventListener("DOMContentLoaded", function () {
+  // Tu código JavaScript aquí
+  console.log("Hola desde index.js");
+});
+
 const mercadopago = new MercadoPago("APP_USR-238d3b3e-176d-4613-a832-882c24b4fdcd", {
-    locale: "es-AR" // The most common are: 'pt-BR', 'es-AR' and 'en-US'
+    locale: "es-AR" 
 });
 
 document.getElementById("checkout-btn").addEventListener("click", function () {
 
-    
-  
     const orderData = {
-    //   quantity: document.getElementById("quantity").value,
-        quantity: document.getElementById("quantity").innerHTML,
-        description: document.getElementById("product-description").innerHTML,
-        price: document.getElementById("unit-price").innerHTML
+        // quantity: document.getElementById("quantity").innerHTML,
+        // description: document.getElementById("product-description").innerHTML,
+        // price: document.getElementById("unit-price").innerHTML
+        quantity: 2,
+        description: "libro",
+        price: 50
     };
   
     fetch("http://localhost:8080/create_preference", {
