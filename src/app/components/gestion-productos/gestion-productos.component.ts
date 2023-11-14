@@ -97,8 +97,8 @@ export class GestionProductosComponent {
         descripcion: this.modificarProd.get('descripcionM').value,
         destacado: this.modificarProd.get('destacadoM').value,
         marca: this.modificarProd.get('marcaM').value,
-        iva: this.altaProd.get('ivaM').value,
-        impuesto_interno: this.altaProd.get('impuesto_internoM').value,
+        iva: this.modificarProd.get('ivaM').value,
+        impuesto_interno: this.modificarProd.get('impuesto_internoM').value,
         cantidad: 1
       }
       this._productosService.updateProduct(this.idProducto, unProducto) 

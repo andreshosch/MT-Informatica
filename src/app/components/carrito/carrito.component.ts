@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, SimpleChanges } from '@angular/core';
 import { DataService } from 'src/app/services/data.service';
 import { PedidosService } from 'src/app/services/pedidos.service';
 import { Pedido } from 'src/app/models/pedido';
@@ -25,16 +25,17 @@ export class CarritoComponent {
   }
 
   ngOnInit(){
-    this.carritoGuardado()
-    console.log(this.usuario)
+    let arregloLS = JSON.parse(localStorage.getItem("hayUsuario"));
+    let usuarioLog: any = arregloLS[0]
+    this.carritoGuardado(usuarioLog)
   }
 
   guardarPedido(){
     console.table(this.productos)
   }
 
-  carritoGuardado(){
-    let elCarrito = JSON.parse(localStorage.getItem("hayCarrito"));
+  carritoGuardado(carroUsr: any){
+    let elCarrito = JSON.parse(localStorage.getItem(carroUsr));
     if (elCarrito){
       const fechaActual = new Date()
       const fechaEnSegundos = fechaActual.getTime()
@@ -43,16 +44,19 @@ export class CarritoComponent {
       const tiempoLogin = Math.round((fechaEnSegundos - fechaAlmDif) / 1000)
 
       if(tiempoLogin < 3600){
-        this.dataService.actualizarCart(elCarrito[0])
+        this.dataService.actualizarCart(elCarrito[0], carroUsr)
       }else{
-        this.quitarCarro()
+        this.quitarCarro(carroUsr)
       }
     }
+    this.productos= [];
+    this.total =0
+    this.monto = 0
     this.actualizarResumen()
   }
 
-  quitarCarro(){
-    localStorage.removeItem("hayCarrito");
+  quitarCarro(carroUsr: any){
+    localStorage.removeItem(carroUsr);
   }
 
 //Inicio sección Carrito
@@ -65,11 +69,11 @@ ocultarCarrito(){
   this.carritoHabilitado = false
 }
 
-
 quitarProd(quitarElem: string){
   const index = this.productos.findIndex(obj => obj.addProducto.id === quitarElem)
   this.productos.splice(index, 1)
   this.actualizarResumen()
+  this.dataService.actualizarCart(this.productos, this.usuario)
 }
 
 
@@ -106,15 +110,14 @@ actualizarResumen(){
     }
   });
 }
+
 mostrarCarrito(){
    let unPedido:Pedido={
      carrito:this.productos,
      idUser:this.usuario
    }
-
-  // let unPedido={nombre:"andres",
-  // apellido:"hosch"}
-  // console.log(unPedido)
   this.pedidosService.createPedido(unPedido)
 }
+
+
 }
