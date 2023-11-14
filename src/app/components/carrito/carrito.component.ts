@@ -15,6 +15,9 @@ export class CarritoComponent {
   monto: number = 0
   
   @Input() usuario:number
+  @Input() nombre:string
+  @Input() apellido:string
+  @Input() celular:number
 
   //Inicio Carrito
   carritoHabilitado: boolean =false
@@ -26,8 +29,7 @@ export class CarritoComponent {
 
   ngOnInit(){
     this.carritoGuardado()
-    console.log(this.usuario)
-  }
+     }
 
   carritoGuardado(){
     let elCarrito = JSON.parse(localStorage.getItem("hayCarrito"));
@@ -103,14 +105,25 @@ actualizarResumen(){
   });
 }
 mostrarCarrito(){
+  const fecha=new Date()
+  let day=fecha.getDay()
+  const month=fecha.getMonth()
+  const year=fecha.getFullYear()
+  const formatFecha=`${day}/${month}/${year}`
+  console.log(day+"/"+month+"/"+year)
    let unPedido:Pedido={
      carrito:this.productos,
-     idUser:this.usuario
+     idUser:this.usuario,
+     fecha: formatFecha,
+     nombre:this.nombre,
+     apellido:this.apellido,
+     celular:this.celular
    }
+   console.log(unPedido)
+  this.pedidosService.createPedido(unPedido,'Pedidos Pendientes')
+}
 
-  // let unPedido={nombre:"andres",
-  // apellido:"hosch"}
-  // console.log(unPedido)
-  this.pedidosService.createPedido(unPedido)
+formatHora(){
+
 }
 }

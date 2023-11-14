@@ -1,9 +1,10 @@
 <div class="menuLogin">
-    <a *ngIf="esAdmin" class="nav-link" href="./gestionUsr">Gestion de Usuarios</a>
-    <a *ngIf="esAdmin" class="nav-link" href="./gestion">Gestion de Productos</a>
+    <a *ngIf="esAdmin" class="nav-link" href="./gestionUsr">Gestión de Usuarios</a>
+    <a *ngIf="esAdmin" class="nav-link" href="./gestion">Gestión de Productos</a>
+    <a *ngIf="esAdmin" class="nav-link" href="./gestionPedido">Gestión de Pedidos</a>
     <a *ngIf="!habilitar" class="nav-link" (click)="habilitarLogin()">Login</a>
     <a *ngIf="habilitar" class="nav-link" (click)="desloguear()" class="nav-link">LogOut</a>
-    <app-carrito [usuario]="usuario" *ngIf="hayUsuario" class="nav-link"></app-carrito>
+    <app-carrito [usuario]="usuario"[nombre]="nombre"[apellido]="apellido"[celular]="celular" *ngIf="hayUsuario" class="nav-link"></app-carrito>
 </div>
 
 <div class="confirmation-dialog" *ngIf="loginProgress">

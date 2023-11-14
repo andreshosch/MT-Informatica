@@ -10,12 +10,18 @@ export class PedidosService {
   prueba:any[]=[]
   constructor(private firestore: AngularFirestore){}
   
-  createPedido(pedido:Pedido ): Promise<any>{  
-    console.log(pedido)  
-    return this.firestore.collection('Pedidos').add(pedido)
+  createPedido(pedido:Pedido,coleccion:string ): Promise<any>{    
+    return this.firestore.collection(coleccion).add(pedido)
   }
 
-  getPedidos(): Observable<any> {
-    return this.firestore.collection('Pedidos').snapshotChanges()
+  getPedidos(coleccion:string): Observable<any> {
+    return this.firestore.collection(coleccion).snapshotChanges()
+  }
+  deletePedidoPorId(id: string, coleccion:string): Promise<any> {
+    return this.firestore.collection(coleccion).doc(id).delete();
+  }
+
+  getPedidoById(id:string,coleccion:string): Observable<any> {
+    return this.firestore.collection(coleccion).doc(id).valueChanges()
   }
 }

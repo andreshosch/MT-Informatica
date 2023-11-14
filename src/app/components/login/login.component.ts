@@ -23,6 +23,9 @@ export class LoginComponent {
   usuariosRegistrados: Usuario[] = []
   loginUsr: FormGroup
   usuario: number;
+  nombre:string;
+  apellido:string;
+  celular:number
   contrasena: string;
   
   //Fin Login
@@ -131,6 +134,9 @@ ingresoUsr(){
       if(this.listUsuario[j].password === this.contrasena){
         this.hayUsuario = true
         this.habilitar=true
+        this.nombre=this.listUsuario[j].nombre
+        this.apellido=this.listUsuario[j].apellido
+        this.celular=this.listUsuario[j].celular
         arregloLS.push(this.usuario)
         j = this.listUsuario.length
         //reemplazar por los DNI de Mariano u Natalia

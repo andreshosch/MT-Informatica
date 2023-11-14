@@ -90,6 +90,7 @@ getSolicitudes() {
       })
     })
   })
+  
 }
 
 getUsuarios() {
