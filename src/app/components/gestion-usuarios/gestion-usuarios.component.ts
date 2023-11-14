@@ -2,9 +2,10 @@ import { Component, ViewChild } from '@angular/core';
 import { Usuario } from 'src/app/models/usuario';
 import { UsuariosService } from 'src/app/services/usuarios.service';
 import { MatTableDataSource } from '@angular/material/table';
-import { MatSort } from '@angular/material/sort';
+import { MatSort, Sort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { LiveAnnouncer } from '@angular/cdk/a11y';
 
 @Component({
   selector: 'app-gestion-usuarios',
@@ -67,7 +68,7 @@ this.dataSource.paginator = this.paginator;
 this.dataSource.sort = this.sort;
 }
 
-constructor(private _usuariosService: UsuariosService, private _snackBar: MatSnackBar){
+constructor(private _usuariosService: UsuariosService, private _snackBar: MatSnackBar,private _liveAnnouncer: LiveAnnouncer){
   this.dataSource = new MatTableDataSource(this.usuariosRegistrados);
 }
 
@@ -78,6 +79,7 @@ ngOnInit(){
   this.dataSource = new MatTableDataSource(this.usuariosRegistrados);
   this.dataSource.sort = this.sort;
 }
+
 
 getSolicitudes() {
   this._usuariosService.getUsers().subscribe(doc => {

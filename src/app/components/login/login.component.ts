@@ -4,6 +4,9 @@ import { Usuario } from 'src/app/models/usuario';
 import { UsuariosService } from 'src/app/services/usuarios.service';
 import { HttpClient } from '@angular/common/http';
 import { MailsService } from 'src/app/services/mails.service';
+import { DataService } from 'src/app/services/data.service';
+
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -31,7 +34,7 @@ export class LoginComponent {
   //Fin Login
 
 
-  constructor(private _usuarioService: UsuariosService, private _mailService:MailsService, private fb:FormBuilder,private http: HttpClient){
+  constructor(private _usuarioService: UsuariosService, private _mailService:MailsService, private fb:FormBuilder,private http: HttpClient, private dataService: DataService){
 
     this.loginUsr = this.fb.group({
       usuario: ['', Validators.required],
@@ -86,6 +89,7 @@ desloguear(){
   this.esAdmin=false
   this.habilitar=false
   localStorage.removeItem("hayUsuario");
+  this.dataService.limpiar();
 }
 
 cerrarLogin(){
