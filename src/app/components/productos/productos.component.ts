@@ -45,6 +45,7 @@ export class ProductosComponent {
     "user_id": '22181',
     "token": "oyhl04axaro"
   }
+  bloqueados: any[] = []
 
   //Inicio Productos destacados
   productosHot: any[] = []
@@ -149,6 +150,12 @@ export class ProductosComponent {
                   id: this.arrProductos[p].id,
                   cantidad: 1
                 }
+                //Prueba bloqueo de categorias
+                // if(!this.establoqueada(unProducto.subcategoria)){
+                //   this.arrProducts.push(unProducto)
+                // }
+
+                //
                 this.arrProducts.push(unProducto)
               }
               // this.arrProducts.push(...this.arrProductos)
@@ -383,7 +390,22 @@ updateProductSearch(){
 modal(producto:any){
   this.selectedProduct=producto
   }
+
+  establoqueada(subcategoria: string): boolean {
+    let existe: boolean = false
+    for (let j=0; j< this.bloqueados.length; j++){
+      if(this.bloqueados[j] === subcategoria){
+        existe = true
+      }
+    }
+    return existe
+  }
+
+
  } 
+
+
+
 
 
 //---------------------------------------------------------------------------------------------

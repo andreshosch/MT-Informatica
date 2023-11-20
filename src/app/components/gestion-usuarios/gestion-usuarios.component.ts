@@ -25,10 +25,13 @@ solicitudAEliminar: string = ""
 usuarioAModificar: Usuario
 idUsuarioAModificar: string = ""
 usuarioUpdate: Usuario
+mostrarFicha: boolean = false
+fichaDetalle: Usuario
 
 
 
-displayedColumns: string[] = ['nombre','apellido','dni','telefono','domicilio','mail','provincia','localidad','codigoPostal','estadoFiscal','observaciones','acciones'];
+// displayedColumns: string[] = ['nombre','apellido','dni','telefono','domicilio','mail','provincia','localidad','codigoPostal','estadoFiscal','observaciones','acciones'];
+displayedColumns: string[] = ['nombre','apellido','dni','telefono','estadoFiscal','acciones'];
 dataSource!: MatTableDataSource<any>;
 
 // private paginator: MatPaginator; 
@@ -207,5 +210,14 @@ confirmUpdate(){
   this.showConfirmationDialogModificacion = false
 }
 
+verFicha(usuario: any){
+  this.fichaDetalle = usuario
+  this.mostrarFicha = true
+  console.log(`este: ${JSON.stringify(usuario)}`)
+}
+
+cancelFicha(){
+  this.mostrarFicha = false
+}
 
 }
