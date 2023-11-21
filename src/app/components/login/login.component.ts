@@ -5,6 +5,7 @@ import { UsuariosService } from 'src/app/services/usuarios.service';
 import { HttpClient } from '@angular/common/http';
 import { MailsService } from 'src/app/services/mails.service';
 import { DataService } from 'src/app/services/data.service';
+import { lastValueFrom } from 'rxjs';
 
 
 @Component({
@@ -19,9 +20,11 @@ export class LoginComponent {
   habilitar: boolean = false
   hayUsuario: boolean = false
   loginProgress: boolean = false
+  actualizarPass: boolean = false
   
   login: boolean= true
   formRegistro: FormGroup
+  updateUsr: FormGroup
   listUsuario: Usuario[] = []
   usuariosRegistrados: Usuario[] = []
   loginUsr: FormGroup
@@ -30,6 +33,7 @@ export class LoginComponent {
   apellido:string;
   celular:number
   contrasena: string;
+  usuarioSoporte: any;
   
   //Fin Login
 
@@ -55,6 +59,13 @@ export class LoginComponent {
       codigoPostal:['',Validators.required],  
       observaciones:[''],
       estadoFiscal:['',Validators.required],
+    })
+
+    this.updateUsr = this.fb.group({
+      usuario: ['', Validators.required],
+      contrasenaOld: ['', Validators.required],
+      contrasenaNew: ['', Validators.required],
+      contrasenaNewFactor: ['', Validators.required],
     })
     
   }
@@ -141,30 +152,63 @@ ingresoUsr(){
   for (let j=0; j < this.listUsuario.length; j++){
     if(this.listUsuario[j].dni == this.usuario){
       if(this.listUsuario[j].password === this.contrasena){
-        this.hayUsuario = true
-        this.habilitar=true
-        this.nombre=this.listUsuario[j].nombre
-        this.apellido=this.listUsuario[j].apellido
-        this.celular=this.listUsuario[j].celular
-        arregloLS.push(this.usuario)
-        j = this.listUsuario.length
-        //reemplazar por los DNI de Mariano u Natalia
-        if((this.usuario == 29560560)||(this.usuario == 29560560)){
-          this.esAdmin = true
-          arregloLS.push("true")
-        }else{
-          arregloLS.push("false")
+        if(this.contrasena === 'MTInformatica1'){
+          //Habilitar el cambio
+          alert('Debes cambiar la contraseña')
+          console.log(`usuario. ${JSON.stringify(this.listUsuario[j])}`)
+          this.actualizarPass = true
+          this.usuarioSoporte = this.listUsuario[j]
         }
-        this.loginProgress = false
-        this.loginUsr.reset()
-        let fecha = new Date()
-        arregloLS.push(fecha)
-        localStorage.setItem("hayUsuario", JSON.stringify(arregloLS));
+        else{
+          this.hayUsuario = true
+          this.habilitar=true
+          this.nombre=this.listUsuario[j].nombre
+          this.apellido=this.listUsuario[j].apellido
+          this.celular=this.listUsuario[j].celular
+          arregloLS.push(this.usuario)
+          j = this.listUsuario.length
+          //reemplazar por los DNI de Mariano u Natalia
+          if((this.usuario == 29560560)||(this.usuario == 29560560)){
+            this.esAdmin = true
+            arregloLS.push("true")
+          }else{
+            arregloLS.push("false")
+          }
+          this.loginProgress = false
+          this.loginUsr.reset()
+          let fecha = new Date()
+          arregloLS.push(fecha)
+          localStorage.setItem("hayUsuario", JSON.stringify(arregloLS));
+        }
       }else{
         console.log('Error en ingreso')
       }
     }
   }
+}
+
+actualizarUsr(elUsuario){
+  let unUsuario = this.updateUsr.get('usuario').value
+  let unContrasena = this.updateUsr.get('contrasenaOld').value
+  let unPassNew = this.updateUsr.get('contrasenaNew').value
+  let uncheckPass = this.updateUsr.get('contrasenaNewFactor').value
+  if (unContrasena != 'MTInformatica1'){
+    alert('Clave actual incorrecta')
+  }else{
+    if (unPassNew != uncheckPass){
+      alert('Clave nueva no coincidente con verificación')
+    } else{
+      this.usuarioSoporte.password = unPassNew
+      this._usuarioService.updateUsr(this.usuarioSoporte.id ,this.usuarioSoporte)
+      alert('Usuario actualizado')
+      this.actualizarPass = false
+    }
+
+  }
+}
+
+cerrarUpdate(){
+  this.actualizarPass = false
 }
 
 solicitarAlta(){

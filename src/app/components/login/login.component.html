@@ -126,3 +126,45 @@
         </div>
     </div>
 </div>
+
+<div class="confirmation-dialog" *ngIf="actualizarPass">
+    <div class="dialog-content">
+        <div class="login">
+            
+            <form [formGroup]="updateUsr" (ngSubmit)="actualizarUsr()"> 
+                <mat-grid-list cols="4" rowHeight="70px" style="margin-top: 8%; margin-right: 6%;">
+                    <mat-grid-tile [colspan]="4" [rowspan]="1">
+                        <mat-form-field>
+                            <mat-label>Usuario</mat-label>
+                            <input matInput formControlName="usuario">
+                        </mat-form-field>
+                    </mat-grid-tile>
+                    <mat-grid-tile [colspan]="4" [rowspan]="1">
+                        <mat-form-field>
+                            <mat-label>Contraseña Actual</mat-label>
+                            <input matInput formControlName="contrasenaOld">
+                        </mat-form-field>
+                    </mat-grid-tile>
+                    <mat-grid-tile [colspan]="4" [rowspan]="1">
+                        <mat-form-field>
+                            <mat-label>Contraseña Nueva</mat-label>
+                            <input matInput formControlName="contrasenaNew">
+                        </mat-form-field>
+                    </mat-grid-tile>
+                    <mat-grid-tile [colspan]="4" [rowspan]="1">
+                        <mat-form-field>
+                            <mat-label>Repita Contraseña nueva</mat-label>
+                            <input matInput formControlName="contrasenaNewFactor">
+                        </mat-form-field>
+                    </mat-grid-tile>
+                </mat-grid-list>
+                <div class="centrado">
+                    <button  type="submit" mat-raised-button color="primary" style="margin-bottom: 40px;">Actualizar</button>  
+                </div>
+            </form>
+            <div class="registroycancel">
+                <button (click)="cerrarUpdate()" mat-raised-button color="primary">Cancelar</button>  
+            </div>
+        </div>
+    </div>   
+</div>     
