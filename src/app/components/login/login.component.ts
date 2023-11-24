@@ -89,6 +89,7 @@ usuarioLogueado(){
       this.hayUsuario = true
       this.habilitar=true
       this.esAdmin = (arregloLS[1] == "true")
+      this.dataService.actualizarEstadoLogin(true)
     }else{
       this.desloguear()
     }
@@ -106,6 +107,7 @@ desloguear(){
   this.habilitar=false
   localStorage.removeItem("hayUsuario");
   this.dataService.limpiar();
+  this.dataService.actualizarEstadoLogin(false)
 }
 
 cerrarLogin(){
@@ -167,6 +169,7 @@ ingresoUsr(){
           this.celular=this.listUsuario[j].celular
           arregloLS.push(this.usuario)
           j = this.listUsuario.length
+          this.dataService.actualizarEstadoLogin(true)
           //reemplazar por los DNI de Mariano u Natalia
           if((this.usuario == 29560560)||(this.usuario == 29560560)){
             this.esAdmin = true

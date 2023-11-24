@@ -12,7 +12,7 @@
             <p>SubRubro: {{articulo.subcategoria}}</p>
             <p>Descripcion: {{articulo.descripcion}} </p>
 
-			<button  (click)="agregarAlCarrito(articulo, articulo.id)">Agregar al carrito</button>
+			<button *ngIf="this.hayLogueado" (click)="agregarAlCarrito(articulo, articulo.id)">Agregar al carrito</button>
 	
 	</ng-template>
 </ngb-carousel>
@@ -47,7 +47,7 @@
       <p class="card-precio">Precio: U$S {{productos.precio}}</p>
       <a href="#modal1" (click)="modal(productos)">Ver Más...</a>
     </div>
-    <button (click)="agregarAlCarrito(productos, productos.id)" style="margin-bottom: 10px; text-align: center;">Agregar al carrito</button>
+    <button *ngIf="this.hayLogueado" (click)="agregarAlCarrito(productos, productos.id)" style="margin-bottom: 10px; text-align: center;">Agregar al carrito</button>
   </div>
   <!-- MODAL PARA MOSTRAR DATOS DE LA CARD -->
   <div id="modal1" class="modalmask" *ngIf="selectedProduct">

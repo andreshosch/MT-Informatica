@@ -46,7 +46,7 @@ export class ProductosComponent {
     "token": "oyhl04axaro"
   }
   bloqueados: any[] = []
-
+  hayLogueado: boolean;
   //Inicio Productos destacados
   productosHot: any[] = []
   elProducto: Producto
@@ -64,6 +64,10 @@ export class ProductosComponent {
   ngOnInit() {
     this.arrayProducts()
     this.getProductos()
+    this.dataService.isAuthenticated$.subscribe((isAuthenticated) => {
+      this.hayLogueado = isAuthenticated;
+    
+    });
   }
 
   loadFirstPage(products: any) {
