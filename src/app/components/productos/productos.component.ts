@@ -329,10 +329,16 @@ getProductos(){
 }
 
   agregarAlCarrito(addProducto: Producto, idProd: string) {
-    const producto = {addProducto};
-    this.dataService.productos$.pipe(first()).subscribe(productos => {
-      this.dataService.actualizarProductos([...productos], [producto], idProd);
-    });
+    if(this.hayLogueado){
+      const producto = {addProducto};
+      this.dataService.productos$.pipe(first()).subscribe(productos => {
+        this.dataService.actualizarProductos([...productos], [producto], idProd);
+      });
+    }
+    else{
+      this.dataService.setLoginProgress(true);
+    }
+    
   }
   //Fin Productos destacados
 

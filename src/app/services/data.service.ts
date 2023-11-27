@@ -11,6 +11,8 @@ export class DataService {
   private isAuthenticatedSubject = new Subject<boolean>();
   isAuthenticated$ = this.isAuthenticatedSubject.asObservable();
 
+  public loginProgressData: boolean = false;
+
   constructor() { }
 
   limpiar(){
@@ -55,6 +57,14 @@ export class DataService {
   // updateAuthenticationStatus(isAuthenticated: boolean) {
     actualizarEstadoLogin(estado: boolean) {
     this.isAuthenticatedSubject.next(estado);
+  }
+
+  setLoginProgress(value: boolean): void {
+    this.loginProgressData = value;
+  }
+
+  resetLoginProgress(): void {
+    this.loginProgressData = false;
   }
 
 

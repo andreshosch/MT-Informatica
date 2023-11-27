@@ -38,7 +38,7 @@ export class LoginComponent {
   //Fin Login
 
 
-  constructor(private _usuarioService: UsuariosService, private _mailService:MailsService, private fb:FormBuilder,private http: HttpClient, private dataService: DataService){
+  constructor(private _usuarioService: UsuariosService, private _mailService:MailsService, private fb:FormBuilder,private http: HttpClient, public dataService: DataService){
 
     this.loginUsr = this.fb.group({
       usuario: ['', Validators.required],
@@ -112,6 +112,7 @@ desloguear(){
 
 cerrarLogin(){
   this.loginProgress = false
+  this.dataService.resetLoginProgress();
 }
 
 irALogin(){
@@ -178,6 +179,7 @@ ingresoUsr(){
             arregloLS.push("false")
           }
           this.loginProgress = false
+          this.dataService.resetLoginProgress();
           this.loginUsr.reset()
           let fecha = new Date()
           arregloLS.push(fecha)
@@ -263,6 +265,7 @@ solicitarAlta(){
     this.formRegistro.reset()
     //enviar mensaje de exito de solicitud
     this.loginProgress=false
+    this.dataService.resetLoginProgress();
     this.login=true
    
   } else{

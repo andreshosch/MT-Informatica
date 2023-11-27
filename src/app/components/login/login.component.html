@@ -9,7 +9,7 @@
     <app-carrito [usuario]="usuario"[nombre]="nombre"[apellido]="apellido"[celular]="celular" *ngIf="hayUsuario" class="nav-link"></app-carrito>
 </div>
 
-<div class="confirmation-dialog" *ngIf="loginProgress">
+<div class="confirmation-dialog" *ngIf="loginProgress || dataService.loginProgressData">
     <div class="dialog-content">
         <div class="login" *ngIf="login">
             <form [formGroup]="loginUsr" (ngSubmit)="ingresoUsr()"> 
