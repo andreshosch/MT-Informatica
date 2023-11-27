@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -7,6 +7,11 @@ import { BehaviorSubject } from 'rxjs';
 export class DataService {
   private productosSubject = new BehaviorSubject<any[]>([]);
   productos$ = this.productosSubject.asObservable();
+
+  private isAuthenticatedSubject = new Subject<boolean>();
+  isAuthenticated$ = this.isAuthenticatedSubject.asObservable();
+
+  public loginProgressData: boolean = false;
 
   constructor() { }
 
@@ -49,6 +54,18 @@ export class DataService {
     localStorage.setItem(cadena, JSON.stringify(carroAux));
   }
 
+  // updateAuthenticationStatus(isAuthenticated: boolean) {
+    actualizarEstadoLogin(estado: boolean) {
+    this.isAuthenticatedSubject.next(estado);
+  }
+
+  setLoginProgress(value: boolean): void {
+    this.loginProgressData = value;
+  }
+
+  resetLoginProgress(): void {
+    this.loginProgressData = false;
+  }
 
 
 }
