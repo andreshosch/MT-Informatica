@@ -25,7 +25,7 @@ export class PedidosService {
     return this.firestore.collection(coleccion).doc(id).valueChanges()
   }
 
-  updatePedido(id: string, pedido: any): Promise<any> {
-    return this.firestore.collection('Pedidos Pendientes').doc(id).update(pedido);
+  updatePedido(id: string,coleccion:string, pedido: any): Promise<any> {
+    return this.firestore.collection(coleccion).doc(id).update(pedido);
   }
 }

@@ -66,6 +66,7 @@ export class CarritoComponent {
 verCarrito(){
   this.carritoHabilitado = true
   this.actualizarResumen()
+  console.log(this.productos)
 }
 
 ocultarCarrito(){

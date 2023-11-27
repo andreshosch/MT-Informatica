@@ -4,208 +4,366 @@
 <h3 style="text-align: center;padding-top: 30px;">Solicitudes pendientes</h3>
 <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="center">
     <mat-tab label="Pedidos Pendientes">
-      <div class="container registrados">
-        <h3>Pedidos Pendientes</h3>
-    
-        <div class="mat-elevation-z8">
-    
-            <table mat-table [dataSource]="dataSourcePedidosPendientes" matSort>
-                <ng-container matColumnDef="fecha">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Fecha </th>
-                    <td mat-cell *matCellDef="let element">{{element.fecha}} </td>
-                </ng-container>
+        <div class="container registrados">
+            <h3>Pedidos Pendientes</h3>
 
-                <ng-container matColumnDef="dni">
-                  <th mat-header-cell *matHeaderCellDef mat-sort-header>DNI</th>
-                  <td mat-cell *matCellDef="let element"> {{element.idUser}} </td>
-              </ng-container>
+            <div class="mat-elevation-z8">
 
-                <ng-container matColumnDef="apellido">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Apellido </th>
-                    <td mat-cell *matCellDef="let element"> {{element.apellido}} </td>
-                </ng-container>
-            
-                <ng-container matColumnDef="nombre" >
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Nombre</th>
-                    <td mat-cell *matCellDef="let element"> {{element.nombre}} </td>
-                </ng-container>
+                <table mat-table [dataSource]="dataSourcePedidosPendientes" matSort>
+                    <ng-container matColumnDef="fecha">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Fecha </th>
+                        <td mat-cell *matCellDef="let element">{{element.fecha}} </td>
+                    </ng-container>
 
-                <ng-container matColumnDef="celular" >
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Celular</th>
-                    <td mat-cell *matCellDef="let element"> {{element.celular}} </td>
-                </ng-container>
-                       
-                <ng-container matColumnDef="acciones" >
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Acciones</th>
-                    <td mat-cell *matCellDef="let element"> <button mat-raised-button color="primary">Ver Pedido</button>
-                        <button mat-raised-button color="primary" (click)="AceptarPedido(element.id,'Pedidos Pendientes','Pedidos En Curso')">Aceptar Pedido</button>
-                        <button mat-raised-button color="primary"(click)="deletePedidoPendienteId(element.id,'Pedidos Pendientes')">Eliminar</button>
-                     </td>
-                </ng-container>
-            
-            
-            
-                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-            </table>
-            <mat-paginator 
-                [pageSizeOptions]="[5, 10, 25]" 
-                [pageSize]="pageSize" 
-                [pageIndex]="pageIndex" 
-                [length]="pedidosPendientes.length"
-                (page)="onPaginateChange($event)">
-            </mat-paginator>
-    
+                    <ng-container matColumnDef="dni">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header>DNI</th>
+                        <td mat-cell *matCellDef="let element"> {{element.idUser}} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="apellido">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Apellido </th>
+                        <td mat-cell *matCellDef="let element"> {{element.apellido}} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="nombre">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Nombre</th>
+                        <td mat-cell *matCellDef="let element"> {{element.nombre}} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="celular">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Celular</th>
+                        <td mat-cell *matCellDef="let element"> {{element.celular}} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="acciones">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Acciones</th>
+                        <td mat-cell *matCellDef="let element">
+                            <a (click)="showModalPedidos(element)"><mat-icon style="cursor: pointer;"
+                                    title="Ver Pedido">visibility</mat-icon></a>
+                            <a (click)="AceptarPedido(element.id,'Pedidos Pendientes','Pedidos En Curso')"><mat-icon
+                                    style="cursor: pointer;" title="Aceptar Pedido">check_circle</mat-icon></a>
+                            <a (click)="deletePedidoPendienteId(element.id,'Pedidos Pendientes')"><mat-icon
+                                    style="cursor: pointer;" title="Eliminar Pedido">delete</mat-icon></a>
+                        </td>
+                    </ng-container>
+
+
+
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                </table>
+                <mat-paginator [pageSizeOptions]="[5, 10, 25]" [pageSize]="pageSize" [pageIndex]="pageIndex"
+                    [length]="pedidosPendientes.length" (page)="onPaginateChange($event)">
+                </mat-paginator>
+
+            </div>
         </div>
-    </div>
     </mat-tab>
     <mat-tab label="Pedidos en Curso">
         <div class="container registrados">
             <h3>Pedidos En Curso</h3>
-        
+
             <div class="mat-elevation-z8">
-        
+
                 <table mat-table [dataSource]="dataSourcePedidosEnCurso" matSort>
                     <ng-container matColumnDef="fecha">
                         <th mat-header-cell *matHeaderCellDef mat-sort-header> Fecha </th>
                         <td mat-cell *matCellDef="let element">{{element.fecha}} </td>
                     </ng-container>
-    
+
                     <ng-container matColumnDef="dni">
-                      <th mat-header-cell *matHeaderCellDef mat-sort-header>DNI</th>
-                      <td mat-cell *matCellDef="let element"> {{element.idUser}} </td>
-                  </ng-container>
-    
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header>DNI</th>
+                        <td mat-cell *matCellDef="let element"> {{element.idUser}} </td>
+                    </ng-container>
+
                     <ng-container matColumnDef="apellido">
                         <th mat-header-cell *matHeaderCellDef mat-sort-header> Apellido </th>
                         <td mat-cell *matCellDef="let element"> {{element.apellido}} </td>
                     </ng-container>
-                
-                    <ng-container matColumnDef="nombre" >
+
+                    <ng-container matColumnDef="nombre">
                         <th mat-header-cell *matHeaderCellDef mat-sort-header>Nombre</th>
                         <td mat-cell *matCellDef="let element"> {{element.nombre}} </td>
                     </ng-container>
-                           
-                    <ng-container matColumnDef="acciones" >
+
+                    <ng-container matColumnDef="acciones">
                         <th mat-header-cell *matHeaderCellDef mat-sort-header>Acciones</th>
-                        <td mat-cell *matCellDef="let element"> <button mat-raised-button color="primary">Ver Pedido</button>
-                            <button mat-raised-button color="primary" (click)="AceptarPedido(element.id,'Pedidos En Curso','Pedidos En Transporte')">Aceptar Pedido</button>
-                            <button mat-raised-button color="primary"(click)="deletePedidoPendienteId(element.id,'Pedidos En Curso')">Eliminar</button>
-                         </td>
+                        <td mat-cell *matCellDef="let element">
+                            <a (click)="showModalPedidosConSeguimiento(element)"><mat-icon style="cursor: pointer;" title="Ver Pedido">visibility</mat-icon></a>
+                            <a (click)="envioTransporte()" title="Envio Transporte" style="cursor: pointer;"><mat-icon>
+                                    local_shipping</mat-icon> </a>
+                            <!-- <a (click)="AceptarPedido(element.id,'Pedidos En Curso','Pedidos En Transporte')"title="Envio Transporte" style="cursor: pointer;"><mat-icon> local_shipping</mat-icon> </a> -->
+                            <a (click)="AceptarPedido(element.id,'Pedidos En Curso','Pedidos Finalizados')"><mat-icon
+                                    style="cursor: pointer;" title="Finalizar Pedido">check_circle</mat-icon></a>
+                        </td>
                     </ng-container>
-                
-                
-                
+
+
+
                     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
                     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
                 </table>
-                <mat-paginator 
-                    [pageSizeOptions]="[5, 10, 25]" 
-                    [pageSize]="pageSize" 
-                    [pageIndex]="pageIndex" 
-                    [length]="pedidosEncurso.length"
-                    (page)="onPaginateChange($event)">
+                <mat-paginator [pageSizeOptions]="[5, 10, 25]" [pageSize]="pageSize" [pageIndex]="pageIndex"
+                    [length]="pedidosEncurso.length" (page)="onPaginateChange($event)">
                 </mat-paginator>
-        
+
             </div>
         </div>
     </mat-tab>
     <mat-tab label="Pedidos en Transporte">
         <div class="container registrados">
             <h3>Pedidos En Transporte</h3>
-        
+
             <div class="mat-elevation-z8">
-        
+
                 <table mat-table [dataSource]="dataSourcePedidosEnTransporte" matSort>
                     <ng-container matColumnDef="fecha">
                         <th mat-header-cell *matHeaderCellDef mat-sort-header> Fecha </th>
                         <td mat-cell *matCellDef="let element">{{element.fecha}} </td>
                     </ng-container>
-    
+
                     <ng-container matColumnDef="dni">
-                      <th mat-header-cell *matHeaderCellDef mat-sort-header>DNI</th>
-                      <td mat-cell *matCellDef="let element"> {{element.idUser}} </td>
-                  </ng-container>
-    
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header>DNI</th>
+                        <td mat-cell *matCellDef="let element"> {{element.idUser}} </td>
+                    </ng-container>
+
                     <ng-container matColumnDef="apellido">
                         <th mat-header-cell *matHeaderCellDef mat-sort-header> Apellido </th>
                         <td mat-cell *matCellDef="let element"> {{element.apellido}} </td>
                     </ng-container>
-                
-                    <ng-container matColumnDef="nombre" >
+
+                    <ng-container matColumnDef="nombre">
                         <th mat-header-cell *matHeaderCellDef mat-sort-header>Nombre</th>
                         <td mat-cell *matCellDef="let element"> {{element.nombre}} </td>
                     </ng-container>
-                           
-                    <ng-container matColumnDef="acciones" >
+
+                    <ng-container matColumnDef="acciones">
                         <th mat-header-cell *matHeaderCellDef mat-sort-header>Acciones</th>
-                        <td mat-cell *matCellDef="let element"> <button mat-raised-button color="primary">Ver Pedido</button>
-                            <button mat-raised-button color="primary" (click)="AceptarPedido(element.id,'Pedidos En Transporte','Pedidos Finalizados')">Aceptar Pedido</button>
-                            <button mat-raised-button color="primary"(click)="deletePedidoPendienteId(element.id,'Pedidos En Transporte')">Eliminar</button>
-                         </td>
+                        <td mat-cell *matCellDef="let element">
+                            <a><mat-icon style="cursor: pointer;" title="Ver Pedido">visibility</mat-icon></a>
+                            <a (click)="AceptarPedido(element.id,'Pedidos En Transporte','Pedidos Finalizados')"
+                                title="Finalizar Pedido" style="cursor: pointer;"><mat-icon> check_circle</mat-icon>
+                            </a>
+                        </td>
                     </ng-container>
-                
-                
-                
+
+
+
                     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
                     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
                 </table>
-                <mat-paginator 
-                    [pageSizeOptions]="[5, 10, 25]" 
-                    [pageSize]="pageSize" 
-                    [pageIndex]="pageIndex" 
-                    [length]="pedidosEnTransporte.length"
-                    (page)="onPaginateChange($event)">
+                <mat-paginator [pageSizeOptions]="[5, 10, 25]" [pageSize]="pageSize" [pageIndex]="pageIndex"
+                    [length]="pedidosEnTransporte.length" (page)="onPaginateChange($event)">
                 </mat-paginator>
-        
+
             </div>
         </div>
     </mat-tab>
     <mat-tab label="Pedidos Finalizados">
         <div class="container registrados">
             <h3>Pedidos Finalizados</h3>
-        
+
             <div class="mat-elevation-z8">
-        
+
                 <table mat-table [dataSource]="dataSourcePedidosFinalizados" matSort>
                     <ng-container matColumnDef="fecha">
                         <th mat-header-cell *matHeaderCellDef mat-sort-header> Fecha </th>
                         <td mat-cell *matCellDef="let element">{{element.fecha}} </td>
                     </ng-container>
-    
+
                     <ng-container matColumnDef="dni">
-                      <th mat-header-cell *matHeaderCellDef mat-sort-header>DNI</th>
-                      <td mat-cell *matCellDef="let element"> {{element.idUser}} </td>
-                  </ng-container>
-    
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header>DNI</th>
+                        <td mat-cell *matCellDef="let element"> {{element.idUser}} </td>
+                    </ng-container>
+
                     <ng-container matColumnDef="apellido">
                         <th mat-header-cell *matHeaderCellDef mat-sort-header> Apellido </th>
                         <td mat-cell *matCellDef="let element"> {{element.apellido}} </td>
                     </ng-container>
-                
-                    <ng-container matColumnDef="nombre" >
+
+                    <ng-container matColumnDef="nombre">
                         <th mat-header-cell *matHeaderCellDef mat-sort-header>Nombre</th>
                         <td mat-cell *matCellDef="let element"> {{element.nombre}} </td>
                     </ng-container>
-                           
-                    <ng-container matColumnDef="acciones" >
+
+                    <ng-container matColumnDef="acciones">
                         <th mat-header-cell *matHeaderCellDef mat-sort-header>Acciones</th>
-                        <td mat-cell *matCellDef="let element"> <button mat-raised-button color="primary">Ver Pedido</button>
-                            <button mat-raised-button color="primary"(click)="deletePedidoPendienteId(element.id,'Pedidos Finalizados')">Eliminar</button>
-                         </td>
+                        <td mat-cell *matCellDef="let element">
+                            <a (click)="showModalPedidosConSeguimiento(element)"><mat-icon style="cursor: pointer;" title="Ver Pedido">visibility</mat-icon></a>
+                        </td>
                     </ng-container>
                     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
                     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
                 </table>
-                <mat-paginator 
-                    [pageSizeOptions]="[5, 10, 25]" 
-                    [pageSize]="pageSize" 
-                    [pageIndex]="pageIndex" 
-                    [length]="pedidosFinalizados.length"
-                    (page)="onPaginateChange($event)">
+                <mat-paginator [pageSizeOptions]="[5, 10, 25]" [pageSize]="pageSize" [pageIndex]="pageIndex"
+                    [length]="pedidosFinalizados.length" (page)="onPaginateChange($event)">
                 </mat-paginator>
-        
+
             </div>
         </div>
     </mat-tab>
-  </mat-tab-group>
+</mat-tab-group>
+
+<div class="carroYcantidad">
+    <span class="nav-link">{{ total }}</span>
+</div>
+
+<div class="confirmation-dialog" *ngIf="carritoHabilitado">
+    <div class="modalCarrito">
+        <div>
+            <div class="contenedorCart">
+                <div class="losProductos container">
+                    <h2>Pedido de {{pedido.nombre}} {{pedido.apellido}}</h2>
+                    <h6 style="text-align: left;">Fecha Pedido: {{pedido.fecha}}</h6>
+                    <h6 style="text-align: left;">Nro Contacto: {{pedido.celular}}</h6>
+                    <h6 *ngIf="showTransporte" style="text-align: left;">Nombre Transporte: {{pedido.transporte}}</h6>
+                    <h6 *ngIf="showCodigoSeguimiento" style="text-align: left;">Nro Seguimiento: {{pedido.seguimiento}}</h6>
+                    <div *ngFor="let carro of pedido.carrito ;let i=index" class="card">
+
+                        <div class="carrito">
+                            <div class="izquierda">
+                                <div class="carroImagen">
+                                    <img src="{{carro.addProducto.imagen}}">
+                                </div>
+                            </div>
+                            <div class="derecha">
+                                <div class="derArriba">
+                                    <div class="carroNombre ordenCeldas">
+                                        <table>
+                                            <tr>
+                                                <th>Producto</th>
+                                            </tr>
+                                            <tr>
+                                                <td>{{carro.addProducto.nombre}}</td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                    <div class="carroDescripcion ordenCeldas">
+                                        <table>
+                                            <tr>
+                                                <th>Descripción</th>
+                                            </tr>
+                                            <tr>
+                                                <td>{{carro.addProducto.descripcion}}</td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="derAbajo">
+                                    <div class="carritoPrecioU ordenCeldas">
+                                        <table>
+                                            <tr>
+                                                <th>Precio unitario</th>
+                                            </tr>
+                                            <tr>
+                                                <td>{{carro.addProducto.precio}}</td>
+                                            </tr>
+                                        </table>
+                                    </div>
+
+                                    <div class="carritoBotonera ordenCeldas">
+                                        <table>
+                                            <tr>
+                                                <th>Cantidad</th>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <button (click)="restarUno(carro.addProducto.id)">-</button>
+                                                    <label id="cotización">{{carro.addProducto.cantidad}}</label>
+                                                    <button (click)="sumarUno(carro.addProducto.id)">+</button>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                    <div class="carritoPrecioT ordenCeldas">
+                                        <table>
+                                            <tr>
+                                                <th>Costo total</th>
+                                            </tr>
+                                            <tr>
+                                                <td>{{ carro.addProducto.precio * carro.addProducto.cantidad }}</td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                    <div class="carritoEliminar ordenCeldas">
+                                        <button (click)="quitarProd(producto.id)"><mat-icon>delete</mat-icon></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="resumenCarrito">
+                    <h4 id="product-description">Resumen</h4>
+
+                    <div class="ordenCeldas">
+                        <table>
+                            <tr>
+                                <th>Cantidad Items:</th>
+                            </tr>
+                            <tr>
+                                <td id="unit-price">{{ total }}</td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <div class="ordenCeldas">
+                        <table>
+                            <tr>
+                                <th>Costo Total:</th>
+                            </tr>
+                            <tr>
+                                <td>$ {{ monto }}</td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <br>
+                    <!-- <button mat-raised-button color="primary" (click)="mostrarCarrito()">Cargar Pedido</button>
+                    <br>
+
+                    <button id="checkout-btn">Checkout</button> -->
+                    <!-- <button mat-raised-button color="primary">Pagar con Mercado Pago</button> -->
+
+
+                    <!-- <div id="button-checkout"> -->
+
+                    <!-- </div> -->
+
+                </div>
+            </div>
+        </div>
+        <div class="buttonClose">
+            <button mat-raised-button color="primary">Actualizar</button>
+            <button (click)="hideCarrito()" mat-raised-button color="primary">Cerrar</button>
+        </div>
+    </div>
+</div>
+
+
+<div class="confirmation-dialog" *ngIf="showSeguimiento">
+    <div class="dialog-content">
+        <div class="login">
+            <form [formGroup]="formSeguimiento" (ngSubmit)="updateSeguimiento()">
+                <mat-grid-list cols="4" rowHeight="70px" style="margin-top: 8%; margin-right: 6%;">
+                    <mat-grid-tile [colspan]="4" [rowspan]="1">
+                        <mat-form-field>
+                            <mat-label>Nombre Transporte</mat-label>
+                            <input matInput formControlName="transporte">
+                        </mat-form-field>
+                    </mat-grid-tile>
+                    <mat-grid-tile [colspan]="4" [rowspan]="1">
+                        <mat-form-field>
+                            <mat-label>Nro. Seguimiento</mat-label>
+                            <input matInput formControlName="seguimiento">
+                        </mat-form-field>
+                    </mat-grid-tile>
+                </mat-grid-list>
+                <div class="centrado">
+                    <button type="submit" mat-raised-button color="primary">Guardar</button>
+                    <button (click)="cerrarSeguimiento()" mat-raised-button color="primary">Cancelar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
