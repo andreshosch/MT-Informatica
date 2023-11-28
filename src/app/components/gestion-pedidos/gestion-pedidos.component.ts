@@ -31,8 +31,10 @@ export class GestionPedidosComponent {
   carritoHabilitado: boolean = false
   showSuma:boolean=true
   showResta:boolean=true
+  showEliminar:boolean=true
   showSeguimiento:boolean=false
   showTransporte:boolean=false
+  showActualizar:boolean=true
   showCodigoSeguimiento:boolean=false
   indicePedidoPendiente: number
   elementoActual: string
@@ -208,6 +210,7 @@ export class GestionPedidosComponent {
     this.showSeguimiento=true
     console.log(element)
     this.elementoActual = element
+    // this.AceptarPedido(this.elementoActual,'Pedidos En Curso','Pedidos En Transporte')
   }
 cerrarSeguimiento(){
   this.showSeguimiento=false
@@ -215,20 +218,42 @@ cerrarSeguimiento(){
   deletePedidoPendienteId(id: string, coleccion: string) {
     this._gestionPedido.deletePedidoPorId(id, coleccion)
   }
-showModalPedidos(element:any, mindice: number, estado: string){
+showModalPendientes(element:any, mindice: number, estado: string){
   console.log(`index: ${mindice}`)
   this.indicePedidoPendiente = mindice
   this.carritoHabilitado=true
+  this.showActualizar=true
+  this.showEliminar=true
+  this.showResta=true
+  this.showSuma=true
   this.pedido=element
 }
 
-showModalPedidosConSeguimiento(element:any){
+showModalEnCurso(element:any){
   this.showSeguimiento=false
-  this.showTransporte=true
-  this.showCodigoSeguimiento=true
+  this.showSuma=false
+  this.showResta=false
+  this.showActualizar=false
+  this.showEliminar=false
   this.carritoHabilitado=true
+  this.showTransporte=false
+  this.showCodigoSeguimiento=false
   this.pedido=element
 }
+
+showModalTransporteyFinalizado(element:any){
+  this.showSeguimiento=false
+  this.showSuma=false
+  this.showResta=false
+  this.showActualizar=false
+  this.showEliminar=false
+  this.carritoHabilitado=true
+  this.showActualizar=true
+ this.showCodigoSeguimiento=true
+ this.showTransporte=true
+  this.pedido=element
+}
+
 hideCarrito(){
   this.carritoHabilitado=false
 }
@@ -238,24 +263,13 @@ hideCarrito(){
   console.log(`IndicePedido: ${this.indicePedidoPendiente}`)
 
  this.pedidosPendientes[this.indicePedidoPendiente].carrito[posicion].addProducto.cantidad++
+ this.monto=3
  }
 
 restarUno(idQuitar: string, posicion: number){
   if(this.pedidosPendientes[this.indicePedidoPendiente].carrito[posicion].addProducto.cantidad > 1){
     this.pedidosPendientes[this.indicePedidoPendiente].carrito[posicion].addProducto.cantidad--;
   }
-}
-
-actualizarResumen(){
-  this.dataService.productos$.subscribe(pedidos => {
-    this.pedidosPendientes = pedidos;
-    this.total = 0
-    this.monto = 0
-    for(let j=0; j < this.pedidosPendientes.length; j++){
-      this.monto = this.monto + (parseInt(this.pedidosPendientes[j].addProducto.precio) * parseInt(this.pedidosPendientes[j].addProducto.cantidad))
-      this.total = this.total + parseInt(this.pedidosPendientes[j].addProducto.cantidad)
-    }
-  });
 }
 
 mostrarIndex(pos){
