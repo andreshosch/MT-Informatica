@@ -12,7 +12,7 @@
                 <table mat-table [dataSource]="dataSourcePedidosPendientes" matSort>
                     <ng-container matColumnDef="fecha">
                         <th mat-header-cell *matHeaderCellDef mat-sort-header> Fecha </th>
-                        <td mat-cell *matCellDef="let element">{{element.fecha}} </td>
+                        <td mat-cell *matCellDef="let element">{{element.fecha}}</td>
                     </ng-container>
 
                     <ng-container matColumnDef="dni">
@@ -37,8 +37,8 @@
 
                     <ng-container matColumnDef="acciones">
                         <th mat-header-cell *matHeaderCellDef mat-sort-header>Acciones</th>
-                        <td mat-cell *matCellDef="let element">
-                            <a (click)="showModalPedidos(element)"><mat-icon style="cursor: pointer;"
+                        <td mat-cell *matCellDef="let element; let pos = index">
+                            <a (click)="showModalPedidos(element, pos)"><mat-icon style="cursor: pointer;"
                                     title="Ver Pedido">visibility</mat-icon></a>
                             <a (click)="AceptarPedido(element.id,'Pedidos Pendientes','Pedidos En Curso')"><mat-icon
                                     style="cursor: pointer;" title="Aceptar Pedido">check_circle</mat-icon></a>
@@ -268,9 +268,9 @@
                                             </tr>
                                             <tr>
                                                 <td>
-                                                    <button (click)="restarUno(carro.addProducto.id)">-</button>
+                                                    <button (click)="restarUno(carro.addProducto.id, i)">-</button>
                                                     <label id="cotización">{{carro.addProducto.cantidad}}</label>
-                                                    <button (click)="sumarUno(carro.addProducto.id)">+</button>
+                                                    <button (click)="sumarUno(carro.addProducto.id, i)">+</button>
                                                 </td>
                                             </tr>
                                         </table>
@@ -286,7 +286,7 @@
                                         </table>
                                     </div>
                                     <div class="carritoEliminar ordenCeldas">
-                                        <button (click)="quitarProd(producto.id)"><mat-icon>delete</mat-icon></button>
+                                        <button (click)="quitarProd(i)"><mat-icon>delete</mat-icon></button>
                                     </div>
                                 </div>
                             </div>

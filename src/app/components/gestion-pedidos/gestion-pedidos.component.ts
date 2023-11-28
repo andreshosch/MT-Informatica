@@ -34,6 +34,7 @@ export class GestionPedidosComponent {
   showSeguimiento:boolean=false
   showTransporte:boolean=false
   showCodigoSeguimiento:boolean=false
+  indicePedidoPendiente: number
 
   displayedColumns: string[] = ['fecha', 'dni', 'apellido', 'nombre', 'acciones'];
   dataSourcePedidosPendientes!: MatTableDataSource<any>;
@@ -213,7 +214,8 @@ cerrarSeguimiento(){
   deletePedidoPendienteId(id: string, coleccion: string) {
     this._gestionPedido.deletePedidoPorId(id, coleccion)
   }
-showModalPedidos(element:any){
+showModalPedidos(element:any, mindice: number){
+  this.indicePedidoPendiente = mindice
   this.carritoHabilitado=true
   this.pedido=element
 }
@@ -228,31 +230,21 @@ showModalPedidosConSeguimiento(element:any){
 hideCarrito(){
   this.carritoHabilitado=false
 }
- sumarUno(idAgregar: string){
-//    for (let j=0; j < this.pedidosPendientes.length; j++){
-//     console.log(this.pedidosPendientes[j].carrito.length)
-    
-//         if(this.pedidosPendientes[j].carrito[i].addProducto.id === idAgregar){
-//           this.pedidosPendientes[j].carrito[i].addProducto.cantidad ++;
-//           //  this.actualizarResumen()
-//           j = this.pedidosPendientes.length
-//       }
-//    }
- console.log(this.pedidosPendientes[0].carrito[0].addProducto.cantidad)
+ sumarUno(idAgregar: string, posicion: number){
+
+  this.pedidosPendientes[this.indicePedidoPendiente].carrito[posicion].addProducto.cantidad++;
+
+console.log(`posicion: ${posicion}`)
+console.log(`IndicePedido: ${this.indicePedidoPendiente}`)
+ console.log(this.pedidosPendientes[this.indicePedidoPendiente].carrito[posicion].addProducto.cantidad)
  }
 
-restarUno(idQuitar: string){
-  // for (let j=0; j < this.pedidosPendientes.length; j++){
-  //   if(this.pedidosPendientes[j].addProducto.id === idQuitar){
-  //     if(this.pedidosPendientes[j].addProducto.cantidad > 1){
-  //       this.pedidosPendientes[j].addProducto.cantidad --;
-  //       this.actualizarResumen()
-  //     }
-  //     j = this.pedidosPendientes.length
-  //   }
-  // }
-  console.log(idQuitar)
+restarUno(idQuitar: string, posicion: number){
+  if(this.pedidosPendientes[this.indicePedidoPendiente].carrito[posicion].addProducto.cantidad > 1){
+    this.pedidosPendientes[this.indicePedidoPendiente].carrito[posicion].addProducto.cantidad--;
+  }
 }
+
 actualizarResumen(){
   this.dataService.productos$.subscribe(pedidos => {
     this.pedidosPendientes = pedidos;
@@ -264,4 +256,10 @@ actualizarResumen(){
     }
   });
 }
+
+mostrarIndex(pos){
+  console.log(`posicion: ${pos}`)
+}
+
+
 }
