@@ -35,6 +35,7 @@ export class GestionPedidosComponent {
   showTransporte:boolean=false
   showCodigoSeguimiento:boolean=false
   indicePedidoPendiente: number
+  elementoActual: string
 
   displayedColumns: string[] = ['fecha', 'dni', 'apellido', 'nombre', 'acciones'];
   dataSourcePedidosPendientes!: MatTableDataSource<any>;
@@ -123,7 +124,7 @@ export class GestionPedidosComponent {
       seguimiento: this.formSeguimiento.get('seguimiento').value,
     }
     console.log(unPedido)
-    this._gestionPedido.updatePedido(id,'Pedidos En Curso',unPedido)
+    this._gestionPedido.updatePedido(this.elementoActual,'Pedidos En Curso',unPedido)
   }
   
   getPedidosPendientes() {
@@ -206,7 +207,7 @@ export class GestionPedidosComponent {
   envioTransporte(element:string){
     this.showSeguimiento=true
     console.log(element)
-    this.updateSeguimiento(element)
+    this.elementoActual = element
   }
 cerrarSeguimiento(){
   this.showSeguimiento=false
@@ -214,7 +215,8 @@ cerrarSeguimiento(){
   deletePedidoPendienteId(id: string, coleccion: string) {
     this._gestionPedido.deletePedidoPorId(id, coleccion)
   }
-showModalPedidos(element:any, mindice: number){
+showModalPedidos(element:any, mindice: number, estado: string){
+  console.log(`index: ${mindice}`)
   this.indicePedidoPendiente = mindice
   this.carritoHabilitado=true
   this.pedido=element
@@ -232,11 +234,10 @@ hideCarrito(){
 }
  sumarUno(idAgregar: string, posicion: number){
 
-  this.pedidosPendientes[this.indicePedidoPendiente].carrito[posicion].addProducto.cantidad++;
+  console.log(`posicion: ${posicion}`)
+  console.log(`IndicePedido: ${this.indicePedidoPendiente}`)
 
-console.log(`posicion: ${posicion}`)
-console.log(`IndicePedido: ${this.indicePedidoPendiente}`)
- console.log(this.pedidosPendientes[this.indicePedidoPendiente].carrito[posicion].addProducto.cantidad)
+ this.pedidosPendientes[this.indicePedidoPendiente].carrito[posicion].addProducto.cantidad++
  }
 
 restarUno(idQuitar: string, posicion: number){
