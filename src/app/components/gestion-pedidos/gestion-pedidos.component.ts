@@ -169,6 +169,11 @@ export class GestionPedidosComponent {
     })
   }
 
+  mostrar(){
+    console.log(`id carro: ${JSON.stringify(this.pedidosPendientes[this.indicePedidoPendiente].id)}`)
+    console.table(JSON.stringify(this.pedidosPendientes[this.indicePedidoPendiente]))
+  }
+
   getPedidosFinalizados() {
     this._gestionPedido.getPedidos('Pedidos Finalizados').subscribe(doc => {
       this.pedidosFinalizados = []
