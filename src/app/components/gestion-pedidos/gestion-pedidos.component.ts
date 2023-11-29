@@ -23,6 +23,7 @@ export class GestionPedidosComponent {
   pedidosEncurso: any[] = []
   pedidosEnTransporte: any[] = []
   pedidosFinalizados: any[] = []
+  pedidosAux: any[] = []
   formSeguimiento:FormGroup
   total: number = 0;
   monto:number=0
@@ -254,16 +255,18 @@ restarUno(idQuitar: string, posicion: number){
   }
 }
 
-actualizarResumen(){
-  this.dataService.productos$.subscribe(pedidos => {
-    this.pedidosPendientes = pedidos;
+actualizarResumen(posicion: number){
+  // this.dataService.productos$.subscribe(pedidos => {
+    console.log(`valor parametro: ${posicion}`)
+    this.pedidosAux = this.pedidosPendientes[posicion].carrito;
+    console.log(`pedidos??: ${this.pedidosAux}`)
     this.total = 0
     this.monto = 0
-    for(let j=0; j < this.pedidosPendientes.length; j++){
-      this.monto = this.monto + (parseInt(this.pedidosPendientes[j].addProducto.precio) * parseInt(this.pedidosPendientes[j].addProducto.cantidad))
-      this.total = this.total + parseInt(this.pedidosPendientes[j].addProducto.cantidad)
+    for(let j=0; j < this.pedidosAux.length; j++){
+      this.monto = this.monto + (parseInt(this.pedidosAux[j].addProducto.precio) * parseInt(this.pedidosAux[j].addProducto.cantidad))
+      this.total = this.total + parseInt(this.pedidosAux[j].addProducto.cantidad)
     }
-  });
+  // });
 }
 
 mostrarIndex(pos){
