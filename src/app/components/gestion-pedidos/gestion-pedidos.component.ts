@@ -23,6 +23,7 @@ export class GestionPedidosComponent {
   pedidosEncurso: any[] = []
   pedidosEnTransporte: any[] = []
   pedidosFinalizados: any[] = []
+  pedidosAux: any[] = []
   formSeguimiento:FormGroup
   total: number = 0;
   monto:number=0
@@ -280,9 +281,36 @@ restarUno(idQuitar: string, posicion: number){
   }
 }
 
+actualizarResumen(posicion: number){
+  // this.dataService.productos$.subscribe(pedidos => {
+    console.log(`valor parametro: ${posicion}`)
+    this.pedidosAux = this.pedidosPendientes[posicion].carrito;
+    console.log(`pedidos??: ${this.pedidosAux}`)
+    this.total = 0
+    this.monto = 0
+    for(let j=0; j < this.pedidosAux.length; j++){
+      this.monto = this.monto + (parseInt(this.pedidosAux[j].addProducto.precio) * parseInt(this.pedidosAux[j].addProducto.cantidad))
+      this.total = this.total + parseInt(this.pedidosAux[j].addProducto.cantidad)
+    }
+  // });
+}
+
 mostrarIndex(pos){
   console.log(`posicion: ${pos}`)
 }
 
+quitarProd(i: number){
+  console.log(`i: ${i}`)
+  console.log(`pos: ${this.indicePedidoPendiente}`)
+
+  console.table(JSON.stringify(this.pedidosPendientes))
+  console.log(`largo carrito: ${this.pedidosPendientes[this.indicePedidoPendiente].carrito.length}`)
+  if ((this.pedidosPendientes[this.indicePedidoPendiente].carrito.length) === 1){
+    alert('Debe eliminar el carrito')
+  }else{
+    this.pedidosPendientes[this.indicePedidoPendiente].carrito.splice(i,1)
+    this._gestionPedido.updatePedido(this.pedidosPendientes[this.indicePedidoPendiente].id, 'Pedidos Pendientes',this.pedidosPendientes[this.indicePedidoPendiente])
+  }
+}
 
 }

@@ -116,6 +116,8 @@ actualizarResumen(){
 }
 
 mostrarCarrito(){
+  let userActual: any = this.usuario
+  console.log(`usuario: ${userActual}`)
   const fecha=new Date()
   let day=fecha.getDay()
   const month=fecha.getMonth()
@@ -132,6 +134,14 @@ mostrarCarrito(){
    }
    console.log(unPedido)
   this.pedidosService.createPedido(unPedido,'Pedidos Pendientes')
+
+  this.productos = []
+  this.total =0
+  this.monto = 0
+  alert('Pedido cargado exitosamente')
+  this.dataService.limpiar()
+  this.ocultarCarrito();
+  localStorage.removeItem(userActual);
 }
 
 formatHora(){
