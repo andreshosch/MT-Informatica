@@ -204,9 +204,6 @@
     </mat-tab>
 </mat-tab-group>
 
-<div class="carroYcantidad">
-    <span class="nav-link">{{ total }}</span>
-</div>
 
 <div class="confirmation-dialog" *ngIf="carritoHabilitado">
     <div class="modalCarrito">
@@ -334,7 +331,7 @@
             </div>
         </div>
         <div class="buttonClose">
-            <button (click)="mostrar()" mat-raised-button color="primary">Actualizar</button>
+            <button (click)="actualizarPedido()" mat-raised-button color="primary">Actualizar</button>
             <button (click)="hideCarrito()" mat-raised-button color="primary">Cerrar</button>
         </div>
     </div>

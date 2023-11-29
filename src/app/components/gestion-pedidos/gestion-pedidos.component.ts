@@ -169,7 +169,10 @@ export class GestionPedidosComponent {
     })
   }
 
-  mostrar(){
+  actualizarPedido(){
+    this._gestionPedido.updatePedido(this.pedidosPendientes[this.indicePedidoPendiente].id, 'Pedidos Pendientes',this.pedidosPendientes[this.indicePedidoPendiente])
+
+
     console.log(`id carro: ${JSON.stringify(this.pedidosPendientes[this.indicePedidoPendiente].id)}`)
     console.table(JSON.stringify(this.pedidosPendientes[this.indicePedidoPendiente]))
   }
