@@ -270,5 +270,18 @@ mostrarIndex(pos){
   console.log(`posicion: ${pos}`)
 }
 
+quitarProd(i: number){
+  console.log(`i: ${i}`)
+  console.log(`pos: ${this.indicePedidoPendiente}`)
+
+  console.table(JSON.stringify(this.pedidosPendientes))
+  console.log(`largo carrito: ${this.pedidosPendientes[this.indicePedidoPendiente].carrito.length}`)
+  if ((this.pedidosPendientes[this.indicePedidoPendiente].carrito.length) === 1){
+    alert('Debe eliminar el carrito')
+  }else{
+    this.pedidosPendientes[this.indicePedidoPendiente].carrito.splice(i,1)
+    this._gestionPedido.updatePedido(this.pedidosPendientes[this.indicePedidoPendiente].id, 'Pedidos Pendientes',this.pedidosPendientes[this.indicePedidoPendiente])
+  }
+}
 
 }
