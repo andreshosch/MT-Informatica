@@ -37,6 +37,8 @@ export class GestionPedidosComponent {
   showCodigoSeguimiento:boolean=false
   indicePedidoPendiente: number
   elementoActual: string
+  showActualizar:boolean=true
+  showEliminar:boolean=true
 
   displayedColumns: string[] = ['fecha', 'dni', 'apellido', 'nombre', 'acciones'];
   dataSourcePedidosPendientes!: MatTableDataSource<any>;
@@ -224,20 +226,41 @@ cerrarSeguimiento(){
   deletePedidoPendienteId(id: string, coleccion: string) {
     this._gestionPedido.deletePedidoPorId(id, coleccion)
   }
-showModalPedidos(element:any, mindice: number, estado: string){
-  console.log(`index: ${mindice}`)
-  this.indicePedidoPendiente = mindice
-  this.carritoHabilitado=true
-  this.pedido=element
-}
-
-showModalPedidosConSeguimiento(element:any){
-  this.showSeguimiento=false
-  this.showTransporte=true
-  this.showCodigoSeguimiento=true
-  this.carritoHabilitado=true
-  this.pedido=element
-}
+  showModalPendientes(element:any, mindice: number, estado: string){
+    console.log(`index: ${mindice}`)
+    this.indicePedidoPendiente = mindice
+    this.carritoHabilitado=true
+    this.showActualizar=true
+    this.showEliminar=true
+    this.showResta=true
+    this.showSuma=true
+    this.pedido=element
+  }
+  
+  showModalEnCurso(element:any){
+    this.showSeguimiento=false
+    this.showSuma=false
+    this.showResta=false
+    this.showActualizar=false
+    this.showEliminar=false
+    this.carritoHabilitado=true
+    this.showTransporte=false
+    this.showCodigoSeguimiento=false
+    this.pedido=element
+  }
+  
+  showModalTransporteyFinalizado(element:any){
+    this.showSeguimiento=false
+    this.showSuma=false
+    this.showResta=false
+    this.showActualizar=false
+    this.showEliminar=false
+    this.carritoHabilitado=true
+    this.showActualizar=true
+   this.showCodigoSeguimiento=true
+   this.showTransporte=true
+    this.pedido=element
+  }
 hideCarrito(){
   this.carritoHabilitado=false
 }
