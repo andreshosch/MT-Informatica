@@ -39,8 +39,6 @@ export class GestionPedidosComponent {
   showCodigoSeguimiento:boolean=false
   indicePedidoPendiente: number
   elementoActual: string
-  showActualizar:boolean=true
-  showEliminar:boolean=true
 
   displayedColumns: string[] = ['fecha', 'dni', 'apellido', 'nombre', 'acciones'];
   dataSourcePedidosPendientes!: MatTableDataSource<any>;
