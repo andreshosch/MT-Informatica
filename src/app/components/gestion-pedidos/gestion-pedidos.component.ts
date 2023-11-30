@@ -236,6 +236,8 @@ showModalPendientes(element:any, mindice: number, estado: string){
   this.showResta=true
   this.showSuma=true
   this.pedido=element
+  this.showTransporte=false
+  this.showCodigoSeguimiento=false
 }
 
 showModalEnCurso(element:any){
