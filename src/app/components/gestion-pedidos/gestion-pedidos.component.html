@@ -265,9 +265,9 @@
                                             </tr>
                                             <tr>
                                                 <td>
-                                                    <button (click)="restarUno(carro.addProducto.id, i); actualizarResumen(indicePedidoPendiente)">-</button>
+                                                    <button *ngIf="showResta" (click)="restarUno(carro.addProducto.id, i); actualizarResumen(indicePedidoPendiente)">-</button>
                                                     <label id="cotización">{{carro.addProducto.cantidad}}</label>
-                                                    <button (click)="sumarUno(carro.addProducto.id, i, tipoPedido); actualizarResumen(indicePedidoPendiente)">+</button>
+                                                    <button *ngIf="showSuma" (click)="sumarUno(carro.addProducto.id, i, tipoPedido); actualizarResumen(indicePedidoPendiente)">+</button>
                                                 </td>
                                             </tr>
                                         </table>
@@ -283,7 +283,7 @@
                                         </table>
                                     </div>
                                     <div class="carritoEliminar ordenCeldas">
-                                        <button (click)="quitarProd(i); actualizarResumen(indicePedidoPendiente)"><mat-icon>delete</mat-icon></button>
+                                        <button *ngIf="showEliminar" (click)="quitarProd(i); actualizarResumen(indicePedidoPendiente)"><mat-icon>delete</mat-icon></button>
                                     </div>
                                 </div>
                             </div>
@@ -331,7 +331,7 @@
             </div>
         </div>
         <div class="buttonClose">
-            <button (click)="actualizarPedido()" mat-raised-button color="primary">Actualizar</button>
+            <button *ngIf="showActualizar" (click)="actualizarPedido()" mat-raised-button color="primary">Actualizar</button>
             <button (click)="hideCarrito()" mat-raised-button color="primary">Cerrar</button>
         </div>
     </div>
