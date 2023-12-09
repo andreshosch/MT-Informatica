@@ -259,7 +259,7 @@ showModalTransporteyFinalizado(element:any){
   this.showActualizar=false
   this.showEliminar=false
   this.carritoHabilitado=true
-  this.showActualizar=true
+  this.showActualizar=false
  this.showCodigoSeguimiento=true
  this.showTransporte=true
   this.pedido=element
