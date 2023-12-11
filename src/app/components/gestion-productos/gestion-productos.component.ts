@@ -4,11 +4,10 @@ import { Producto } from 'src/app/models/producto';
 import { ProductosService } from 'src/app/services/productos.service';
 
 
-
 @Component({
   selector: 'app-gestion-productos',
   templateUrl: './gestion-productos.component.html',
-  styleUrls: ['./gestion-productos.component.css']
+  styleUrls: ['./gestion-productos.component.css'],
 })
 export class GestionProductosComponent {
 
@@ -17,6 +16,7 @@ export class GestionProductosComponent {
   modificarProd: FormGroup
   modalActivo: boolean = false
   idProducto: string
+  losBloqueados: string[] = []
 
 
   constructor(private _productosService: ProductosService, private fb: FormBuilder){
@@ -47,9 +47,9 @@ export class GestionProductosComponent {
     })
   }
 
-
   ngOnInit(){
     this.getProductos()
+    this.getBloqueados()
   }
 
   ngAfterView(){
@@ -66,6 +66,17 @@ export class GestionProductosComponent {
         })
       })
       console.log(this.productosHot)
+    })
+  }
+
+  getBloqueados(){
+    this._productosService.getBloqueos().subscribe(doc => {
+      doc.forEach((element: any) => {
+        this.losBloqueados.push({
+          id: element.payload.doc.id,
+          ... element.payload.doc.data()
+        })
+      })
     })
   }
 
@@ -134,6 +145,11 @@ export class GestionProductosComponent {
 
   cerrarModal(){
     this.modalActivo=false
+  }
+
+  altaBloqueo(){
+    let categoria = document.getElementById('aBloquear').textContent
+    console.log(categoria)
   }
 
 }

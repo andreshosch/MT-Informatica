@@ -36,3 +36,46 @@
   padding-top: 15px;
   background-color: lightgrey;
 }
+
+.izquierda{
+  width: 50%;
+  background-color: azure;
+}
+
+.izquierda mat-select{
+  background-color: coral;
+  width: 70%;
+}
+
+.izquierda button{
+  width: 20%;
+  margin-left: 5%;
+}
+
+.derecha{
+  width: 50%;
+}
+
+.derecha mat-select{
+  background-color: coral;
+  width: 70%;
+}
+
+.derecha button{
+  width: 20%;
+  margin-left: 5%;
+}
+
+.bloqueos{
+  width: 100%;
+}
+
+.bloqueos h3{
+  text-align: center;
+  background-color: brown;
+}
+
+.estructura{
+  display: flex;
+  flex-direction: row ;
+}

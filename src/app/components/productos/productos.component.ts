@@ -45,7 +45,7 @@ export class ProductosComponent {
     "user_id": '22181',
     "token": "oyhl04axaro"
   }
-  bloqueados: any[] = []
+  bloqueados: any[] = ['Notebooks Corporativo', 'Procesadores']
   hayLogueado: boolean;
   //Inicio Productos destacados
   productosHot: any[] = []
@@ -68,6 +68,7 @@ export class ProductosComponent {
       this.hayLogueado = isAuthenticated;
     
     });
+    this.getBloqueados()
   }
 
   loadFirstPage(products: any) {
@@ -155,12 +156,12 @@ export class ProductosComponent {
                   cantidad: 1
                 }
                 //Prueba bloqueo de categorias
-                // if(!this.establoqueada(unProducto.subcategoria)){
-                //   this.arrProducts.push(unProducto)
-                // }
+                if(!this.establoqueada(unProducto.subcategoria)){
+                  this.arrProducts.push(unProducto)
+                }
 
                 //
-                this.arrProducts.push(unProducto)
+                //this.arrProducts.push(unProducto)
               }
               // this.arrProducts.push(...this.arrProductos)
               this.loadFirstPage(this.arrProducts)
@@ -410,6 +411,23 @@ modal(producto:any){
     }
     return existe
   }
+
+  getBloqueados(){
+    this.productosServices.getBloqueos().subscribe(doc => {
+      this.bloqueados = []
+      doc.forEach((element: any) => {
+        
+        this.bloqueados.push({
+          id: element.payload.doc.id,
+          ... element.payload.doc.data()
+        })
+     
+      })
+      console.log(`bloqueados: ${this.bloqueados}`)
+    })
+  }
+
+
 
 
  } 
