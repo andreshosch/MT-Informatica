@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, ViewChild } from '@angular/core';
 import { PedidosService } from 'src/app/services/pedidos.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
@@ -96,7 +96,7 @@ export class GestionPedidosComponent {
     this.dataSourcePedidosFinalizados.sort = this.sort;
   }
 
-  constructor(private _gestionPedido: PedidosService, private _snackBar: MatSnackBar,private fb:FormBuilder, private firestore: AngularFirestore,private dataService: DataService) {
+  constructor(private _gestionPedido: PedidosService, private _snackBar: MatSnackBar,private fb:FormBuilder, private firestore: AngularFirestore,private dataService: DataService, private cdr: ChangeDetectorRef) {
   
     this.formSeguimiento=this.fb.group({
       transporte:['',Validators.required],
@@ -287,7 +287,7 @@ actualizarResumen(posicion: number){
   // this.dataService.productos$.subscribe(pedidos => {
     console.log(`valor parametro: ${posicion}`)
     this.pedidosAux = this.pedidosPendientes[posicion].carrito;
-    console.log(`pedidos??: ${this.pedidosAux}`)
+    console.log(`pedidos??: ${JSON.stringify(this.pedidosAux)}`)
     this.total = 0
     this.monto = 0
     for(let j=0; j < this.pedidosAux.length; j++){
@@ -305,13 +305,14 @@ quitarProd(i: number){
   console.log(`i: ${i}`)
   console.log(`pos: ${this.indicePedidoPendiente}`)
 
-  console.table(JSON.stringify(this.pedidosPendientes))
   console.log(`largo carrito: ${this.pedidosPendientes[this.indicePedidoPendiente].carrito.length}`)
   if ((this.pedidosPendientes[this.indicePedidoPendiente].carrito.length) === 1){
     alert('Debe eliminar el carrito')
   }else{
     this.pedidosPendientes[this.indicePedidoPendiente].carrito.splice(i,1)
     this._gestionPedido.updatePedido(this.pedidosPendientes[this.indicePedidoPendiente].id, 'Pedidos Pendientes',this.pedidosPendientes[this.indicePedidoPendiente])
+    
+    this.cdr.detectChanges();
   }
 }
 

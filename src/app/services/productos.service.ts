@@ -42,6 +42,10 @@ updateProduct(id: string, cliente: any): Promise<any> {
   return this.firestore.collection('Productos').doc(id).update(cliente);
 }
 
+getBloqueos(): Observable<any>{
+  return this.firestore.collection('Bloqueos').snapshotChanges()
+}
+
 }
 
 
