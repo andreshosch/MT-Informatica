@@ -2,6 +2,8 @@ import { Component, Input, SimpleChanges } from '@angular/core';
 import { DataService } from 'src/app/services/data.service';
 import { PedidosService } from 'src/app/services/pedidos.service';
 import { Pedido } from 'src/app/models/pedido';
+import { format } from 'date-fns';
+import {MensajeService} from 'src/app/services/mensaje.service'
 
 @Component({
   selector: 'app-carrito',
@@ -11,142 +13,135 @@ import { Pedido } from 'src/app/models/pedido';
 export class CarritoComponent {
 
   productos: any[] = [];
-  total: number=0
+  total: number = 0
   monto: number = 0
-  
-  @Input() usuario:number
-  @Input() nombre:string
-  @Input() apellido:string
-  @Input() celular:number
+  fechaActual: Date = new Date()
+
+  @Input() usuario: number
+  @Input() nombre: string
+  @Input() apellido: string
+  @Input() celular: number
 
   //Inicio Carrito
-  carritoHabilitado: boolean =false
+  carritoHabilitado: boolean = false
   //Fin Carrito
 
-  constructor(private dataService: DataService,private pedidosService:PedidosService){
-    
+  constructor(private dataService: DataService, private pedidosService: PedidosService, private _mensaje:MensajeService) {
+
   }
 
-  ngOnInit(){
+  ngOnInit() {
     let arregloLS = JSON.parse(localStorage.getItem("hayUsuario"));
     let usuarioLog: any = arregloLS[0]
     this.carritoGuardado(usuarioLog)
   }
 
-  guardarPedido(){
+  guardarPedido() {
     console.table(this.productos)
   }
 
-  carritoGuardado(carroUsr: any){
+  carritoGuardado(carroUsr: any) {
     let elCarrito = JSON.parse(localStorage.getItem(carroUsr));
-    if (elCarrito){
+    if (elCarrito) {
       const fechaActual = new Date()
       const fechaEnSegundos = fechaActual.getTime()
       const fechaAlmacenada = new Date(elCarrito[1])
       const fechaAlmDif = fechaAlmacenada.getTime()
       const tiempoLogin = Math.round((fechaEnSegundos - fechaAlmDif) / 1000)
 
-      if(tiempoLogin < 3600){
+      if (tiempoLogin < 3600) {
         this.dataService.actualizarCart(elCarrito[0], carroUsr)
-      }else{
+      } else {
         this.quitarCarro(carroUsr)
       }
     }
-    this.productos= [];
-    this.total =0
+    this.productos = [];
+    this.total = 0
     this.monto = 0
     this.actualizarResumen()
   }
 
-  quitarCarro(carroUsr: any){
+  quitarCarro(carroUsr: any) {
     localStorage.removeItem(carroUsr);
   }
 
-//Inicio sección Carrito
-verCarrito(){
-  this.carritoHabilitado = true
-  this.actualizarResumen()
-  console.log(this.productos)
-}
-
-ocultarCarrito(){
-  this.carritoHabilitado = false
-}
-
-quitarProd(quitarElem: string){
-  const index = this.productos.findIndex(obj => obj.addProducto.id === quitarElem)
-  this.productos.splice(index, 1)
-  this.actualizarResumen()
-  this.dataService.actualizarCart(this.productos, this.usuario)
-}
-
-
-sumarUno(idAgregar: string){
-  for (let j=0; j < this.productos.length; j++){
-    if(this.productos[j].addProducto.id === idAgregar){
-      this.productos[j].addProducto.cantidad ++;
-      this.actualizarResumen()
-      j = this.productos.length
-    }
+  //Inicio sección Carrito
+  verCarrito() {
+    this.carritoHabilitado = true
+    this.actualizarResumen()
+    console.log(this.productos)
   }
-}
 
-restarUno(idQuitar: string){
-  for (let j=0; j < this.productos.length; j++){
-    if(this.productos[j].addProducto.id === idQuitar){
-      if(this.productos[j].addProducto.cantidad > 1){
-        this.productos[j].addProducto.cantidad --;
+  ocultarCarrito() {
+    this.carritoHabilitado = false
+  }
+
+  quitarProd(quitarElem: string) {
+    const index = this.productos.findIndex(obj => obj.addProducto.id === quitarElem)
+    this.productos.splice(index, 1)
+    this.actualizarResumen()
+    this.dataService.actualizarCart(this.productos, this.usuario)
+  }
+
+
+  sumarUno(idAgregar: string) {
+    for (let j = 0; j < this.productos.length; j++) {
+      if (this.productos[j].addProducto.id === idAgregar) {
+        this.productos[j].addProducto.cantidad++;
         this.actualizarResumen()
+        j = this.productos.length
       }
-      j = this.productos.length
     }
   }
-}
 
-actualizarResumen(){
-  this.dataService.productos$.subscribe(productos => {
-    this.productos = productos;
+  restarUno(idQuitar: string) {
+    for (let j = 0; j < this.productos.length; j++) {
+      if (this.productos[j].addProducto.id === idQuitar) {
+        if (this.productos[j].addProducto.cantidad > 1) {
+          this.productos[j].addProducto.cantidad--;
+          this.actualizarResumen()
+        }
+        j = this.productos.length
+      }
+    }
+  }
+
+  actualizarResumen() {
+    this.dataService.productos$.subscribe(productos => {
+      this.productos = productos;
+      this.total = 0
+      this.monto = 0
+      for (let j = 0; j < this.productos.length; j++) {
+        this.monto = this.monto + (parseInt(productos[j].addProducto.precio) * parseInt(productos[j].addProducto.cantidad))
+        this.total = this.total + parseInt(productos[j].addProducto.cantidad)
+      }
+    });
+  }
+
+  mostrarCarrito() {
+    let userActual: any = this.usuario
+    console.log(`usuario: ${userActual}`)
+    let unPedido: Pedido = {
+      carrito: this.productos,
+      idUser: this.usuario,
+      fecha: this.formatFecha(),
+      nombre: this.nombre,
+      apellido: this.apellido,
+      celular: this.celular
+    }
+    console.log(unPedido)
+    this.pedidosService.createPedido(unPedido, 'Pedidos Pendientes')
+    this.productos = []
     this.total = 0
     this.monto = 0
-    for(let j=0; j < this.productos.length; j++){
-      this.monto = this.monto + (parseInt(productos[j].addProducto.precio) * parseInt(productos[j].addProducto.cantidad))
-      this.total = this.total + parseInt(productos[j].addProducto.cantidad)
-    }
-  });
-}
+     this._mensaje.snackBar("Carrito creado correctamente",'red')
+    this.dataService.limpiar()
+    this.ocultarCarrito();
+    localStorage.removeItem(userActual);
+  }
 
-mostrarCarrito(){
-  let userActual: any = this.usuario
-  console.log(`usuario: ${userActual}`)
-  const fecha=new Date()
-  let day=fecha.getDay()
-  const month=fecha.getMonth()
-  const year=fecha.getFullYear()
-  const formatFecha=`${day}/${month}/${year}`
-  console.log(day+"/"+month+"/"+year)
-   let unPedido:Pedido={
-     carrito:this.productos,
-     idUser:this.usuario,
-     fecha: formatFecha,
-     nombre:this.nombre,
-     apellido:this.apellido,
-     celular:this.celular
-   }
-   console.log(unPedido)
-  this.pedidosService.createPedido(unPedido,'Pedidos Pendientes')
+  formatFecha() {
+    return format(this.fechaActual, 'dd/MM/yyyy - HH:mm');
+  }
+  }
 
-  this.productos = []
-  this.total =0
-  this.monto = 0
-  alert('Pedido cargado exitosamente')
-  this.dataService.limpiar()
-  this.ocultarCarrito();
-  localStorage.removeItem(userActual);
-}
-
-formatHora(){
-
-}
-
-
-}

@@ -15,7 +15,6 @@ import { FormsModule } from '@angular/forms';
 import { AngularFireModule } from '@angular/fire/compat';
 import { environment } from 'src/environment/environment'
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
-import { DatePipe } from '@angular/common';
 import {MatTabsModule} from '@angular/material/tabs';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -25,6 +24,7 @@ import { GestionUsuariosComponent } from './components/gestion-usuarios/gestion-
 import { LoginComponent } from './components/login/login.component';
 import { CarritoComponent } from './components/carrito/carrito.component';
 import { GestionPedidosComponent } from './components/gestion-pedidos/gestion-pedidos.component';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 
 @NgModule({
@@ -57,7 +57,8 @@ import { GestionPedidosComponent } from './components/gestion-pedidos/gestion-pe
     SharedModule,
     BrowserAnimationsModule,
     FormsModule,
-    MatTabsModule
+    MatTabsModule,
+    MatSnackBarModule
   ],
   exports: [
     AngularFireModule,

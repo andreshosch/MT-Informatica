@@ -6,6 +6,7 @@ import { HttpClient } from '@angular/common/http';
 import { MailsService } from 'src/app/services/mails.service';
 import { DataService } from 'src/app/services/data.service';
 import { lastValueFrom } from 'rxjs';
+import { MensajeService } from 'src/app/services/mensaje.service';
 
 
 @Component({
@@ -38,7 +39,7 @@ export class LoginComponent {
   //Fin Login
 
 
-  constructor(private _usuarioService: UsuariosService, private _mailService:MailsService, private fb:FormBuilder,private http: HttpClient, public dataService: DataService){
+  constructor(private _usuarioService: UsuariosService, private _mailService:MailsService, private fb:FormBuilder,private http: HttpClient, public dataService: DataService,private _mensaje:MensajeService){
 
     this.loginUsr = this.fb.group({
       usuario: ['', Validators.required],
@@ -157,7 +158,7 @@ ingresoUsr(){
       if(this.listUsuario[j].password === this.contrasena){
         if(this.contrasena === 'MTInformatica1'){
           //Habilitar el cambio
-          alert('Debes cambiar la contraseña')
+          this._mensaje.snackBar("Debes cambiar la contraseña","red")
           console.log(`usuario. ${JSON.stringify(this.listUsuario[j])}`)
           this.actualizarPass = true
           this.usuarioSoporte = this.listUsuario[j]
@@ -186,7 +187,7 @@ ingresoUsr(){
           localStorage.setItem("hayUsuario", JSON.stringify(arregloLS));
         }
       }else{
-        console.log('Error en ingreso')
+        this._mensaje.snackBar("Error al ingresar","red")
       }
     }
   }
@@ -198,14 +199,14 @@ actualizarUsr(elUsuario){
   let unPassNew = this.updateUsr.get('contrasenaNew').value
   let uncheckPass = this.updateUsr.get('contrasenaNewFactor').value
   if (unContrasena != 'MTInformatica1'){
-    alert('Clave actual incorrecta')
+    this._mensaje.snackBar("Clave actual incorrecta","red")
   }else{
     if (unPassNew != uncheckPass){
-      alert('Clave nueva no coincidente con verificación')
+      this._mensaje.snackBar("Clave nueva no coincidente con verificación","red")
     } else{
       this.usuarioSoporte.password = unPassNew
       this._usuarioService.updateUsr(this.usuarioSoporte.id ,this.usuarioSoporte)
-      alert('Usuario actualizado')
+      this._mensaje.snackBar("Usuario actualizado","green")
       this.actualizarPass = false
     }
 
