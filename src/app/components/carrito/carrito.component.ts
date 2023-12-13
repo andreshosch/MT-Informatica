@@ -134,7 +134,7 @@ export class CarritoComponent {
     this.productos = []
     this.total = 0
     this.monto = 0
-     this._mensaje.snackBar("Carrito creado correctamente",'red')
+     this._mensaje.snackBar("Carrito creado correctamente",'green')
     this.dataService.limpiar()
     this.ocultarCarrito();
     localStorage.removeItem(userActual);

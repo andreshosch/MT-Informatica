@@ -4,6 +4,7 @@ import { NgbCarouselConfig } from '@ng-bootstrap/ng-bootstrap';
 import { first } from 'rxjs';
 import { Producto } from 'src/app/models/producto';
 import { DataService } from 'src/app/services/data.service';
+import { MensajeService } from 'src/app/services/mensaje.service';
 import { ProductosService } from 'src/app/services/productos.service';
 
 @Component({
@@ -54,7 +55,7 @@ export class ProductosComponent {
   // Fin Productos destacados
 
 
-  constructor(private productosServices: ProductosService, private _config: NgbCarouselConfig, private dataService: DataService) {
+  constructor(private productosServices: ProductosService, private _config: NgbCarouselConfig, private dataService: DataService,private _mensaje:MensajeService) {
     _config.interval = 2000;
     _config.pauseOnHover = true;
     _config.showNavigationArrows = false;
@@ -334,6 +335,7 @@ getProductos(){
       const producto = {addProducto};
       this.dataService.productos$.pipe(first()).subscribe(productos => {
         this.dataService.actualizarProductos([...productos], [producto], idProd);
+        this._mensaje.snackBar("Producto agregado al carrito","green")
       });
     }
     else{
