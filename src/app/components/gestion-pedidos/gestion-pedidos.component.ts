@@ -312,10 +312,6 @@ quitarProd(i: number){
        
     this._gestionPedido.updatePedido(this.pedidosPendientes[this.indicePedidoPendiente].id, 'Pedidos Pendientes',this.pedidosPendientes[this.indicePedidoPendiente])
     
-    
-    this.zone.run(() => {
-      this.cdr.detectChanges();
-    });
 
      this.cdr.detectChanges();
     //this.cdr.markForCheck();
