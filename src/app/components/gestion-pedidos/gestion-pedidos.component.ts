@@ -296,25 +296,18 @@ actualizarResumen(posicion: number){
   // });
 }
 
-mostrarIndex(pos){
-  console.log(`posicion: ${pos}`)
-}
 
 quitarProd(i: number){
   
-
-  console.log(`largo carrito: ${this.pedidosPendientes[this.indicePedidoPendiente].carrito.length}`)
   if ((this.pedidosPendientes[this.indicePedidoPendiente].carrito.length) === 1){
     alert('Debe eliminar el carrito')
   }else{
        
-    this.pedidosPendientes[this.indicePedidoPendiente].carrito.splice(i,1)
-       
+    this.pedidosPendientes[this.indicePedidoPendiente].carrito.splice(i,1)   
     this._gestionPedido.updatePedido(this.pedidosPendientes[this.indicePedidoPendiente].id, 'Pedidos Pendientes',this.pedidosPendientes[this.indicePedidoPendiente])
-    
-
-     this.cdr.detectChanges();
-    //this.cdr.markForCheck();
+    this.cdr.detectChanges();
+    this.carritoHabilitado=false
+    this.showModalPendientes(this.pedidosPendientes[this.indicePedidoPendiente],this.indicePedidoPendiente,'hola')
   }
 }
 

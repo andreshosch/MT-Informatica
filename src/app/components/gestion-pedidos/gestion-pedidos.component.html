@@ -39,7 +39,7 @@
                         <th mat-header-cell *matHeaderCellDef mat-sort-header>Acciones</th>
                         <td mat-cell *matCellDef="let element; let pos = index">
                             <a (click)="showModalPendientes(element, pos); actualizarResumen(pos)" ><mat-icon style="cursor: pointer;"
-                                    title="Ver Pedido">visibility</mat-icon>{{pos}}</a>
+                                    title="Ver Pedido">visibility</mat-icon></a>
                             <a (click)="AceptarPedido(element.id,'Pedidos Pendientes','Pedidos En Curso')"><mat-icon
                                     style="cursor: pointer;" title="Aceptar Pedido">check_circle</mat-icon></a>
                             <a (click)="deletePedidoPendienteId(element.id,'Pedidos Pendientes')"><mat-icon
