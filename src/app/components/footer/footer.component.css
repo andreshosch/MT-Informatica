@@ -30,14 +30,36 @@
     background: -webkit-linear-gradient(left, #AFA13B 0%, #AE7D71 50%, #107997 100%);
     background: linear-gradient(to right, #AFA13B 0%, #AE7D71 50%, #107997 100%);
     margin-right: 20px;
+  
 }
-.circle mat-icon {
+.circle i {
+
     font-weight: bold;
     color: white;
   }
+
+  /* .whatsapp-icon {
+    position: fixed;
+    bottom: 30px;
+    right: 20px;
+    background-color: #25D366; 
+    color: #fff; 
+    padding: 15px; 
+    font-size: 30px;
+    width: 70px; 
+    height: 70px; 
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+  }
+  
+  .whatsapp-icon:hover {
+    background-color: #128C7E; 
+  } */
 
  .footer{
     width: 100%;
     height:auto;
     display: flex;
 }
+

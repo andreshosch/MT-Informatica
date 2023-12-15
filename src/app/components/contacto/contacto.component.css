@@ -10,7 +10,7 @@ body {
 .container-contacto {
     display: flex;
     height: 100vh;
-    margin-top: 50px;
+    margin-top: 5px;
     margin-right: auto;
 }
 
@@ -29,17 +29,16 @@ body {
 .right {
     flex: 1;
     transition: 1s;
-     background-image:url("https://sistemas.com/termino/wp-content/uploads/Informatica.jpg") ;
-    background-size: cover;
+    background-image: url("../../../assets/Frontal.png");
+    background-size: contain; /* Ajusta esta propiedad según tus preferencias */
     background-repeat: no-repeat;
     background-position: center;
-   
 }
 
-.right img{
+/* .right img{
     height: 50%;
     width: 50%;
-}
+} */
 
 .header>h2 {
     margin: 0;
