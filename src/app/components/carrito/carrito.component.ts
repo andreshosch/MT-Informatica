@@ -78,6 +78,7 @@ export class CarritoComponent {
 
   quitarProd(quitarElem: string) {
     const index = this.productos.findIndex(obj => obj.addProducto.id === quitarElem)
+    console.log(`productos. ${JSON.stringify(this.productos[index])}`)
     this.productos.splice(index, 1)
     this.actualizarResumen()
     this.dataService.actualizarCart(this.productos, this.usuario)
