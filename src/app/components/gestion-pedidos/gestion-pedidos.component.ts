@@ -39,21 +39,31 @@ export class GestionPedidosComponent {
   showCodigoSeguimiento:boolean=false
   indicePedidoPendiente: number
   elementoActual: string
+  ordenActual: 'asc' | 'desc' = 'asc';
 
   displayedColumns: string[] = ['fecha', 'dni', 'apellido', 'nombre', 'acciones'];
   dataSourcePedidosPendientes!: MatTableDataSource<any>;
   dataSourcePedidosEnCurso!: MatTableDataSource<any>;
   dataSourcePedidosEnTransporte!: MatTableDataSource<any>;
   dataSourcePedidosFinalizados!: MatTableDataSource<any>;
-  // private paginator: MatPaginator; 
+   private paginator: MatPaginator; 
   private sort: MatSort;
 
-  @ViewChild(MatSort) set matSort(ms: MatSort) {
-    this.sort = ms;
-    this.setDataSourceAttributes();
+  // @ViewChild(MatSort) set matSort(ms: MatSort) {
+  //   this.sort = ms;
+  //   this.setDataSourceAttributes();
+  // }
+
+  @ViewChild(MatPaginator) set matPaginator(mp: MatPaginator) {
+    this.paginator = mp;
+    this.paginator._intl.itemsPerPageLabel='Pedidos por Página'
+    this.paginator._intl.firstPageLabel="Primera Página"
+    this.paginator._intl.previousPageLabel="Página Anterior"
+    this.paginator._intl.nextPageLabel='Siguiente Página'
+    this.paginator._intl.lastPageLabel="Última Página"
   }
 
-  @ViewChild(MatPaginator) paginator: MatPaginator;
+  // @ViewChild(MatPaginator) paginator: MatPaginator;
   pageIndex = 0;
   pageSize = 10;
 
@@ -84,17 +94,41 @@ export class GestionPedidosComponent {
     this.dataSourcePedidosEnTransporte.paginator.length = this.pedidosEnTransporte.length;
     this.dataSourcePedidosFinalizados.paginator.length = this.pedidosFinalizados.length;
   }
-
-  setDataSourceAttributes() {
-    this.dataSourcePedidosPendientes.paginator = this.paginator;
-    this.dataSourcePedidosPendientes.sort = this.sort;
-    this.dataSourcePedidosEnCurso.paginator = this.paginator;
-    this.dataSourcePedidosEnCurso.sort = this.sort;
-    this.dataSourcePedidosEnTransporte.paginator = this.paginator;
-    this.dataSourcePedidosEnTransporte.sort = this.sort;
-    this.dataSourcePedidosFinalizados.paginator = this.paginator;
-    this.dataSourcePedidosFinalizados.sort = this.sort;
+  ordenarTabla(propiedad: string) {
+    this.ordenActual = this.ordenActual === 'asc' ? 'desc' : 'asc';
+    this.dataSourcePedidosPendientes.data = this.ordenarDatos(this.dataSourcePedidosPendientes.data, propiedad, this.ordenActual);
   }
+
+  applyFilter(event: Event, dataSource:MatTableDataSource<any>) {
+    const filterValue = (event.target as HTMLInputElement).value;
+   dataSource.filter = filterValue.trim().toLowerCase()
+  }
+  
+  private ordenarDatos(datos: Pedido[], propiedad: string, orden: 'asc' | 'desc'): Pedido[] {
+    
+    return datos.sort((a, b) => {
+      const valorA = a[propiedad];
+      const valorB = b[propiedad];
+  
+      if (valorA < valorB) {
+        return orden === 'asc' ? -1 : 1;
+      } else if (valorA > valorB) {
+        return orden === 'asc' ? 1 : -1;
+      } else {
+        return 0;
+      }
+    });
+  }
+  // setDataSourceAttributes() {
+  //   this.dataSourcePedidosPendientes.paginator = this.paginator;
+  //   this.dataSourcePedidosPendientes.sort = this.sort;
+  //   this.dataSourcePedidosEnCurso.paginator = this.paginator;
+  //   this.dataSourcePedidosEnCurso.sort = this.sort;
+  //   this.dataSourcePedidosEnTransporte.paginator = this.paginator;
+  //   this.dataSourcePedidosEnTransporte.sort = this.sort;
+  //   this.dataSourcePedidosFinalizados.paginator = this.paginator;
+  //   this.dataSourcePedidosFinalizados.sort = this.sort;
+  // }
 
   constructor(private _gestionPedido: PedidosService, private _snackBar: MatSnackBar,private fb:FormBuilder, private firestore: AngularFirestore,private dataService: DataService, private cdr: ChangeDetectorRef) {
   
@@ -107,17 +141,17 @@ export class GestionPedidosComponent {
 
   ngOnInit() {
     this.getPedidosPendientes()
-    this.dataSourcePedidosPendientes = new MatTableDataSource(this.pedidosPendientes);
-    this.dataSourcePedidosPendientes.sort = this.sort;
-    this.getPedidosEnCurso()
-    this.dataSourcePedidosEnCurso = new MatTableDataSource(this.pedidosEncurso);
-    this.dataSourcePedidosEnCurso.sort = this.sort;
-    this.getPedidosEnTransporte()
-    this.dataSourcePedidosEnTransporte = new MatTableDataSource(this.pedidosEnTransporte);
-    this.dataSourcePedidosEnTransporte.sort = this.sort;
-    this.getPedidosFinalizados()
-    this.dataSourcePedidosFinalizados = new MatTableDataSource(this.pedidosFinalizados);
-    this.dataSourcePedidosFinalizados.sort = this.sort;
+    // this.dataSourcePedidosPendientes = new MatTableDataSource(this.pedidosPendientes);
+    // this.dataSourcePedidosPendientes.sort = this.sort;
+     this.getPedidosEnCurso()
+    // this.dataSourcePedidosEnCurso = new MatTableDataSource(this.pedidosEncurso);
+    // this.dataSourcePedidosEnCurso.sort = this.sort;
+     this.getPedidosEnTransporte()
+    // this.dataSourcePedidosEnTransporte = new MatTableDataSource(this.pedidosEnTransporte);
+    // this.dataSourcePedidosEnTransporte.sort = this.sort;
+     this.getPedidosFinalizados()
+    // this.dataSourcePedidosFinalizados = new MatTableDataSource(this.pedidosFinalizados);
+    // this.dataSourcePedidosFinalizados.sort = this.sort;
   }
 
   updateSeguimiento(id:string)

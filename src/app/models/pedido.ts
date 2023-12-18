@@ -7,7 +7,7 @@ export class Pedido {
     celular:number
     transporte?:string
     seguimiento?:string
-    
+     
 
     constructor(carrito: any[], idUser: number,apellido:string,nombre:string,fecha:string,celular:number,transporte:string,seguimiento:string) {
         this.carrito = carrito
