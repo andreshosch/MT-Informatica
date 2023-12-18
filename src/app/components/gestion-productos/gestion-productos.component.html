@@ -188,7 +188,7 @@
                     </mat-form-field>
                 </mat-grid-tile>
             </mat-grid-list>
-            <button  type="submit" mat-raised-button color="primary" style="float: center;margin-bottom: 40px;">Aceptar</button>  
+            <button  type="submit" mat-raised-button color="primary" style="float: center;margin-bottom: 40px;" [disabled]="!altaProd.valid">Aceptar</button>  
         </form>
     </div>
 </div>

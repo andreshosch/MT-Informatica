@@ -101,52 +101,21 @@
                 <td mat-cell *matCellDef="let element"> {{element.apellido}} </td>
             </ng-container>
         
-        
             <ng-container matColumnDef="dni">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header>DNI</th>
                 <td mat-cell *matCellDef="let element"> {{element.dni}} </td>
             </ng-container>
-<!--         
-            <ng-container matColumnDef="mail" >
-                <th mat-header-cell *matHeaderCellDef mat-sort-header>Mail</th>
-                <td mat-cell *matCellDef="let element"> {{element.mail}} </td>
-            </ng-container> -->
         
             <ng-container matColumnDef="telefono">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header>Telefono</th>
                 <td mat-cell *matCellDef="let element"> {{element.celular}} </td>
             </ng-container>
-             
-            <!-- <ng-container matColumnDef="domicilio" >
-                <th mat-header-cell *matHeaderCellDef mat-sort-header>Domicilio</th>
-                <td mat-cell *matCellDef="let element"> {{element.domicilio}} </td>
-            </ng-container>
-
-            <ng-container matColumnDef="provincia" >
-                <th mat-header-cell *matHeaderCellDef mat-sort-header>Provincia</th>
-                <td mat-cell *matCellDef="let element"> {{element.provincia}} </td>
-            </ng-container>
-
-            <ng-container matColumnDef="localidad" >
-                <th mat-header-cell *matHeaderCellDef mat-sort-header>Localidad</th>
-                <td mat-cell *matCellDef="let element"> {{element.localidad}} </td>
-            </ng-container>
-
-            <ng-container matColumnDef="codigoPostal" >
-                <th mat-header-cell *matHeaderCellDef mat-sort-header>Codigo Postal</th>
-                <td mat-cell *matCellDef="let element"> {{element.codigoPostal}} </td>
-            </ng-container> -->
 
             <ng-container matColumnDef="estadoFiscal" >
                 <th mat-header-cell *matHeaderCellDef mat-sort-header>Situación fiscal</th>
                 <td mat-cell *matCellDef="let element"> {{element.estadoFiscal}} </td>
             </ng-container>
 
-            <!-- <ng-container matColumnDef="observaciones" >
-                <th mat-header-cell *matHeaderCellDef mat-sort-header>Observaciones</th>
-                <td mat-cell *matCellDef="let element"> {{element.observaciones}} </td>
-            </ng-container> -->
-        
             <ng-container matColumnDef="acciones" >
                 <th mat-header-cell *matHeaderCellDef mat-sort-header>Acciones</th>
                 <td mat-cell *matCellDef="let element"> 
@@ -155,8 +124,6 @@
                     <button (click)="eliminarUsr(element.id)" mat-raised-button color="primary">Eliminar</button> 
                 </td>
             </ng-container>
-        
-        
         
             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
             <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>

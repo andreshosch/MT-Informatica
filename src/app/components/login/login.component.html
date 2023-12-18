@@ -121,7 +121,7 @@
                     </mat-grid-tile>
 
                 </mat-grid-list>
-                <button type="submit" mat-raised-button color="primary">Registrarme</button>  
+                <button type="submit" mat-raised-button color="primary" [disabled]="!formRegistro.valid">Registrarme</button>  
             </form>
             <button class="ingreso" (click)="irALogin()" mat-raised-button color="primary">Cancelar</button>  
         </div>

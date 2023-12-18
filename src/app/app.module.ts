@@ -25,7 +25,7 @@ import { LoginComponent } from './components/login/login.component';
 import { CarritoComponent } from './components/carrito/carrito.component';
 import { GestionPedidosComponent } from './components/gestion-pedidos/gestion-pedidos.component';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
-
+import { MatSortModule } from '@angular/material/sort';
 
 @NgModule({
   declarations: [
@@ -58,7 +58,8 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
     BrowserAnimationsModule,
     FormsModule,
     MatTabsModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatSortModule
   ],
   exports: [
     AngularFireModule,
