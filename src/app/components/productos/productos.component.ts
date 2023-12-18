@@ -299,11 +299,12 @@ export class ProductosComponent {
 
   cleanFilters() {
     this.filterArray = []
+    this.subCategoryFilter=[]
+    this.brandFilter=[]
     this.productSearch = ''
     this.categorySearch = ''
     this.subCategorySearch = ''
     this.brandSearch=''
-
     this.numberPages = 1
     this.loadFirstPage(this.arrProducts)
 
