@@ -37,6 +37,7 @@ dataSource!: MatTableDataSource<any>;
 // private paginator: MatPaginator; 
 private sort: MatSort;
 
+
 @ViewChild(MatSort) set matSort(ms: MatSort) {
   this.sort = ms;
   this.setDataSourceAttributes();
