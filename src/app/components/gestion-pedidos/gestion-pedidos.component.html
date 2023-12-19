@@ -15,22 +15,22 @@
 
                 <table mat-table [dataSource]="dataSourcePedidosPendientes" matSort>
                     <ng-container matColumnDef="fecha">
-                        <th mat-header-cell *matHeaderCellDef mat-sort-header (click)="ordenarTabla('fecha')" > Fecha </th>
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header (click)="ordenarTabla('fecha',dataSourcePedidosPendientes)" > Fecha </th>
                         <td mat-cell *matCellDef="let element">{{element.fecha}}</td>
                     </ng-container>
 
                     <ng-container matColumnDef="dni">
-                        <th mat-header-cell *matHeaderCellDef mat-sort-header (click)="ordenarTabla('idUser')">DNI</th>
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header (click)="ordenarTabla('idUser',dataSourcePedidosPendientes)">DNI</th>
                         <td mat-cell *matCellDef="let element"> {{element.idUser}} </td>
                     </ng-container>
 
                     <ng-container matColumnDef="apellido">
-                        <th mat-header-cell *matHeaderCellDef mat-sort-header (click)="ordenarTabla('apellido')"> Apellido </th>
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header (click)="ordenarTabla('apellido',dataSourcePedidosPendientes)"> Apellido </th>
                         <td mat-cell *matCellDef="let element"> {{element.apellido}} </td>
                     </ng-container>
 
                     <ng-container matColumnDef="nombre">
-                        <th mat-header-cell *matHeaderCellDef mat-sort-header (click)="ordenarTabla('nombre')">Nombre</th>
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header (click)="ordenarTabla('nombre',dataSourcePedidosPendientes)">Nombre</th>
                         <td mat-cell *matCellDef="let element"> {{element.nombre}} </td>
                     </ng-container>
 
@@ -74,22 +74,22 @@
 
                 <table mat-table [dataSource]="dataSourcePedidosEnCurso" matSort>
                     <ng-container matColumnDef="fecha">
-                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Fecha </th>
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header (click)="ordenarTabla('fecha',dataSourcePedidosEnCurso)"> Fecha </th>
                         <td mat-cell *matCellDef="let element">{{element.fecha}} </td>
                     </ng-container>
 
                     <ng-container matColumnDef="dni">
-                        <th mat-header-cell *matHeaderCellDef mat-sort-header>DNI</th>
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header (click)="ordenarTabla('idUser',dataSourcePedidosEnCurso)">DNI</th>
                         <td mat-cell *matCellDef="let element"> {{element.idUser}} </td>
                     </ng-container>
 
                     <ng-container matColumnDef="apellido">
-                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Apellido </th>
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header (click)="ordenarTabla('apellido',dataSourcePedidosEnCurso)"> Apellido </th>
                         <td mat-cell *matCellDef="let element"> {{element.apellido}} </td>
                     </ng-container>
 
                     <ng-container matColumnDef="nombre">
-                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Nombre</th>
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header (click)="ordenarTabla('nombre',dataSourcePedidosEnCurso)">Nombre</th>
                         <td mat-cell *matCellDef="let element"> {{element.nombre}} </td>
                     </ng-container>
 
@@ -129,22 +129,22 @@
 
                 <table mat-table [dataSource]="dataSourcePedidosEnTransporte" matSort>
                     <ng-container matColumnDef="fecha">
-                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Fecha </th>
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header (click)="ordenarTabla('fecha',dataSourcePedidosEnTransporte)"> Fecha </th>
                         <td mat-cell *matCellDef="let element">{{element.fecha}} </td>
                     </ng-container>
 
                     <ng-container matColumnDef="dni">
-                        <th mat-header-cell *matHeaderCellDef mat-sort-header>DNI</th>
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header (click)="ordenarTabla('idUser',dataSourcePedidosEnTransporte)">DNI</th>
                         <td mat-cell *matCellDef="let element"> {{element.idUser}} </td>
                     </ng-container>
 
                     <ng-container matColumnDef="apellido">
-                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Apellido </th>
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header (click)="ordenarTabla('apellido',dataSourcePedidosEnTransporte)"> Apellido </th>
                         <td mat-cell *matCellDef="let element"> {{element.apellido}} </td>
                     </ng-container>
 
                     <ng-container matColumnDef="nombre">
-                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Nombre</th>
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header (click)="ordenarTabla('nombre',dataSourcePedidosEnTransporte)">Nombre</th>
                         <td mat-cell *matCellDef="let element"> {{element.nombre}} </td>
                     </ng-container>
 
@@ -182,22 +182,22 @@
 
                 <table mat-table [dataSource]="dataSourcePedidosFinalizados" matSort>
                     <ng-container matColumnDef="fecha">
-                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Fecha </th>
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header (click)="ordenarTabla('fecha',dataSourcePedidosFinalizados)"> Fecha </th>
                         <td mat-cell *matCellDef="let element">{{element.fecha}} </td>
                     </ng-container>
 
                     <ng-container matColumnDef="dni">
-                        <th mat-header-cell *matHeaderCellDef mat-sort-header>DNI</th>
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header (click)="ordenarTabla('idUser',dataSourcePedidosFinalizados)">DNI</th>
                         <td mat-cell *matCellDef="let element"> {{element.idUser}} </td>
                     </ng-container>
 
                     <ng-container matColumnDef="apellido">
-                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Apellido </th>
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header (click)="ordenarTabla('apellido',dataSourcePedidosFinalizados)"> Apellido </th>
                         <td mat-cell *matCellDef="let element"> {{element.apellido}} </td>
                     </ng-container>
 
                     <ng-container matColumnDef="nombre">
-                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Nombre</th>
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header (click)="ordenarTabla('nombre',dataSourcePedidosFinalizados)">Nombre</th>
                         <td mat-cell *matCellDef="let element"> {{element.nombre}} </td>
                     </ng-container>
 

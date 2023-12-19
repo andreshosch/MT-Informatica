@@ -94,9 +94,9 @@ export class GestionPedidosComponent {
     this.dataSourcePedidosEnTransporte.paginator.length = this.pedidosEnTransporte.length;
     this.dataSourcePedidosFinalizados.paginator.length = this.pedidosFinalizados.length;
   }
-  ordenarTabla(propiedad: string) {
+  ordenarTabla(propiedad: string,dataSource:MatTableDataSource<any>) {
     this.ordenActual = this.ordenActual === 'asc' ? 'desc' : 'asc';
-    this.dataSourcePedidosPendientes.data = this.ordenarDatos(this.dataSourcePedidosPendientes.data, propiedad, this.ordenActual);
+   dataSource.data = this.ordenarDatos(dataSource.data, propiedad, this.ordenActual);
   }
 
   applyFilter(event: Event, dataSource:MatTableDataSource<any>) {
