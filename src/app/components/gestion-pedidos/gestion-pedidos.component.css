@@ -41,10 +41,10 @@
     justify-content: center;
   }
 
-  .container {
+  /* .container {
     position: relative;
     min-height: 100vh;
-  }
+  } */
 
   .contenedorCart{
     display: flex;
@@ -233,18 +233,4 @@
 
 .centrado button{
   width: 40%;
-}
-
-::ng-deep .mat-paginator-page-size-label {
-  display: none; /* Oculta el texto "Items per page" */
-}
-
-::ng-deep .mat-paginator-range-label {
-  font-size: 14px; /* Establece el tamaño de fuente según tus necesidades */
-  color: #333; /* Establece el color de texto según tus necesidades */
-}
-
-::ng-deep .mat-paginator-page-size {
-  font-size: 14px; /* Establece el tamaño de fuente según tus necesidades */
-  color: #333; /* Establece el color de texto según tus necesidades */
 }

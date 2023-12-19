@@ -5,8 +5,6 @@ import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Pedido } from 'src/app/models/pedido';
-import { map, switchMap } from 'rxjs/operators';
-import { Observable } from 'rxjs';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { DataService } from 'src/app/services/data.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -47,9 +45,7 @@ export class GestionPedidosComponent {
   dataSourcePedidosEnTransporte!: MatTableDataSource<any>;
   dataSourcePedidosFinalizados!: MatTableDataSource<any>;
    private paginator: MatPaginator; 
-  private sort: MatSort;
-
-  
+    
   @ViewChild(MatPaginator) set matPaginator(mp: MatPaginator) {
     this.paginator = mp;
     this.paginator._intl.itemsPerPageLabel='Pedidos por Página'

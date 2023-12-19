@@ -27,25 +27,24 @@ idUsuarioAModificar: string = ""
 usuarioUpdate: Usuario
 mostrarFicha: boolean = false
 fichaDetalle: Usuario
+ordenActual: 'asc' | 'desc' = 'asc';
 
 
 
 // displayedColumns: string[] = ['nombre','apellido','dni','telefono','domicilio','mail','provincia','localidad','codigoPostal','estadoFiscal','observaciones','acciones'];
 displayedColumns: string[] = ['nombre','apellido','dni','telefono','estadoFiscal','acciones'];
-dataSource!: MatTableDataSource<any>;
+dataSourceUsuarios: MatTableDataSource<any>;
+private paginator: MatPaginator; 
 
-// private paginator: MatPaginator; 
-private sort: MatSort;
-
-
-@ViewChild(MatSort) set matSort(ms: MatSort) {
-  this.sort = ms;
-  this.setDataSourceAttributes();
+@ViewChild(MatPaginator) set matPaginator(mp: MatPaginator) {
+  this.paginator = mp;
+  this.paginator._intl.itemsPerPageLabel='Pedidos por Página'
+  this.paginator._intl.firstPageLabel="Primera Página"
+  this.paginator._intl.previousPageLabel="Página Anterior"
+  this.paginator._intl.nextPageLabel='Siguiente Página'
+  this.paginator._intl.lastPageLabel="Última Página"
 }
 
-
-
-@ViewChild(MatPaginator) paginator: MatPaginator;
 pageIndex = 0;
 pageSize = 10;
 
@@ -62,27 +61,47 @@ onPaginateChange(event) {
     const pageItems = this.usuariosRegistrados.slice(startIndex, endIndex);
   
     // Actualizar el dataSource con los elementos de la página actual
-    this.dataSource.data = pageItems;
+    this.dataSourceUsuarios.data = pageItems;
 
     // Actualizar el length del paginator con la longitud total del arreglo
-    this.dataSource.paginator.length = this.usuariosRegistrados.length;
-  
+    this.dataSourceUsuarios.paginator.length = this.usuariosRegistrados.length; 
 }
 
-setDataSourceAttributes() {
-this.dataSource.paginator = this.paginator;
-this.dataSource.sort = this.sort;
+ordenarTabla(propiedad: string) {
+  this.ordenActual = this.ordenActual === 'asc' ? 'desc' : 'asc';
+ this.dataSourceUsuarios.data = this.ordenarDatos(this.dataSourceUsuarios.data, propiedad, this.ordenActual);
+}
+
+private ordenarDatos(datos: Usuario[], propiedad: string, orden: 'asc' | 'desc'): Usuario[] {
+    
+  return datos.sort((a, b) => {
+    const valorA = a[propiedad];
+    const valorB = b[propiedad];
+
+    if (valorA < valorB) {
+      return orden === 'asc' ? -1 : 1;
+    } else if (valorA > valorB) {
+      return orden === 'asc' ? 1 : -1;
+    } else {
+      return 0;
+    }
+  });
+}
+
+applyFilter(event: Event) {
+  const filterValue = (event.target as HTMLInputElement).value;
+ this.dataSourceUsuarios.filter = filterValue.trim().toLowerCase()
 }
 
 constructor(private _usuariosService: UsuariosService, private _snackBar: MatSnackBar,private _liveAnnouncer: LiveAnnouncer){
-  this.dataSource = new MatTableDataSource(this.usuariosRegistrados);
+  this.dataSourceUsuarios = new MatTableDataSource(this.usuariosRegistrados);
 }
 
 ngOnInit(){
   this.getUsuarios()
   this.getSolicitudes()
 
-  this.dataSource = new MatTableDataSource(this.usuariosRegistrados);
+  // this.dataSource = new MatTableDataSource(this.usuariosRegistrados);
 }
 
 
@@ -90,7 +109,7 @@ ngOnInit(){
 getSolicitudes() {
   this._usuariosService.getUsers().subscribe(doc => {
     this.usuariosRegistrados = []
-    this.dataSource = new MatTableDataSource(this.usuariosRegistrados)
+    this.dataSourceUsuarios = new MatTableDataSource(this.usuariosRegistrados)
     doc.forEach((element: any) => {
       this.usuariosRegistrados.push({
         id: element.payload.doc.id,
@@ -98,7 +117,6 @@ getSolicitudes() {
       })
     })
   })
-  
 }
 
 getUsuarios() {

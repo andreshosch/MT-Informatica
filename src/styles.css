@@ -14,9 +14,9 @@
   --mdc-snackbar-container-color: red !important;
   --mdc-snackbar-supporting-text-color: #fff !important;
 }
-.example-spacer {
+/* .example-spacer {
   flex: 1 1 auto;
-}
+} */
 
 /* html,
 body {
