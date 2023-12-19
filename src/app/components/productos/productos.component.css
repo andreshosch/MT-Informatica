@@ -18,6 +18,8 @@
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 1; /* Limita a 2 renglones */
   overflow: hidden;
+  text-align: center;
+  margin-bottom: 30px;
 }
 
 /* Inicio Productos destacados */
@@ -120,3 +122,8 @@
   color:#222;
 }
 /* Fin Productos destacados */
+
+.linea{
+  display: flex;
+  
+}

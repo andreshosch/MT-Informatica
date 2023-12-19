@@ -12,7 +12,11 @@
             <p>SubRubro: {{articulo.subcategoria}}</p>
             <p>Descripcion: {{articulo.descripcion}} </p>
 
-			<button (click)="agregarAlCarrito(articulo, articulo.id)">Agregar al carrito</button>
+            <div class="example-button-row">
+              <button (click)="agregarAlCarrito(articulo, articulo.id)" mat-raised-button color="primary">Agregar al carrito</button>
+            </div>
+            
+			
 	
 	</ng-template>
 </ngb-carousel>
@@ -34,20 +38,30 @@
   </select> 
   <button (click)="filterProducts()">Buscar</button> 
  <button (click)="cleanFilters()">Limpiar filtros</button> 
+
+
 <h3 class="titleProductos" >NUESTROS PRODUCTOS</h3>
 <!-- <button (click)="traerTodo()">Traer</button> -->
   <div class="card" style="width: 18rem" *ngFor="let productos of arrProductsPages">
-    <img src={{productos.imagenes[0]}} class="card-img-top" alt="..." style="size: 100px;">
+    <img src={{productos.imagenes}} class="card-img-top" alt="..." style="size: 100px;">
     <div class="card-body">
       <h5 class="title">{{productos.nombre}}</h5>
-      <p class="card-text">{{productos.categoria}}</p>
-      <p class="card-marca">{{productos.marca}}</p>
+      
+        <div class="linea">
+          <h6>Categoría: </h6> <h6>{{productos.categoria}}</h6>
+        </div>
+      
+      <p class="card-text">Categoría: {{productos.categoria}}</p>
+      <p class="card-marca">Marca: {{productos.marca}}</p>
       <p class="card-precio">Imp. Interno: {{productos.impuesto_interno}} %</p>
       <p class="card-precio">IVA: {{productos.iva}} %</p>
       <p class="card-precio">Precio: U$S {{productos.precio}}</p>
       <a href="#modal1" (click)="modal(productos)">Ver Más...</a>
     </div>
-    <button *ngIf="this.hayLogueado" (click)="agregarAlCarrito(productos, productos.id)" style="margin-bottom: 10px; text-align: center;">Agregar al carrito</button>
+    <div class="example-button-row">
+      <button *ngIf="this.hayLogueado" (click)="agregarAlCarrito(productos, productos.id)" (click)="agregarAlCarrito(articulo, articulo.id)" mat-raised-button color="primary">Agregar al carrito</button>
+    </div>
+    <!-- <button *ngIf="this.hayLogueado" (click)="agregarAlCarrito(productos, productos.id)" style="margin-bottom: 10px; text-align: center;">Agregar al carrito</button> -->
   </div>
   <!-- MODAL PARA MOSTRAR DATOS DE LA CARD -->
   <div id="modal1" class="modalmask" *ngIf="selectedProduct">

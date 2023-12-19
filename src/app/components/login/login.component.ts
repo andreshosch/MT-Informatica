@@ -91,6 +91,7 @@ usuarioLogueado(){
       this.habilitar=true
       this.esAdmin = (arregloLS[1] == "true")
       this.dataService.actualizarEstadoLogin(true)
+      this.usuario = arregloLS[0]
     }else{
       this.desloguear()
     }
