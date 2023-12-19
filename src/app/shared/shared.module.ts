@@ -39,7 +39,7 @@ import { MatMenuModule } from '@angular/material/menu';
       MatSortModule,
       MatSnackBarModule,
       MatSelectModule,
-      MatMenuModule
+      MatMenuModule,
     ]
   })
   export class SharedModule { }
