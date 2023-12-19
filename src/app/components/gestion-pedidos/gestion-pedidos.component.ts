@@ -37,7 +37,7 @@ export class GestionPedidosComponent {
   showCodigoSeguimiento:boolean=false
   indicePedidoPendiente: number
   elementoActual: string
-  ordenActual: 'asc' | 'desc' = 'asc';
+  ordenActual: 'asc' | 'desc' | 'original' = 'asc';
 
   displayedColumns: string[] = ['fecha', 'dni', 'apellido', 'nombre', 'acciones'];
   dataSourcePedidosPendientes!: MatTableDataSource<any>;
@@ -45,6 +45,7 @@ export class GestionPedidosComponent {
   dataSourcePedidosEnTransporte!: MatTableDataSource<any>;
   dataSourcePedidosFinalizados!: MatTableDataSource<any>;
    private paginator: MatPaginator; 
+  numeroClics: number=0;
     
   @ViewChild(MatPaginator) set matPaginator(mp: MatPaginator) {
     this.paginator = mp;
@@ -85,32 +86,47 @@ export class GestionPedidosComponent {
     this.dataSourcePedidosEnTransporte.paginator.length = this.pedidosEnTransporte.length;
     this.dataSourcePedidosFinalizados.paginator.length = this.pedidosFinalizados.length;
   }
-  ordenarTabla(propiedad: string,dataSource:MatTableDataSource<any>) {
-    this.ordenActual = this.ordenActual === 'asc' ? 'desc' : 'asc';
-   dataSource.data = this.ordenarDatos(dataSource.data, propiedad, this.ordenActual);
+  ordenarTabla(propiedad: string, dataSource: MatTableDataSource<any>) {
+    this.numeroClics++;
+  if (this.numeroClics > 2) {
+    this.ordenActual = 'original';
+    this.numeroClics = 0; // Reiniciar el contador
+  } else {
+    this.ordenActual = this.ordenActual === 'desc' ? 'asc' : 'desc';
+  }
+  dataSource.data = this.ordenarDatos(dataSource.data, propiedad, this.ordenActual);
   }
 
-  applyFilter(event: Event, dataSource:MatTableDataSource<any>) {
-    const filterValue = (event.target as HTMLInputElement).value;
-   dataSource.filter = filterValue.trim().toLowerCase()
-  }
+  private ordenarDatos(datos: Pedido[], propiedad: string, orden: 'asc' | 'desc' | 'original'): Pedido[] {
+    if (orden === 'original') {
+      // Devolver una copia de los datos originales (para no modificar el array original)
+     
+      return datos.sort(() => Math.random() - 0.5);
+    }
   
-  private ordenarDatos(datos: Pedido[], propiedad: string, orden: 'asc' | 'desc'): Pedido[] {
-    
     return datos.sort((a, b) => {
       const valorA = a[propiedad];
       const valorB = b[propiedad];
   
-      if (valorA < valorB) {
-        return orden === 'asc' ? -1 : 1;
-      } else if (valorA > valorB) {
-        return orden === 'asc' ? 1 : -1;
+      if (typeof valorA === 'number' && typeof valorB === 'number') {
+        // Comparar números de manera directa
+        return orden === 'asc' ? valorA - valorB : valorB - valorA;
+      } else if (typeof valorA === 'string' && typeof valorB === 'string') {
+        // Comparar cadenas utilizando localeCompare
+        return orden === 'asc' ? valorA.localeCompare(valorB) : valorB.localeCompare(valorA);
       } else {
+        // Comparar otros tipos (o valores iguales) para mantener el orden original
         return 0;
       }
     });
   }
 
+  
+  applyFilter(event: Event, dataSource:MatTableDataSource<any>) {
+    const filterValue = (event.target as HTMLInputElement).value;
+   dataSource.filter = filterValue.trim().toLowerCase()
+  }
+  
   constructor(private _gestionPedido: PedidosService, private _snackBar: MatSnackBar,private fb:FormBuilder, private firestore: AngularFirestore,private dataService: DataService, private cdr: ChangeDetectorRef) {
   
     this.formSeguimiento=this.fb.group({
