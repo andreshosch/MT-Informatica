@@ -49,11 +49,7 @@ export class GestionPedidosComponent {
    private paginator: MatPaginator; 
   private sort: MatSort;
 
-  // @ViewChild(MatSort) set matSort(ms: MatSort) {
-  //   this.sort = ms;
-  //   this.setDataSourceAttributes();
-  // }
-
+  
   @ViewChild(MatPaginator) set matPaginator(mp: MatPaginator) {
     this.paginator = mp;
     this.paginator._intl.itemsPerPageLabel='Pedidos por Página'
@@ -63,8 +59,7 @@ export class GestionPedidosComponent {
     this.paginator._intl.lastPageLabel="Última Página"
   }
 
-  // @ViewChild(MatPaginator) paginator: MatPaginator;
-  pageIndex = 0;
+   pageIndex = 0;
   pageSize = 10;
 
   // Método para manejar el cambio de página
@@ -119,16 +114,6 @@ export class GestionPedidosComponent {
       }
     });
   }
-  // setDataSourceAttributes() {
-  //   this.dataSourcePedidosPendientes.paginator = this.paginator;
-  //   this.dataSourcePedidosPendientes.sort = this.sort;
-  //   this.dataSourcePedidosEnCurso.paginator = this.paginator;
-  //   this.dataSourcePedidosEnCurso.sort = this.sort;
-  //   this.dataSourcePedidosEnTransporte.paginator = this.paginator;
-  //   this.dataSourcePedidosEnTransporte.sort = this.sort;
-  //   this.dataSourcePedidosFinalizados.paginator = this.paginator;
-  //   this.dataSourcePedidosFinalizados.sort = this.sort;
-  // }
 
   constructor(private _gestionPedido: PedidosService, private _snackBar: MatSnackBar,private fb:FormBuilder, private firestore: AngularFirestore,private dataService: DataService, private cdr: ChangeDetectorRef) {
   
@@ -140,18 +125,10 @@ export class GestionPedidosComponent {
   }
 
   ngOnInit() {
-    this.getPedidosPendientes()
-    // this.dataSourcePedidosPendientes = new MatTableDataSource(this.pedidosPendientes);
-    // this.dataSourcePedidosPendientes.sort = this.sort;
+     this.getPedidosPendientes()
      this.getPedidosEnCurso()
-    // this.dataSourcePedidosEnCurso = new MatTableDataSource(this.pedidosEncurso);
-    // this.dataSourcePedidosEnCurso.sort = this.sort;
      this.getPedidosEnTransporte()
-    // this.dataSourcePedidosEnTransporte = new MatTableDataSource(this.pedidosEnTransporte);
-    // this.dataSourcePedidosEnTransporte.sort = this.sort;
      this.getPedidosFinalizados()
-    // this.dataSourcePedidosFinalizados = new MatTableDataSource(this.pedidosFinalizados);
-    // this.dataSourcePedidosFinalizados.sort = this.sort;
   }
 
   updateSeguimiento(id:string)
