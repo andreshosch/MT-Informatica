@@ -41,10 +41,10 @@
     justify-content: center;
   }
 
-  .container {
+  /* .container {
     position: relative;
     min-height: 100vh;
-  }
+  } */
 
   .contenedorCart{
     display: flex;
