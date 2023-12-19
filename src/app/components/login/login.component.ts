@@ -52,7 +52,7 @@ export class LoginComponent {
       contrasena:['',Validators.required],
       mail:['',Validators.required],
       dni:['',Validators.required],      
-      cuit:['',Validators.required],  
+      cuit:[''],  
       domicilio:['',Validators.required],
       telefono:['',Validators.required],      
       provincia:['',Validators.required],

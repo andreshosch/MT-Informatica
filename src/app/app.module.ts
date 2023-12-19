@@ -26,7 +26,6 @@ import { CarritoComponent } from './components/carrito/carrito.component';
 import { GestionPedidosComponent } from './components/gestion-pedidos/gestion-pedidos.component';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 
-
 @NgModule({
   declarations: [
     AppComponent,

@@ -24,6 +24,7 @@ export class CarritoComponent {
 
   //Inicio Carrito
   carritoHabilitado: boolean = false
+  carritoVacio: boolean = false
   //Fin Carrito
 
   constructor(private dataService: DataService, private pedidosService: PedidosService, private _mensaje:MensajeService) {
@@ -67,9 +68,16 @@ export class CarritoComponent {
 
   //Inicio sección Carrito
   verCarrito() {
-    this.carritoHabilitado = true
-    this.actualizarResumen()
-    console.log(this.productos)
+    if (this.productos.length > 0){
+      this.carritoHabilitado = true
+      this.actualizarResumen()
+    }else{
+      this.carritoVacio = true
+    } 
+  }
+
+  cerrarAviso(){
+    this.carritoVacio = false
   }
 
   ocultarCarrito() {
@@ -78,9 +86,14 @@ export class CarritoComponent {
 
   quitarProd(quitarElem: string) {
     const index = this.productos.findIndex(obj => obj.addProducto.id === quitarElem)
+    this.productos[index].addProducto.cantidad=1;
     this.productos.splice(index, 1)
     this.actualizarResumen()
     this.dataService.actualizarCart(this.productos, this.usuario)
+    if(this.productos.length === 0){
+      this.carritoHabilitado = false
+      this.carritoVacio = true
+    }
   }
 
 
