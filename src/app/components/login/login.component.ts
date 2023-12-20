@@ -194,6 +194,7 @@ export class LoginComponent {
             //reemplazar por los DNI de Mariano u Natalia
             if ((this.usuario == 29560560) || (this.usuario == 29560560)) {
               this.esAdmin = true
+              this._usuarioService.setAdminStatus(true)
               arregloLS.push("true")
             } else {
               arregloLS.push("false")

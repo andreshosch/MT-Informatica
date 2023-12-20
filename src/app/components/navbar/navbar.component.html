@@ -15,12 +15,18 @@
       <a class="nav-link" href="#">Servicios</a>
     </li>
 
-    <div>
-      <li>
-        <app-login></app-login>
-      </li>
-    </div>
+    <li>
+      <a *ngIf="isAdmin" class="nav-link" href="./gestionUsr">Gestión de Usuarios</a>
+    </li>
 
+    <li>
+      <a *ngIf="isAdmin" class="nav-link" href="./gestion">Gestión de Productos</a>
+    </li>
+
+    <li>
+      <a *ngIf="isAdmin" class="nav-link" href="./gestionPedido">Gestión de Pedidos</a>
+    </li>
+    
   </ul>
 
   <!-- <nav class="navbar navbar-expand-lg navbar-light bg-light">
