@@ -87,7 +87,7 @@ export class GestionProductosComponent {
         precio: this.altaProd.get('precio').value,
         categoria: this.altaProd.get('categoria').value,
         subcategoria: this.altaProd.get('subcategoria').value,
-        imagenes: this.altaProd.get('imagenes').value,
+        imagenes:this.altaProd.get('imagenes').value,
         descripcion: this.altaProd.get('descripcion').value,
         destacado: this.altaProd.get('destacado').value,
         marca: this.altaProd.get('marca').value,

@@ -43,7 +43,7 @@
 <h3 class="titleProductos" >NUESTROS PRODUCTOS</h3>
 <!-- <button (click)="traerTodo()">Traer</button> -->
   <div class="card" style="width: 18rem" *ngFor="let productos of arrProductsPages">
-    <img src={{productos.imagenes}} class="card-img-top" alt="..." style="size: 100px;">
+    <img src={{productos.imagenes[0]}} class="card-img-top" alt="..." style="size: 100px;">
     <div class="card-body">
       <h5 class="title">{{productos.nombre}}</h5>
       
