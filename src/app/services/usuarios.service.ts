@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Usuario } from '../models/usuario';
 
 import { AngularFirestore } from '@angular/fire/compat/firestore'
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -11,6 +11,19 @@ export class UsuariosService {
 
   constructor(private firestore: AngularFirestore) { }
 
+  isAdmin: boolean = false
+
+
+  private isAdminSubject = new BehaviorSubject<boolean>(false);
+  isAdmin$ = this.isAdminSubject.asObservable();
+
+  setAdminStatus(isAdmin: boolean) {
+    this.isAdminSubject.next(isAdmin)
+  }
+
+  getAdminStatus() {
+    return this.isAdminSubject.value
+  }
 
   getUsers(): Observable<any> {
     return this.firestore.collection('Usuarios').snapshotChanges()
@@ -44,9 +57,10 @@ export class UsuariosService {
   }
 
   updateUsr(id: string, usuario: any): Promise<any> {
-    
     return this.firestore.collection('Usuarios').doc(id).update(usuario);
   }
+
+ 
 
 
 }
