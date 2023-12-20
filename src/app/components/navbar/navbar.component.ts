@@ -17,7 +17,7 @@ export class NavbarComponent {
   private subscription: Subscription
 
   ngOnInit(){
-
+    this.usuarioLogueado()
   }
 
   constructor(private usuarioService: UsuariosService){
@@ -29,6 +29,24 @@ export class NavbarComponent {
 
   ngOnDestroy(){
     this.subscription.unsubscribe();
+  }
+
+  usuarioLogueado() {
+    let arregloLS = JSON.parse(localStorage.getItem("hayUsuario"));
+    if (arregloLS) {
+      const fechaActual = new Date()
+      const fechaEnSegundos = fechaActual.getTime()
+      const fechaAlmacenada = new Date(arregloLS[2])
+      const fechaAlmDif = fechaAlmacenada.getTime()
+      const tiempoLogin = Math.round((fechaEnSegundos - fechaAlmDif) / 1000)
+
+      if (tiempoLogin < 3600) {
+        this.isAdmin = (arregloLS[1] == "true")
+      } else {
+        this.isAdmin = false
+      }
+
+    }
   }
 
 }

@@ -92,6 +92,8 @@ export class LoginComponent {
         this.esAdmin = (arregloLS[1] == "true")
         this.dataService.actualizarEstadoLogin(true)
         this.usuario = arregloLS[0]
+        this.nombre = arregloLS[3]
+        this.apellido = arregloLS[4]
       } else {
         this.desloguear()
       }
@@ -204,6 +206,8 @@ export class LoginComponent {
             this.loginUsr.reset()
             let fecha = new Date()
             arregloLS.push(fecha)
+            arregloLS.push(this.nombre)
+            arregloLS.push(this.apellido)
             localStorage.setItem("hayUsuario", JSON.stringify(arregloLS));
           }
         }
