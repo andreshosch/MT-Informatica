@@ -19,8 +19,7 @@ export class GestionProductosComponent {
   idProducto: string
   losBloqueados: string[] = []
   imagenesArray:string[]=[]
-  imagenesArrayM:string[]=[]
-  
+    
 
   constructor(private _productosService: ProductosService, private fb: FormBuilder,private _mensaje:MensajeService){
     this.altaProd = this.fb.group({
@@ -85,13 +84,13 @@ export class GestionProductosComponent {
 
   agregarProd(tipo){
     if(tipo == 'a'){
-        // this.imagenesArray.push(this.altaProd.get('imagenes').value)
+        this.imagenesArray.push(this.altaProd.get('imagenes').value)
         const unProducto: Producto = {
         nombre: this.altaProd.get('nombre').value,
         precio: this.altaProd.get('precio').value,
         categoria: this.altaProd.get('categoria').value,
         subcategoria: this.altaProd.get('subcategoria').value,
-        imagenes:this.altaProd.get('imagenes').value,
+        imagenes: this.imagenesArray, 
         descripcion: this.altaProd.get('descripcion').value,
         destacado: this.altaProd.get('destacado').value,
         marca: this.altaProd.get('marca').value,
@@ -104,13 +103,13 @@ export class GestionProductosComponent {
       this._mensaje.snackBar("Producto dado de alta correctamente","green")
       console.log(unProducto)
     }else{
-      // this.imagenesArrayM.push(this.modificarProd.get('imagenesM').value)
-      const unProducto: Producto = {
+       this.imagenesArray.push(this.modificarProd.get('imagenesM').value)
+       const unProducto: Producto = {
         nombre: this.modificarProd.get('nombreM').value,
         precio: this.modificarProd.get('precioM').value,
         categoria: this.modificarProd.get('categoriaM').value,
         subcategoria: this.modificarProd.get('subcategoriaM').value,
-        imagenes: this.modificarProd.get('imagenesM').value,
+        imagenes: this.imagenesArray, 
         descripcion: this.modificarProd.get('descripcionM').value,
         destacado: this.modificarProd.get('destacadoM').value,
         marca: this.modificarProd.get('marcaM').value,
