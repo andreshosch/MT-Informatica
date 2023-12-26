@@ -1,11 +1,17 @@
 .menuLogin{
     display: flex;
     flex-direction: row;
+    justify-content: center;
+    margin: 0 10px
+}
+.menuLogin a{
+  margin: 0 20px 
 }
 
 .login{
     display: flex;
     flex-direction: column;
+    margin: 0 5px;
 }
 
 .confirmation-dialog {
@@ -31,22 +37,41 @@
 
   .centrado{
     text-align: center;
+    
   }
 
   .centrado button{
-    width: 40%;
+    width: 20%;
+    margin:0 5px;
+    background-color:#107997;
+    color: white;  
+  }
+  
+  .carroYLogin{
+    display: inline-flex;
+    margin: 0 50px; 
   }
 
+  .containerLogin{
+         display: flex;
+        /* margin-bottom: 10px; */
+  }
+
+    .carroYLogin .app-carrito,
+  .carroYLogin a {
+    /* margin-right: 40px; 
+    margin-left: 10px; */
+    margin: 0 10px;
+  }  
 
  .registroycancel{
     display: flex;
     flex-direction: row;
-    justify-content:space-around
+    justify-content:space-around;
+      a{
+    cursor: pointer;;
+    }
  }
-
-  .registroycancel button{
-    width: 30%;
-  }
 
   .formInicio{
     display: flex;

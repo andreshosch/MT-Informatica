@@ -1,19 +1,30 @@
-<div class="menuLogin">
-    <!-- <a *ngIf="esAdmin" class="nav-link" href="./gestionUsr">Gestión de Usuarios</a>
+
+    <div class="menuLogin">
+        <!-- <a *ngIf="esAdmin" class="nav-link" href="./gestionUsr">Gestión de Usuarios</a>
     <a *ngIf="esAdmin" class="nav-link" href="./gestion">Gestión de Productos</a>
     <a *ngIf="esAdmin" class="nav-link" href="./gestionPedido">Gestión de Pedidos</a> -->
-    <a *ngIf="!habilitar" class="nav-link" (click)="habilitarLogin()">Login</a>
-    <a *ngIf="habilitar" class="nav-link userId">Bienvenido: {{this.nombre}} {{this.apellido}}</a>
-    <a *ngIf="habilitar" class="nav-link" (click)="desloguear()" href="">LogOut</a>
-
-    <app-carrito [usuario]="usuario"[nombre]="nombre"[apellido]="apellido"[celular]="celular" *ngIf="hayUsuario" class="nav-link"></app-carrito>
+        <a *ngIf="!habilitar" class="nav-link" (click)="habilitarLogin()"><mat-icon
+                style="background-color: lightgray;color:#107997;font-weight: bold" title="Ingresar">account_circle</mat-icon></a>
+    </div>
+    <div class="containerLogin">
+    <div class="nombreUser">
+        <p *ngIf="habilitar" class="nav-link userId"><span style="color: #107997; font-weight: bold;">Usuario:{{ this.nombre}} {{this.apellido}}</span></p>
+    </div>
+    
+    <div class="carroYLogin">
+        <app-carrito [usuario]="usuario" [nombre]="nombre" [apellido]="apellido" [celular]="celular" *ngIf="hayUsuario"
+            class="nav-link"></app-carrito>
+        <a *ngIf="habilitar" class="nav-link" (click)="desloguear()"><mat-icon style="background-color: lightgray; color:#107997;font-weight: bold;"
+                title="Salir">exit_to_app</mat-icon></a>
+    </div>
 </div>
+
 
 <div class="confirmation-dialog" *ngIf="loginProgress || dataService.loginProgressData">
     <div class="dialog-content">
         <div class="login" *ngIf="login">
-            <form [formGroup]="loginUsr" (ngSubmit)="ingresoUsr()"> 
-                <mat-grid-list cols="4" rowHeight="70px" style="margin-top: 8%; margin-right: 6%;">
+            <form [formGroup]="loginUsr" (ngSubmit)="ingresoUsr()">
+                <mat-grid-list cols="4" rowHeight="70px" style="margin-top: 8%;">
                     <mat-grid-tile [colspan]="4" [rowspan]="1">
                         <mat-form-field>
                             <mat-label>Usuario</mat-label>
@@ -28,12 +39,14 @@
                     </mat-grid-tile>
                 </mat-grid-list>
                 <div class="centrado">
-                    <button  type="submit" mat-raised-button color="primary" style="margin-bottom: 40px;">Ingresar</button>  
+                    <button type="submit" mat-raised-button style="margin-bottom: 40px;">Ingresar</button>
+                    <button (click)="cerrarLogin()" mat-raised-button style="margin-bottom: 40px;">Cancelar</button>
                 </div>
             </form>
             <div class="registroycancel">
-                <button (click)="irARegistro()" mat-raised-button color="primary">Registrarme</button>  
-                <button (click)="cerrarLogin()" mat-raised-button color="primary">Cancelar</button>  
+                <p>Aún no tiene cuenta? registrese <a (click)="irARegistro()" class="buttonInvisible">aquí</a></p>
+
+
             </div>
         </div>
         <div class="registro" *ngIf="!login">
@@ -121,9 +134,10 @@
                     </mat-grid-tile>
 
                 </mat-grid-list>
-                <button type="submit" mat-raised-button color="primary" [disabled]="!formRegistro.valid">Registrarme</button>  
+                <button type="submit" mat-raised-button color="primary"
+                    [disabled]="!formRegistro.valid">Registrarme</button>
             </form>
-            <button class="ingreso" (click)="irALogin()" mat-raised-button color="primary">Cancelar</button>  
+            <button class="ingreso" (click)="irALogin()" mat-raised-button color="primary">Cancelar</button>
         </div>
     </div>
 </div>
@@ -131,8 +145,8 @@
 <div class="confirmation-dialog" *ngIf="actualizarPass">
     <div class="dialog-content">
         <div class="login">
-            
-            <form [formGroup]="updateUsr" (ngSubmit)="actualizarUsr()"> 
+
+            <form [formGroup]="updateUsr" (ngSubmit)="actualizarUsr()">
                 <mat-grid-list cols="4" rowHeight="70px" style="margin-top: 8%; margin-right: 6%;">
                     <mat-grid-tile [colspan]="4" [rowspan]="1">
                         <mat-form-field>
@@ -160,12 +174,13 @@
                     </mat-grid-tile>
                 </mat-grid-list>
                 <div class="centrado">
-                    <button  type="submit" mat-raised-button color="primary" style="margin-bottom: 40px;">Actualizar</button>  
+                    <button type="submit" mat-raised-button color="primary"
+                        style="margin-bottom: 40px;">Actualizar</button>
                 </div>
             </form>
             <div class="registroycancel">
-                <button (click)="cerrarUpdate()" mat-raised-button color="primary">Cancelar</button>  
+                <button (click)="cerrarUpdate()" mat-raised-button color="primary">Cancelar</button>
             </div>
         </div>
-    </div>   
-</div>     
+    </div>
+</div>

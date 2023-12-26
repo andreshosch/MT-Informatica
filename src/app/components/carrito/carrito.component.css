@@ -4,11 +4,15 @@
     margin-left: 3%;
     margin-top: 25px;
   }
+
+  .mat-icon{
+    background-color: red;
+    overflow: hidden;
+  }
   
   .resumenCarrito h4{
     text-align: center;
   }
-
   .resumenCarrito button{
     margin-top: 5px;
     width: 70%;
@@ -22,6 +26,8 @@
     width: 90%;
     text-align: center;
   }
+
+  
 
   .confirmation-dialog {
     z-index: 9;
@@ -47,6 +53,13 @@
 
   .carroYcantidad{
     display: flex;
+    flex-direction: row;
+    justify-content: center;
+  }
+
+  .carroYcantidad a{
+    display: flex;
+    flex-direction: row;
   }
 
 .card{

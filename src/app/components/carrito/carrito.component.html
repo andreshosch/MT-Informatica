@@ -8,10 +8,9 @@
 </head>
 <body>
     <div class="carroYcantidad">
-        <a (click)="verCarrito()"><mat-icon>shopping_cart</mat-icon> </a>
-        <span class="nav-link">{{ total }}</span>
+        <a (click)="verCarrito()"><mat-icon style="background-color: lightgray; cursor: pointer;color:#107997;font-weight: bolder">shopping_cart </mat-icon> </a>
+        <span class="nav-link" style="background-color: lightgray;color:#107997;font-weight: bolder;size: 50px;">{{ total }}</span>
     </div>
-
     <div class="confirmation-dialog" *ngIf="carritoVacio">
         <div class="modalCarrito">
             <img src="../../../assets/carritoVacio.png" alt="">

@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Producto } from 'src/app/models/producto';
+import { MensajeService } from 'src/app/services/mensaje.service';
 import { ProductosService } from 'src/app/services/productos.service';
 
 
@@ -17,9 +18,11 @@ export class GestionProductosComponent {
   modalActivo: boolean = false
   idProducto: string
   losBloqueados: string[] = []
+  imagenesArray:string[]=[]
+  imagenesArrayM:string[]=[]
+  
 
-
-  constructor(private _productosService: ProductosService, private fb: FormBuilder){
+  constructor(private _productosService: ProductosService, private fb: FormBuilder,private _mensaje:MensajeService){
     this.altaProd = this.fb.group({
       nombre: ['', Validators.required],
       categoria: ['', Validators.required],
@@ -82,7 +85,8 @@ export class GestionProductosComponent {
 
   agregarProd(tipo){
     if(tipo == 'a'){
-      const unProducto: Producto = {
+        // this.imagenesArray.push(this.altaProd.get('imagenes').value)
+        const unProducto: Producto = {
         nombre: this.altaProd.get('nombre').value,
         precio: this.altaProd.get('precio').value,
         categoria: this.altaProd.get('categoria').value,
@@ -97,8 +101,10 @@ export class GestionProductosComponent {
       }
       this._productosService.createProduct(unProducto) 
       this.altaProd.reset()
-      alert('Producto dado de alta correctamente... BORRAR')
+      this._mensaje.snackBar("Producto dado de alta correctamente","green")
+      console.log(unProducto)
     }else{
+      // this.imagenesArrayM.push(this.modificarProd.get('imagenesM').value)
       const unProducto: Producto = {
         nombre: this.modificarProd.get('nombreM').value,
         precio: this.modificarProd.get('precioM').value,
@@ -114,7 +120,8 @@ export class GestionProductosComponent {
       }
       this._productosService.updateProduct(this.idProducto, unProducto) 
       this.modalActivo=false
-      alert('Producto modificado correctamente... BORRAR')
+      this._mensaje.snackBar("Producto modificado correctamente","green")
+      console.log(unProducto)
     }
     
   }

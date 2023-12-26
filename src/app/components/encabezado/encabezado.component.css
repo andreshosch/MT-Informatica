@@ -1,17 +1,17 @@
 .izquierda{
-    width: 20%;
-    text-align: center;
+     width: 10%; 
+     text-align: left 
+    
 }
 
 .derecha{
-    width: 80%;
-    font-size: 2REM;
+    width: 91%;
+    font-size: 1.3rem;
     }
 
 .encabezado{
     display: flex;
-    height: 200px;
-    align-items: center;
+    height: 60px;  
     background-color: lightgrey;
 }
 
@@ -19,4 +19,8 @@
     background-color: lightgrey;
     display: flex;
     flex-direction: row-reverse;
+}
+
+.contenedor{
+    margin-left: 5%;
 }
