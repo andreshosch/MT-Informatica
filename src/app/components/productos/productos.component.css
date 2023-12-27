@@ -1,3 +1,8 @@
+.container-card{
+text-align: center;
+}
+
+
 .titleProductos{
   color: blue;
   text-align: center;
@@ -118,12 +123,26 @@
 }
 
 .close:hover {
-  background: #FAAC58;
+  background: #107997;
   color:#222;
 }
 /* Fin Productos destacados */
 
-.linea{
-  display: flex;
-  
+.container-pages button {
+  background-color:  lightgray;
+  margin-left: 5px;
+  margin-bottom: 10px;
+  border-color: #107997;;
+ 
+}
+
+.container-pages a{
+  background-color:  lightgray;
+  color: #107997;
+  border: none;
+  font-weight: bold;
+}
+
+.page-item{
+  color:green
 }
