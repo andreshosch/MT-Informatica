@@ -44,7 +44,7 @@
 <!-- <button (click)="traerTodo()">Traer</button> -->
 <div class="container container-card">
   <div class="card" style="width: 18rem" *ngFor="let productos of arrProductsPages">
-    <img src={{productos.imagenes[0]}} class="card-img-top" alt="..." style="height: 250px;width: 250px;">
+    <img src={{productos.imagenes}} class="card-img-top" alt="..." style="height: 250px;width: 250px;">
     <div class="card-body">
       <h5 class="title">{{productos.nombre}}</h5>      
       <p class="card-text">Categoría: {{productos.categoria}}</p>
@@ -67,7 +67,7 @@
       <a href="#close" title="Cerrar" class="close">X</a>
       <div class="card-body">
         <h4>{{selectedProduct.nombre}}</h4>
-        <img src={{selectedProduct.imagenes[0]}} class="card-img-top" style="width: 40%;height: 40%;" alt="...">      
+        <img src={{selectedProduct.imagenes}} class="card-img-top" style="width: 40%;height: 40%;" alt="...">      
         <p class="card-precio">Imp. Interno: {{selectedProduct.impuesto_interno}} %</p>
         <p class="card-precio">IVA: {{selectedProduct.iva}} %</p>
         <p> Descripción: {{selectedProduct.descripcion}}</p>

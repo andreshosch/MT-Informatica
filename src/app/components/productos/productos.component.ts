@@ -147,7 +147,7 @@ export class ProductosComponent {
                   precio: this.arrProductos[p].precio,
                   categoria: this.arrProductos[p].categoria,
                   subcategoria: this.arrProductos[p].sub_categoria,
-                  imagenes: this.arrProductos[p].imagenes,
+                  imagenes: this.arrProductos[p].imagenes[0],
                   descripcion: this.arrProductos[p].descripcion,
                   destacado: false,
                   marca: this.arrProductos[p].marca,
@@ -166,7 +166,7 @@ export class ProductosComponent {
               }
               // this.arrProducts.push(...this.arrProductos)
               this.loadFirstPage(this.arrProducts)
-              
+              console.log(this.arrProducts)
             })
         }
        }
