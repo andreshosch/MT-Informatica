@@ -15,6 +15,63 @@
   --mdc-snackbar-supporting-text-color: #fff !important;
 }
 
+/* ESTILOS GOBLALES DE SPINNER*/
+
+.spinner-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: white; 
+  z-index: 9999; 
+}
+
+.cargando{
+    width: 120px;
+    height: 30px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    justify-content: space-between;
+    margin: 0 auto; 
+}
+.texto-cargando{ 
+  padding-top:20px;
+  color:#107997;
+  font-weight: bold;
+}
+.cargando span{
+    font-size: 20px;
+    text-transform: uppercase;
+}
+.pelotas {
+    width: 30px;
+    height: 30px;
+    background-color: #107997;
+    animation: salto .5s alternate
+    infinite;
+  border-radius: 50%  
+}
+.pelotas:nth-child(2) {
+    animation-delay: .18s;
+}
+.pelotas:nth-child(3) {
+    animation-delay: .37s;
+}
+@keyframes salto {
+    from {
+        transform: scaleX(1.25);
+    }
+    to{
+        transform: 
+        translateY(-50px) scaleX(1);
+    }
+}
+/*FIN ESTILOS GLOBALES DE SPPINER*/
 
 /* .example-spacer {
   flex: 1 1 auto;
@@ -29,3 +86,4 @@ body {
     margin: 0;
     font-family: Roboto, "Helvetica Neue", sans-serif;
 } */
+

@@ -6,6 +6,7 @@ import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
+import { SppinerService } from 'src/app/services/sppiner.service';
 
 @Component({
   selector: 'app-gestion-usuarios',
@@ -107,11 +108,12 @@ export class GestionUsuariosComponent {
     this.dataSourceUsuarios.filter = filterValue.trim().toLowerCase()
   }
 
-  constructor(private _usuariosService: UsuariosService, private _snackBar: MatSnackBar, private _liveAnnouncer: LiveAnnouncer) {
+  constructor(private _usuariosService: UsuariosService, private _snackBar: MatSnackBar, private _liveAnnouncer: LiveAnnouncer,public _spinner:SppinerService) {
     this.dataSourceUsuarios = new MatTableDataSource(this.usuariosRegistrados);
   }
 
   ngOnInit() {
+    this._spinner.showSpinner()
     this.getUsuarios()
     this.getSolicitudes()
   }

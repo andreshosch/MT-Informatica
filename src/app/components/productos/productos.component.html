@@ -106,3 +106,7 @@
         (click)="lastPage(arrProducts)"><mat-icon>last_page</mat-icon></a></button>
   </div>
 </nav>
+
+<div *ngIf="_spinner.getSpinner()" class="spinner-container">
+  <app-spinner></app-spinner>
+</div>

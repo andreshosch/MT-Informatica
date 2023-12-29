@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Producto } from 'src/app/models/producto';
 import { MensajeService } from 'src/app/services/mensaje.service';
 import { ProductosService } from 'src/app/services/productos.service';
+import { SppinerService } from 'src/app/services/sppiner.service';
 
 
 @Component({
@@ -21,7 +22,7 @@ export class GestionProductosComponent {
   imagenesArray:string[]=[]
     
 
-  constructor(private _productosService: ProductosService, private fb: FormBuilder,private _mensaje:MensajeService){
+  constructor(private _productosService: ProductosService, private fb: FormBuilder,private _mensaje:MensajeService, public _spinner:SppinerService){
     this.altaProd = this.fb.group({
       nombre: ['', Validators.required],
       categoria: ['', Validators.required],
@@ -50,6 +51,7 @@ export class GestionProductosComponent {
   }
 
   ngOnInit(){
+    this._spinner.showSpinner()
     this.getProductos()
     this.getBloqueados()
   }

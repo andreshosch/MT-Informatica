@@ -6,6 +6,7 @@ import { Producto } from 'src/app/models/producto';
 import { DataService } from 'src/app/services/data.service';
 import { MensajeService } from 'src/app/services/mensaje.service';
 import { ProductosService } from 'src/app/services/productos.service';
+import { SppinerService } from 'src/app/services/sppiner.service';
 
 @Component({
   selector: 'app-productos',
@@ -56,7 +57,7 @@ export class ProductosComponent {
   // Fin Productos destacados
 
 
-  constructor(private productosServices: ProductosService, private _config: NgbCarouselConfig, private dataService: DataService,private _mensaje:MensajeService) {
+  constructor(private productosServices: ProductosService, private _config: NgbCarouselConfig, private dataService: DataService,private _mensaje:MensajeService, public _spinner:SppinerService) {
     _config.interval = 2000;
     _config.pauseOnHover = true;
     _config.showNavigationArrows = false;
@@ -64,6 +65,7 @@ export class ProductosComponent {
 
 
   ngOnInit() {
+    this._spinner.showSpinner()
     this.arrayProducts()
     this.getProductos()
     this.dataService.isAuthenticated$.subscribe((isAuthenticated) => {

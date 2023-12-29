@@ -8,6 +8,7 @@ import { Pedido } from 'src/app/models/pedido';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { DataService } from 'src/app/services/data.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { SppinerService } from 'src/app/services/sppiner.service';
 
 
 @Component({
@@ -37,6 +38,7 @@ export class GestionPedidosComponent {
   showCodigoSeguimiento:boolean=false
   indicePedidoPendiente: number
   elementoActual: string
+  loading:boolean=true
   ordenActual: 'asc' | 'desc' | 'original' = 'asc';
 
   displayedColumns: string[] = ['fecha', 'dni', 'apellido', 'nombre', 'acciones'];
@@ -127,7 +129,7 @@ export class GestionPedidosComponent {
    dataSource.filter = filterValue.trim().toLowerCase()
   }
   
-  constructor(private _gestionPedido: PedidosService, private _snackBar: MatSnackBar,private fb:FormBuilder, private firestore: AngularFirestore,private dataService: DataService, private cdr: ChangeDetectorRef) {
+  constructor(private _gestionPedido: PedidosService, private _snackBar: MatSnackBar,private fb:FormBuilder, private firestore: AngularFirestore,private dataService: DataService, private cdr: ChangeDetectorRef, public _spinner:SppinerService) {
   
     this.formSeguimiento=this.fb.group({
       transporte:['',Validators.required],
@@ -137,6 +139,7 @@ export class GestionPedidosComponent {
   }
 
   ngOnInit() {
+    this._spinner.showSpinner()
      this.getPedidosPendientes()
      this.getPedidosEnCurso()
      this.getPedidosEnTransporte()
