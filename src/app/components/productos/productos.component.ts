@@ -52,6 +52,7 @@ export class ProductosComponent {
   productosHot: any[] = []
   elProducto: Producto
   idProducto: string
+  showProductosDestacados:boolean=false
   // Fin Productos destacados
 
 
@@ -327,6 +328,13 @@ getProductos(){
         })
       }
     })
+    if(this.productosHot.length>0)
+    {
+      this.showProductosDestacados=true
+    }
+    else{
+      this.showProductosDestacados=false
+    }
     this.loadFirstPage(this.arrProducts)
   })
 }

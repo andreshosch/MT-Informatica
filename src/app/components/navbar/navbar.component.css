@@ -55,3 +55,8 @@
   .registroycancel button{
     width: 30%;
   }
+
+  .colorNavBar a{
+  color: #107997;
+  font-weight: bold;
+  }
