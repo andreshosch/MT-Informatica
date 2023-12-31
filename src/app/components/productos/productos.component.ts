@@ -390,6 +390,7 @@ getProductos(){
     this.subCategorySearch=''
     this.brandSearch=''
     this.productSearch=''
+    this.brandFilter=[]
     this.subCategoryFilter = this.arrProducts.filter(
       (subcategoria) => subcategoria.categoria === this.categorySearch
     );
@@ -412,6 +413,8 @@ getProductos(){
   }
 updateProductSearch(){
   this.filterArray=[]
+  this.subCategoryFilter=[]
+  this.brandFilter=[]
   this.categorySearch=''
   this.subCategorySearch=''
   this.brandSearch=''

@@ -159,3 +159,59 @@ text-align: center;
 .page-item{
   color:green
 }
+.form-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 20px;
+  margin-top: 20px;
+  justify-content: center;
+}
+/* Estilo para los elementos de entrada de texto y select */
+input, select {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-right: 10px;
+}
+
+/* Estilo para el botón de búsqueda */
+/* button {
+  padding: 10px 15px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+} */
+
+/* Estilo para el botón de limpiar filtros */
+button.clear {
+  background-color: #107997;
+  margin-left: 10px;
+  color: white;
+  font-weight: bold;
+  margin-top: 2.5px;
+}
+select,input {
+  color: #107997; /* Color del texto no seleccionado */
+  font-weight: bold; 
+}
+input::placeholder {
+  color: #107997; /* Color del texto no seleccionado */
+  font-weight: bold; 
+}
+
+select option,input option {
+  color: #107997; /* Color del texto de las opciones no seleccionadas */
+  font-weight: bold;
+}
+
+select:focus {
+  border: 1px solid #107997;
+}
+select option:hover
+ {
+  background-color: #4CAF50; /* Color de fondo de la opción al pasar el ratón o al enfocarla */
+  color: #fff; /* Color del texto de la opción al pasar el ratón o al enfocarla */
+}

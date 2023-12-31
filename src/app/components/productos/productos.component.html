@@ -24,8 +24,8 @@
   </ngb-carousel>
 </div>
 <!-- Fin Productos destacados -->
-
-<input type="input" [(ngModel)]="productSearch" placeholder="Ingrese una palabra clave" (input)="updateProductSearch()">
+<div class="form-container">
+<input type="text" [(ngModel)]="productSearch" placeholder="Ingrese una palabra clave" (input)="updateProductSearch()">
 
 <select [(ngModel)]="categorySearch" (change)="updateSubCategories()">
   <option value="">Selecciona una categoría</option>
@@ -39,9 +39,9 @@
   <option value="">Selecciona una Marca</option>
   <option *ngFor="let marca of brandFilter" [value]="marca">{{marca}}</option>
 </select>
-<button (click)="filterProducts()">Buscar</button>
-<button (click)="cleanFilters()">Limpiar filtros</button>
-
+<button mat-raised-button (click)="filterProducts()" class="clear">Buscar</button>
+<button mat-raised-button (click)="cleanFilters()" class="clear">Limpiar filtros</button>
+</div>
 <h3 class="titleProductos" id="productos">NUESTROS PRODUCTOS</h3>
 <!-- <button (click)="traerTodo()">Traer</button> -->
 <div class="container container-card">
