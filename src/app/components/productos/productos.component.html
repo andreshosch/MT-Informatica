@@ -42,7 +42,6 @@
 <button (click)="filterProducts()">Buscar</button>
 <button (click)="cleanFilters()">Limpiar filtros</button>
 
-
 <h3 class="titleProductos" id="productos">NUESTROS PRODUCTOS</h3>
 <!-- <button (click)="traerTodo()">Traer</button> -->
 <div class="container container-card">
@@ -82,28 +81,29 @@
 </div>
 <!-- ------------------------------------------------ -->
 
+<div>
 <nav aria-label="Page navigation example" class="container-pages" style="display: flex; justify-content: center;">
   <div class="pagination justify-content-center" *ngIf="filterArray.length>0">
-    <button *ngIf="visibleFirstPage" class="page-item"><a href="#productos" ; class="page-link" *ngIf="visibleFirstPage"
-        (click)="firstPage(filterArray)"><mat-icon>first_page</mat-icon></a></button>
-    <button *ngIf="visibleAfterPage" class="page-item"><a href="#productos" class="page-link " *ngIf="visibleAfterPage"
-        (click)="afterPage(filterArray)"><mat-icon>chevron_left</mat-icon></a></button>
+    <button *ngIf="visibleFirstPage" class="page-item"><a class="page-link" *ngIf="visibleFirstPage"
+        (click)="firstPage(filterArray) ;scroll('productos')"><mat-icon>first_page</mat-icon></a></button>
+    <button *ngIf="visibleAfterPage" class="page-item"><a class="page-link " *ngIf="visibleAfterPage"
+        (click)="afterPage(filterArray);scroll('productos')"><mat-icon>chevron_left</mat-icon></a></button>
     <button class="page-item"><a href="#productos" class="page-link">{{this.numberPages}}</a></button>
-    <button *ngIf="visibleNextPage" class="page-item"><a href="#productos" class="page-link" *ngIf="visibleNextPage"
-        (click)="nextPage(filterArray)"><mat-icon>chevron_right</mat-icon></a></button>
-    <button *ngIf="visibleLastPage" class="page-item"><a href="#productos" class="page-link" *ngIf="visibleLastPage"
-        (click)="lastPage(filterArray)"><mat-icon>last_page</mat-icon></a></button>
+    <button *ngIf="visibleNextPage" class="page-item"><a class="page-link" *ngIf="visibleNextPage"
+        (click)="nextPage(filterArray);scroll('productos')"><mat-icon>chevron_right</mat-icon></a></button>
+    <button *ngIf="visibleLastPage" class="page-item"><a class="page-link" *ngIf="visibleLastPage"
+        (click)="lastPage(filterArray);scroll('productos')"><mat-icon>last_page</mat-icon></a></button>
   </div>
   <div class="pagination justify-content-center" *ngIf="filterArray.length===0">
-    <button *ngIf="visibleFirstPage" class="page-item"><a href="#productos" class="page-link" *ngIf="visibleFirstPage"
-        (click)="firstPage(arrProducts)"><mat-icon>first_page</mat-icon></a></button>
-    <button *ngIf="visibleAfterPage" class="page-item"><a href="#productos" class="page-link " *ngIf="visibleAfterPage"
-        (click)="afterPage(arrProducts)"><mat-icon>chevron_left</mat-icon></a></button>
+    <button *ngIf="visibleFirstPage;" class="page-item"><a class="page-link" *ngIf="visibleFirstPage"
+        (click)="firstPage(arrProducts);scroll('productos')"><mat-icon>first_page</mat-icon></a></button>
+    <button *ngIf="visibleAfterPage" class="page-item"><a class="page-link " *ngIf="visibleAfterPage"
+        (click)="afterPage(arrProducts);scroll('productos')"><mat-icon>chevron_left</mat-icon></a></button>
     <button class="page-item"><a class="page-link">{{this.numberPages}}</a></button>
-    <button *ngIf="visibleNextPage" class="page-item"><a href="#productos" class="page-link" *ngIf="visibleNextPage"
-        (click)="nextPage(arrProducts)"><mat-icon>chevron_right</mat-icon></a></button>
-    <button *ngIf="visibleLastPage" class="page-item"><a href="#productos" class="page-link" *ngIf="visibleLastPage"
-        (click)="lastPage(arrProducts)"><mat-icon>last_page</mat-icon></a></button>
+    <button *ngIf="visibleNextPage" class="page-item"><a class="page-link" *ngIf="visibleNextPage"
+        (click)="nextPage(arrProducts);scroll('productos')"><mat-icon>chevron_right</mat-icon></a></button>
+    <button *ngIf="visibleLastPage" class="page-item"><a class="page-link" *ngIf="visibleLastPage"
+        (click)="lastPage(arrProducts);scroll('productos')"><mat-icon>last_page</mat-icon></a></button>
   </div>
 </nav>
 

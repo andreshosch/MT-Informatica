@@ -138,8 +138,7 @@ text-align: center;
   border-color: #107997;
   width: 60px;
   height: 50px;
-  text-align: center;
- 
+  text-align: center; 
 }
 
 .container-pages a{
@@ -147,6 +146,7 @@ text-align: center;
   color: #107997;
   border: none;
   font-weight: bold;
+  
 }
 
 .mat-icon{

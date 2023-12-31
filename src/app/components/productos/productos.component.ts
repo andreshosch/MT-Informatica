@@ -1,5 +1,4 @@
-
-import { Component } from '@angular/core';
+import { Component,Renderer2 } from '@angular/core';
 import { NgbCarouselConfig } from '@ng-bootstrap/ng-bootstrap';
 import { first } from 'rxjs';
 import { Producto } from 'src/app/models/producto';
@@ -7,6 +6,7 @@ import { DataService } from 'src/app/services/data.service';
 import { MensajeService } from 'src/app/services/mensaje.service';
 import { ProductosService } from 'src/app/services/productos.service';
 import { SppinerService } from 'src/app/services/sppiner.service';
+
 
 @Component({
   selector: 'app-productos',
@@ -21,7 +21,7 @@ export class ProductosComponent {
   arrProductsPages: any[] = []
   subCategoryFilter: any[] = []
   brandFilter: any[] = []
-  numberPages: any = 1
+   numberPages: any = 1
   numberPagesTotal: number
   onlyCategory: any
   onlySubCategory: any
@@ -57,7 +57,8 @@ export class ProductosComponent {
   // Fin Productos destacados
 
 
-  constructor(private productosServices: ProductosService, private _config: NgbCarouselConfig, private dataService: DataService,private _mensaje:MensajeService, public _spinner:SppinerService) {
+  constructor(private productosServices: ProductosService, private _config: NgbCarouselConfig, private dataService: DataService,
+  private _mensaje:MensajeService, public _spinner:SppinerService,private renderer: Renderer2) {
     _config.interval = 2000;
     _config.pauseOnHover = true;
     _config.showNavigationArrows = false;
@@ -179,7 +180,7 @@ export class ProductosComponent {
     this.arrProductsPages = []
     let numberPage = Math.ceil(products.length / 20);
     this.numberPages += 1;
-    if (this.numberPages<=numberPage){
+      if (this.numberPages<=numberPage){
       this.visibleFirstPage=true
       this.visibleAfterPage=true
       this.visibleNextPage=true
@@ -208,13 +209,12 @@ export class ProductosComponent {
     else {
       this.lastPage(products)
     }
-    console.log(products.length)
   }
 
   afterPage(products: any) {
     this.arrProductsPages = []
     this.numberPages -= 1;
-    if (this.numberPages==1){
+      if (this.numberPages==1){
       this.visibleFirstPage=false
       this.visibleAfterPage=false
       this.visibleNextPage=true
@@ -235,7 +235,6 @@ export class ProductosComponent {
         j += 1;
       }
     while (j < 20)
-    console.log(this.numberPages)
   }
   firstPage(products: any) {
     this.arrProductsPages = []
@@ -250,7 +249,6 @@ export class ProductosComponent {
     for (let i = this.min; i < this.max; i++) {
       this.arrProductsPages[i] = products[i]
     }
-    console.log(products.length)
   }
 
   lastPage(products: any) {
@@ -298,6 +296,13 @@ export class ProductosComponent {
       });
     }
     this.loadFirstPage(this.filterArray)
+    if(this.filterArray.length<=20){
+      this.visibleAfterPage=false
+      this.visibleFirstPage=false
+      this.visibleNextPage=false
+      this.visibleLastPage=false
+      console.log("-20")
+    }
   }
 
   cleanFilters() {
@@ -439,16 +444,18 @@ modal(producto:any){
       console.log(`bloqueados: ${this.bloqueados}`)
     })
   }
+  
+  scroll(sectionId: string): void {
+    const targetElement = document.getElementById(sectionId);
 
-
-
-
- } 
-
-
-
-
-
+    if (targetElement) {
+      targetElement.scrollIntoView({ 
+        behavior: 'instant',
+      });
+    }
+  }
+}
+  
 //---------------------------------------------------------------------------------------------
 
 
