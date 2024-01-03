@@ -13,6 +13,17 @@ export class ProductosService {
   private baseUrl: string
   baseUrl1: string
 
+  private onlyCategory: string[] = [];
+
+  setOnlyCategory(data: string[]): void {
+    this.onlyCategory = data;
+    console.log(`service: ${JSON.stringify(this.onlyCategory)}`)
+  }
+
+  getOnlyCategory(): string[] {
+    return this.onlyCategory;
+  }
+
   constructor(private http:HttpClient, private firestore: AngularFirestore) { 
     this.baseUrl="https://clientes.elit.com.ar/v1/api/productos?limit="
         
@@ -44,6 +55,11 @@ updateProduct(id: string, cliente: any): Promise<any> {
 
 getBloqueos(): Observable<any>{
   return this.firestore.collection('Bloqueos').snapshotChanges()
+}
+
+setBloqueos(categoria: any): Promise<any>{
+  console.log(`parametro: ${categoria}`)
+  return this.firestore.collection('Bloqueos').add(categoria)
 }
 
 }

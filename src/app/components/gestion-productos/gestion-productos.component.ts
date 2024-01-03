@@ -13,12 +13,14 @@ import { ProductosService } from 'src/app/services/productos.service';
 export class GestionProductosComponent {
 
   productosHot: any[] = []
+  listado: any[] = []
   altaProd:FormGroup
   modificarProd: FormGroup
   modalActivo: boolean = false
   idProducto: string
   losBloqueados: string[] = []
   imagenesArray:string[]=[]
+  onlyCategory: any;
     
 
   constructor(private _productosService: ProductosService, private fb: FormBuilder,private _mensaje:MensajeService){
@@ -50,13 +52,12 @@ export class GestionProductosComponent {
   }
 
   ngOnInit(){
-    this.getProductos()
     this.getBloqueados()
+    this.getProductos()
+    this.onlyCategory =  JSON.parse(localStorage.getItem('categorias'));
   }
 
-  ngAfterView(){
-    
-  }
+
 
   getProductos(){
     this._productosService.getProducts().subscribe(doc => {
@@ -73,11 +74,11 @@ export class GestionProductosComponent {
 
   getBloqueados(){
     this._productosService.getBloqueos().subscribe(doc => {
+      this.losBloqueados = []
       doc.forEach((element: any) => {
-        this.losBloqueados.push({
-          id: element.payload.doc.id,
-          ... element.payload.doc.data()
-        })
+        this.losBloqueados.push(
+          element.payload.doc.data().categoria
+        )
       })
     })
   }
@@ -155,7 +156,31 @@ export class GestionProductosComponent {
 
   altaBloqueo(){
     let categoria = document.getElementById('aBloquear').textContent
-    console.log(categoria)
+    this._productosService.getBloqueos().subscribe(doc => {
+      this.listado = []
+    doc.forEach((element: any) => {
+      this.listado.push({
+        id: element.payload.doc.id,
+        ... element.payload.doc.data()
+      })
+    })
+    console.log(`listado: ${this.listado}`)
+  })
+    
+    this.listado.push(categoria)
+    let prueba = {
+      categoria
+    }
+    console.log(`listado post: ${this.listado}`)
+    this._productosService.setBloqueos(prueba)
   }
 
+  bajaBloqueo(){
+    let categoria = document.getElementById('aDesbloquear').textContent
+    console.log(`categoria a eliminar: ${categoria}`)
+  }
+
+
+
 }
+
