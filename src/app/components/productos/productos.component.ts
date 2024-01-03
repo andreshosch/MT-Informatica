@@ -56,6 +56,8 @@ export class ProductosComponent {
   showProductosDestacados:boolean=false
   // Fin Productos destacados
 
+  
+
 
   constructor(private productosServices: ProductosService, private _config: NgbCarouselConfig, private dataService: DataService,
   private _mensaje:MensajeService, public _spinner:SppinerService,private renderer: Renderer2) {
@@ -66,6 +68,7 @@ export class ProductosComponent {
 
 
   ngOnInit() {
+    this.getBloqueados()
     this._spinner.showSpinner()
     this.arrayProducts()
     this.getProductos()
@@ -73,7 +76,6 @@ export class ProductosComponent {
       this.hayLogueado = isAuthenticated;
     
     });
-    this.getBloqueados()
   }
 
   loadFirstPage(products: any) {
@@ -161,7 +163,7 @@ export class ProductosComponent {
                   cantidad: 1
                 }
                 //Prueba bloqueo de categorias
-                if(!this.establoqueada(unProducto.subcategoria)){
+                if(!this.establoqueada(unProducto.categoria)){
                   this.arrProducts.push(unProducto)
                 }
 
@@ -367,6 +369,10 @@ getProductos(){
   get category(): any[] {
     this.onlyCategory = [...new Set(this.arrProducts.map(producto => producto.categoria))];
     this.onlyCategory.sort();
+    setTimeout(() => {
+      localStorage.setItem('categorias', JSON.stringify(this.onlyCategory));
+    }, 10000); 
+
     return this.onlyCategory
   }
 
@@ -423,10 +429,10 @@ modal(producto:any){
   this.selectedProduct=producto
   }
 
-  establoqueada(subcategoria: string): boolean {
+  establoqueada(categoria: string): boolean {
     let existe: boolean = false
     for (let j=0; j< this.bloqueados.length; j++){
-      if(this.bloqueados[j] === subcategoria){
+      if(this.bloqueados[j] === categoria){
         existe = true
       }
     }
@@ -436,15 +442,11 @@ modal(producto:any){
   getBloqueados(){
     this.productosServices.getBloqueos().subscribe(doc => {
       this.bloqueados = []
+      let catActual: string
       doc.forEach((element: any) => {
-        
-        this.bloqueados.push({
-          id: element.payload.doc.id,
-          ... element.payload.doc.data()
-        })
-     
+        catActual = element.payload.doc.data().categoria
+        this.bloqueados.push(catActual)
       })
-      console.log(`bloqueados: ${this.bloqueados}`)
     })
   }
   

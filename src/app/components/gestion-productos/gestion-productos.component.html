@@ -5,21 +5,17 @@
     <h3>Bloqueo de categorías</h3>
     <div class="estructura">
         <div class="izquierda">
-            <mat-select id="aBloquear">
-                <mat-option value="Notebook">Notebook</mat-option>
-                <mat-option value="Teve">Teve</mat-option>
-                <mat-option value="Radio">Radio</mat-option>
+            <mat-select id="aBloquear" *ngIf="onlyCategory">
+                <mat-option *ngFor="let category of onlyCategory" [value]="category">{{category}}</mat-option>
             </mat-select>
     
             <button (click)="altaBloqueo()">Bloquear</button>
         </div>
         <div class="derecha">
-            <mat-select>
-                <mat-option value="Notebook">Notebook</mat-option>
-                <mat-option value="Teve">Teve</mat-option>
-                <mat-option value="Radio">Radio</mat-option>
+            <mat-select id="aDesbloquear">
+                <mat-option *ngFor="let bloqueado of losBloqueados" [value]="bloqueado">{{bloqueado}}</mat-option>
             </mat-select>
-            <button>Desbloquear</button>
+            <button (click)="bajaBloqueo()">Desbloquear</button>
         </div>
     </div>
 </div>
