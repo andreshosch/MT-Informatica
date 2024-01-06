@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Usuario } from 'src/app/models/usuario';
 import { UsuariosService } from 'src/app/services/usuarios.service';
@@ -26,6 +26,7 @@ export class LoginComponent {
   login: boolean = true
   formRegistro: FormGroup
   updateUsr: FormGroup
+  updatePerfil: FormGroup
   listUsuario: Usuario[] = []
   usuariosRegistrados: Usuario[] = []
   loginUsr: FormGroup
@@ -35,6 +36,8 @@ export class LoginComponent {
   celular: number
   contrasena: string;
   usuarioSoporte: any;
+  modalPerfil: boolean = false
+  usuarioAuxiliar: any
 
   //Fin Login
 
@@ -69,6 +72,16 @@ export class LoginComponent {
       contrasenaNewFactor: ['', Validators.required],
     })
 
+    this.updatePerfil = this.fb.group({
+      mail: ['', Validators.required],
+      domicilio: ['', Validators.required],
+      telefono: ['', Validators.required],
+      provincia: ['', Validators.required],
+      localidad: ['', Validators.required],
+      codigoPostal: ['', Validators.required],
+      observaciones: [''],
+      estadoFiscal: ['', Validators.required],
+    })
   }
 
   ngOnInit() {
@@ -113,6 +126,7 @@ export class LoginComponent {
     localStorage.removeItem("hayUsuario");
     this.dataService.limpiar();
     this.dataService.actualizarEstadoLogin(false)
+    this.usuarioAuxiliar = null
   }
 
   cerrarLogin() {
@@ -175,7 +189,7 @@ export class LoginComponent {
 
       if (this.listUsuario[j].dni == this.usuario) {
         if (this.listUsuario[j].password === this.contrasena) {
-
+          this.usuarioAuxiliar = this.listUsuario[j]
           if (this.contrasena === 'MTInformatica1') {
             //Habilitar el cambio
             this._mensaje.snackBar("Debes cambiar la contraseña", "red")
@@ -296,6 +310,36 @@ export class LoginComponent {
       console.log(resultado)
     }
   }
+
+  abrirPerfil(){
+    this.modalPerfil = true;
+    this.updatePerfil.patchValue({
+      mail: this.usuarioAuxiliar.mail,
+      domicilio: this.usuarioAuxiliar.domicilio,
+      telefono: this.usuarioAuxiliar.celular,
+      provincia: this.usuarioAuxiliar.provincia,
+      localidad: this.usuarioAuxiliar.localidad,
+      codigoPostal: this.usuarioAuxiliar.codigoPostal,
+      observaciones: this.usuarioAuxiliar.observaciones,
+      estadoFiscal: this.usuarioAuxiliar.estadoFiscal
+    });
+  }
+
+  actualizarPerfil(){
+    this.usuarioAuxiliar.mail = this.updatePerfil.get('mail').value
+    this.usuarioAuxiliar.domicilio = this.updatePerfil.get('domicilio').value
+    this.usuarioAuxiliar.celular = this.updatePerfil.get('telefono').value
+    this.usuarioAuxiliar.provincia = this.updatePerfil.get('provincia').value
+    this.usuarioAuxiliar.localidad = this.updatePerfil.get('localidad').value
+    this.usuarioAuxiliar.codigoPostal = this.updatePerfil.get('codigoPostal').value
+    this.usuarioAuxiliar.observaciones = this.updatePerfil.get('observaciones').value
+    this.usuarioAuxiliar.estadoFiscal = this.updatePerfil.get('estadoFiscal').value
+    this._usuarioService.updateUsr(this.usuarioAuxiliar.id, this.usuarioAuxiliar)
+    this._mensaje.snackBar('Actualizaste correctamente tu perfil', 'green')
+    this.modalPerfil = false
+    this.updatePerfil.reset()
+  }
+
 
 
 }

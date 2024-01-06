@@ -8,7 +8,7 @@
     </div>
     <div class="containerLogin">
     <div class="nombreUser">
-        <p *ngIf="habilitar" class="nav-link userId"><span style="color: #107997; font-weight: bold;">Usuario:{{ this.nombre}} {{this.apellido}}</span></p>
+        <p *ngIf="habilitar" class="nav-link userId"><span style="color: #107997; font-weight: bold;">Usuario: {{ this.nombre}} {{this.apellido}} <mat-icon matTooltip="Actualizar perfil" class="hover-pointer" (click)="abrirPerfil()" >create</mat-icon></span></p>
     </div>
     
     <div class="carroYLogin">
@@ -184,3 +184,80 @@
         </div>
     </div>
 </div>
+
+
+
+<div class="confirmation-dialog" *ngIf="modalPerfil">
+    <div class="dialog-content">
+        <div class="login">
+            <h3>Actualización de perfil</h3>
+            <h4>{{usuarioAuxiliar.nombre}} {{usuarioAuxiliar.apellido}}</h4>
+            <form [formGroup]="updatePerfil" (ngSubmit)="actualizarPerfil()">
+                <mat-grid-list cols="8" rowHeight="70px" style="margin-top: 8%; margin-right: 6%;">
+                    <mat-grid-tile [colspan]="4" [rowspan]="1">
+                        <mat-form-field>
+                            <mat-label>Domicilio</mat-label>
+                            <input matInput formControlName="domicilio" value="{{usuarioAuxiliar.domicilio}}">
+                        </mat-form-field>
+                    </mat-grid-tile>
+                    <mat-grid-tile [colspan]="4" [rowspan]="1">
+                        <mat-form-field>
+                            <mat-label>Correo</mat-label>
+                            <input matInput formControlName="mail" value="{{usuarioAuxiliar.mail}}">
+                        </mat-form-field>
+                    </mat-grid-tile>
+                    <mat-grid-tile [colspan]="4" [rowspan]="1">
+                        <mat-form-field>
+                            <mat-label>Teléfono</mat-label>
+                            <input matInput formControlName="telefono" value="{{usuarioAuxiliar.celular}}">
+                        </mat-form-field>
+                    </mat-grid-tile>
+                    <mat-grid-tile [colspan]="4" [rowspan]="1">
+                        <mat-form-field>
+                            <mat-label>Provincia</mat-label>
+                            <input matInput formControlName="provincia" value="{{usuarioAuxiliar.provincia}}">
+                        </mat-form-field>
+                    </mat-grid-tile>
+                    <mat-grid-tile [colspan]="4" [rowspan]="1">
+                        <mat-form-field>
+                            <mat-label>Localidad</mat-label>
+                            <input matInput formControlName="localidad" value="{{usuarioAuxiliar.localidad}}">
+                        </mat-form-field>
+                    </mat-grid-tile>
+                    <mat-grid-tile [colspan]="4" [rowspan]="1">
+                        <mat-form-field>
+                            <mat-label>Codigo Postal</mat-label>
+                            <input matInput formControlName="codigoPostal" value="{{usuarioAuxiliar.codigoPostal}}">
+                        </mat-form-field>
+                    </mat-grid-tile>
+                    <mat-grid-tile [colspan]="4" [rowspan]="1">
+                        <mat-form-field>
+                            <mat-label>Situación Fiscal</mat-label>
+                            <mat-select formControlName="estadoFiscal">
+                                <mat-option value="ivaRespInscripto">IVA Responsable Inscripto</mat-option>
+                                <mat-option value="ivaExento">IVA Exento</mat-option>
+                                <mat-option value="monotributista">Monotributista</mat-option>
+                                <mat-option value="consumidorFinal">Consumidor final</mat-option>
+                                <mat-option value="indefinido">No lo sé</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </mat-grid-tile>
+                    <mat-grid-tile [colspan]="4" [rowspan]="1">
+                        <mat-form-field>
+                            <mat-label>Observaciones</mat-label>
+                            <input matInput formControlName="observaciones" value="{{usuarioAuxiliar.observaciones}}">
+                        </mat-form-field>
+                    </mat-grid-tile>
+
+                </mat-grid-list>
+                <div class="registroycancel">
+                    <button type="submit" mat-raised-button color="primary"
+                    [disabled]="!updatePerfil.valid">Actualizar</button>
+                    <button (click)="modalPerfil=false" mat-raised-button color="primary">Cancelar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+

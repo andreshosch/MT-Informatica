@@ -90,3 +90,6 @@
   text-decoration:dotted ;
 }
 
+.hover-pointer:hover {
+  cursor: pointer;
+}

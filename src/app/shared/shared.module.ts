@@ -11,6 +11,7 @@ import {MatSortModule} from '@angular/material/sort';
 import {MatSnackBarModule} from '@angular/material/snack-bar'
 import { MatSelectModule } from '@angular/material/select';
 import { MatMenuModule } from '@angular/material/menu';
+import { MatTooltipModule } from "@angular/material/tooltip";
 
 
 @NgModule({
@@ -26,7 +27,8 @@ import { MatMenuModule } from '@angular/material/menu';
       MatSortModule,
       MatSnackBarModule,
       MatSelectModule,
-      MatMenuModule
+      MatMenuModule,
+      MatTooltipModule
     ],
     exports: [
       MatFormFieldModule,
@@ -40,6 +42,7 @@ import { MatMenuModule } from '@angular/material/menu';
       MatSnackBarModule,
       MatSelectModule,
       MatMenuModule,
+      MatTooltipModule
     ]
   })
   export class SharedModule { }
