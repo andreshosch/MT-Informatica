@@ -366,12 +366,19 @@ getProductos(){
 
   // obteber array con las categorias subcategorias y marcas para la busqueda filtrada
 
+
   get category(): any[] {
     this.onlyCategory = [...new Set(this.arrProducts.map(producto => producto.categoria))];
     this.onlyCategory.sort();
-    setTimeout(() => {
-      localStorage.setItem('categorias', JSON.stringify(this.onlyCategory));
-    }, 10000); 
+
+    const categoriesSaved = sessionStorage.getItem('categoriesSaved');
+
+    if (!categoriesSaved) {
+      setTimeout(() => {
+        localStorage.setItem('categorias', JSON.stringify(this.onlyCategory));
+        sessionStorage.setItem('categoriesSaved', 'true');
+      }, 10000);
+    }
 
     return this.onlyCategory
   }
@@ -462,11 +469,4 @@ modal(producto:any){
 }
   
 //---------------------------------------------------------------------------------------------
-
-
-
-
-
-
-
 

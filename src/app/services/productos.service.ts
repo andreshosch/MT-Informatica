@@ -49,14 +49,16 @@ getProductById(id:string): Observable<any> {
   return this.firestore.collection('Productos').doc(id).valueChanges()
 }
 
- updateProduct(id: string, cliente: any): Promise<any> {
-   return this.firestore.collection('Productos').doc(id).update(cliente);
- }
-
-
+updateProduct(id: string, cliente: any): Promise<any> {
+  return this.firestore.collection('Productos').doc(id).update(cliente);
+}
 
 getBloqueos(): Observable<any>{
   return this.firestore.collection('Bloqueos').snapshotChanges()
+}
+
+deleteBloqueo(id: string): Promise<any> {
+  return this.firestore.collection('Bloqueos').doc(id).delete();
 }
 
 setBloqueos(categoria: any): Promise<any>{

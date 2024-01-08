@@ -192,6 +192,7 @@
         <div class="login">
             <h3>Actualización de perfil</h3>
             <h4>{{usuarioAuxiliar.nombre}} {{usuarioAuxiliar.apellido}}</h4>
+            <mat-divider></mat-divider>
             <form [formGroup]="updatePerfil" (ngSubmit)="actualizarPerfil()">
                 <mat-grid-list cols="8" rowHeight="70px" style="margin-top: 8%; margin-right: 6%;">
                     <mat-grid-tile [colspan]="4" [rowspan]="1">

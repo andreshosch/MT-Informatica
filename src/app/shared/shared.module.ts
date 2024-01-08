@@ -12,6 +12,7 @@ import {MatSnackBarModule} from '@angular/material/snack-bar'
 import { MatSelectModule } from '@angular/material/select';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatTooltipModule } from "@angular/material/tooltip";
+import { MatDividerModule } from "@angular/material/divider";
 
 
 @NgModule({
@@ -28,7 +29,8 @@ import { MatTooltipModule } from "@angular/material/tooltip";
       MatSnackBarModule,
       MatSelectModule,
       MatMenuModule,
-      MatTooltipModule
+      MatTooltipModule,
+      MatDividerModule
     ],
     exports: [
       MatFormFieldModule,
@@ -42,7 +44,8 @@ import { MatTooltipModule } from "@angular/material/tooltip";
       MatSnackBarModule,
       MatSelectModule,
       MatMenuModule,
-      MatTooltipModule
+      MatTooltipModule,
+      MatDividerModule
     ]
   })
   export class SharedModule { }

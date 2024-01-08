@@ -157,31 +157,40 @@ export class GestionProductosComponent {
 
   altaBloqueo(){
     let categoria = document.getElementById('aBloquear').textContent
-    this._productosService.getBloqueos().subscribe(doc => {
-      this.listado = []
-    doc.forEach((element: any) => {
-      this.listado.push({
-        id: element.payload.doc.id,
-        ... element.payload.doc.data()
-      })
-    })
-    console.log(`listado: ${this.listado}`)
-  })
+
+    if(categoria){
+      let prueba = {
+        categoria
+      }
+      this._productosService.setBloqueos(prueba)
+      this.onlyCategory = this.onlyCategory.filter(category => category !== categoria);
+      this._mensaje.snackBar('Categoría bloqueada correctamente', 'green')
+    } 
+  //   this._productosService.getBloqueos().subscribe(doc => {
+  //     this.listado = []
+  //   doc.forEach((element: any) => {
+  //     this.listado.push({
+  //       id: element.payload.doc.id,
+  //       ... element.payload.doc.data()
+  //     })
+  //   })
+  //   console.log(`listado: ${this.listado}`)
+  // })
     
-    this.listado.push(categoria)
+  //   this.listado.push(categoria)
+  }
+
+bajaBloqueo(){
+  let categoria = document.getElementById('aDesbloquear').textContent
+  console.log(`bloqueados: ${JSON.stringify(this.losBloqueados)}`)
+  console.log(`catt: ${JSON.stringify(this.onlyCategory)}`)
+  if(categoria){
     let prueba = {
       categoria
     }
-    console.log(`listado post: ${this.listado}`)
-    this._productosService.setBloqueos(prueba)
+    this._productosService.deleteBloqueo(categoria)
   }
-
-  bajaBloqueo(){
-    let categoria = document.getElementById('aDesbloquear').textContent
-    console.log(`categoria a eliminar: ${categoria}`)
-  }
-
-
-
+  
 }
 
+}
