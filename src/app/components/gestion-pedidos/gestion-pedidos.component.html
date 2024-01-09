@@ -152,6 +152,8 @@
                         <th mat-header-cell *matHeaderCellDef mat-sort-header>Acciones</th>
                         <td mat-cell *matCellDef="let element; let pos = index">
                             <a (click)="showModalTransporteyFinalizado(element, pos)"><mat-icon style="cursor: pointer;" title="Ver Pedido">visibility</mat-icon></a>
+                            <a (click)="envioSeguimiento(element.id)" title="Cargar Seguimiento" style="cursor: pointer;"><mat-icon>
+                                list_alt</mat-icon> </a>
                             <a (click)="AceptarPedido(element.id,'Pedidos En Transporte','Pedidos Finalizados')"
                                 title="Finalizar Pedido" style="cursor: pointer;"><mat-icon> check_circle</mat-icon>
                             </a>
@@ -230,7 +232,7 @@
                     <h2>Pedido de {{pedido.nombre}} {{pedido.apellido}}</h2>
                     <h6 style="text-align: left;">Fecha Pedido: {{pedido.fecha}}</h6>
                     <h6 style="text-align: left;">Nro Contacto: {{pedido.celular}}</h6>
-                    <h6 *ngIf="showTransporte" style="text-align: left;">Nombre Transporte: {{pedido.transporte}}</h6>
+                    <h6 *ngIf="showNombreTransporte" style="text-align: left;">Nombre Transporte: {{pedido.transporte}}</h6>
                     <h6 *ngIf="showCodigoSeguimiento" style="text-align: left;">Nro Seguimiento: {{pedido.seguimiento}}</h6>
                     <div *ngFor="let carro of pedido.carrito ;let i=index" class="card">
 
@@ -353,20 +355,35 @@
                 <mat-grid-list cols="4" rowHeight="70px" style="margin-top: 8%; margin-right: 6%;">
                     <mat-grid-tile [colspan]="4" [rowspan]="1">
                         <mat-form-field>
-                            <mat-label>Nombre Transporte</mat-label>
-                            <input matInput formControlName="transporte">
-                        </mat-form-field>
-                    </mat-grid-tile>
-                    <mat-grid-tile [colspan]="4" [rowspan]="1">
-                        <mat-form-field>
                             <mat-label>Nro. Seguimiento</mat-label>
                             <input matInput formControlName="seguimiento">
                         </mat-form-field>
                     </mat-grid-tile>
                 </mat-grid-list>
                 <div class="centrado">
-                    <button (click)="AceptarPedido(this.elementoActual,'Pedidos En Curso','Pedidos En Transporte')" type="submit" mat-raised-button color="primary">Guardar</button>
+                    <button type="submit" mat-raised-button color="primary">Guardar</button>
                     <button (click)="cerrarSeguimiento()" mat-raised-button color="primary">Cancelar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="confirmation-dialog" *ngIf="showTransporte">
+    <div class="dialog-content">
+        <div class="login">
+            <form [formGroup]="formTransporte" (ngSubmit)="updateTransporte()">
+                <mat-grid-list cols="4" rowHeight="70px" style="margin-top: 8%; margin-right: 6%;">
+                    <mat-grid-tile [colspan]="4" [rowspan]="1">
+                        <mat-form-field>
+                            <mat-label>Nombre Transporte</mat-label>
+                            <input matInput formControlName="transporte">
+                        </mat-form-field>
+                    </mat-grid-tile>
+                </mat-grid-list>
+                <div class="centrado">
+                    <button (click)="AceptarPedido(this.elementoActual,'Pedidos En Curso','Pedidos En Transporte')" type="submit" mat-raised-button color="primary">Guardar</button>
+                    <button (click)="cerrarTransporte()" mat-raised-button color="primary">Cancelar</button>
                 </div>
             </form>
         </div>

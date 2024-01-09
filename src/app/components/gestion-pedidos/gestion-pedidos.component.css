@@ -229,8 +229,12 @@
 
 .centrado{
   text-align: center;
+  
 }
 
 .centrado button{
-  width: 40%;
+  width: 20%;
+  margin:0 5px;
+  background-color:#107997;
+  color: white;  
 }

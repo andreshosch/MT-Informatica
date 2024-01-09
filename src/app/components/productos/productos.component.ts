@@ -172,7 +172,7 @@ export class ProductosComponent {
               }
               // this.arrProducts.push(...this.arrProductos)
               this.loadFirstPage(this.arrProducts)
-              console.log(this.arrProducts)
+              
             })
         }
        }

@@ -1,7 +1,6 @@
 import { ChangeDetectorRef, Component, ViewChild } from '@angular/core';
 import { PedidosService } from 'src/app/services/pedidos.service';
 import { MatTableDataSource } from '@angular/material/table';
-import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Pedido } from 'src/app/models/pedido';
@@ -9,6 +8,7 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { DataService } from 'src/app/services/data.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { SppinerService } from 'src/app/services/sppiner.service';
+import { MensajeService } from 'src/app/services/mensaje.service';
 
 
 @Component({
@@ -24,6 +24,7 @@ export class GestionPedidosComponent {
   pedidosFinalizados: any[] = []
   pedidosAux: any[] = []
   formSeguimiento:FormGroup
+  formTransporte:FormGroup
   total: number = 0;
   monto:number=0
   pedido:any
@@ -36,6 +37,7 @@ export class GestionPedidosComponent {
   showTransporte:boolean=false
   showActualizar:boolean=true
   showCodigoSeguimiento:boolean=false
+  showNombreTransporte:boolean=false
   indicePedidoPendiente: number
   elementoActual: string
   loading:boolean=true
@@ -129,13 +131,14 @@ export class GestionPedidosComponent {
    dataSource.filter = filterValue.trim().toLowerCase()
   }
   
-  constructor(private _gestionPedido: PedidosService, private _snackBar: MatSnackBar,private fb:FormBuilder, private firestore: AngularFirestore,private dataService: DataService, private cdr: ChangeDetectorRef, public _spinner:SppinerService) {
+  constructor(private _gestionPedido: PedidosService,private fb:FormBuilder, private firestore: AngularFirestore, private cdr: ChangeDetectorRef, public _spinner:SppinerService, private _mensaje:MensajeService) {
   
     this.formSeguimiento=this.fb.group({
-      transporte:['',Validators.required],
       seguimiento:['',Validators.required],
     })
-  
+    this.formTransporte=this.fb.group({
+      transporte:['',Validators.required],
+    })
   }
 
   ngOnInit() {
@@ -146,13 +149,22 @@ export class GestionPedidosComponent {
      this.getPedidosFinalizados()
   }
 
-  updateSeguimiento(id:string)
+  updateSeguimiento()
   {
+    this.showSeguimiento=false
       const unPedido={
-      transporte: this.formSeguimiento.get('transporte').value,
       seguimiento: this.formSeguimiento.get('seguimiento').value,
     }
-    console.log(unPedido)
+    this._gestionPedido.updatePedido(this.elementoActual,'Pedidos En Transporte',unPedido)
+    this._mensaje.snackBar('Se ha actualizado el nro de seguimiento','green')
+  }
+
+  updateTransporte()
+  {
+    this.showTransporte=false
+      const unPedido={
+      transporte: this.formTransporte.get('transporte').value,
+    }
     this._gestionPedido.updatePedido(this.elementoActual,'Pedidos En Curso',unPedido)
   }
   
@@ -237,17 +249,50 @@ export class GestionPedidosComponent {
         console.error('El elemento no existe en la colección de origen');
       }
     });
-
+     switch(coleccionDestino)
+     {
+      case 'Pedidos En Curso':
+        this._mensaje.snackBar('El Pedido se encuentra en curso ','green')
+        break;
+        case 'Pedidos En Transporte':
+          this._mensaje.snackBar('El Pedido se encuentra en Transporte ','green')
+          break;
+          case 'Pedidos Finalizados':
+          this._mensaje.snackBar('El Pedido ha finalizado ','green')
+          break;
+     }
   }
 
   envioTransporte(element:string){
+    this.showTransporte=true
+    console.log(element)
+    this.elementoActual = element
+    // this.AceptarPedido(this.elementoActual,'Pedidos En Curso','Pedidos En Transporte')
+  }
+
+  envioSeguimiento(element:string){
     this.showSeguimiento=true
     console.log(element)
     this.elementoActual = element
     // this.AceptarPedido(this.elementoActual,'Pedidos En Curso','Pedidos En Transporte')
   }
+
 cerrarSeguimiento(){
+  this.formSeguimiento.patchValue({
+    seguimiento:''
+  })
+  this.formSeguimiento.markAsPristine();
+  this.formSeguimiento.markAsUntouched();
   this.showSeguimiento=false
+}
+
+cerrarTransporte(){
+  this.formTransporte.patchValue({
+    transporte:''
+  })
+  this.formTransporte.markAsPristine();
+  this.formTransporte.markAsUntouched();
+  this.showTransporte=false
 }
   deletePedidoPendienteId(id: string, coleccion: string) {
     this._gestionPedido.deletePedidoPorId(id, coleccion)
@@ -261,7 +306,7 @@ showModalPendientes(element:any, mindice: number, estado: string){
   this.showResta=true
   this.showSuma=true
   this.pedido=element
-  this.showTransporte=false
+  this.showNombreTransporte=false
   this.showCodigoSeguimiento=false
 }
 
@@ -272,7 +317,7 @@ showModalEnCurso(element:any){
   this.showActualizar=false
   this.showEliminar=false
   this.carritoHabilitado=true
-  this.showTransporte=false
+  this.showNombreTransporte=false
   this.showCodigoSeguimiento=false
   this.pedido=element
 }
@@ -285,9 +330,22 @@ showModalTransporteyFinalizado(element:any){
   this.showEliminar=false
   this.carritoHabilitado=true
   this.showActualizar=false
- this.showCodigoSeguimiento=true
- this.showTransporte=true
   this.pedido=element
+  if(this.pedido?.transporte)
+  {
+    this.showNombreTransporte=true
+  }
+  else{
+this.showNombreTransporte=false
+  }
+
+  if(this.pedido?.seguimiento)
+  {
+    this.showCodigoSeguimiento=true
+  }
+  else{
+this.showCodigoSeguimiento=false
+  }
 }
 
 hideCarrito(){
