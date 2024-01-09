@@ -62,4 +62,29 @@
     height:auto;
     display: flex;
 }
+.whatsapp-container {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 1000;
+  width: 70px; /* Ancho cuadrado */
+  height: 70px; /* Alto cuadrado */
+}
 
+/* Estilos para el botón de WhatsApp */
+.whatsapp-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #25D366; /* Color verde de WhatsApp */
+  color: #fff;
+  text-decoration: none;
+  padding: 10px;
+  border-radius: 50%;
+  font-size: 50px;
+  transition: background-color 0.3s ease;
+}
+
+.whatsapp-btn:hover {
+  background-color: #128C7E; /* Cambio de color al pasar el ratón */
+}

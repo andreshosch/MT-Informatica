@@ -29,6 +29,7 @@ export class GestionUsuariosComponent {
   mostrarFicha: boolean = false
   fichaDetalle: Usuario
   ordenActual: 'asc' | 'desc' | 'original' = 'asc';
+  showSolicitudPendiente:boolean=false
 
 
 
@@ -140,9 +141,19 @@ export class GestionUsuariosComponent {
           ...element.payload.doc.data()
         })
       })
+      console.log(this.usuariosEnEspera)
+      if (this.usuariosEnEspera.length>0)
+    {
+      this.showSolicitudPendiente=true
+    }
+      else{
+        this.showSolicitudPendiente=false
+      }
     })
-  }
-
+  
+    
+    }
+  
   aceptarUsr(id: string) {
     let posicion = 0
     for (let j = 0; j < this.usuariosEnEspera.length; j++) {
