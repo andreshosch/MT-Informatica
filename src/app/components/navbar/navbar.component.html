@@ -10,9 +10,17 @@
         <a class="nav-link" href="#">Nosotros</a>
         <a class="nav-link" aria-current="page"href="./contacto">Contactos</a>
         <a class="nav-link"href="#">Servicios</a>
-        <a *ngIf="isAdmin"class="nav-link" href="./gestionUsr">Gestión de Usuarios</a>
-        <a *ngIf="isAdmin"class="nav-link" href="./gestion">Gestión de Productos</a>
-        <a *ngIf="isAdmin"class="nav-link" href="./gestionPedido">Gestión de Pedidos</a>
+        <div *ngIf="isAdmin" class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Gestiones
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="./gestionUsr">Usuarios</a>
+            <a class="dropdown-item" href="./gestion">Productos</a>
+            <a class="dropdown-item" href="./gestionPedido">Pedidos</a>
+            <a class="dropdown-item" href="./gestionPago">Pagos</a>
+          </div>
+        </div>
       </div>
     </div>
   </div>

@@ -23,10 +23,14 @@ export class CarritoComponent {
   @Input() apellido: string
   @Input() celular: number
 
-  //Inicio Carrito
   carritoHabilitado: boolean = false
   carritoVacio: boolean = false
-  //Fin Carrito
+  
+
+  //Traer datos de coleccion... 
+  metodoPago: string[] = ['Link de pago', 'Transferencia', 'Mercado Pago'];
+  seleccionPago: string = this.metodoPago[0]
+  
 
   constructor(private dataService: DataService, private pedidosService: PedidosService, private _mensaje:MensajeService) {
 

@@ -27,6 +27,7 @@ import { GestionPedidosComponent } from './components/gestion-pedidos/gestion-pe
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { SpinnerComponent } from './components/spinner/spinner.component';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { GestionPagoComponent } from './components/gestion-pago/gestion-pago.component';
 
 
 @NgModule({
@@ -44,6 +45,7 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
     CarritoComponent,
     GestionPedidosComponent,
     SpinnerComponent,
+    GestionPagoComponent,
    
     
     

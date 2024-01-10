@@ -13,7 +13,7 @@
         </div>
         <div class="derecha">
             <mat-select id="aDesbloquear">
-                <mat-option *ngFor="let bloqueado of losBloqueados" [value]="bloqueado">{{bloqueado}}</mat-option>
+                <mat-option *ngFor="let bloqueado of losBloqueados" [value]="bloqueado">{{bloqueado.categoria}}</mat-option>
             </mat-select>
             <button (click)="bajaBloqueo()">Desbloquear</button>
         </div>

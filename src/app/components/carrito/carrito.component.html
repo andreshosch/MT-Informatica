@@ -125,17 +125,16 @@
                             </table>
                         </div>
     
+                        <br><br>
+                        <label id="example-radio-group-label">Seleccione método de pago</label>
+                        <mat-radio-group aria-labelledby="example-radio-group-label" class="radio-group" [(ngModel)]="seleccionPago">
+                            <mat-radio-button class="radio-button" *ngFor="let metodo of metodoPago" [value]="metodo">{{metodo}}</mat-radio-button>
+                        </mat-radio-group>
+                        <div>Tu selección de pago: {{seleccionPago}}</div>
+
                         <br>
-                        <button mat-raised-button color="primary" (click)="mostrarCarrito()">Cargar Pedido</button>
+                        <button mat-raised-button color="primary" (click)="mostrarCarrito()">Confirmar pedido</button>
                         <br>
-    
-                        <button id="checkout-btn">Checkout</button>
-                        <!-- <button mat-raised-button color="primary">Pagar con Mercado Pago</button> -->
-    
-                        
-                        <div id="button-checkout">
-    
-                        </div>
     
                     </div>
                 </div>

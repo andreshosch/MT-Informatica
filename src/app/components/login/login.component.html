@@ -14,11 +14,10 @@
     <div class="carroYLogin">
         <app-carrito [usuario]="usuario" [nombre]="nombre" [apellido]="apellido" [celular]="celular" *ngIf="hayUsuario"
             class="nav-link"></app-carrito>
-        <a *ngIf="habilitar" class="nav-link" (click)="desloguear()"><mat-icon style="background-color: lightgray; color:#107997;font-weight: bold;"
+        <a *ngIf="habilitar" class="nav-link" (click)="desloguear()" href=""><mat-icon style="background-color: lightgray; color:#107997;font-weight: bold;"
                 title="Salir">exit_to_app</mat-icon></a>
     </div>
 </div>
-
 
 <div class="confirmation-dialog" *ngIf="loginProgress || dataService.loginProgressData">
     <div class="dialog-content">

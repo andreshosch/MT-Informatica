@@ -19,9 +19,10 @@ export class GestionProductosComponent {
   modificarProd: FormGroup
   modalActivo: boolean = false
   idProducto: string
-  losBloqueados: string[] = []
+  losBloqueados: any[] = []
   imagenesArray:string[]=[]
   onlyCategory: any;
+
     
 
   constructor(private _productosService: ProductosService, private fb: FormBuilder,private _mensaje:MensajeService, public _spinner:SppinerService){
@@ -78,9 +79,10 @@ export class GestionProductosComponent {
     this._productosService.getBloqueos().subscribe(doc => {
       this.losBloqueados = []
       doc.forEach((element: any) => {
-        this.losBloqueados.push(
-          element.payload.doc.data().categoria
-        )
+        this.losBloqueados.push({    
+          id: element.payload.doc.id,
+          categoria: element.payload.doc.data().categoria
+      })
       })
     })
   }
@@ -166,31 +168,13 @@ export class GestionProductosComponent {
       this.onlyCategory = this.onlyCategory.filter(category => category !== categoria);
       this._mensaje.snackBar('Categoría bloqueada correctamente', 'green')
     } 
-  //   this._productosService.getBloqueos().subscribe(doc => {
-  //     this.listado = []
-  //   doc.forEach((element: any) => {
-  //     this.listado.push({
-  //       id: element.payload.doc.id,
-  //       ... element.payload.doc.data()
-  //     })
-  //   })
-  //   console.log(`listado: ${this.listado}`)
-  // })
-    
-  //   this.listado.push(categoria)
   }
 
 bajaBloqueo(){
   let categoria = document.getElementById('aDesbloquear').textContent
-  console.log(`bloqueados: ${JSON.stringify(this.losBloqueados)}`)
-  console.log(`catt: ${JSON.stringify(this.onlyCategory)}`)
-  if(categoria){
-    let prueba = {
-      categoria
-    }
-    this._productosService.deleteBloqueo(categoria)
-  }
-  
+  const index = this.losBloqueados.findIndex(objeto => objeto.categoria === categoria)
+  this._productosService.deleteBloqueo(this.losBloqueados[index].id)
+  this._mensaje.snackBar('Categoría desbloqueada correctamente', 'green')
 }
 
 }
