@@ -179,6 +179,8 @@ export class GestionUsuariosComponent {
     }
     this._usuariosService.createUser(unUsuario)
     console.log(`Se creo el usuario: ${JSON.stringify(unUsuario)}`)
+    console.log(unUsuario.celular)
+    window.open(`https://api.whatsapp.com/send?phone=${unUsuario.celular}`);
     this._usuariosService.deleteSolicitudPorId(id)
     console.log(`Se borró el usuario: ${id}`)
 
