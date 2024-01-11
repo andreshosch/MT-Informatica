@@ -8,16 +8,17 @@
         
             <div class="card">
                 <h6><strong>DNI: </strong>{{solicitud.dni}}</h6>
-                <h6>Nombre: {{solicitud.nombre}}</h6>
-                <h6>Apellido: {{solicitud.apellido}}</h6>
-                <h6>Mail: {{solicitud.mail}}</h6>
-                <h6>Telefono: {{solicitud.celular}}</h6>
-                <h6>Domicilio: {{solicitud.domicilio}}</h6>
-                <h6>Provincia: {{solicitud.provincia}}</h6>
-                <h6>Localidad: {{solicitud.localidad}}</h6>
-                <h6>Codigo Postal: {{solicitud.codigoPostal}}</h6>
-                <h6>Situación Fiscal: {{solicitud.estadoFiscal}}</h6>
-                <h6>Observaciones: {{solicitud.observaciones}}</h6>
+                <h6><strong>Nombre: </strong>{{solicitud.nombre}}</h6>
+                <h6><strong>Apellido: </strong>{{solicitud.apellido}}</h6>
+                <h6><strong>Mail: </strong>{{solicitud.mail}}</h6>
+                <h6><strong>Telefono: </strong>{{solicitud.celular}}</h6>
+                <h6><strong>Domicilio: </strong>{{solicitud.domicilio}}</h6>
+                <h6><strong>Provincia: </strong>{{solicitud.provincia}}</h6>
+                <h6><strong>Localidad: </strong>{{solicitud.localidad}}</h6>
+                <h6><strong>Codigo Postal: </strong>{{solicitud.codigoPostal}}</h6>
+                <h6><strong>Situación Fiscal: </strong>{{solicitud.estadoFiscal}}</h6>
+                <h6 *ngIf="solicitud.cuit"><strong>CUIT: </strong>{{solicitud.cuit}}</h6>
+                <h6 *ngIf="solicitud.observaciones"><strong>Observaciones: </strong>{{solicitud.observaciones}}</h6>
                 <div>
                     <button (click)="aceptarUsr(solicitud.id)" mat-raised-button color="primary">Aceptar</button>  
                     <button (click)="eliminarSolicitud(solicitud.id)" mat-raised-button color="primary">Eliminar</button>

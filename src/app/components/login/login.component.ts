@@ -22,6 +22,7 @@ export class LoginComponent {
   hayUsuario: boolean = false
   loginProgress: boolean = false
   actualizarPass: boolean = false
+  noRequerido: boolean = true
 
   login: boolean = true
   formRegistro: FormGroup
@@ -55,7 +56,7 @@ export class LoginComponent {
       contrasena: ['', Validators.required],
       mail: ['', Validators.required],
       dni: ['', Validators.required],
-      cuit: [''],
+      cuit: [{value: '', disabled: this.noRequerido}, this.getValidators(this.noRequerido)],
       domicilio: ['', Validators.required],
       telefono: ['', Validators.required],
       provincia: ['', Validators.required],
@@ -82,6 +83,20 @@ export class LoginComponent {
       observaciones: [''],
       estadoFiscal: ['', Validators.required],
     })
+
+    this.formRegistro.controls['estadoFiscal'].valueChanges.subscribe(val => {
+      this.noRequerido = ((val === 'IVA Resp Inscripto') || (val === 'IVA Exento') || (val === 'Monotributista'))
+      if(this.noRequerido){
+        this.formRegistro.get('cuit').enable();
+      }
+      else{
+        this.formRegistro.get('cuit').disable();
+      }
+    })
+  }
+
+  getValidators(isRequired: boolean) {
+    return isRequired ? Validators.required : null;
   }
 
   ngOnInit() {
@@ -287,6 +302,7 @@ export class LoginComponent {
         codigoPostal: this.formRegistro.get('codigoPostal').value,
         observaciones: this.formRegistro.get('observaciones').value,
         estadoFiscal: this.formRegistro.get('estadoFiscal').value,
+        cuit: this.formRegistro.get('cuit').value
       }
       const formData: any = this.formRegistro.value
       const formUrl = 'https://formspree.io/f/maygvrgw'
