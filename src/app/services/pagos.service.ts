@@ -19,6 +19,10 @@ export class PagosService {
     
   }
 
+  deletePago(id: string): Promise<any> {
+    return this.firestore.collection('tablaPagos').doc(id).delete();
+  }
+
 
 }
 

@@ -14,12 +14,19 @@ export class GestionPagoComponent {
   dataSourcePagos!: MatTableDataSource<any>;
   displayedColumns: string[] = ['metodo', 'porcentaje', 'acciones'];
   formMetodo: FormGroup
+  updateMetodo: FormGroup
+  actualizarPago: boolean = false
 
   constructor(private _pagosService: PagosService, private fb:FormBuilder){
 
     this.dataSourcePagos = new MatTableDataSource(this.tablaPagos);
 
     this.formMetodo=this.fb.group({
+      metodo:['',Validators.required],
+      porcentaje:['',Validators.required],
+    })
+
+    this.updateMetodo = this.fb.group({
       metodo:['',Validators.required],
       porcentaje:['',Validators.required],
     })
@@ -48,6 +55,20 @@ export class GestionPagoComponent {
       porcentaje: this.formMetodo.get('porcentaje').value,
     }
     this._pagosService.createPagos(newMetodo)
+  }
+
+  eliminarPago(id: string){
+    this._pagosService.deletePago(id)
+  }
+
+  actualizarMetodoPago(){
+
+  }
+
+  modificarPago(id: string, indice: number){
+    console.log(`indice: ${indice}`)
+    console.log(`Metodo: ${JSON.stringify(this.tablaPagos[indice])}`)
+    this.actualizarPago = true
   }
 
 }

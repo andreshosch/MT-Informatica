@@ -4,6 +4,7 @@ import { PedidosService } from 'src/app/services/pedidos.service';
 import { Pedido } from 'src/app/models/pedido';
 import { format } from 'date-fns';
 import {MensajeService} from 'src/app/services/mensaje.service'
+import { PagosService } from 'src/app/services/pagos.service';
 
 
 @Component({
@@ -25,14 +26,17 @@ export class CarritoComponent {
 
   carritoHabilitado: boolean = false
   carritoVacio: boolean = false
+  incremento: number = 0
+  montoIncremento = 0
   
 
   //Traer datos de coleccion... 
-  metodoPago: string[] = ['Link de pago', 'Transferencia', 'Mercado Pago'];
+  // metodoPago: string[] = ['Link de pago', 'Transferencia', 'Mercado Pago'];
+  metodoPago: any[] = []
   seleccionPago: string = this.metodoPago[0]
   
 
-  constructor(private dataService: DataService, private pedidosService: PedidosService, private _mensaje:MensajeService) {
+  constructor(private dataService: DataService, private pedidosService: PedidosService, private _mensaje:MensajeService, private _pagosService: PagosService) {
 
   }
 
@@ -40,6 +44,22 @@ export class CarritoComponent {
     let arregloLS = JSON.parse(localStorage.getItem("hayUsuario"));
     let usuarioLog: any = arregloLS[0]
     this.carritoGuardado(usuarioLog)
+    this.getTablaPagos()
+  }
+
+  getTablaPagos(){
+    this._pagosService.getPagos().subscribe(doc => {
+      this.metodoPago = []
+      doc.forEach((element: any) => {
+        this.metodoPago.push({
+          ...element.payload.doc.data()
+        })
+      })
+    })
+  }
+
+  mostrarMetodos(){
+    console.log(`metodos: ${JSON.stringify(this.metodoPago)}`)
   }
 
   guardarPedido() {
@@ -64,6 +84,7 @@ export class CarritoComponent {
     this.productos = [];
     this.total = 0
     this.monto = 0
+    this.incremento = 0
     this.actualizarResumen()
   }
 
@@ -129,16 +150,18 @@ export class CarritoComponent {
       this.productos = productos;
       this.total = 0
       this.monto = 0
+      this.incremento = 0
       for (let j = 0; j < this.productos.length; j++) {
         this.monto = this.monto + (parseInt(productos[j].addProducto.precio) * parseInt(productos[j].addProducto.cantidad))
         this.total = this.total + parseInt(productos[j].addProducto.cantidad)
       }
+    this.montoIncremento = this.incremento > 0? (this.monto * this.incremento / 100 + this.monto) : this.monto  
+
     });
   }
 
   mostrarCarrito() {
     let userActual: any = this.usuario
-    console.log(`usuario: ${userActual}`)
     let unPedido: Pedido = {
       carrito: this.productos,
       idUser: this.usuario,
@@ -147,11 +170,11 @@ export class CarritoComponent {
       apellido: this.apellido,
       celular: this.celular
     }
-    console.log(unPedido)
     this.pedidosService.createPedido(unPedido, 'Pedidos Pendientes')
     this.productos = []
     this.total = 0
     this.monto = 0
+    this.incremento = 0
      this._mensaje.snackBar("Carrito creado correctamente",'green')
     this.dataService.limpiar()
     this.ocultarCarrito();
@@ -161,5 +184,15 @@ export class CarritoComponent {
   formatFecha() {
     return format(this.fechaActual, 'dd/MM/yyyy - HH:mm');
   }
+
+
+  seleccionCambiada() {
+    const indiceSeleccionado = this.metodoPago.findIndex(metodo => metodo.metodo === this.seleccionPago);
+    this.incremento = this.metodoPago[indiceSeleccionado].porcentaje
+    this.montoIncremento = this.incremento > 0? (this.monto * this.incremento / 100 + this.monto) : this.monto  
+    console.log(`incremento: ${this.incremento}`)
+    console.log(`valor: ${this.montoIncremento}`)
+  }
+
   }
 
