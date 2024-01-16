@@ -23,6 +23,10 @@ export class PagosService {
     return this.firestore.collection('tablaPagos').doc(id).delete();
   }
 
+  updatePago(id: string, pago: any): Promise<any> {
+    return this.firestore.collection('tablaPagos').doc(id).update(pago);
+  }
+
 
 }
 

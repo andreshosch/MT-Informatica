@@ -16,6 +16,7 @@ export class GestionPagoComponent {
   formMetodo: FormGroup
   updateMetodo: FormGroup
   actualizarPago: boolean = false
+  idAuxiliar: string = ""
 
   constructor(private _pagosService: PagosService, private fb:FormBuilder){
 
@@ -62,13 +63,21 @@ export class GestionPagoComponent {
   }
 
   actualizarMetodoPago(){
-
+    const metodoAuxiliar = {
+      metodo: this.updateMetodo.get('metodo').value,
+      porcentaje: this.updateMetodo.get('porcentaje').value, 
+    }
+    this._pagosService.updatePago(this.idAuxiliar, metodoAuxiliar)
+    this.idAuxiliar = ""
   }
 
   modificarPago(id: string, indice: number){
-    console.log(`indice: ${indice}`)
-    console.log(`Metodo: ${JSON.stringify(this.tablaPagos[indice])}`)
     this.actualizarPago = true
+    this.updateMetodo.patchValue({
+      metodo: this.tablaPagos[indice].metodo,
+      porcentaje: this.tablaPagos[indice].porcentaje,
+    });
+    this.idAuxiliar = id
   }
 
 }
