@@ -122,10 +122,25 @@ export class LoginComponent {
         this.usuario = arregloLS[0]
         this.nombre = arregloLS[3]
         this.apellido = arregloLS[4]
+        setTimeout(() => {
+          this.completarAux(this.usuario);
+        }, 5000);
       } else {
         this.desloguear()
       }
 
+    }
+  }
+
+  completarAux(usuario: number) {
+    console.log('ingrese a completarAuz')
+    console.log(`thisUsuario: ${this.listUsuario}`)
+    for(let j=0; j < this.listUsuario.length; j++){
+      if(this.listUsuario[j].dni === usuario){
+        console.log('entré')
+        this.usuarioAuxiliar = this.listUsuario[j]
+        j = this.listUsuario.length
+      }
     }
   }
 
@@ -208,7 +223,6 @@ export class LoginComponent {
           if (this.contrasena === 'MTInformatica1') {
             //Habilitar el cambio
             this._mensaje.snackBar("Debes cambiar la contraseña", "red")
-            console.log(`usuario. ${JSON.stringify(this.listUsuario[j])}`)
             this.actualizarPass = true
             this.usuarioSoporte = this.listUsuario[j]
           }

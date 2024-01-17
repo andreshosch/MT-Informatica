@@ -28,6 +28,7 @@ export class CarritoComponent {
   carritoVacio: boolean = false
   incremento: number = 0
   montoIncremento = 0
+  usuarioLog: string = ""
   
 
   //Traer datos de coleccion... 
@@ -42,8 +43,9 @@ export class CarritoComponent {
 
   ngOnInit() {
     let arregloLS = JSON.parse(localStorage.getItem("hayUsuario"));
-    let usuarioLog: any = arregloLS[0]
-    this.carritoGuardado(usuarioLog)
+    // let usuarioLog: any = arregloLS[0]
+    this.usuarioLog = arregloLS[0]
+    this.carritoGuardado(this.usuarioLog)
     this.getTablaPagos()
   }
 
@@ -131,6 +133,7 @@ export class CarritoComponent {
         j = this.productos.length
       }
     }
+    this.dataService.actualizarCart(this.productos, this.usuarioLog)
   }
 
   restarUno(idQuitar: string) {
@@ -143,6 +146,7 @@ export class CarritoComponent {
         j = this.productos.length
       }
     }
+    this.dataService.actualizarCart(this.productos, this.usuarioLog)
   }
 
   actualizarResumen() {
@@ -150,7 +154,6 @@ export class CarritoComponent {
       this.productos = productos;
       this.total = 0
       this.monto = 0
-      this.incremento = 0
       for (let j = 0; j < this.productos.length; j++) {
         this.monto = this.monto + (parseInt(productos[j].addProducto.precio) * parseInt(productos[j].addProducto.cantidad))
         this.total = this.total + parseInt(productos[j].addProducto.cantidad)
