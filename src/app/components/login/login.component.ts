@@ -137,7 +137,6 @@ export class LoginComponent {
     console.log(`thisUsuario: ${this.listUsuario}`)
     for(let j=0; j < this.listUsuario.length; j++){
       if(this.listUsuario[j].dni === usuario){
-        console.log('entré')
         this.usuarioAuxiliar = this.listUsuario[j]
         j = this.listUsuario.length
       }
