@@ -173,6 +173,7 @@ export class CarritoComponent {
       apellido: this.apellido,
       celular: this.celular
     }
+    console.log(`unPedido: ${JSON.stringify(unPedido)}`)
     this.pedidosService.createPedido(unPedido, 'Pedidos Pendientes')
     this.productos = []
     this.total = 0

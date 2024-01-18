@@ -141,7 +141,6 @@ export class GestionUsuariosComponent {
           ...element.payload.doc.data()
         })
       })
-      console.log(this.usuariosEnEspera)
       if (this.usuariosEnEspera.length>0)
     {
       this.showSolicitudPendiente=true

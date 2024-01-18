@@ -133,11 +133,10 @@ export class LoginComponent {
   }
 
   completarAux(usuario: number) {
-    console.log('ingrese a completarAuz')
-    console.log(`thisUsuario: ${this.listUsuario}`)
     for(let j=0; j < this.listUsuario.length; j++){
       if(this.listUsuario[j].dni === usuario){
         this.usuarioAuxiliar = this.listUsuario[j]
+        this.celular = this.listUsuario[j].celular
         j = this.listUsuario.length
       }
     }
