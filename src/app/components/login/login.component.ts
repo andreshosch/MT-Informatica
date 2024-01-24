@@ -7,6 +7,7 @@ import { MailsService } from 'src/app/services/mails.service';
 import { DataService } from 'src/app/services/data.service';
 import { lastValueFrom } from 'rxjs';
 import { MensajeService } from 'src/app/services/mensaje.service';
+import { tr } from 'date-fns/locale';
 
 
 @Component({
@@ -25,6 +26,7 @@ export class LoginComponent {
   noRequerido: boolean = true
 
   login: boolean = true
+  habilitarIcono:boolean=false
   formRegistro: FormGroup
   updateUsr: FormGroup
   updatePerfil: FormGroup
@@ -340,6 +342,10 @@ export class LoginComponent {
   }
 
   abrirPerfil(){
+    // setTimeout(() => {
+    //   // Activa nuevamente el icono después de 2 segundos
+    //   this.habilitarIcono = true;
+    // }, 5000);
     this.modalPerfil = true;
     this.updatePerfil.patchValue({
       mail: this.usuarioAuxiliar.mail,

@@ -9,7 +9,7 @@ export class SppinerService {
   showSpinner(): void {
     setTimeout(() => {
       this.loading=false
-    }, 3000);
+    }, 5000);
   }
   getSpinner(): boolean {
     return this.loading;

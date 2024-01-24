@@ -209,10 +209,10 @@ export class GestionPedidosComponent {
 
   actualizarPedido(){
     this._gestionPedido.updatePedido(this.pedidosPendientes[this.indicePedidoPendiente].id, 'Pedidos Pendientes',this.pedidosPendientes[this.indicePedidoPendiente])
+    this._mensaje.snackBar('Pedido actualizado correctamente','green')
 
-
-    console.log(`id carro: ${JSON.stringify(this.pedidosPendientes[this.indicePedidoPendiente].id)}`)
-    console.table(JSON.stringify(this.pedidosPendientes[this.indicePedidoPendiente]))
+    // console.log(`id carro: ${JSON.stringify(this.pedidosPendientes[this.indicePedidoPendiente].id)}`)
+    // console.table(JSON.stringify(this.pedidosPendientes[this.indicePedidoPendiente]))
   }
 
   getPedidosFinalizados() {
@@ -353,11 +353,11 @@ hideCarrito(){
 }
  sumarUno(idAgregar: string, posicion: number){
 
-  console.log(`posicion: ${posicion}`)
-  console.log(`IndicePedido: ${this.indicePedidoPendiente}`)
+  // console.log(`posicion: ${posicion}`)
+  // console.log(`IndicePedido: ${this.indicePedidoPendiente}`)
 
  this.pedidosPendientes[this.indicePedidoPendiente].carrito[posicion].addProducto.cantidad++
- this.monto=3
+  //this.monto=3
  }
 
 restarUno(idQuitar: string, posicion: number){
@@ -366,16 +366,16 @@ restarUno(idQuitar: string, posicion: number){
   }
 }
 
-actualizarResumen(posicion: number){
+actualizarResumen(posicion: number,coleccion:any){
   // this.dataService.productos$.subscribe(pedidos => {
-    console.log(`valor parametro: ${posicion}`)
-    this.pedidosAux = this.pedidosPendientes[posicion].carrito;
-    console.log(`pedidos??: ${JSON.stringify(this.pedidosAux)}`)
+    // console.log(`valor parametro: ${posicion}`)
+    this.pedidosAux =coleccion[posicion].carrito;
+    // console.log(`pedidos??: ${JSON.stringify(this.pedidosAux)}`)
     this.total = 0
     this.monto = 0
     for(let j=0; j < this.pedidosAux.length; j++){
-      this.monto = this.monto + (parseInt(this.pedidosAux[j].addProducto.precio) * parseInt(this.pedidosAux[j].addProducto.cantidad))
-      this.total = this.total + parseInt(this.pedidosAux[j].addProducto.cantidad)
+      this.monto = this.monto + (parseFloat(this.pedidosAux[j].addProducto.precio) * parseInt(this.pedidosAux[j].addProducto.cantidad))
+      this.total =(this.total + parseInt(this.pedidosAux[j].addProducto.cantidad))
     }
   // });
 }
