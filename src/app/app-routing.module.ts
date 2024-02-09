@@ -6,6 +6,7 @@ import { GestionProductosComponent } from './components/gestion-productos/gestio
 import { GestionUsuariosComponent } from './components/gestion-usuarios/gestion-usuarios.component';
 import { GestionPedidosComponent } from './components/gestion-pedidos/gestion-pedidos.component';
 import { GestionPagoComponent } from './components/gestion-pago/gestion-pago.component';
+import { NosotrosComponent } from './components/nosotros/nosotros.component';
 
 const routes: Routes = [
   {path:'',component:IndexComponent},
@@ -14,6 +15,7 @@ const routes: Routes = [
   {path: 'gestionUsr', component: GestionUsuariosComponent }, 
   {path: 'gestionPedido', component: GestionPedidosComponent },
   {path: 'gestionPago', component: GestionPagoComponent },  
+  {path: 'nosotros', component: NosotrosComponent }
 ];
 
 

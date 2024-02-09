@@ -1,0 +1,44 @@
+.videoFoto{
+    display: flex;
+    margin-top: 45px;
+    justify-content: center;
+}
+
+.infografia {
+    margin-top: 45px;
+    margin-bottom: 45px;
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-start;
+    & h2 {
+        text-align: center;
+    }
+  }
+  
+  .seccion {
+    width: 30%;
+    background-color: #f0f0f0;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  .seccion h2 {
+    color: #333;
+    font-size: 20px;
+    margin-bottom: 10px;
+  }
+  
+  .seccion p {
+    color: #666;
+  }
+  
+  .seccion ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .seccion li {
+    color: #666;
+    margin-bottom: 5px;
+  }

@@ -28,6 +28,7 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { SpinnerComponent } from './components/spinner/spinner.component';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { GestionPagoComponent } from './components/gestion-pago/gestion-pago.component';
+import { NosotrosComponent } from './components/nosotros/nosotros.component';
 
 
 @NgModule({
@@ -46,6 +47,7 @@ import { GestionPagoComponent } from './components/gestion-pago/gestion-pago.com
     GestionPedidosComponent,
     SpinnerComponent,
     GestionPagoComponent,
+    NosotrosComponent,
    
     
     
