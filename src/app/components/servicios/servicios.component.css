@@ -1,0 +1,85 @@
+
+
+  .circulos div {
+    width: 150px;
+    height: 100px;
+    border-radius: 50%;
+    background-color: lightblue;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+    cursor: pointer;
+  }
+
+  .circulos{
+    display: flex;
+    flex-direction: column;
+    background-color: red;
+    width: 20%;
+    align-items: center;
+    height: 650px;
+    justify-content:space-around
+  }
+
+  .seleccionado{
+    display: flex;
+    flex-direction: column;
+    width: 20%;
+    align-items: center;
+    height: 650px;
+    justify-content:space-around;
+    background-color: blue;
+  }
+
+  .seleccionado div {
+    width: 150px;
+    height: 100px;
+    border-radius: 50%;
+    background-color: lightblue;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+    cursor: pointer;
+  }
+  
+  .detalles {
+    width: 60%;
+    text-align: center;
+    /* background-color: gray; */
+    height: 650px;
+    justify-content: center;
+    background-color: yellow;
+  }
+  
+  .detalles img {
+    max-width: 200px;
+    max-height: 200px;
+    margin-bottom: 20px;
+  }
+
+  .detalles h6 {
+    color: black
+  }
+
+  .miContenedor{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 100vh;
+    background-color: black;
+  }
+
+.datos h5{
+  text-align: center;
+}
+
+.datos mat-panel-title h5{
+  text-align: center;
+}
+
+.paneles{
+  width: 60%;
+  margin-left: 20%;
+}

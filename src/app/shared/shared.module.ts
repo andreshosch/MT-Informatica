@@ -14,6 +14,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatTooltipModule } from "@angular/material/tooltip";
 import { MatDividerModule } from "@angular/material/divider";
 import {MatRadioModule} from '@angular/material/radio';
+import { MatExpansionModule } from '@angular/material/expansion'
 
 
 @NgModule({
@@ -32,7 +33,8 @@ import {MatRadioModule} from '@angular/material/radio';
       MatMenuModule,
       MatTooltipModule,
       MatDividerModule,
-      MatRadioModule
+      MatRadioModule,
+      MatExpansionModule
     ],
     exports: [
       MatFormFieldModule,
@@ -48,7 +50,8 @@ import {MatRadioModule} from '@angular/material/radio';
       MatMenuModule,
       MatTooltipModule,
       MatDividerModule,
-      MatRadioModule
+      MatRadioModule,
+      MatExpansionModule
     ]
   })
   export class SharedModule { }

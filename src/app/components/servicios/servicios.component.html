@@ -1,0 +1,60 @@
+<app-encabezado></app-encabezado>
+<app-navbar></app-navbar>
+
+<div class="body">
+    <div class="miContenedor container">
+        <div class="circulos">
+          <div *ngIf="servicioI" (click)="mostrarDetalles('Servicio Técnico')">Servicio Técnico</div>
+          <div *ngIf="ventaI" (click)="mostrarDetalles('Venta')">Venta</div>
+          <div *ngIf="asesoramientoI" (click)="mostrarDetalles('Asesoramiento')">Asesoramiento</div>
+        </div>
+        <div class="seleccionado">
+            <div *ngIf="servicioD">Servicio Técnico</div>
+            <div *ngIf="ventaD">Venta</div>
+            <div *ngIf="asesoramientoD">Asesoramiento</div>
+        </div>
+        <div class="detalles">
+          <img [src]="imagen" alt="Imagen">
+          <div class="container datos" *ngIf="venta">
+            <h4>VENTA DE EQUIPOS E INSUMOS</h4>
+
+              <mat-accordion>
+                <mat-expansion-panel *ngFor="let panel of datosPaneles; let i = index" [expanded]="panelOpenState[i]" (opened)="togglePanel(i)">
+                  <mat-expansion-panel-header>
+                    <mat-panel-title>
+                      {{ panel.titulo }}
+                    </mat-panel-title>
+                  </mat-expansion-panel-header>
+                  <mat-expansion-panel-content>
+                    <div *ngFor="let item of panel.contenido">
+                      {{ item }}
+                    </div>
+                  </mat-expansion-panel-content>
+                </mat-expansion-panel>
+              </mat-accordion>
+        
+            <!-- 
+    
+            6- OTROS
+                - Software OEM y OLP para licencias por volúmen -->
+          </div>
+
+          <div *ngIf="asesoramiento">
+                <h1>
+                    Asesoramiento
+                </h1>
+          </div>
+
+          <div *ngIf="servicio">
+                <h1>
+                    Servicio
+                </h1>
+          </div>
+        </div>
+      </div>
+</div> 
+
+  
+
+
+<app-footer></app-footer>

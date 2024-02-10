@@ -29,6 +29,7 @@ import { SpinnerComponent } from './components/spinner/spinner.component';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { GestionPagoComponent } from './components/gestion-pago/gestion-pago.component';
 import { NosotrosComponent } from './components/nosotros/nosotros.component';
+import { ServiciosComponent } from './components/servicios/servicios.component';
 
 
 @NgModule({
@@ -48,6 +49,7 @@ import { NosotrosComponent } from './components/nosotros/nosotros.component';
     SpinnerComponent,
     GestionPagoComponent,
     NosotrosComponent,
+    ServiciosComponent,
    
     
     
