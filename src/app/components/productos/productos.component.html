@@ -1,6 +1,6 @@
 <div class="body">
   <!-- Inicio Productos destacados -->
-  <div *ngIf="showProductosDestacados">
+  <div *ngIf="showProductosDestacados" class="container">
     <h3 class="titleProductos">PRODUCTOS DESTACADOS</h3>
     <ngb-carousel class="fondoCarrousel">
       <ng-template *ngFor="let articulo of productosHot" ngbSlide>
@@ -26,22 +26,26 @@
   </div>
   <!-- Fin Productos destacados -->
   <div class="form-container"id="productos">
-  <input type="text" [(ngModel)]="productSearch" placeholder="Ingrese una palabra clave" (input)="updateProductSearch()">
-
-  <select [(ngModel)]="categorySearch" (change)="updateSubCategories()">
-    <option value="">Selecciona una categoría</option>
-    <option *ngFor="let categoria of category" [value]="categoria">{{categoria}}</option>
-  </select>
-  <select [(ngModel)]="subCategorySearch" (change)="updateBrand()">
-    <option value="">Selecciona una subcategoría</option>
-    <option *ngFor="let subCategoria of subCategoryFilter" [value]="subCategoria">{{subCategoria}}</option>
-  </select>
-  <select [(ngModel)]="brandSearch">
-    <option value="">Selecciona una Marca</option>
-    <option *ngFor="let marca of brandFilter" [value]="marca">{{marca}}</option>
-  </select>
-  <button mat-raised-button (click)="filterProducts()" class="clear">Buscar</button>
-  <button mat-raised-button (click)="cleanFilters()" class="clear">Limpiar filtros</button>
+    <div> 
+      <input type="text" [(ngModel)]="productSearch" placeholder="Ingrese una palabra clave" (input)="updateProductSearch()"></div>
+    <div>
+      <select [(ngModel)]="categorySearch" (change)="updateSubCategories()">
+        <option value="">Selecciona una categoría</option>
+        <option *ngFor="let categoria of category" [value]="categoria">{{categoria}}</option>
+      </select>
+      <select [(ngModel)]="subCategorySearch" (change)="updateBrand()">
+        <option value="">Selecciona una subcategoría</option>
+        <option *ngFor="let subCategoria of subCategoryFilter" [value]="subCategoria">{{subCategoria}}</option>
+      </select>
+      <select [(ngModel)]="brandSearch">
+        <option value="">Selecciona una Marca</option>
+        <option *ngFor="let marca of brandFilter" [value]="marca">{{marca}}</option>
+      </select>
+    </div>
+    <div>
+      <button mat-raised-button (click)="filterProducts()" class="clear">Buscar</button>
+      <button mat-raised-button (click)="cleanFilters()" class="clear">Limpiar filtros</button>
+    </div>
   </div>
   <h3 class="titleProductos">NUESTROS PRODUCTOS</h3>
   <!-- <button (click)="traerTodo()">Traer</button> -->

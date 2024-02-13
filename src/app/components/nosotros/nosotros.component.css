@@ -44,5 +44,7 @@
   }
 
   .miContenedor{
-    background-color: black;
+    /* background-color: black; */
+    
+    background-image: url('../../../assets/textile.jpg');
   }

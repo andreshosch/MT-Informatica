@@ -71,3 +71,7 @@
   width: 60%;
   margin-left: 20%;
 }
+
+.body{
+  background-image: url('../../../assets/textile.jpg');
+}
