@@ -4,14 +4,9 @@
 <div class="body">
     <div class="miContenedor container">
         <div class="circulos">
-          <div *ngIf="servicioI" (click)="mostrarDetalles('Servicio Técnico')">Servicio Técnico</div>
-          <div *ngIf="ventaI" (click)="mostrarDetalles('Venta')">Venta</div>
-          <div *ngIf="asesoramientoI" (click)="mostrarDetalles('Asesoramiento')">Asesoramiento</div>
-        </div>
-        <div class="seleccionado">
-            <div *ngIf="servicioD">Servicio Técnico</div>
-            <div *ngIf="ventaD">Venta</div>
-            <div *ngIf="asesoramientoD">Asesoramiento</div>
+          <div (click)="mostrarDetalles('Servicio Técnico')" [class.selected]="opcionSeleccionada === 'Servicio Técnico'"><strong>Servicio Técnico</strong></div>
+          <div (click)="mostrarDetalles('Venta')" [class.selected]="opcionSeleccionada === 'Venta'"><strong>Venta</strong></div>
+          <div (click)="mostrarDetalles('Asesoramiento')" [class.selected]="opcionSeleccionada === 'Asesoramiento'"><strong>Asesoramiento</strong></div>
         </div>
         <div class="detalles">
           <img [src]="imagen" alt="Imagen">
@@ -40,15 +35,27 @@
           </div>
 
           <div *ngIf="asesoramiento">
-                <h1>
-                    Asesoramiento
-                </h1>
+                <h4>
+                    ASESORAMIENTO
+                </h4>
+                <H6>
+                  <P>- Asesoramiento sobre Software Legal</P>
+                </H6>
           </div>
 
           <div *ngIf="servicio">
-                <h1>
-                    Servicio
-                </h1>
+                <h4>
+                    SERVICIO TECNICO
+                </h4>
+                <h6>
+                  <p>- Reparación electronica de Notebooks, PC's de escritorio, monitores, placas madres, etc.</p>
+                  <p>- Reparación y mantenimiento de UPS.</p>
+                  <p>- Mantenimiento de impresoras.</p>
+                  <p>- Instalación y configuración de redes de datos, cableados y puestos de trabajo.</p>
+                  <p>- Armado de rack informático.</p>
+                  <p>- Recuperación de datos y backup.</p>
+                  <p>- Software: Instalación y configuración de sistemas operativos Linux y Windows en notebooks, PC's y servidores.</p>
+                </h6>
           </div>
         </div>
       </div>

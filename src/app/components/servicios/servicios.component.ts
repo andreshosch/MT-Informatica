@@ -39,76 +39,51 @@ export class ServiciosComponent {
   ];
 
   imagen: string;
-  descripcion: string;
 
   venta: boolean = false
   servicio: boolean = false
   asesoramiento: boolean = false
-  asesoramientoI: boolean = true
-  asesoramientoD: boolean = false
-  ventaI: boolean = false
-  ventaD: boolean = true
-  servicioI: boolean = true
-  servicioD: boolean = false
+
+  opcionSeleccionada: string = '';
 
   constructor() { }
 
   mostrarServicio(){
-    this.servicioD= true
-    this.servicioI= false
-    this.asesoramientoD = false
-    this.asesoramientoI = true
-    this.ventaD = false
-    this.ventaI = true
     this.venta = false
     this.asesoramiento = false
     this.servicio = true
   }
 
   mostrarVenta(){
-    this.servicioD= false
-    this.servicioI= true
-    this.asesoramientoD = false
-    this.asesoramientoI = true
-    this.ventaD = true
-    this.ventaI = false
     this.venta = true
     this.asesoramiento = false
     this.servicio = false
   }
 
   mostrarAsesoramiento(){
-    this.servicioD= false
-    this.servicioI= true
-    this.asesoramientoD = true
-    this.asesoramientoI = false
-    this.ventaD = false
-    this.ventaI = true
     this.venta = false
     this.asesoramiento = true
     this.servicio = false
   }
 
   mostrarDetalles(opcion: string) {
+    this.opcionSeleccionada = opcion;
     switch (opcion) {
       case 'Servicio Técnico':
-        this.imagen = '../../../assets/Servicio.png'
-        this.descripcion = 'Reparación electrónica de Notebooks';
+        this.imagen = '../../../assets/Logo.png';
+        // this.imagen = '../../../assets/Servicio.png'
         this.mostrarServicio()
         break;
       case 'Venta':
         this.imagen = '../../../assets/Logo.png';
-        this.descripcion = '1- Equipos Informáticos';
         this.mostrarVenta()
         break;
       case 'Asesoramiento':
         this.imagen = '../../../assets/Logo.png';
-        this.descripcion = 'Asesoramiento de software legal';
         this.mostrarAsesoramiento()
         break;
       default:
         this.imagen = '';
-        this.descripcion = '';
         break;
     }
   }

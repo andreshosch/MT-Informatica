@@ -173,13 +173,15 @@ export class CarritoComponent {
       apellido: this.apellido,
       celular: this.celular
     }
-    console.log(`unPedido: ${JSON.stringify(unPedido)}`)
     this.pedidosService.createPedido(unPedido, 'Pedidos Pendientes')
+    for (let i =0; i < this.productos.length; i++){
+      this.productos[i].addProducto.cantidad = 1;
+    }
     this.productos = []
     this.total = 0
     this.monto = 0
     this.incremento = 0
-     this._mensaje.snackBar("Carrito creado correctamente",'green')
+    this._mensaje.snackBar("Carrito creado correctamente",'green')
     this.dataService.limpiar()
     this.ocultarCarrito();
     localStorage.removeItem(userActual);
