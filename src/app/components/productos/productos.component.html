@@ -1,113 +1,121 @@
-<!-- Inicio Productos destacados -->
-<div *ngIf="showProductosDestacados">
-  <h3 class="titleProductos">PRODUCTOS DESTACADOS</h3>
-  <ngb-carousel class="fondoCarrousel">
-    <ng-template *ngFor="let articulo of productosHot" ngbSlide>
-      <div class="picsum-img-wrapper">
-        <img src="{{articulo.imagenes}}" alt="Random first slide" />
-      </div>
+<div class="body">
+  <!-- Inicio Productos destacados -->
+  <div *ngIf="showProductosDestacados" class="container">
+    <h3 class="titleProductos">PRODUCTOS DESTACADOS</h3>
+    <ngb-carousel class="fondoCarrousel">
+      <ng-template *ngFor="let articulo of productosHot" ngbSlide>
+        <div class="picsum-img-wrapper">
+          <img src="{{articulo.imagenes}}" alt="Random first slide" />
+        </div>
 
-      <h3>Articulo: {{articulo.nombre}}</h3>
-      <p>Precio: {{articulo.precio}}</p>
-      <p>Rubro: {{articulo.categoria}} </p>
-      <p>SubRubro: {{articulo.subcategoria}}</p>
-      <p>Descripcion: {{articulo.descripcion}} </p>
+        <h3>Articulo: {{articulo.nombre}}</h3>
+        <p>Precio: {{articulo.precio}}</p>
+        <p>Rubro: {{articulo.categoria}} </p>
+        <p>SubRubro: {{articulo.subcategoria}}</p>
+        <p>Descripcion: {{articulo.descripcion}} </p>
 
-      <div class="example-button-row">
-        <button (click)="agregarAlCarrito(articulo, articulo.id)" mat-raised-button color="primary">Agregar al
-          carrito</button>
-      </div>
+        <div class="example-button-row">
+          <button (click)="agregarAlCarrito(articulo, articulo.id)" mat-raised-button color="primary">Agregar al
+            carrito</button>
+        </div>
 
 
 
-    </ng-template>
-  </ngb-carousel>
-</div>
-<!-- Fin Productos destacados -->
-<div class="form-container"id="productos">
-<input type="text" [(ngModel)]="productSearch" placeholder="Ingrese una palabra clave" (input)="updateProductSearch()">
-
-<select [(ngModel)]="categorySearch" (change)="updateSubCategories()">
-  <option value="">Selecciona una categoría</option>
-  <option *ngFor="let categoria of category" [value]="categoria">{{categoria}}</option>
-</select>
-<select [(ngModel)]="subCategorySearch" (change)="updateBrand()">
-  <option value="">Selecciona una subcategoría</option>
-  <option *ngFor="let subCategoria of subCategoryFilter" [value]="subCategoria">{{subCategoria}}</option>
-</select>
-<select [(ngModel)]="brandSearch">
-  <option value="">Selecciona una Marca</option>
-  <option *ngFor="let marca of brandFilter" [value]="marca">{{marca}}</option>
-</select>
-<button mat-raised-button (click)="filterProducts()" class="clear">Buscar</button>
-<button mat-raised-button (click)="cleanFilters()" class="clear">Limpiar filtros</button>
-</div>
-<h3 class="titleProductos">NUESTROS PRODUCTOS</h3>
-<!-- <button (click)="traerTodo()">Traer</button> -->
-<div class="container container-card">
-  <div class="card" style="width: 18rem" *ngFor="let productos of arrProductsPages">
-    <img src={{productos.imagenes}} class="card-img-top" alt="..." style="height: 250px;width: 250px;">
-    <div class="card-body">
-      <h5 class="title">{{productos.nombre}}</h5>
-      <p class="card-text">Categoría: {{productos.categoria}}</p>
-      <p class="card-marca">Marca: {{productos.marca}}</p>
-      <p class="card-precio">Imp. Interno: {{productos.impuesto_interno}} %</p>
-      <p class="card-precio">IVA: {{productos.iva}} %</p>
-      <p class="card-precio">Precio: U$S {{productos.precio}}</p>
-      <a href="#modal1" (click)="modal(productos)">Ver Más...</a>
-    </div>
-    <div class="example-button-row">
-      <button style="background-color: #107997;color: white;margin-bottom: 15px;" *ngIf="this.hayLogueado"
-        (click)="agregarAlCarrito(productos, productos.id)"
-        mat-raised-button>Agregar al carrito</button>
-    </div>
-    <!-- <button *ngIf="this.hayLogueado" (click)="agregarAlCarrito(productos, productos.id)" style="margin-bottom: 10px; text-align: center;">Agregar al carrito</button> -->
+      </ng-template>
+    </ngb-carousel>
   </div>
-</div>
-<!-- MODAL PARA MOSTRAR DATOS DE LA CARD -->
-<div class="container container-card">
-  <div id="modal1" class="modalmask" *ngIf="selectedProduct">
-    <div class="modalbox movedown">
-      <a href="#close" title="Cerrar" class="close">X</a>
+  <!-- Fin Productos destacados -->
+  <div class="form-container"id="productos">
+    <div> 
+      <input type="text" [(ngModel)]="productSearch" placeholder="Ingrese una palabra clave" (input)="updateProductSearch()"></div>
+    <div>
+      <select [(ngModel)]="categorySearch" (change)="updateSubCategories()">
+        <option value="">Selecciona una categoría</option>
+        <option *ngFor="let categoria of category" [value]="categoria">{{categoria}}</option>
+      </select>
+      <select [(ngModel)]="subCategorySearch" (change)="updateBrand()">
+        <option value="">Selecciona una subcategoría</option>
+        <option *ngFor="let subCategoria of subCategoryFilter" [value]="subCategoria">{{subCategoria}}</option>
+      </select>
+      <select [(ngModel)]="brandSearch">
+        <option value="">Selecciona una Marca</option>
+        <option *ngFor="let marca of brandFilter" [value]="marca">{{marca}}</option>
+      </select>
+    </div>
+    <div>
+      <button mat-raised-button (click)="filterProducts()" class="clear">Buscar</button>
+      <button mat-raised-button (click)="cleanFilters()" class="clear">Limpiar filtros</button>
+    </div>
+  </div>
+  <h3 class="titleProductos">NUESTROS PRODUCTOS</h3>
+  <!-- <button (click)="traerTodo()">Traer</button> -->
+  <div class="container container-card">
+    <div class="card" style="width: 18rem" *ngFor="let productos of arrProductsPages">
+      <img src={{productos.imagenes}} class="card-img-top" alt="..." style="height: 250px;width: 250px;">
       <div class="card-body">
-        <h4>{{selectedProduct.nombre}}</h4>
-        <img src={{selectedProduct.imagenes}} class="card-img-top" style="width: 40%;height: 40%;" alt="...">
-        <p class="card-precio">Imp. Interno: {{selectedProduct.impuesto_interno}} %</p>
-        <p class="card-precio">IVA: {{selectedProduct.iva}} %</p>
-        <p> Descripción: {{selectedProduct.descripcion}}</p>
+        <h5 class="title">{{productos.nombre}}</h5>
+        <p class="card-text">Categoría: {{productos.categoria}}</p>
+        <p class="card-marca">Marca: {{productos.marca}}</p>
+        <p class="card-precio">Imp. Interno: {{productos.impuesto_interno}} %</p>
+        <p class="card-precio">IVA: {{productos.iva}} %</p>
+        <p class="card-precio">Precio: U$S {{productos.precio}}</p>
+        <a href="#modal1" (click)="modal(productos)">Ver Más...</a>
+      </div>
+      <div class="example-button-row">
+        <button style="background-color: #107997;color: white;margin-bottom: 15px;" *ngIf="this.hayLogueado"
+          (click)="agregarAlCarrito(productos, productos.id)"
+          mat-raised-button>Agregar al carrito</button>
+      </div>
+      <!-- <button *ngIf="this.hayLogueado" (click)="agregarAlCarrito(productos, productos.id)" style="margin-bottom: 10px; text-align: center;">Agregar al carrito</button> -->
+    </div>
+  </div>
+  <!-- MODAL PARA MOSTRAR DATOS DE LA CARD -->
+  <div class="container container-card">
+    <div id="modal1" class="modalmask" *ngIf="selectedProduct">
+      <div class="modalbox movedown">
+        <a href="#close" title="Cerrar" class="close">X</a>
+        <div class="card-body">
+          <h4>{{selectedProduct.nombre}}</h4>
+          <img src={{selectedProduct.imagenes}} class="card-img-top" style="width: 40%;height: 40%;" alt="...">
+          <p class="card-precio">Imp. Interno: {{selectedProduct.impuesto_interno}} %</p>
+          <p class="card-precio">IVA: {{selectedProduct.iva}} %</p>
+          <p> Descripción: {{selectedProduct.descripcion}}</p>
+        </div>
       </div>
     </div>
   </div>
-</div>
-<!-- ------------------------------------------------ -->
+  <!-- ------------------------------------------------ -->
 
-<div>
-<nav aria-label="Page navigation example" class="container-pages" style="display: flex; justify-content: center;">
-  <div class="pagination justify-content-center" *ngIf="filterArray.length>0">
-    <button *ngIf="visibleFirstPage" class="page-item"><a class="page-link" *ngIf="visibleFirstPage"
-        (click)="firstPage(filterArray) ;scroll('productos')"><mat-icon>first_page</mat-icon></a></button>
-    <button *ngIf="visibleAfterPage" class="page-item"><a class="page-link " *ngIf="visibleAfterPage"
-        (click)="afterPage(filterArray);scroll('productos')"><mat-icon>chevron_left</mat-icon></a></button>
-    <button class="page-item"><a href="#productos" class="page-link">{{this.numberPages}}</a></button>
-    <button *ngIf="visibleNextPage" class="page-item"><a class="page-link" *ngIf="visibleNextPage"
-        (click)="nextPage(filterArray);scroll('productos')"><mat-icon>chevron_right</mat-icon></a></button>
-    <button *ngIf="visibleLastPage" class="page-item"><a class="page-link" *ngIf="visibleLastPage"
-        (click)="lastPage(filterArray);scroll('productos')"><mat-icon>last_page</mat-icon></a></button>
-  </div>
-  <div class="pagination justify-content-center" *ngIf="filterArray.length===0">
-    <button *ngIf="visibleFirstPage;" class="page-item"><a class="page-link" *ngIf="visibleFirstPage"
-        (click)="firstPage(arrProducts);scroll('productos')"><mat-icon>first_page</mat-icon></a></button>
-    <button *ngIf="visibleAfterPage" class="page-item"><a class="page-link " *ngIf="visibleAfterPage"
-        (click)="afterPage(arrProducts);scroll('productos')"><mat-icon>chevron_left</mat-icon></a></button>
-    <button class="page-item"><a class="page-link">{{this.numberPages}}</a></button>
-    <button *ngIf="visibleNextPage" class="page-item"><a class="page-link" *ngIf="visibleNextPage"
-        (click)="nextPage(arrProducts);scroll('productos')"><mat-icon>chevron_right</mat-icon></a></button>
-    <button *ngIf="visibleLastPage" class="page-item"><a class="page-link" *ngIf="visibleLastPage"
-        (click)="lastPage(arrProducts);scroll('productos')"><mat-icon>last_page</mat-icon></a></button>
-  </div>
-</nav>
+  <div>
+  <nav aria-label="Page navigation example" class="container-pages" style="display: flex; justify-content: center;">
+    <div class="pagination justify-content-center" *ngIf="filterArray.length>0">
+      <button *ngIf="visibleFirstPage" class="page-item"><a class="page-link" *ngIf="visibleFirstPage"
+          (click)="firstPage(filterArray) ;scroll('productos')"><mat-icon>first_page</mat-icon></a></button>
+      <button *ngIf="visibleAfterPage" class="page-item"><a class="page-link " *ngIf="visibleAfterPage"
+          (click)="afterPage(filterArray);scroll('productos')"><mat-icon>chevron_left</mat-icon></a></button>
+      <button class="page-item"><a href="#productos" class="page-link">{{this.numberPages}}</a></button>
+      <button *ngIf="visibleNextPage" class="page-item"><a class="page-link" *ngIf="visibleNextPage"
+          (click)="nextPage(filterArray);scroll('productos')"><mat-icon>chevron_right</mat-icon></a></button>
+      <button *ngIf="visibleLastPage" class="page-item"><a class="page-link" *ngIf="visibleLastPage"
+          (click)="lastPage(filterArray);scroll('productos')"><mat-icon>last_page</mat-icon></a></button>
+    </div>
+    <div class="pagination justify-content-center" *ngIf="filterArray.length===0">
+      <button *ngIf="visibleFirstPage;" class="page-item"><a class="page-link" *ngIf="visibleFirstPage"
+          (click)="firstPage(arrProducts);scroll('productos')"><mat-icon>first_page</mat-icon></a></button>
+      <button *ngIf="visibleAfterPage" class="page-item"><a class="page-link " *ngIf="visibleAfterPage"
+          (click)="afterPage(arrProducts);scroll('productos')"><mat-icon>chevron_left</mat-icon></a></button>
+      <button class="page-item"><a class="page-link">{{this.numberPages}}</a></button>
+      <button *ngIf="visibleNextPage" class="page-item"><a class="page-link" *ngIf="visibleNextPage"
+          (click)="nextPage(arrProducts);scroll('productos')"><mat-icon>chevron_right</mat-icon></a></button>
+      <button *ngIf="visibleLastPage" class="page-item"><a class="page-link" *ngIf="visibleLastPage"
+          (click)="lastPage(arrProducts);scroll('productos')"><mat-icon>last_page</mat-icon></a></button>
+    </div>
+  </nav>
 
-<div *ngIf="_spinner.getSpinner()" class="spinner-container">
-  <app-spinner></app-spinner>
+  <div *ngIf="_spinner.getSpinner()" class="spinner-container">
+    <app-spinner></app-spinner>
+  </div>
+
+  
 </div>
 

@@ -1,0 +1,67 @@
+<app-encabezado></app-encabezado>
+<app-navbar></app-navbar>
+
+<div class="body">
+    <div class="miContenedor container">
+        <div class="circulos">
+          <div (click)="mostrarDetalles('Servicio Técnico')" [class.selected]="opcionSeleccionada === 'Servicio Técnico'"><strong>Servicio Técnico</strong></div>
+          <div (click)="mostrarDetalles('Venta')" [class.selected]="opcionSeleccionada === 'Venta'"><strong>Venta</strong></div>
+          <div (click)="mostrarDetalles('Asesoramiento')" [class.selected]="opcionSeleccionada === 'Asesoramiento'"><strong>Asesoramiento</strong></div>
+        </div>
+        <div class="detalles">
+          <img [src]="imagen" alt="Imagen">
+          <div class="container datos" *ngIf="venta">
+            <h4>VENTA DE EQUIPOS E INSUMOS</h4>
+
+              <mat-accordion>
+                <mat-expansion-panel *ngFor="let panel of datosPaneles; let i = index" [expanded]="panelOpenState[i]" (opened)="togglePanel(i)">
+                  <mat-expansion-panel-header>
+                    <mat-panel-title>
+                      {{ panel.titulo }}
+                    </mat-panel-title>
+                  </mat-expansion-panel-header>
+                  <mat-expansion-panel-content>
+                    <div *ngFor="let item of panel.contenido">
+                      {{ item }}
+                    </div>
+                  </mat-expansion-panel-content>
+                </mat-expansion-panel>
+              </mat-accordion>
+        
+            <!-- 
+    
+            6- OTROS
+                - Software OEM y OLP para licencias por volúmen -->
+          </div>
+
+          <div *ngIf="asesoramiento">
+                <h4>
+                    ASESORAMIENTO
+                </h4>
+                <H6>
+                  <P>- Asesoramiento sobre Software Legal</P>
+                </H6>
+          </div>
+
+          <div *ngIf="servicio">
+                <h4>
+                    SERVICIO TECNICO
+                </h4>
+                <h6>
+                  <p>- Reparación electronica de Notebooks, PC's de escritorio, monitores, placas madres, etc.</p>
+                  <p>- Reparación y mantenimiento de UPS.</p>
+                  <p>- Mantenimiento de impresoras.</p>
+                  <p>- Instalación y configuración de redes de datos, cableados y puestos de trabajo.</p>
+                  <p>- Armado de rack informático.</p>
+                  <p>- Recuperación de datos y backup.</p>
+                  <p>- Software: Instalación y configuración de sistemas operativos Linux y Windows en notebooks, PC's y servidores.</p>
+                </h6>
+          </div>
+        </div>
+      </div>
+</div> 
+
+  
+
+
+<app-footer></app-footer>

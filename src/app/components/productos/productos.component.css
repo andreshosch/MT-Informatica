@@ -216,3 +216,6 @@ select option:hover
   color: #fff; /* Color del texto de la opción al pasar el ratón o al enfocarla */
 }
 
+.body{
+  background-image: url('../../../assets/textile.jpg');
+}
