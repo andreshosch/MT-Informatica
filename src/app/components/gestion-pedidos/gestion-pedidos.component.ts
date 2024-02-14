@@ -27,6 +27,7 @@ export class GestionPedidosComponent {
   formTransporte:FormGroup
   total: number = 0;
   monto:number=0
+  montoIva = 0
   pedido:any
   carrito:any[]=[]
   carritoHabilitado: boolean = false
@@ -373,10 +374,13 @@ actualizarResumen(posicion: number,coleccion:any){
     // console.log(`pedidos??: ${JSON.stringify(this.pedidosAux)}`)
     this.total = 0
     this.monto = 0
+    this.montoIva = 0
     for(let j=0; j < this.pedidosAux.length; j++){
       this.monto = this.monto + (parseFloat(this.pedidosAux[j].addProducto.precio) * parseInt(this.pedidosAux[j].addProducto.cantidad))
       this.total =(this.total + parseInt(this.pedidosAux[j].addProducto.cantidad))
+      this.montoIva = this.montoIva + (parseFloat(this.pedidosAux[j].addProducto.precio) * parseInt(this.pedidosAux[j].addProducto.cantidad) * (1 + parseFloat(this.pedidosAux[j].addProducto.iva) / 100))
     }
+    console.log(`montoIva = ${this.montoIva}`)
   // });
 }
 

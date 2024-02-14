@@ -92,6 +92,16 @@
                                                 </tr>
                                             </table>
                                         </div>
+                                        <div class="carritoPrecioT ordenCeldas">
+                                            <table>
+                                                <tr>
+                                                    <th>Costo total con IVA</th>
+                                                </tr>
+                                                <tr>
+                                                    <td>{{ producto.addProducto.precio * producto.addProducto.cantidad * (1 + producto.addProducto.iva / 100) }}</td>
+                                                </tr>
+                                            </table>
+                                        </div>
                                         <div class="carritoEliminar ordenCeldas">
                                             <button (click)="quitarProd(producto.addProducto.id)"><mat-icon>delete</mat-icon></button>
                                         </div>
@@ -122,6 +132,18 @@
                                 <tr>
                                     <!-- <td>$ {{ monto }}</td> -->
                                     <td>$ {{ montoIncremento }}</td>
+                                </tr>
+                            </table>
+                        </div>
+
+                        <div class="ordenCeldas">
+                            <table>
+                                <tr>
+                                    <th>Costo Total con Iva:</th>
+                                </tr>
+                                <tr>
+                                    <!-- <td>$ {{ monto }}</td> -->
+                                    <td>$ {{ montoIncrementoIva }}</td>
                                 </tr>
                             </table>
                         </div>

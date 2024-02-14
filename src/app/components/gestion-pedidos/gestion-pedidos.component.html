@@ -302,6 +302,16 @@
                                             </tr>
                                         </table>
                                     </div>
+                                    <div class="ordenCeldas">
+                                        <table>
+                                            <tr>
+                                                <th>Costo Total con Iva:</th>
+                                            </tr>
+                                            <tr>
+                                                <td>$ {{ (carro.addProducto.precio * carro.addProducto.cantidad) * (1 + carro.addProducto.iva / 100) }}</td>
+                                            </tr>
+                                        </table>
+                                    </div>
                                     <div class="carritoEliminar ordenCeldas">
                                         <button *ngIf="showEliminar" (click)="quitarProd(i); actualizarResumen(indicePedidoPendiente)"><mat-icon>delete</mat-icon></button>
                                     </div>
@@ -331,6 +341,17 @@
                             </tr>
                             <tr>
                                 <td>$ {{ monto  |number: '1.2-2' }}</td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <div class="ordenCeldas">
+                        <table>
+                            <tr>
+                                <th>Costo Total con IVA:</th>
+                            </tr>
+                            <tr>
+                                <td>$ {{ montoIva |number: '1.2-2' }}</td>
                             </tr>
                         </table>
                     </div>

@@ -17,6 +17,7 @@ export class CarritoComponent {
   productos: any[] = [];
   total: number = 0
   monto: number = 0
+  montoIva: number = 0
   fechaActual: Date = new Date()
 
   @Input() usuario: number
@@ -28,6 +29,7 @@ export class CarritoComponent {
   carritoVacio: boolean = false
   incremento: number = 0
   montoIncremento = 0
+  montoIncrementoIva = 0
   usuarioLog: string = ""
   
 
@@ -86,6 +88,7 @@ export class CarritoComponent {
     this.productos = [];
     this.total = 0
     this.monto = 0
+    this.montoIva = 0
     this.incremento = 0
     this.actualizarResumen()
   }
@@ -154,11 +157,14 @@ export class CarritoComponent {
       this.productos = productos;
       this.total = 0
       this.monto = 0
+      this.montoIva = 0
       for (let j = 0; j < this.productos.length; j++) {
         this.monto = this.monto + (parseInt(productos[j].addProducto.precio) * parseInt(productos[j].addProducto.cantidad))
+        this.montoIva = this.montoIva + (parseInt(productos[j].addProducto.precio) * parseInt(productos[j].addProducto.cantidad) * (1 + (parseInt(productos[j].addProducto.iva) / 100)))
         this.total = this.total + parseInt(productos[j].addProducto.cantidad)
       }
     this.montoIncremento = this.incremento > 0? (this.monto * this.incremento / 100 + this.monto) : this.monto  
+    this.montoIncrementoIva = this.incremento > 0? (this.montoIva * this.incremento / 100 + this.montoIva) : this.montoIva  
 
     });
   }
@@ -180,6 +186,7 @@ export class CarritoComponent {
     this.productos = []
     this.total = 0
     this.monto = 0
+    this.montoIva = 0
     this.incremento = 0
     this._mensaje.snackBar("Carrito creado correctamente",'green')
     this.dataService.limpiar()
@@ -196,8 +203,7 @@ export class CarritoComponent {
     const indiceSeleccionado = this.metodoPago.findIndex(metodo => metodo.metodo === this.seleccionPago);
     this.incremento = this.metodoPago[indiceSeleccionado].porcentaje
     this.montoIncremento = this.incremento > 0? (this.monto * this.incremento / 100 + this.monto) : this.monto  
-    console.log(`incremento: ${this.incremento}`)
-    console.log(`valor: ${this.montoIncremento}`)
+    this.montoIncrementoIva = this.incremento > 0? (this.montoIva * this.incremento / 100 + this.montoIva) : this.montoIva
   }
 
   }

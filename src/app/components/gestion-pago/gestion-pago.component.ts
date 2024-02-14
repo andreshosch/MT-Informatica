@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatTableDataSource } from '@angular/material/table';
 import { PagosService } from 'src/app/services/pagos.service';
+import {MensajeService} from 'src/app/services/mensaje.service'
 
 @Component({
   selector: 'app-gestion-pago',
@@ -18,18 +19,18 @@ export class GestionPagoComponent {
   actualizarPago: boolean = false
   idAuxiliar: string = ""
 
-  constructor(private _pagosService: PagosService, private fb:FormBuilder){
+  constructor(private _pagosService: PagosService, private fb:FormBuilder, private _mensaje:MensajeService){
 
     this.dataSourcePagos = new MatTableDataSource(this.tablaPagos);
 
     this.formMetodo=this.fb.group({
       metodo:['',Validators.required],
-      porcentaje:['',Validators.required],
+      porcentaje: ['', [Validators.required, Validators.pattern(/^\d*\.?\d+$/)]],
     })
 
     this.updateMetodo = this.fb.group({
       metodo:['',Validators.required],
-      porcentaje:['',Validators.required],
+      porcentaje: ['', [Validators.required, Validators.pattern(/^\d*\.?\d+$/)]],
     })
   }
 
@@ -56,10 +57,12 @@ export class GestionPagoComponent {
       porcentaje: this.formMetodo.get('porcentaje').value,
     }
     this._pagosService.createPagos(newMetodo)
+    this._mensaje.snackBar("Método de Pago creado correctamente",'green')
   }
 
   eliminarPago(id: string){
     this._pagosService.deletePago(id)
+    this._mensaje.snackBar("Método de Pago eliminado correctamente",'green')
   }
 
   actualizarMetodoPago(){
@@ -69,6 +72,8 @@ export class GestionPagoComponent {
     }
     this._pagosService.updatePago(this.idAuxiliar, metodoAuxiliar)
     this.idAuxiliar = ""
+    this.actualizarPago = false
+    this._mensaje.snackBar("Método de Pago actualizado correctamente",'green')
   }
 
   modificarPago(id: string, indice: number){
