@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatTableDataSource } from '@angular/material/table';
 import { PagosService } from 'src/app/services/pagos.service';
 import {MensajeService} from 'src/app/services/mensaje.service'
+import { tr } from 'date-fns/locale';
 
 @Component({
   selector: 'app-gestion-pago',
@@ -18,6 +19,8 @@ export class GestionPagoComponent {
   updateMetodo: FormGroup
   actualizarPago: boolean = false
   idAuxiliar: string = ""
+  showConfirmationDelPago: boolean = false
+  metodoExistente: boolean = false
 
   constructor(private _pagosService: PagosService, private fb:FormBuilder, private _mensaje:MensajeService){
 
@@ -52,16 +55,41 @@ export class GestionPagoComponent {
   }
 
   crearMetodo(){
+    let existe = false
     let newMetodo = {
       metodo: this.formMetodo.get('metodo').value,
       porcentaje: this.formMetodo.get('porcentaje').value,
     }
-    this._pagosService.createPagos(newMetodo)
-    this._mensaje.snackBar("Método de Pago creado correctamente",'green')
+
+    console.log(`metodo: ${newMetodo.metodo}`)
+    console.table(`lista metodos: ${JSON.stringify(this.tablaPagos)}`)
+    
+    for(let j=0; j< this.tablaPagos.length; j++){
+      if((this.tablaPagos[j].metodo).toLowerCase == (newMetodo.metodo).toLowerCase ){
+        existe = true
+        j = this.tablaPagos.length
+      }
+    }
+
+    if(existe){
+      this.metodoInvalido()
+    }else{
+      this._pagosService.createPagos(newMetodo)
+      this._mensaje.snackBar("Método de Pago creado correctamente",'green')
+      this.formMetodo.reset()
+    }
   }
 
-  eliminarPago(id: string){
+  metodoInvalido(){
+    this.metodoExistente = true
+    setTimeout(() => {
+      this.metodoExistente =false
+    }, 3000);
+  }
+
+  confirmDel(id: string){
     this._pagosService.deletePago(id)
+    this.showConfirmationDelPago = false
     this._mensaje.snackBar("Método de Pago eliminado correctamente",'green')
   }
 
@@ -83,6 +111,15 @@ export class GestionPagoComponent {
       porcentaje: this.tablaPagos[indice].porcentaje,
     });
     this.idAuxiliar = id
+  }
+
+  eliminarUnPago(id: string){
+    this.showConfirmationDelPago = true
+    this.idAuxiliar = id
+  }
+
+  cancelDel(){
+    this.showConfirmationDelPago = false
   }
 
 }

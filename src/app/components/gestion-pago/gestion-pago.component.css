@@ -52,3 +52,7 @@
 .altaPago mat-form-field{
   margin-right: 5px;
 }
+
+.matHint{
+  color: red;
+}
