@@ -15,6 +15,10 @@
   margin-right: 5px;
 }
 
+.card h6{
+  text-align: center;
+}
+
 .galeriaCard{
   display: flex;
   flex-direction: row;
@@ -23,9 +27,13 @@
 }
 
 .formatoArticulos{
-  text-align: center;
-  margin: 10px;
   background-color: lightgrey;
+}
+
+.formatoArticulos h3{
+  padding-top: 25px;
+  margin-bottom: 25px;
+  text-align: center;
 }
 
 .formAgregar{
@@ -38,44 +46,58 @@
 }
 
 .izquierda{
-  width: 50%;
-  background-color: azure;
+  width: 40%;
+  margin-left: 5%;
+  margin-right: 5%;
 }
 
 .izquierda mat-select{
-  background-color: coral;
-  width: 70%;
+  width: 60%;
+  background-color: white;
 }
 
 .izquierda button{
-  width: 20%;
+  width: 30%;
   margin-left: 5%;
 }
 
 .derecha{
-  width: 50%;
+  width: 40%;
+  margin-left: 5%;
 }
 
 .derecha mat-select{
-  background-color: coral;
-  width: 70%;
+  width: 60%;
+  background-color: white;
 }
 
 .derecha button{
-  width: 20%;
+  width: 30%;
   margin-left: 5%;
 }
 
 .bloqueos{
-  width: 100%;
+  width: 60%;
+  margin-left: 20%;
+  text-align: center;
+  margin-top: 50px;
+  border: 1px solid #ccc;
+  padding: 20px; 
+  border-radius: 5px;
+  margin-bottom: 50px;
+  background-color: lightgrey;
 }
 
 .bloqueos h3{
-  text-align: center;
-  background-color: brown;
+  margin-bottom: 20px;
 }
 
 .estructura{
   display: flex;
-  flex-direction: row ;
+  flex-direction: row;
+  margin-top: 25px;
+}
+
+.card .duplaBoton{
+  padding-bottom: 20px;
 }
