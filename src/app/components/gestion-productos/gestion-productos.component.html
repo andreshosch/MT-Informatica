@@ -1,37 +1,43 @@
 <app-encabezado></app-encabezado>
 <app-navbar></app-navbar>
 
-<div class="container bloqueos">
-    <h3>Bloqueo de categorías</h3>
+<div class="bloqueos">
+    <h3>Gestión de categorías</h3>
     <div class="estructura">
         <div class="izquierda">
-            <mat-select id="aBloquear" *ngIf="onlyCategory">
-                <mat-option *ngFor="let category of onlyCategory" [value]="category">{{category}}</mat-option>
-            </mat-select>
-    
-            <button (click)="altaBloqueo()">Bloquear</button>
+            <div><h5>Categorías disponibles</h5></div>
+            <div>
+                <mat-select id="aBloquear" *ngIf="onlyCategory">
+                    <mat-option *ngFor="let category of onlyCategory" [value]="category">{{category}}</mat-option>
+                </mat-select>
+                <button (click)="altaBloqueo()" mat-raised-button color="primary">Bloquear</button>
+            </div>
         </div>
         <div class="derecha">
-            <mat-select id="aDesbloquear">
-                <mat-option *ngFor="let bloqueado of losBloqueados" [value]="bloqueado">{{bloqueado.categoria}}</mat-option>
-            </mat-select>
-            <button (click)="bajaBloqueo()">Desbloquear</button>
+            <div><h5>Categorías bloqueadas</h5></div>
+            <div>
+                <mat-select id="aDesbloquear">
+                    <mat-option *ngFor="let bloqueado of losBloqueados" [value]="bloqueado">{{bloqueado.categoria}}</mat-option>
+                </mat-select>
+                <button (click)="bajaBloqueo()" mat-raised-button color="primary">Desbloquear</button>
+            </div>
         </div>
     </div>
 </div>
 
-<div class="formatoArticulos">
+<div class="formatoArticulos container">
     <h3>Articulos actuales</h3>
     <div class="galeriaCard container">
         <div *ngFor="let articulo of productosHot">
         
             <div class="card">
                 <img src="{{articulo.imagenes}}">
-                <h6>Articulo: {{articulo.nombre}}</h6>
+                <h6>{{articulo.nombre}}</h6>
                 <h6>Precio: {{articulo.precio}}</h6>
-                <div>
-                    <button (click)="modificar(articulo.id)">Modificar</button>
-                    <button (click)="borrarPorId(articulo.id)">Borrar</button>
+                <h6>IVA: {{articulo.iva}}</h6>
+                <div class="duplaBoton">
+                    <button (click)="modificar(articulo.id)" mat-raised-button color="primary">Modificar</button>
+                    <button (click)="borrarPorId(articulo.id)" mat-raised-button color="primary">Borrar</button>
                 </div>
             </div>
         </div>
