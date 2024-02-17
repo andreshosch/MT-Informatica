@@ -28,24 +28,6 @@
     width: 100%;
 }
 
-  .confirmation-dialog {
-    z-index: 9;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.3);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  /* .container {
-    position: relative;
-    min-height: 100vh;
-  } */
-
   .contenedorCart{
     display: flex;
   }
@@ -64,10 +46,11 @@
 }
 
 .card img{
-  width: 100px;
-  height: 100px;
-  margin-top: 15px;
-  margin-bottom: 15px;
+  width: 90%;
+  height: 90%;
+  margin-top: 5%;
+  /* margin-top: 15px;
+  margin-bottom: 15px; */
 }
 
 .ordenCard{
@@ -88,25 +71,15 @@
 }
 
 .carroImagen{
-  width: 15%;
+  width: 100%;
   height: 130px;
-}
-
-.carroImagen img{
   display: flex;
   justify-content: center;
 }
 
 .carroNombre{
-  width: 30%;
+  width: 100%;
   height: 60px;
-  /* background-color: lightcoral; */
-}
-
-.carroDescripcion{
-  width: 70%;
-  height: 60px;
-  /* background-color: aquamarine; */
 }
 
 .derAbajo{
@@ -117,9 +90,8 @@
 }
 
 .carritoPrecioU{
-  width: 30%;
+  width: 20%;
   height: 70px;
-  /* background-color: lightcyan; */
 }
 
 .carritoPrecioU table{
@@ -127,28 +99,29 @@
 }
 
 .carritoPrecioT{
-  width: 30%;
+  width: 20%;
   height: 70px;
-  /* background-color: lightgrey; */
 }
 
 .carritoPrecioT table{
   width: 100%;
 }
 
+.carritoPrecioIva{
+  width: 30%;
+}
+
 .carritoBotonera {
-  width: 25%;
+  width: 20%;
   height: 70px;
-  /* background-color: lightpink; */
 }
 .carritoBotonera button {
   margin: 0 5px; 
 }
 
 .carritoEliminar{
-  width: 15%;
+  width: 10%;
   height: 70px;
-  /* background-color: lightgreen; */
 }
 
 .formatoCol{
@@ -165,7 +138,6 @@
   display: flex;
   flex-direction: column;
 }
-
 
 .izquierda{
   width: 15%;
@@ -191,9 +163,14 @@
 }
 
 .buttonClose{
+  width: 70%;
   text-align: center;
   justify-content: center;
   margin-top: 25px;
+}
+
+.buttonClose button{
+  margin: 5px
 }
 
 .menuLogin{
@@ -224,7 +201,18 @@
   padding: 20px;
   border-radius: 4px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  width: 40%;
+}
+
+.dialog-content h3 {
+  margin-top: 0;
+}
+
+.dialog-content p {
+  margin-bottom: 10px;
+}
+
+.dialog-content button {
+  margin-right: 10px;
 }
 
 .centrado{
@@ -237,4 +225,19 @@
   margin:0 5px;
   background-color:#107997;
   color: white;  
+}
+
+.datos{
+  padding-bottom: 20px;
+  margin-bottom: 25px;
+}
+
+.aviso{
+  width: 70%;
+  text-align: center;
+}
+
+.matHint{
+  font-size: 1rem;
+  color: red;
 }

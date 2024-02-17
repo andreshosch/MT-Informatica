@@ -1,227 +1,229 @@
 <app-encabezado></app-encabezado>
+<mat-divider></mat-divider>
 <app-navbar></app-navbar>
 
-<h3 style="text-align: center;padding-top: 30px;">Solicitudes pendientes</h3>
-<mat-tab-group mat-stretch-tabs="false" mat-align-tabs="center">
-    <mat-tab label="Pedidos Pendientes">
-        <div class="container registrados">
-            <h3>Pedidos Pendientes</h3>
-
-            <mat-form-field>
-                <mat-label>Ingrese pedido a buscar</mat-label>
-                <input matInput (keyup)="applyFilter($event,dataSourcePedidosPendientes)" placeholder="Búsqueda Pedido" #input autocomplete="off">
-            </mat-form-field>
-            <div class="mat-elevation-z8">
-
-                <table mat-table [dataSource]="dataSourcePedidosPendientes" matSort>
-                    <ng-container matColumnDef="fecha">
-                        <th mat-header-cell *matHeaderCellDef mat-sort-header (click)="ordenarTabla('fecha',dataSourcePedidosPendientes)" > Fecha </th>
-                        <td mat-cell *matCellDef="let element">{{element.fecha}}</td>
-                    </ng-container>
-
-                    <ng-container matColumnDef="dni">
-                        <th mat-header-cell *matHeaderCellDef mat-sort-header (click)="ordenarTabla('idUser',dataSourcePedidosPendientes)">DNI</th>
-                        <td mat-cell *matCellDef="let element"> {{element.idUser}} </td>
-                    </ng-container>
-
-                    <ng-container matColumnDef="apellido">
-                        <th mat-header-cell *matHeaderCellDef mat-sort-header (click)="ordenarTabla('apellido',dataSourcePedidosPendientes)"> Apellido </th>
-                        <td mat-cell *matCellDef="let element"> {{element.apellido}} </td>
-                    </ng-container>
-
-                    <ng-container matColumnDef="nombre">
-                        <th mat-header-cell *matHeaderCellDef mat-sort-header (click)="ordenarTabla('nombre',dataSourcePedidosPendientes)">Nombre</th>
-                        <td mat-cell *matCellDef="let element"> {{element.nombre}} </td>
-                    </ng-container>
-
-                    <ng-container matColumnDef="celular">
-                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Celular</th>
-                        <td mat-cell *matCellDef="let element"> {{element.celular}} </td>
-                    </ng-container>
-
-                    <ng-container matColumnDef="acciones">
-                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Acciones</th>
-                        <td mat-cell *matCellDef="let element; let pos = index">
-                            <a (click)="showModalPendientes(element, pos); actualizarResumen(pos,pedidosPendientes)" ><mat-icon style="cursor: pointer;"
-                                    title="Ver Pedido">visibility</mat-icon></a>
-                            <a (click)="AceptarPedido(element.id,'Pedidos Pendientes','Pedidos En Curso')"><mat-icon
-                                    style="cursor: pointer;" title="Aceptar Pedido">check_circle</mat-icon></a>
-                            <a (click)="deletePedidoPendienteId(element.id,'Pedidos Pendientes')"><mat-icon
-                                    style="cursor: pointer;" title="Eliminar Pedido">delete</mat-icon></a>
-                        </td>
-                    </ng-container>
-
-                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-                </table>
-                <mat-paginator [pageSizeOptions]="[5, 10, 25]" showFirstLastButtons itemsPerPageLabel="Pedidos por Página"[pageSize]="pageSize" [pageIndex]="pageIndex"
-                    [length]="pedidosPendientes.length" (page)="onPaginateChange($event)">
+<h3 style="text-align: center;padding-top: 30px;">Gestión de pedidos</h3>
+<div class="datos">
+    <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="center">
+        <mat-tab label="Pedidos Pendientes">
+            <div class="container">
+                <h3>Pedidos Pendientes</h3>
+    
+                <mat-form-field>
+                    <mat-label>Ingrese pedido a buscar</mat-label>
+                    <input matInput (keyup)="applyFilter($event,dataSourcePedidosPendientes)" placeholder="Búsqueda Pedido" #input autocomplete="off">
+                </mat-form-field>
+                <div class="mat-elevation-z8">
+    
+                    <table mat-table [dataSource]="dataSourcePedidosPendientes" matSort>
+                        <ng-container matColumnDef="fecha">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header (click)="ordenarTabla('fecha',dataSourcePedidosPendientes)" > Fecha </th>
+                            <td mat-cell *matCellDef="let element">{{element.fecha}}</td>
+                        </ng-container>
+    
+                        <ng-container matColumnDef="dni">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header (click)="ordenarTabla('idUser',dataSourcePedidosPendientes)">DNI</th>
+                            <td mat-cell *matCellDef="let element"> {{element.idUser}} </td>
+                        </ng-container>
+    
+                        <ng-container matColumnDef="apellido">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header (click)="ordenarTabla('apellido',dataSourcePedidosPendientes)"> Apellido </th>
+                            <td mat-cell *matCellDef="let element"> {{element.apellido}} </td>
+                        </ng-container>
+    
+                        <ng-container matColumnDef="nombre">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header (click)="ordenarTabla('nombre',dataSourcePedidosPendientes)">Nombre</th>
+                            <td mat-cell *matCellDef="let element"> {{element.nombre}} </td>
+                        </ng-container>
+    
+                        <ng-container matColumnDef="celular">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header>Celular</th>
+                            <td mat-cell *matCellDef="let element"> {{element.celular}} </td>
+                        </ng-container>
+    
+                        <ng-container matColumnDef="acciones">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header>Acciones</th>
+                            <td mat-cell *matCellDef="let element; let pos = index">
+                                <a (click)="showModalPendientes(element, pos); actualizarResumen(pos,pedidosPendientes)" ><mat-icon style="cursor: pointer;"
+                                        title="Ver Pedido">visibility</mat-icon></a>
+                                <a (click)="AceptarPedido(element.id,'Pedidos Pendientes','Pedidos En Curso')"><mat-icon
+                                        style="cursor: pointer;" title="Aceptar Pedido">check_circle</mat-icon></a>
+                                <a (click)="deletePedidoPendienteId(element.id,'Pedidos Pendientes')"><mat-icon
+                                        style="cursor: pointer;" title="Eliminar Pedido">delete</mat-icon></a>
+                            </td>
+                        </ng-container>
+    
+                        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                    </table>
+                    <mat-paginator [pageSizeOptions]="[5, 10, 25]" showFirstLastButtons itemsPerPageLabel="Pedidos por Página"[pageSize]="pageSize" [pageIndex]="pageIndex"
+                        [length]="pedidosPendientes.length" (page)="onPaginateChange($event)">
+                    </mat-paginator>
+    
+                </div>
+            </div>
+        </mat-tab>
+        <mat-tab label="Pedidos en Curso">
+            <div class="container">
+                <h3>Pedidos En Curso</h3>
+    
+                <mat-form-field>
+                    <mat-label>Ingrese pedido a buscar</mat-label>
+                    <input matInput (keyup)="applyFilter($event,dataSourcePedidosEnCurso)" placeholder="Búsqueda Pedido" #input autocomplete="off">
+                </mat-form-field>
+    
+                <div class="mat-elevation-z8">
+    
+                    <table mat-table [dataSource]="dataSourcePedidosEnCurso" matSort>
+                        <ng-container matColumnDef="fecha">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header (click)="ordenarTabla('fecha',dataSourcePedidosEnCurso)"> Fecha </th>
+                            <td mat-cell *matCellDef="let element">{{element.fecha}} </td>
+                        </ng-container>
+    
+                        <ng-container matColumnDef="dni">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header (click)="ordenarTabla('idUser',dataSourcePedidosEnCurso)">DNI</th>
+                            <td mat-cell *matCellDef="let element"> {{element.idUser}} </td>
+                        </ng-container>
+    
+                        <ng-container matColumnDef="apellido">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header (click)="ordenarTabla('apellido',dataSourcePedidosEnCurso)"> Apellido </th>
+                            <td mat-cell *matCellDef="let element"> {{element.apellido}} </td>
+                        </ng-container>
+    
+                        <ng-container matColumnDef="nombre">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header (click)="ordenarTabla('nombre',dataSourcePedidosEnCurso)">Nombre</th>
+                            <td mat-cell *matCellDef="let element"> {{element.nombre}} </td>
+                        </ng-container>
+    
+                        <ng-container matColumnDef="acciones">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header>Acciones</th>
+                            <td mat-cell *matCellDef="let element; let pos = index">
+                                <a (click)="showModalEnCurso(element, pos);actualizarResumen(pos,pedidosEncurso)"><mat-icon style="cursor: pointer;" title="Ver Pedido">visibility</mat-icon></a>
+                                <a (click)="envioTransporte(element.id)" title="Envio Transporte" style="cursor: pointer;"><mat-icon>
+                                        local_shipping</mat-icon> </a>
+                                <!-- <a (click)="AceptarPedido(element.id,'Pedidos En Curso','Pedidos En Transporte')"title="Envio Transporte" style="cursor: pointer;"><mat-icon> local_shipping</mat-icon> </a> -->
+                                <a (click)="AceptarPedido(element.id,'Pedidos En Curso','Pedidos Finalizados')"><mat-icon
+                                        style="cursor: pointer;" title="Finalizar Pedido">check_circle</mat-icon></a>
+                            </td>
+                        </ng-container>
+    
+    
+    
+                        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                    </table>
+                    <mat-paginator [pageSizeOptions]="[5, 10, 25]" showFirstLastButtons itemsPerPageLabel="Pedidos por Página"[pageSize]="pageSize" [pageIndex]="pageIndex"
+                    [length]="pedidosEncurso.length" (page)="onPaginateChange($event)">
+                </mat-paginator>
+    
+    
+                </div>
+            </div>
+        </mat-tab>
+        <mat-tab label="Pedidos en Transporte">
+            <div class="container">
+                <h3>Pedidos En Transporte</h3>
+                <mat-form-field>
+                    <mat-label>Ingrese pedido a buscar</mat-label>
+                    <input matInput (keyup)="applyFilter($event,dataSourcePedidosEnTransporte)" placeholder="Búsqueda Pedido" #input autocomplete="off">
+                </mat-form-field>
+                <div class="mat-elevation-z8">
+    
+                    <table mat-table [dataSource]="dataSourcePedidosEnTransporte" matSort>
+                        <ng-container matColumnDef="fecha">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header (click)="ordenarTabla('fecha',dataSourcePedidosEnTransporte)"> Fecha </th>
+                            <td mat-cell *matCellDef="let element">{{element.fecha}} </td>
+                        </ng-container>
+    
+                        <ng-container matColumnDef="dni">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header (click)="ordenarTabla('idUser',dataSourcePedidosEnTransporte)">DNI</th>
+                            <td mat-cell *matCellDef="let element"> {{element.idUser}} </td>
+                        </ng-container>
+    
+                        <ng-container matColumnDef="apellido">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header (click)="ordenarTabla('apellido',dataSourcePedidosEnTransporte)"> Apellido </th>
+                            <td mat-cell *matCellDef="let element"> {{element.apellido}} </td>
+                        </ng-container>
+    
+                        <ng-container matColumnDef="nombre">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header (click)="ordenarTabla('nombre',dataSourcePedidosEnTransporte)">Nombre</th>
+                            <td mat-cell *matCellDef="let element"> {{element.nombre}} </td>
+                        </ng-container>
+    
+                        <ng-container matColumnDef="acciones">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header>Acciones</th>
+                            <td mat-cell *matCellDef="let element; let pos = index">
+                                <a (click)="showModalTransporteyFinalizado(element, pos);actualizarResumen(pos,pedidosEnTransporte)"><mat-icon style="cursor: pointer;" title="Ver Pedido">visibility</mat-icon></a>
+                                <a (click)="envioSeguimiento(element.id)" title="Cargar Seguimiento" style="cursor: pointer;"><mat-icon>
+                                    list_alt</mat-icon> </a>
+                                <a (click)="AceptarPedido(element.id,'Pedidos En Transporte','Pedidos Finalizados')"
+                                    title="Finalizar Pedido" style="cursor: pointer;"><mat-icon> check_circle</mat-icon>
+                                </a>
+                            </td>
+                        </ng-container>
+    
+    
+    
+                        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                    </table>
+                    <mat-paginator [pageSizeOptions]="[5, 10, 25]" showFirstLastButtons itemsPerPageLabel="Pedidos por Página"[pageSize]="pageSize" [pageIndex]="pageIndex"
+                    [length]="pedidosEnTransporte.length" (page)="onPaginateChange($event)">
+                </mat-paginator>
+    
+    
+                </div>
+            </div>
+        </mat-tab>
+        <mat-tab label="Pedidos Finalizados">
+            <div class="container">
+                <h3>Pedidos Finalizados</h3>
+                <mat-form-field>
+                    <mat-label>Ingrese pedido a buscar</mat-label>
+                    <input matInput (keyup)="applyFilter($event,dataSourcePedidosFinalizados)" placeholder="Búsqueda Pedido" #input autocomplete="off">
+                </mat-form-field>
+                <div class="mat-elevation-z8">
+    
+                    <table mat-table [dataSource]="dataSourcePedidosFinalizados" matSort>
+                        <ng-container matColumnDef="fecha">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header (click)="ordenarTabla('fecha',dataSourcePedidosFinalizados)"> Fecha </th>
+                            <td mat-cell *matCellDef="let element">{{element.fecha}} </td>
+                        </ng-container>
+    
+                        <ng-container matColumnDef="dni">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header (click)="ordenarTabla('idUser',dataSourcePedidosFinalizados)">DNI</th>
+                            <td mat-cell *matCellDef="let element"> {{element.idUser}} </td>
+                        </ng-container>
+    
+                        <ng-container matColumnDef="apellido">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header (click)="ordenarTabla('apellido',dataSourcePedidosFinalizados)"> Apellido </th>
+                            <td mat-cell *matCellDef="let element"> {{element.apellido}} </td>
+                        </ng-container>
+    
+                        <ng-container matColumnDef="nombre">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header (click)="ordenarTabla('nombre',dataSourcePedidosFinalizados)">Nombre</th>
+                            <td mat-cell *matCellDef="let element"> {{element.nombre}} </td>
+                        </ng-container>
+    
+                        <ng-container matColumnDef="acciones">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header>Acciones</th>
+                            <td mat-cell *matCellDef="let element; let pos = index">
+                                <a (click)="showModalTransporteyFinalizado(element, pos);actualizarResumen(pos,pedidosFinalizados)"><mat-icon style="cursor: pointer;" title="Ver Pedido">visibility</mat-icon></a>
+                            </td>
+                        </ng-container>
+                        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                    </table>
+                    <mat-paginator [pageSizeOptions]="[5, 10, 25]" showFirstLastButtons itemsPerPageLabel="Pedidos por Página"[pageSize]="pageSize" [pageIndex]="pageIndex"
+                    [length]="pedidosFinalizados.length" (page)="onPaginateChange($event)">
                 </mat-paginator>
 
+                </div>
             </div>
-        </div>
-    </mat-tab>
-    <mat-tab label="Pedidos en Curso">
-        <div class="container registrados">
-            <h3>Pedidos En Curso</h3>
-
-            <mat-form-field>
-                <mat-label>Ingrese pedido a buscar</mat-label>
-                <input matInput (keyup)="applyFilter($event,dataSourcePedidosEnCurso)" placeholder="Búsqueda Pedido" #input autocomplete="off">
-            </mat-form-field>
-
-            <div class="mat-elevation-z8">
-
-                <table mat-table [dataSource]="dataSourcePedidosEnCurso" matSort>
-                    <ng-container matColumnDef="fecha">
-                        <th mat-header-cell *matHeaderCellDef mat-sort-header (click)="ordenarTabla('fecha',dataSourcePedidosEnCurso)"> Fecha </th>
-                        <td mat-cell *matCellDef="let element">{{element.fecha}} </td>
-                    </ng-container>
-
-                    <ng-container matColumnDef="dni">
-                        <th mat-header-cell *matHeaderCellDef mat-sort-header (click)="ordenarTabla('idUser',dataSourcePedidosEnCurso)">DNI</th>
-                        <td mat-cell *matCellDef="let element"> {{element.idUser}} </td>
-                    </ng-container>
-
-                    <ng-container matColumnDef="apellido">
-                        <th mat-header-cell *matHeaderCellDef mat-sort-header (click)="ordenarTabla('apellido',dataSourcePedidosEnCurso)"> Apellido </th>
-                        <td mat-cell *matCellDef="let element"> {{element.apellido}} </td>
-                    </ng-container>
-
-                    <ng-container matColumnDef="nombre">
-                        <th mat-header-cell *matHeaderCellDef mat-sort-header (click)="ordenarTabla('nombre',dataSourcePedidosEnCurso)">Nombre</th>
-                        <td mat-cell *matCellDef="let element"> {{element.nombre}} </td>
-                    </ng-container>
-
-                    <ng-container matColumnDef="acciones">
-                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Acciones</th>
-                        <td mat-cell *matCellDef="let element; let pos = index">
-                            <a (click)="showModalEnCurso(element, pos);actualizarResumen(pos,pedidosEncurso)"><mat-icon style="cursor: pointer;" title="Ver Pedido">visibility</mat-icon></a>
-                            <a (click)="envioTransporte(element.id)" title="Envio Transporte" style="cursor: pointer;"><mat-icon>
-                                    local_shipping</mat-icon> </a>
-                            <!-- <a (click)="AceptarPedido(element.id,'Pedidos En Curso','Pedidos En Transporte')"title="Envio Transporte" style="cursor: pointer;"><mat-icon> local_shipping</mat-icon> </a> -->
-                            <a (click)="AceptarPedido(element.id,'Pedidos En Curso','Pedidos Finalizados')"><mat-icon
-                                    style="cursor: pointer;" title="Finalizar Pedido">check_circle</mat-icon></a>
-                        </td>
-                    </ng-container>
-
-
-
-                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-                </table>
-                <mat-paginator [pageSizeOptions]="[5, 10, 25]" showFirstLastButtons itemsPerPageLabel="Pedidos por Página"[pageSize]="pageSize" [pageIndex]="pageIndex"
-                [length]="pedidosEncurso.length" (page)="onPaginateChange($event)">
-            </mat-paginator>
-
-
-            </div>
-        </div>
-    </mat-tab>
-    <mat-tab label="Pedidos en Transporte">
-        <div class="container registrados">
-            <h3>Pedidos En Transporte</h3>
-            <mat-form-field>
-                <mat-label>Ingrese pedido a buscar</mat-label>
-                <input matInput (keyup)="applyFilter($event,dataSourcePedidosEnTransporte)" placeholder="Búsqueda Pedido" #input autocomplete="off">
-            </mat-form-field>
-            <div class="mat-elevation-z8">
-
-                <table mat-table [dataSource]="dataSourcePedidosEnTransporte" matSort>
-                    <ng-container matColumnDef="fecha">
-                        <th mat-header-cell *matHeaderCellDef mat-sort-header (click)="ordenarTabla('fecha',dataSourcePedidosEnTransporte)"> Fecha </th>
-                        <td mat-cell *matCellDef="let element">{{element.fecha}} </td>
-                    </ng-container>
-
-                    <ng-container matColumnDef="dni">
-                        <th mat-header-cell *matHeaderCellDef mat-sort-header (click)="ordenarTabla('idUser',dataSourcePedidosEnTransporte)">DNI</th>
-                        <td mat-cell *matCellDef="let element"> {{element.idUser}} </td>
-                    </ng-container>
-
-                    <ng-container matColumnDef="apellido">
-                        <th mat-header-cell *matHeaderCellDef mat-sort-header (click)="ordenarTabla('apellido',dataSourcePedidosEnTransporte)"> Apellido </th>
-                        <td mat-cell *matCellDef="let element"> {{element.apellido}} </td>
-                    </ng-container>
-
-                    <ng-container matColumnDef="nombre">
-                        <th mat-header-cell *matHeaderCellDef mat-sort-header (click)="ordenarTabla('nombre',dataSourcePedidosEnTransporte)">Nombre</th>
-                        <td mat-cell *matCellDef="let element"> {{element.nombre}} </td>
-                    </ng-container>
-
-                    <ng-container matColumnDef="acciones">
-                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Acciones</th>
-                        <td mat-cell *matCellDef="let element; let pos = index">
-                            <a (click)="showModalTransporteyFinalizado(element, pos);actualizarResumen(pos,pedidosEnTransporte)"><mat-icon style="cursor: pointer;" title="Ver Pedido">visibility</mat-icon></a>
-                            <a (click)="envioSeguimiento(element.id)" title="Cargar Seguimiento" style="cursor: pointer;"><mat-icon>
-                                list_alt</mat-icon> </a>
-                            <a (click)="AceptarPedido(element.id,'Pedidos En Transporte','Pedidos Finalizados')"
-                                title="Finalizar Pedido" style="cursor: pointer;"><mat-icon> check_circle</mat-icon>
-                            </a>
-                        </td>
-                    </ng-container>
-
-
-
-                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-                </table>
-                <mat-paginator [pageSizeOptions]="[5, 10, 25]" showFirstLastButtons itemsPerPageLabel="Pedidos por Página"[pageSize]="pageSize" [pageIndex]="pageIndex"
-                [length]="pedidosEnTransporte.length" (page)="onPaginateChange($event)">
-            </mat-paginator>
-
-
-            </div>
-        </div>
-    </mat-tab>
-    <mat-tab label="Pedidos Finalizados">
-        <div class="container registrados">
-            <h3>Pedidos Finalizados</h3>
-            <mat-form-field>
-                <mat-label>Ingrese pedido a buscar</mat-label>
-                <input matInput (keyup)="applyFilter($event,dataSourcePedidosFinalizados)" placeholder="Búsqueda Pedido" #input autocomplete="off">
-            </mat-form-field>
-            <div class="mat-elevation-z8">
-
-                <table mat-table [dataSource]="dataSourcePedidosFinalizados" matSort>
-                    <ng-container matColumnDef="fecha">
-                        <th mat-header-cell *matHeaderCellDef mat-sort-header (click)="ordenarTabla('fecha',dataSourcePedidosFinalizados)"> Fecha </th>
-                        <td mat-cell *matCellDef="let element">{{element.fecha}} </td>
-                    </ng-container>
-
-                    <ng-container matColumnDef="dni">
-                        <th mat-header-cell *matHeaderCellDef mat-sort-header (click)="ordenarTabla('idUser',dataSourcePedidosFinalizados)">DNI</th>
-                        <td mat-cell *matCellDef="let element"> {{element.idUser}} </td>
-                    </ng-container>
-
-                    <ng-container matColumnDef="apellido">
-                        <th mat-header-cell *matHeaderCellDef mat-sort-header (click)="ordenarTabla('apellido',dataSourcePedidosFinalizados)"> Apellido </th>
-                        <td mat-cell *matCellDef="let element"> {{element.apellido}} </td>
-                    </ng-container>
-
-                    <ng-container matColumnDef="nombre">
-                        <th mat-header-cell *matHeaderCellDef mat-sort-header (click)="ordenarTabla('nombre',dataSourcePedidosFinalizados)">Nombre</th>
-                        <td mat-cell *matCellDef="let element"> {{element.nombre}} </td>
-                    </ng-container>
-
-                    <ng-container matColumnDef="acciones">
-                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Acciones</th>
-                        <td mat-cell *matCellDef="let element; let pos = index">
-                            <a (click)="showModalTransporteyFinalizado(element, pos);actualizarResumen(pos,pedidosFinalizados)"><mat-icon style="cursor: pointer;" title="Ver Pedido">visibility</mat-icon></a>
-                        </td>
-                    </ng-container>
-                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-                </table>
-                <mat-paginator [pageSizeOptions]="[5, 10, 25]" showFirstLastButtons itemsPerPageLabel="Pedidos por Página"[pageSize]="pageSize" [pageIndex]="pageIndex"
-                [length]="pedidosFinalizados.length" (page)="onPaginateChange($event)">
-            </mat-paginator>
-
-
-
-            </div>
-        </div>
-    </mat-tab>
-</mat-tab-group>
+        </mat-tab>
+    </mat-tab-group>
+    
+</div>
 
 
 <div class="confirmation-dialog" *ngIf="carritoHabilitado">
@@ -247,22 +249,10 @@
                                     <div class="carroNombre ordenCeldas">
                                         <table>
                                             <tr>
-                                                <th>Producto</th>
-                                            </tr>
-                                            <tr>
-                                                <td>{{carro.addProducto.nombre}}
+                                                <td>
+                                                    <strong>Producto: </strong>{{carro.addProducto.nombre}}
                                                 </td>
                                             </tr>
-                                        </table>
-                                    </div>
-                                    <div class="carroDescripcion ordenCeldas">
-                                        <table>
-                                            <!-- <tr>
-                                                <th>Descripción</th>
-                                            </tr> -->
-                                            <!-- <tr>
-                                                <td>{{carro.addProducto.descripcion}}</td>
-                                            </tr> -->
                                         </table>
                                     </div>
                                 </div>
@@ -273,7 +263,7 @@
                                                 <th>Precio unitario</th>
                                             </tr>
                                             <tr>
-                                                <td>{{carro.addProducto.precio}}</td>
+                                                <td>$ {{carro.addProducto.precio}}</td>
                                             </tr>
                                         </table>
                                     </div>
@@ -298,17 +288,17 @@
                                                 <th>Costo total</th>
                                             </tr>
                                             <tr>
-                                                <td>{{(carro.addProducto.precio * carro.addProducto.cantidad)|number:'1.2-2'}}</td>
+                                                <td>$ {{(carro.addProducto.precio * carro.addProducto.cantidad)|number:'1.2-2'}}</td>
                                             </tr>
                                         </table>
                                     </div>
-                                    <div class="ordenCeldas">
+                                    <div class="carritoPrecioIva ordenCeldas">
                                         <table>
                                             <tr>
                                                 <th>Costo Total con Iva:</th>
                                             </tr>
                                             <tr>
-                                                <td>$ {{ (carro.addProducto.precio * carro.addProducto.cantidad) * (1 + carro.addProducto.iva / 100) }}</td>
+                                                <td>$ {{ ((carro.addProducto.precio * carro.addProducto.cantidad) * (1 + carro.addProducto.iva / 100)).toFixed(2) | number:'1.2-2' }}</td>
                                             </tr>
                                         </table>
                                     </div>
@@ -351,7 +341,7 @@
                                 <th>Costo Total con IVA:</th>
                             </tr>
                             <tr>
-                                <td>$ {{ montoIva |number: '1.2-2' }}</td>
+                                <td>$ {{ montoIva.toFixed(2) | number:'1.2-2' }}</td>
                             </tr>
                         </table>
                     </div>
@@ -362,8 +352,11 @@
             </div>
         </div>
         <div class="buttonClose">
-            <button *ngIf="showActualizar" (click)="actualizarPedido()" mat-raised-button color="primary">Actualizar</button>
+            <button *ngIf="showActualizar" [disabled]="sinModificaciones" (click)="actualizarPedido()" mat-raised-button color="primary">Actualizar</button>
             <button (click)="hideCarrito()" mat-raised-button color="primary">Cerrar</button>
+        </div>
+        <div class="aviso">
+            <mat-hint class="matHint" *ngIf="!sinModificaciones">Debe "actualizar" para guardar los cambios o "cerrar" para descartarlos</mat-hint>
         </div>
     </div>
 </div>
@@ -414,3 +407,17 @@
 <div *ngIf="_spinner.getSpinner()" class="spinner-container">
     <app-spinner></app-spinner>
   </div>
+
+  <div class="confirmation-dialog" *ngIf="showConfirmationDelPedido">
+    <div class="dialog-content">
+        <h4>¿Está seguro que desea eliminar el pedido?</h4>
+        <div style="text-align: center;">
+            <button mat-raised-button color="primary" (click)="confirmDel()">Confirmar</button>
+            <button mat-raised-button color="primary" (click)="cancelDel()">Cancelar</button>
+        </div>
+    </div>
+</div>
+
+<div class="footer">
+    <app-footer></app-footer>
+</div>
