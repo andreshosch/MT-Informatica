@@ -26,30 +26,31 @@ export class GestionProductosComponent {
     
 
   constructor(private _productosService: ProductosService, private fb: FormBuilder,private _mensaje:MensajeService, public _spinner:SppinerService){
+    
     this.altaProd = this.fb.group({
       nombre: ['', Validators.required],
-      categoria: ['', Validators.required],
-      subcategoria: ['', Validators.required],
+      categoria: ['', [Validators.required, Validators.pattern('[a-zA-Z ]*')]],
+      subcategoria: ['', [Validators.required, Validators.pattern('[a-zA-Z ]*')]],
       descripcion: ['', Validators.required],
-      precio: ['', Validators.required],
+      precio: ['', [Validators.required, Validators.pattern('^[0-9]+(\.[0-9]{1,2})?$')]],
       imagenes: ['', Validators.required],
       destacado: ['', Validators.required],
       marca: ['', Validators.required],
-      iva: ['', Validators.required],
-      impuesto_interno: ['', Validators.required],
-    })
+      iva: ['', [Validators.required, Validators.pattern('^[0-9]+(\.[0-9]{1,2})?$')]],
+      impuesto_interno: ['', [Validators.required, Validators.pattern('^[0-9]+(\.[0-9]{1,2})?$')]],
+    });
 
     this.modificarProd = this.fb.group({
       nombreM: ['', Validators.required],
-      categoriaM: ['', Validators.required],
-      subcategoriaM: ['', Validators.required],
+      categoriaM: ['', [Validators.required, Validators.pattern('[a-zA-Z ]*')]],
+      subcategoriaM: ['', [Validators.required, Validators.pattern('[a-zA-Z ]*')]],
       descripcionM: ['', Validators.required],
-      precioM: ['', Validators.required],
+      precioM: ['', [Validators.required, Validators.pattern('^[0-9]+(\.[0-9]{1,2})?$')]],
       imagenesM: ['', Validators.required],
       destacadoM: ['', Validators.required],
       marcaM: ['', Validators.required],
-      ivaM: ['', Validators.required],
-      impuesto_internoM: ['', Validators.required],
+      ivaM: ['', [Validators.required, Validators.pattern('^[0-9]+(\.[0-9]{1,2})?$')]],
+      impuesto_internoM: ['', [Validators.required, Validators.pattern('^[0-9]+(\.[0-9]{1,2})?$')]],
     })
   }
 
