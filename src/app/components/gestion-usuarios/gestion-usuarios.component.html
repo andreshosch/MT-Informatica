@@ -1,4 +1,5 @@
 <app-encabezado></app-encabezado>
+<mat-divider></mat-divider>
 <app-navbar></app-navbar>
 
 <div class="formatoArticulos" *ngIf="showSolicitudPendiente">
@@ -19,7 +20,7 @@
                 <h6><strong>Situación Fiscal: </strong>{{solicitud.estadoFiscal}}</h6>
                 <h6 *ngIf="solicitud.cuit"><strong>CUIT: </strong>{{solicitud.cuit}}</h6>
                 <h6 *ngIf="solicitud.observaciones"><strong>Observaciones: </strong>{{solicitud.observaciones}}</h6>
-                <div>
+                <div class="botonera">
                     <button (click)="aceptarUsr(solicitud.id)" mat-raised-button color="primary">Aceptar</button>  
                     <button (click)="eliminarSolicitud(solicitud.id)" mat-raised-button color="primary">Eliminar</button>
                 </div>
@@ -64,24 +65,25 @@
 </div>
 
 <div class="confirmation-dialog" *ngIf="mostrarFicha">
-    <div class="dialog-content">
-        <h3>Ficha de usuario - {{fichaDetalle.nombre}} {{fichaDetalle.apellido}}</h3>
-        <div class="card">
-            <h6><strong>DNI: </strong>{{fichaDetalle.dni}}</h6>
-            <h6>Nombre: {{fichaDetalle.nombre}}</h6>
-            <h6>Apellido: {{fichaDetalle.apellido}}</h6>
-            <h6>Mail: {{fichaDetalle.mail}}</h6>
-            <h6>Telefono: {{fichaDetalle.celular}}</h6>
-            <h6>Domicilio: {{fichaDetalle.domicilio}}</h6>
-            <h6>Provincia: {{fichaDetalle.provincia}}</h6>
-            <h6>Localidad: {{fichaDetalle.localidad}}</h6>
-            <h6>Codigo Postal: {{fichaDetalle.codigoPostal}}</h6>
-            <h6>Situación Fiscal: {{fichaDetalle.estadoFiscal}}</h6>
-            <h6>Observaciones: {{fichaDetalle.observaciones}}</h6>
-        </div>
-    
-        <div style="text-align: center;">
-            <button mat-raised-button color="primary" (click)="cancelFicha()">Cerrar</button>
+    <div class="dialog-content fondo">
+        <div class="datosUsr">
+            <h3>Ficha de usuario: {{fichaDetalle.nombre}} {{fichaDetalle.apellido}}</h3>
+            <div class="card">
+                <h6><strong>DNI: </strong>{{fichaDetalle.dni}}</h6>
+                <h6>Nombre: {{fichaDetalle.nombre}}</h6>
+                <h6>Apellido: {{fichaDetalle.apellido}}</h6>
+                <h6>Mail: {{fichaDetalle.mail}}</h6>
+                <h6>Telefono: {{fichaDetalle.celular}}</h6>
+                <h6>Domicilio: {{fichaDetalle.domicilio}}</h6>
+                <h6>Provincia: {{fichaDetalle.provincia}}</h6>
+                <h6>Localidad: {{fichaDetalle.localidad}}</h6>
+                <h6>Codigo Postal: {{fichaDetalle.codigoPostal}}</h6>
+                <h6>Situación Fiscal: {{fichaDetalle.estadoFiscal}}</h6>
+                <h6>Observaciones: {{fichaDetalle.observaciones}}</h6>
+            </div>
+            <div style="text-align: center;">
+                <button mat-raised-button color="primary" (click)="cancelFicha()">Cerrar</button>
+            </div>
         </div>
     </div>
 </div>
@@ -127,9 +129,9 @@
                 <th style="background-color: #107997;color: white;font-weight: bold;" mat-header-cell *matHeaderCellDef>Acciones</th>
                 <td mat-cell *matCellDef="let element"> 
                     <a (click)="verFicha(element)"><mat-icon style="cursor: pointer;color: #107997;"
-                        title="Ver Pedido">visibility</mat-icon></a>
+                        title="Ver ficha de Usuario">visibility</mat-icon></a>
                     <a (click)="blanquearClave(element)"><mat-icon style="cursor: pointer;color: #107997;" title="Resetear Password">refresh</mat-icon></a>
-                    <a (click)="eliminarUsr(element.id)"><mat-icon style="cursor: pointer;color: #107997;" title="Eliminar Pedido">delete</mat-icon></a> 
+                    <a (click)="eliminarUsr(element.id)"><mat-icon style="cursor: pointer;color: #107997;" title="Eliminar Usuario">delete</mat-icon></a> 
                 </td>
             </ng-container>
         
@@ -145,3 +147,5 @@
 <div *ngIf="_spinner.getSpinner()" class="spinner-container">
     <app-spinner></app-spinner>
   </div>
+
+  <app-footer></app-footer>
