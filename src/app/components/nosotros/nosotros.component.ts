@@ -16,6 +16,7 @@ export class NosotrosComponent {
       const video = document.getElementById('miVideo') as HTMLVideoElement;
       if (video) {
         video.play();
+        video.volume=0.1
       }
     }, 1000);
   }
