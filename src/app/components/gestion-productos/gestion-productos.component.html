@@ -33,8 +33,8 @@
             <div class="card">
                 <img src="{{articulo.imagenes}}">
                 <h6>{{articulo.nombre}}</h6>
-                <h6>Precio: {{articulo.precio}}</h6>
-                <h6>IVA: {{articulo.iva}}</h6>
+                <h6>Precio: ${{articulo.precio}}</h6>
+                <h6>IVA: {{articulo.iva}}%</h6>
                 <div class="duplaBoton">
                     <button (click)="modificar(articulo.id)" mat-raised-button color="primary">Modificar</button>
                     <button (click)="borrarPorId(articulo.id)" mat-raised-button color="primary">Borrar</button>
@@ -45,12 +45,12 @@
 </div>
 
 <div class="formAgregar" *ngIf="modalActivo">
-    <div>
+    <div class="formularios">
         <h3>Modificar producto</h3>
         <div>
             <form [formGroup]="modificarProd" (ngSubmit)="agregarProd('m')"> 
             
-                <mat-grid-list cols="4" rowHeight="70px" style="margin-top: 8%; margin-right: 6%;">
+                <mat-grid-list cols="4" rowHeight="70px" style="margin-top: 8%">
                     <mat-grid-tile [colspan]="2" [rowspan]="1">
                         <mat-form-field>
                             <mat-label>Nombre</mat-label>
@@ -115,87 +115,93 @@
                         </mat-form-field>
                     </mat-grid-tile>
                 </mat-grid-list>
-                <button  type="submit" mat-raised-button color="primary" style="float: center;margin-bottom: 40px;">Actualizar</button>  
-                <button  (click)="cerrarModal()" type="text" mat-raised-button color="primary" style="float: center;margin-bottom: 40px;">Cancelar</button>  
+                <div class="botonera">
+                    <button  type="submit" mat-raised-button color="primary" style="float: center;margin-bottom: 40px;" [disabled]="!modificarProd.valid">Actualizar</button>  
+                    <button  (click)="cerrarModal()" type="text" mat-raised-button color="primary" style="float: center;margin-bottom: 40px;">Cancelar</button>  
+                </div>
             </form>
         </div>
     </div>
 </div>
 
 <div class="formAgregar" *ngIf="!modalActivo">
-    <h3>Agregar productos</h3>
-    <div>
-        <form [formGroup]="altaProd" (ngSubmit)="agregarProd('a')"> 
-            <mat-grid-list cols="4" rowHeight="70px" style="margin-top: 8%; margin-right: 6%;">
-                <mat-grid-tile [colspan]="2" [rowspan]="1">
-                    <mat-form-field>
-                        <mat-label>Nombre</mat-label>
-                        <input matInput formControlName="nombre">
-                    </mat-form-field>
-                </mat-grid-tile>
-                <mat-grid-tile [colspan]="2" [rowspan]="1">
-                    <mat-form-field>
-                        <mat-label>Precio</mat-label>
-                        <input matInput formControlName="precio">
-                    </mat-form-field>
-                </mat-grid-tile>. <mat-grid-tile [colspan]="2" [rowspan]="1">
-                    <mat-form-field>
-                        <mat-label>Iva</mat-label>
-                        <input matInput formControlName="iva">
-                    </mat-form-field>
-                </mat-grid-tile>
-                <mat-grid-tile [colspan]="2" [rowspan]="1">
-                    <mat-form-field>
-                        <mat-label>Impuesto_interno</mat-label>
-                        <input matInput formControlName="impuesto_interno">
-                    </mat-form-field>
-                </mat-grid-tile>
-                <mat-grid-tile [colspan]="2" [rowspan]="1">
-                    <mat-form-field>
-                        <mat-label>Categoria</mat-label>
-                        <input matInput formControlName="categoria">
-                    </mat-form-field>
-                </mat-grid-tile>
-                <mat-grid-tile [colspan]="2" [rowspan]="1">
-                    <mat-form-field>
-                        <mat-label>Subcategoria</mat-label>
-                        <input matInput formControlName="subcategoria">
-                    </mat-form-field>
-                </mat-grid-tile>
-                <mat-grid-tile [colspan]="2" [rowspan]="1">
-                    <mat-form-field>
-                        <mat-label>Descripción</mat-label>
-                        <input matInput formControlName="descripcion">
-                    </mat-form-field>
-                </mat-grid-tile>
-                <mat-grid-tile [colspan]="2" [rowspan]="1">
-                    <mat-form-field>
-                        <mat-label>Marca</mat-label>
-                        <input matInput formControlName="marca">
-                    </mat-form-field>
-                </mat-grid-tile>
-                <mat-grid-tile [colspan]="2" [rowspan]="1">
-                    <mat-form-field>
-                        <mat-label>Imagen</mat-label>
-                        <input matInput formControlName="imagenes">
-                    </mat-form-field>
-                </mat-grid-tile>
-                <mat-grid-tile [colspan]="2" [rowspan]="1">
-                    <mat-form-field>
-                        <mat-label>Destacado</mat-label>
-                        <mat-select formControlName="destacado">
-                            <mat-option value="true">True</mat-option>
-                            <mat-option value="false">False</mat-option>
-                        </mat-select>
-                    </mat-form-field>
-                </mat-grid-tile>
-            </mat-grid-list>
-            <button  type="submit" mat-raised-button color="primary" style="float: center;margin-bottom: 40px;" [disabled]="!altaProd.valid">Aceptar</button>  
-        </form>
+    <div class="formularios">
+        <h3>Agregar productos</h3>
+        <div>
+            <form [formGroup]="altaProd" (ngSubmit)="agregarProd('a')"> 
+                <mat-grid-list cols="4" rowHeight="70px" style="margin-top: 8%">
+                    <mat-grid-tile [colspan]="2" [rowspan]="1">
+                        <mat-form-field>
+                            <mat-label>Nombre</mat-label>
+                            <input matInput formControlName="nombre">
+                        </mat-form-field>
+                    </mat-grid-tile>
+                    <mat-grid-tile [colspan]="2" [rowspan]="1">
+                        <mat-form-field>
+                            <mat-label>Precio</mat-label>
+                            <input matInput formControlName="precio">
+                        </mat-form-field>
+                    </mat-grid-tile>. <mat-grid-tile [colspan]="2" [rowspan]="1">
+                        <mat-form-field>
+                            <mat-label>Iva</mat-label>
+                            <input matInput formControlName="iva">
+                        </mat-form-field>
+                    </mat-grid-tile>
+                    <mat-grid-tile [colspan]="2" [rowspan]="1">
+                        <mat-form-field>
+                            <mat-label>Impuesto_interno</mat-label>
+                            <input matInput formControlName="impuesto_interno">
+                        </mat-form-field>
+                    </mat-grid-tile>
+                    <mat-grid-tile [colspan]="2" [rowspan]="1">
+                        <mat-form-field>
+                            <mat-label>Categoria</mat-label>
+                            <input matInput formControlName="categoria">
+                        </mat-form-field>
+                    </mat-grid-tile>
+                    <mat-grid-tile [colspan]="2" [rowspan]="1">
+                        <mat-form-field>
+                            <mat-label>Subcategoria</mat-label>
+                            <input matInput formControlName="subcategoria">
+                        </mat-form-field>
+                    </mat-grid-tile>
+                    <mat-grid-tile [colspan]="2" [rowspan]="1">
+                        <mat-form-field>
+                            <mat-label>Descripción</mat-label>
+                            <input matInput formControlName="descripcion">
+                        </mat-form-field>
+                    </mat-grid-tile>
+                    <mat-grid-tile [colspan]="2" [rowspan]="1">
+                        <mat-form-field>
+                            <mat-label>Marca</mat-label>
+                            <input matInput formControlName="marca">
+                        </mat-form-field>
+                    </mat-grid-tile>
+                    <mat-grid-tile [colspan]="2" [rowspan]="1">
+                        <mat-form-field>
+                            <mat-label>Imagen</mat-label>
+                            <input matInput formControlName="imagenes">
+                        </mat-form-field>
+                    </mat-grid-tile>
+                    <mat-grid-tile [colspan]="2" [rowspan]="1">
+                        <mat-form-field>
+                            <mat-label>Destacado</mat-label>
+                            <mat-select formControlName="destacado">
+                                <mat-option value="true">True</mat-option>
+                                <mat-option value="false">False</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </mat-grid-tile>
+                </mat-grid-list>
+                <button  type="submit" mat-raised-button color="primary" style="float: center;margin-bottom: 40px;" [disabled]="!altaProd.valid">Aceptar</button>  
+            </form>
+        </div>
     </div>
+
 </div>
 <div *ngIf="_spinner.getSpinner()" class="spinner-container">
     <app-spinner></app-spinner>
   </div>
 
+<app-footer></app-footer>
 

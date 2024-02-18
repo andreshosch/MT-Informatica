@@ -9,6 +9,7 @@ import { DataService } from 'src/app/services/data.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { SppinerService } from 'src/app/services/sppiner.service';
 import { MensajeService } from 'src/app/services/mensaje.service';
+import { tr } from 'date-fns/locale';
 
 
 @Component({
@@ -43,6 +44,7 @@ export class GestionPedidosComponent {
   elementoActual: string
   loading:boolean=true
   ordenActual: 'asc' | 'desc' | 'original' = 'asc';
+  idAuxiliar: string = ""
 
   displayedColumns: string[] = ['fecha', 'dni', 'apellido', 'nombre', 'acciones'];
   dataSourcePedidosPendientes!: MatTableDataSource<any>;
@@ -51,6 +53,9 @@ export class GestionPedidosComponent {
   dataSourcePedidosFinalizados!: MatTableDataSource<any>;
    private paginator: MatPaginator; 
   numeroClics: number=0;
+  sinModificaciones: boolean = true
+  showConfirmationDelPedido: boolean = false
+  coleccionAuxiliar: string = ""
     
   @ViewChild(MatPaginator) set matPaginator(mp: MatPaginator) {
     this.paginator = mp;
@@ -296,7 +301,9 @@ cerrarTransporte(){
   this.showTransporte=false
 }
   deletePedidoPendienteId(id: string, coleccion: string) {
-    this._gestionPedido.deletePedidoPorId(id, coleccion)
+    this.showConfirmationDelPedido = true
+    this.idAuxiliar = id
+    this.coleccionAuxiliar = coleccion
   }
 showModalPendientes(element:any, mindice: number, estado: string){
   console.log(`index: ${mindice}`)
@@ -350,20 +357,18 @@ this.showCodigoSeguimiento=false
 }
 
 hideCarrito(){
+  this.sinModificaciones = true
   this.carritoHabilitado=false
 }
  sumarUno(idAgregar: string, posicion: number){
-
-  // console.log(`posicion: ${posicion}`)
-  // console.log(`IndicePedido: ${this.indicePedidoPendiente}`)
-
- this.pedidosPendientes[this.indicePedidoPendiente].carrito[posicion].addProducto.cantidad++
-  //this.monto=3
+  this.pedidosPendientes[this.indicePedidoPendiente].carrito[posicion].addProducto.cantidad++
+  this.sinModificaciones = false
  }
 
 restarUno(idQuitar: string, posicion: number){
   if(this.pedidosPendientes[this.indicePedidoPendiente].carrito[posicion].addProducto.cantidad > 1){
     this.pedidosPendientes[this.indicePedidoPendiente].carrito[posicion].addProducto.cantidad--;
+    this.sinModificaciones = false
   }
 }
 
@@ -397,6 +402,17 @@ quitarProd(i: number){
     this.carritoHabilitado=false
     this.showModalPendientes(this.pedidosPendientes[this.indicePedidoPendiente],this.indicePedidoPendiente,'hola')
   }
+}
+
+cancelDel(){
+  this.showConfirmationDelPedido = false
+}
+
+confirmDel(){
+  this._gestionPedido.deletePedidoPorId(this.idAuxiliar, this.coleccionAuxiliar)
+  this.idAuxiliar = ""
+  this.coleccionAuxiliar = ""
+  this.showConfirmationDelPedido = false
 }
 
 }
