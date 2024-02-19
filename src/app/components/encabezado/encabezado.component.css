@@ -1,26 +1,33 @@
-.izquierda{
-     width: 10%; 
-     text-align: left 
-    
-}
-
-.derecha{
-    width: 91%;
-    font-size: 1.3rem;
-    }
-
 .encabezado{
     display: flex;
-    height: 60px;  
-    background-color: lightgrey;
+    height: 100px;  
+    background-color: black;
+}
+
+.logo{
+    width: 20%;
+}
+
+.navegacion{
+    width: 50%;
+    height: 100px;  
 }
 
 .login{
-    background-color: lightgrey;
+    background-color: black;
     display: flex;
     flex-direction: row-reverse;
+    align-items: center;
+    width: 30%;
+    height: 100px;  
 }
 
 .contenedor{
     margin-left: 5%;
+}
+
+.total{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
 }
