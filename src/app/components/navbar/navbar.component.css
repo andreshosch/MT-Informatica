@@ -62,5 +62,13 @@
   }
 
   .barra{
-    background-color: lightgrey;
+    background-color: yellow;
+    height: 100%;
+    display: flex;
+    align-items: center;
+  }
+
+  .posiciones{
+    display: flex;
+    justify-content: space-between;
   }
