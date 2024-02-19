@@ -1,74 +1,83 @@
 <div class="body">
   <!-- Inicio Productos destacados -->
-  <div *ngIf="showProductosDestacados" class="container">
-    <h3 class="titleProductos">PRODUCTOS DESTACADOS</h3>
-    <ngb-carousel class="fondoCarrousel">
-      <ng-template *ngFor="let articulo of productosHot" ngbSlide>
-        <div class="picsum-img-wrapper">
-          <img src="{{articulo.imagenes}}" alt="Random first slide" />
-        </div>
+  
+    <div *ngIf="showProductosDestacados" class="container container-shop">
+      <h3 class="titleProductos">PRODUCTOS DESTACADOS</h3>
+      <!-- <ngb-carousel class="fondoCarrousel"> -->
+        <ngb-carousel class="container container-card">
+        
+        <ng-template class="card" style="width: 18rem" *ngFor="let articulo of productosHot" ngbSlide>
+          <!-- class="fondoDestacado"  -->
+            <img src="{{articulo.imagenes}}" alt="Random first slide" class="card-img-top" alt="..." style="height: 250px;width: 250px;"/>
+            <div class="card-body">
+              <h3 class="title">{{articulo.nombre}}</h3>
+              <p><strong>Precio: </strong>U$S {{articulo.precio}}</p>
+              <!-- <p>Rubro: {{articulo.categoria}} </p>
+              <p>SubRubro: {{articulo.subcategoria}}</p> -->
+              <p>Descripcion: {{articulo.descripcion}} </p>    
+            </div>
+          
+          <div class="example-button-row">
+            <button (click)="agregarAlCarrito(articulo, articulo.id)" mat-raised-button color="primary">Agregar al
+              carrito</button>
+          </div>
+        </ng-template>
+      </ngb-carousel>
+    </div>
+  
 
-        <h3>Articulo: {{articulo.nombre}}</h3>
-        <p>Precio: U$S {{articulo.precio}}</p>
-        <p>Rubro: {{articulo.categoria}} </p>
-        <p>SubRubro: {{articulo.subcategoria}}</p>
-        <p>Descripcion: {{articulo.descripcion}} </p>
-
-        <div class="example-button-row">
-          <button (click)="agregarAlCarrito(articulo, articulo.id)" mat-raised-button color="primary">Agregar al
-            carrito</button>
-        </div>
-
-
-
-      </ng-template>
-    </ngb-carousel>
-  </div>
   <!-- Fin Productos destacados -->
-  <div class="form-container"id="productos">
-    <div> 
-      <input type="text" [(ngModel)]="productSearch" placeholder="Ingrese una palabra clave" (input)="updateProductSearch()"></div>
-    <div>
-      <select [(ngModel)]="categorySearch" (change)="updateSubCategories()">
-        <option value="">Selecciona una categoría</option>
-        <option *ngFor="let categoria of category" [value]="categoria">{{categoria}}</option>
-      </select>
-      <select [(ngModel)]="subCategorySearch" (change)="updateBrand()">
-        <option value="">Selecciona una subcategoría</option>
-        <option *ngFor="let subCategoria of subCategoryFilter" [value]="subCategoria">{{subCategoria}}</option>
-      </select>
-      <select [(ngModel)]="brandSearch">
-        <option value="">Selecciona una Marca</option>
-        <option *ngFor="let marca of brandFilter" [value]="marca">{{marca}}</option>
-      </select>
-    </div>
-    <div>
-      <button mat-raised-button (click)="filterProducts()" class="clear">Buscar</button>
-      <button mat-raised-button (click)="cleanFilters()" class="clear">Limpiar filtros</button>
+  <div class="container container-shop">
+    <div class="form-container"id="productos">
+      <div> 
+        <input type="text" [(ngModel)]="productSearch" placeholder="Ingrese una palabra clave" (input)="updateProductSearch()"></div>
+      <div>
+        <select [(ngModel)]="categorySearch" (change)="updateSubCategories()">
+          <option value="">Selecciona una categoría</option>
+          <option *ngFor="let categoria of category" [value]="categoria">{{categoria}}</option>
+        </select>
+        <select [(ngModel)]="subCategorySearch" (change)="updateBrand()">
+          <option value="">Selecciona una subcategoría</option>
+          <option *ngFor="let subCategoria of subCategoryFilter" [value]="subCategoria">{{subCategoria}}</option>
+        </select>
+        <select [(ngModel)]="brandSearch">
+          <option value="">Selecciona una Marca</option>
+          <option *ngFor="let marca of brandFilter" [value]="marca">{{marca}}</option>
+        </select>
+      </div>
+      <div>
+        <button mat-raised-button (click)="filterProducts()" class="clear">Buscar</button>
+        <button mat-raised-button (click)="cleanFilters()" class="clear">Limpiar filtros</button>
+      </div>
     </div>
   </div>
-  <h3 class="titleProductos">NUESTROS PRODUCTOS</h3>
-  <!-- <button (click)="traerTodo()">Traer</button> -->
-  <div class="container container-card">
-    <div class="card" style="width: 18rem" *ngFor="let productos of arrProductsPages">
-      <img src={{productos.imagenes}} class="card-img-top" alt="..." style="height: 250px;width: 250px;">
-      <div class="card-body">
-        <h5 class="title">{{productos.nombre}}</h5>
-        <p class="card-text">Categoría: {{productos.categoria}}</p>
-        <p class="card-marca">Marca: {{productos.marca}}</p>
-        <p class="card-precio">Imp. Interno: {{productos.impuesto_interno}} %</p>
-        <p class="card-precio">IVA: {{productos.iva}} %</p>
-        <p class="card-precio">Precio: U$S {{productos.precio}}</p>
-        <a href="#modal1" (click)="modal(productos)">Ver Más...</a>
+
+
+  <div class="container container-shop">
+    <h3 class="titleProductos">NUESTROS PRODUCTOS</h3>
+    <!-- <button (click)="traerTodo()">Traer</button> -->
+    <div class="container container-card">
+      <div class="card" style="width: 18rem" *ngFor="let productos of arrProductsPages">
+        <img src={{productos.imagenes}} class="card-img-top" alt="..." style="height: 250px;width: 250px;">
+        <div class="card-body">
+          <h6 class="title">{{productos.nombre}}</h6>
+          <!-- <p class="card-text">Categoría: {{productos.categoria}}</p> -->
+          <p class="card-marca"><strong>Marca: </strong>{{productos.marca}}</p>
+          <!-- <p class="card-precio">Imp. Interno: {{productos.impuesto_interno}} %</p>
+          <p class="card-precio">IVA: {{productos.iva}} %</p> -->
+          <p class="card-precio"><strong>Precio: </strong>U$S {{productos.precio}}</p>
+          <a href="#modal1" (click)="modal(productos)">Ver Más...</a>
+        </div>
+        <div class="example-button-row">
+          <button style="background-color: #107997;color: white;margin-bottom: 15px;" *ngIf="this.hayLogueado"
+            (click)="agregarAlCarrito(productos, productos.id)"
+            mat-raised-button>Agregar al carrito</button>
+        </div>
+        <!-- <button *ngIf="this.hayLogueado" (click)="agregarAlCarrito(productos, productos.id)" style="margin-bottom: 10px; text-align: center;">Agregar al carrito</button> -->
       </div>
-      <div class="example-button-row">
-        <button style="background-color: #107997;color: white;margin-bottom: 15px;" *ngIf="this.hayLogueado"
-          (click)="agregarAlCarrito(productos, productos.id)"
-          mat-raised-button>Agregar al carrito</button>
-      </div>
-      <!-- <button *ngIf="this.hayLogueado" (click)="agregarAlCarrito(productos, productos.id)" style="margin-bottom: 10px; text-align: center;">Agregar al carrito</button> -->
     </div>
   </div>
+
   <!-- MODAL PARA MOSTRAR DATOS DE LA CARD -->
   <div class="container container-card">
     <div id="modal1" class="modalmask" *ngIf="selectedProduct">

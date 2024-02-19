@@ -1,24 +1,29 @@
 <app-encabezado></app-encabezado>
+<mat-divider></mat-divider>
 <app-navbar></app-navbar>
-<div class="container portada ">
+<div class="fondo">
+    <div class="container portada ">
 
-    <div class="container-contacto">
-        <div class="left">
-            <div class="header">
-                <!-- <h2 class="animation  a1">CONTACTANOS</h2> -->
-
-            </div>
-            <form (ngSubmit)="submitForm()">
-                <div class="form">
-                    <input type="text" name="Nombre" class="form-field animation a3" id="name" [(ngModel)]="formData.name" placeholder="Nombre" required>
-                    <input type="number" name="Teléfono" class="form-field animation a4" id="phone" [(ngModel)]="formData.phone" placeholder="Teléfono" required>
-                    <input type="email" name="Correo" class="form-field animation a5" placeholder="Mail" id="mail" [(ngModel)]="formData.mail" required>
-                    <textarea name="mensaje" class="animation a6" placeholder="Dejanos tu comentario..." id="coment" [(ngModel)]="formData.coment" cols="30" rows="10" required></textarea>
-                    <button type="submit" mat-raised-button color="primary" class="animation a6 button-form">Enviar</button>
+        <div class="container-contacto">
+            <div class="left">
+                <div class="header">
+                    <!-- <h2 class="animation  a1">CONTACTANOS</h2> -->
+    
                 </div>
-            </form>
+                <form (ngSubmit)="submitForm()">
+                    <div class="form">
+                        <input type="text" name="Nombre" class="form-field animation a3" id="name" [(ngModel)]="formData.name" placeholder="Nombre" required>
+                        <input type="number" name="Teléfono" class="form-field animation a4" id="phone" [(ngModel)]="formData.phone" placeholder="Teléfono" required>
+                        <input type="email" name="Correo" class="form-field animation a5" placeholder="Mail" id="mail" [(ngModel)]="formData.mail" required>
+                        <textarea name="mensaje" class="animation a6" placeholder="Dejanos tu comentario..." id="coment" [(ngModel)]="formData.coment" cols="30" rows="10" required></textarea>
+                        <button type="submit" mat-raised-button color="primary" class="animation a6 button-form">Enviar</button>
+                    </div>
+                </form>
+            </div>
+            <div class="right"></div>
         </div>
-        <div class="right"></div>
     </div>
+    
 </div>
+<mat-divider></mat-divider>
 <app-footer></app-footer>

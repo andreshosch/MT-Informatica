@@ -193,3 +193,7 @@ body {
 textarea {
     resize: none;
 }
+
+.fondo{
+    background-color: lightgray;
+}
