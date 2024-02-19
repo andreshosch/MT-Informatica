@@ -247,7 +247,7 @@ export class GestionPedidosComponent {
         // Copiar los datos a la colección de destino
         destinoDocRef.set(datos).then(() => {
           console.log('Elemento copiado exitosamente');
-          this.deletePedidoPendienteId(id, coleccionOrigen)
+          this.moverPedido(id, coleccionOrigen)
         }).catch((error) => {
           console.error('Error al copiar el elemento:', error);
         });
@@ -300,11 +300,17 @@ cerrarTransporte(){
   this.formTransporte.markAsUntouched();
   this.showTransporte=false
 }
-  deletePedidoPendienteId(id: string, coleccion: string) {
+  moverPedido(id: string, coleccion: string) {
+   
+    this.idAuxiliar = id
+    this.coleccionAuxiliar = coleccion
+  }
+  deletePedidoPendienteId2(id: string, coleccion: string) {
     this.showConfirmationDelPedido = true
     this.idAuxiliar = id
     this.coleccionAuxiliar = coleccion
   }
+
 showModalPendientes(element:any, mindice: number, estado: string){
   console.log(`index: ${mindice}`)
   this.indicePedidoPendiente = mindice

@@ -2,7 +2,7 @@
 <app-navbar></app-navbar>
 
 <div class="titulo">
-    <h3>Gestión de Metodos de Pago</h3>
+    <h4 style="color: #107997;font-weight: bold;">GESTION DE METODOS DE PAGOS</h4>
 </div>
 
 <div class="container">
@@ -44,7 +44,7 @@
 
 
 <div class="altaPago">
-    <h4>Alta método de Pago</h4>
+    <h5 style="color: #107997;font-weight: bold;">ALTA MEDIO DE PAGO</h5>
     <form [formGroup]="formMetodo" (ngSubmit)="crearMetodo()">
         <mat-form-field>
             <mat-label>Metodo</mat-label>
@@ -55,7 +55,7 @@
             <mat-label>Porcentaje</mat-label>
             <input matInput formControlName="porcentaje">
         </mat-form-field>
-        <p><button type="submit" mat-raised-button color="primary" [disabled]="!formMetodo.valid">Alta metodo</button></p>
+        <p><button style="background-color: #107997;color: white;" color type="submit" mat-raised-button [disabled]="!formMetodo.valid">Alta metodo</button></p>
     </form>
 </div>
 
@@ -64,7 +64,7 @@
 <div class="confirmation-dialog" *ngIf="actualizarPago">
     <div class="dialog-content">
         <div>
-            <h4>Actualización método de Pago</h4>
+            <h5 style="color: #107997;font-weight: bold;">ACTUALIZACION METODO DE PAGO</h5>
             <form [formGroup]="updateMetodo" (ngSubmit)="actualizarMetodoPago()">
                 <mat-form-field>
                     <mat-label>Metodo</mat-label>
@@ -75,8 +75,8 @@
                     <input matInput formControlName="porcentaje">
                 </mat-form-field>
                 <p>
-                    <button type="submit" mat-raised-button color="primary" [disabled]="!updateMetodo.valid">Actualizar</button>
-                    <button (click)="actualizarPago = false" mat-raised-button color="primary">Cancelar</button>
+                    <button style="background-color: #107997;color: white;" type="submit" mat-raised-button color="primary" [disabled]="!updateMetodo.valid">Actualizar</button>
+                    <button style="background-color: #107997;color:white;" (click)="actualizarPago = false" mat-raised-button color="primary">Cancelar</button>
                 </p>
 
             </form>
