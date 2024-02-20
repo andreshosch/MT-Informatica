@@ -94,3 +94,7 @@
   cursor: pointer;
 }
 
+.menu{
+  display: flex;
+  align-items: center;
+}

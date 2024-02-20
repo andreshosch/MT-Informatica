@@ -1,4 +1,4 @@
-
+<div class="menu">
     <div class="menuLogin">
         <!-- <a *ngIf="esAdmin" class="nav-link" href="./gestionUsr">Gestión de Usuarios</a>
     <a *ngIf="esAdmin" class="nav-link" href="./gestion">Gestión de Productos</a>
@@ -7,17 +7,19 @@
                 style="background-color: lightgray;color:#107997;font-weight: bold" title="Ingresar">account_circle</mat-icon></a>
     </div>
     <div class="containerLogin">
-    <div class="nombreUser">
-        <p *ngIf="habilitar" class="nav-link userId"><span style="color: #107997; font-weight: bold;">Usuario: {{ this.nombre}} {{this.apellido}} <mat-icon matTooltip="Actualizar perfil" class="hover-pointer" (click)="abrirPerfil()">create</mat-icon></span></p>
+        <div class="nombreUser">
+            <p *ngIf="habilitar" class="nav-link userId"><span style="color: #107997; font-weight: bold;">Usuario: {{ this.nombre}} {{this.apellido}} <mat-icon matTooltip="Actualizar perfil" class="hover-pointer" (click)="abrirPerfil()">create</mat-icon></span></p>
+        </div>
+        
+        <div class="carroYLogin">
+            <app-carrito [usuario]="usuario" [nombre]="nombre" [apellido]="apellido" [celular]="celular" *ngIf="hayUsuario"
+                class="nav-link"></app-carrito>
+            <a *ngIf="habilitar" class="nav-link" (click)="desloguear()" href=""><mat-icon style="background-color: lightgray; color:#107997;font-weight: bold;"
+                    title="Salir">exit_to_app</mat-icon></a>
+        </div>
     </div>
-    
-    <div class="carroYLogin">
-        <app-carrito [usuario]="usuario" [nombre]="nombre" [apellido]="apellido" [celular]="celular" *ngIf="hayUsuario"
-            class="nav-link"></app-carrito>
-        <a *ngIf="habilitar" class="nav-link" (click)="desloguear()" href=""><mat-icon style="background-color: lightgray; color:#107997;font-weight: bold;"
-                title="Salir">exit_to_app</mat-icon></a>
-    </div>
-</div>
+</div>    
+
 
 <div class="confirmation-dialog" *ngIf="loginProgress || dataService.loginProgressData">
     <div class="dialog-content">
