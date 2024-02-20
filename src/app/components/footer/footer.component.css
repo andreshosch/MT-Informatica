@@ -1,22 +1,12 @@
-/* .izquierda{
-    width: 30%;
-    background-color: red;
-} */
-
 .centro{
     display: flex;
     flex-direction: row;
     justify-content: center;
     width: 100%;
-    background-color: lightgray;
+    background-color: black;
     text-align: center;
     padding-top: 20px;
 }
-
-/* .derecha{
-    width: 30%;
-    background-color: yellow;
-} */
 
 .circle {
     display: flex;
@@ -62,6 +52,7 @@
     height:auto;
     display: flex;
 }
+
 .whatsapp-container {
   position: fixed;
   bottom: 20px;
@@ -87,4 +78,20 @@
 
 .whatsapp-btn:hover {
   background-color: #128C7E; /* Cambio de color al pasar el ratón */
+}
+
+.copyright{
+  .copyright {
+    margin-top: auto;
+    width: 100%; 
+    text-align: center;
+    font-size: 15px;
+    background-color: #3f51b5;
+    color: white;
+    padding: 0.4rem;
+}
+a{
+    text-decoration: none;
+    color: white;
+}
 }

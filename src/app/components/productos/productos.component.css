@@ -8,6 +8,8 @@ text-align: center;
   background-color: #fff;
   box-shadow: 2px 10px 10px #c7bebe59;
   padding-bottom: 25px;
+  padding-top: 25px;
+  margin-bottom: 10px;
   height: auto;
 }
 
@@ -15,7 +17,7 @@ text-align: center;
 .titleProductos{
   color: #107997;
   text-align: center;
-  padding-top: 2rem;
+  padding-top: 1rem;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   margin-bottom: 20px;
 }
@@ -79,12 +81,12 @@ text-align: center;
 
 /*Formato de la ventana*/
 .modalbox{
-  width: 400px;
+  width: 50%;
   height: 500px;
   position: relative;
   padding: 5px 20px 13px 20px;
   background: #fff;
-  border-radius:3px;
+  border-radius:10px;
   -webkit-transition: all 500ms ease-in;
   -moz-transition: all 500ms ease-in;
   transition: all 500ms ease-in;
@@ -152,6 +154,7 @@ text-align: center;
   width: 60px;
   height: 50px;
   text-align: center; 
+  border-radius: 10px;
 }
 
 .container-pages a{
@@ -173,12 +176,14 @@ text-align: center;
   color:green
 }
 .form-container {
+  width: 80%;
+  margin-left: 10%;
   display: flex;
   flex-wrap: wrap;
-  /* gap: 10px; */
-  margin-bottom: 20px;
-  margin-top: 20px;
   justify-content: center;
+  padding-top: 15px;
+  box-shadow: 2px 10px 20px #b0b3b2;
+  border-radius: 10px;
 }
 /* Estilo para los elementos de entrada de texto y select */
 input, select {
@@ -243,4 +248,37 @@ select option:hover
   box-shadow: 2px 10px 20px #b0b3b2;
   /* margin-top: 10px;
   margin-bottom: 10px; */
+}
+
+.espaciador{
+  width: 100%;
+  height: 70px;
+  background-color: #e6e6e6;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 2px 10px 10px #d2cccc;
+  position: relative;
+}
+
+.gris{
+  width: 100%;
+  height: 50px;
+  background-color: #ebebeb;
+}
+
+.ordenFiltro{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.botonera{
+  margin-top: 20px;
+  margin-bottom: 25px;
+}
+
+.botones button mat-icon{
+  border-radius: 10px;
 }

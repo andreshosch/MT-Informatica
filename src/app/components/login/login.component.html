@@ -1,13 +1,8 @@
 <div class="menu">
     <div class="menuLogin">
-        <!-- <a *ngIf="!habilitar" class="nav-link" (click)="habilitarLogin()">
-            <mat-icon
-                style="background-color: lightgray;color:#107997;font-weight: bold" title="Ingresar">account_circle
-            </mat-icon>
-        </a> -->
         <a *ngIf="!habilitar" class="nav-link" (click)="habilitarLogin()">
             <div class="fondoLogin">
-                <i class="pi pi-user p-button-icon" style="color: #107997"></i>
+                <i class="pi pi-user p-button-icon" style="font-size: 1.5rem; color: #107997"></i>
             </div>
         </a>
     </div>
@@ -19,8 +14,9 @@
         <div class="carroYLogin">
             <app-carrito [usuario]="usuario" [nombre]="nombre" [apellido]="apellido" [celular]="celular" *ngIf="hayUsuario"
                 class="nav-link"></app-carrito>
-            <a *ngIf="habilitar" class="nav-link" (click)="desloguear()" href=""><mat-icon style="background-color: lightgray; color:#107997;font-weight: bold;"
-                    title="Salir">exit_to_app</mat-icon></a>
+            <a *ngIf="habilitar" class="nav-link" (click)="desloguear()" href="">
+                <i class="pi pi-sign-out p-button-icon" style="font-size: 1.5rem; color: #107997" matTooltip="Logout"></i>
+            </a>
         </div>
     </div>
 </div>    
@@ -200,8 +196,10 @@
 <div class="confirmation-dialog" *ngIf="modalPerfil">
     <div class="dialog-content">
         <div class="login">
-            <h3>Actualización de perfil</h3>
-            <h4>{{usuarioAuxiliar.nombre}} {{usuarioAuxiliar.apellido}}</h4>
+            <div class="datos">
+                <h3>Actualización de perfil</h3>
+                <h4>{{usuarioAuxiliar.nombre}} {{usuarioAuxiliar.apellido}}</h4>
+            </div>
             <mat-divider></mat-divider>
             <form [formGroup]="updatePerfil" (ngSubmit)="actualizarPerfil()">
                 <mat-grid-list cols="8" rowHeight="70px" style="margin-top: 8%; margin-right: 6%;">
