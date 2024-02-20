@@ -1,10 +1,13 @@
 <div class="menu">
     <div class="menuLogin">
-        <!-- <a *ngIf="esAdmin" class="nav-link" href="./gestionUsr">Gestión de Usuarios</a>
-    <a *ngIf="esAdmin" class="nav-link" href="./gestion">Gestión de Productos</a>
-    <a *ngIf="esAdmin" class="nav-link" href="./gestionPedido">Gestión de Pedidos</a> -->
-        <a *ngIf="!habilitar" class="nav-link" (click)="habilitarLogin()"><mat-icon
-                style="background-color: lightgray;color:#107997;font-weight: bold" title="Ingresar">account_circle</mat-icon></a>
+        <!-- <a *ngIf="!habilitar" class="nav-link" (click)="habilitarLogin()">
+            <mat-icon
+                style="background-color: lightgray;color:#107997;font-weight: bold" title="Ingresar">account_circle
+            </mat-icon>
+        </a> -->
+        <a *ngIf="!habilitar" class="nav-link" (click)="habilitarLogin()">
+            <i class="pi pi-user p-button-icon" style="color: #107997"></i>
+        </a>
     </div>
     <div class="containerLogin">
         <div class="nombreUser">

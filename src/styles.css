@@ -1,5 +1,6 @@
 @import '~@angular/material/prebuilt-themes/indigo-pink.css';
 @import '~@fortawesome/fontawesome-free/css/all.css';
+@import "primeicons/primeicons.css";
 
 .estilosSnackBar {
   text-align: center;
