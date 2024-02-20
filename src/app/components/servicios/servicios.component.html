@@ -8,19 +8,19 @@
           <div (click)="mostrarDetalles('Asesoramiento')" [class.selected]="opcionSeleccionada === 'Asesoramiento'"><strong>Asesoramiento</strong></div>
         </div>
         <div class="detalles">
-          <img [src]="imagen" alt="Imagen">
-          <div class="container datos" *ngIf="venta">
-            <h4>VENTA DE EQUIPOS E INSUMOS</h4>
+          <img src="../../../assets/Logo.png" alt="Imagen">
+          <div class="container infoService" *ngIf="venta">
+            <h4 style="color: #107997;">VENTA DE EQUIPOS E INSUMOS</h4>
 
               <mat-accordion>
                 <mat-expansion-panel *ngFor="let panel of datosPaneles; let i = index" [expanded]="panelOpenState[i]" (opened)="togglePanel(i)">
                   <mat-expansion-panel-header>
-                    <mat-panel-title>
+                    <mat-panel-title  style="color: #107997;font-weight: bold;">
                       {{ panel.titulo }}
                     </mat-panel-title>
                   </mat-expansion-panel-header>
                   <mat-expansion-panel-content>
-                    <div *ngFor="let item of panel.contenido">
+                    <div *ngFor="let item of panel.contenido" style="color: #107997;">
                       {{ item }}
                     </div>
                   </mat-expansion-panel-content>
@@ -33,20 +33,20 @@
                 - Software OEM y OLP para licencias por volúmen -->
           </div>
 
-          <div *ngIf="asesoramiento">
-                <h4>
+          <div *ngIf="asesoramiento" class="infoService">
+                <h4 style="color: #107997;">
                     ASESORAMIENTO
                 </h4>
                 <H6>
-                  <P>- Asesoramiento sobre Software Legal</P>
+                  <P style="color: #107997;">- Asesoramiento sobre Software Legal</P>
                 </H6>
           </div>
 
-          <div *ngIf="servicio">
-                <h4>
+          <div *ngIf="servicio"class="infoService">
+                <h4 style="color: #107997;">
                     SERVICIO TECNICO
                 </h4>
-                <h6>
+                <h6 style="color: #107997;">
                   <p>- Reparación electronica de Notebooks, PC's de escritorio, monitores, placas madres, etc.</p>
                   <p>- Reparación y mantenimiento de UPS.</p>
                   <p>- Mantenimiento de impresoras.</p>
