@@ -141,11 +141,11 @@
     
                         <br><br>
 
-                        <button (click)="mostrarMetodos()">
+                        <!-- <button (click)="mostrarMetodos()">
 
                         </button>
 
-                        <form action=""></form>
+                        <form action=""></form> -->
                         <label id="example-radio-group-label">Seleccione método de pago</label>
                         <mat-radio-group aria-labelledby="example-radio-group-label" class="radio-group" [(ngModel)]="seleccionPago" (change)="seleccionCambiada()">
                             <mat-radio-button class="radio-button" *ngFor="let metodo of metodoPago; let i = index" [value]="metodo.metodo">{{metodo.metodo}}</mat-radio-button>
