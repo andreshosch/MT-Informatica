@@ -1,37 +1,38 @@
 <div class="body">
-  <!-- Inicio Productos destacados -->
-  
+  <div class="gris"></div>
     <div *ngIf="showProductosDestacados" class="container container-shop">
       <h3 class="titleProductos">PRODUCTOS DESTACADOS</h3>
-      <!-- <ngb-carousel class="fondoCarrousel"> -->
+      <div class="form-container ordenFiltro"id="productos">
         <ngb-carousel class="container container-card">
-        
-        <ng-template class="card" style="width: 18rem" *ngFor="let articulo of productosHot" ngbSlide>
-          <!-- class="fondoDestacado"  -->
-            <img src="{{articulo.imagenes}}" alt="Random first slide" class="card-img-top" alt="..." style="height: 250px;width: 250px;"/>
-            <div class="card-body">
-              <h3 class="title">{{articulo.nombre}}</h3>
-              <p><strong>Precio: </strong>U$S {{articulo.precio}}</p>
-              <!-- <p>Rubro: {{articulo.categoria}} </p>
-              <p>SubRubro: {{articulo.subcategoria}}</p> -->
-              <p>Descripcion: {{articulo.descripcion}} </p>    
+          <ng-template class="card" style="width: 18rem" *ngFor="let articulo of productosHot" ngbSlide>
+              <img src="{{articulo.imagenes}}" alt="Random first slide" class="card-img-top" alt="..." style="height: 250px;width: 250px;"/>
+              <div class="card-body">
+                <h3 class="title">{{articulo.nombre}}</h3>
+                <p class="card-precio"><strong>Precio: </strong>U$S {{articulo.precio}}</p>
+                <p>Descripcion: {{articulo.descripcion}} </p>    
+              </div>
+            
+            <div class="example-button-row">
+              <button (click)="agregarAlCarrito(articulo, articulo.id)" button style="background-color: #107997;color:  white;margin-bottom: 15px;" mat-raised-button>Agregar al
+                carrito</button>
             </div>
-          
-          <div class="example-button-row">
-            <button (click)="agregarAlCarrito(articulo, articulo.id)" button style="background-color: #107997;color:  white;margin-bottom: 15px;" mat-raised-button>Agregar al
-              carrito</button>
-          </div>
-        </ng-template>
-      </ngb-carousel>
+          </ng-template>
+        </ngb-carousel>
+      </div>
     </div>
   
+    <div class="gris"></div>
 
   <!-- Fin Productos destacados -->
-  <div class="container container-shop">
-    <div class="form-container"id="productos">
-      <div> 
-        <input type="text" [(ngModel)]="productSearch" placeholder="Ingrese una palabra clave" (input)="updateProductSearch()"></div>
+  <div class="container container-shop ">
+    <div class="form-container ordenFiltro"id="productos">
       <div>
+        <h4 class="titleProductos">
+          BUSQUEDA AVANZADA
+        </h4>
+      </div>
+      <div>
+        <input type="text" [(ngModel)]="productSearch" placeholder="Ingrese una palabra clave" (input)="updateProductSearch()">
         <select [(ngModel)]="categorySearch" (change)="updateSubCategories()">
           <option value="">Selecciona una categoría</option>
           <option *ngFor="let categoria of category" [value]="categoria">{{categoria}}</option>
@@ -43,14 +44,16 @@
         <select [(ngModel)]="brandSearch">
           <option value="">Selecciona una Marca</option>
           <option *ngFor="let marca of brandFilter" [value]="marca">{{marca}}</option>
-        </select>
+        </select>  
       </div>
-      <div>
+      <div class="botonera">
         <button mat-raised-button (click)="filterProducts()" class="clear">Buscar</button>
         <button mat-raised-button (click)="cleanFilters()" class="clear">Limpiar filtros</button>
       </div>
     </div>
   </div>
+
+  <div class="gris"></div>
 
 
   <div class="container container-shop">
@@ -86,9 +89,9 @@
         <div class="card-body">
           <h4>{{selectedProduct.nombre}}</h4>
           <img src={{selectedProduct.imagenes}} class="card-img-top" style="width: 40%;height: 40%;" alt="...">
-          <p class="card-precio">Imp. Interno: {{selectedProduct.impuesto_interno}} %</p>
-          <p class="card-precio">IVA: {{selectedProduct.iva}} %</p>
-          <p> Descripción: {{selectedProduct.descripcion}}</p>
+          <p class="card-precio"><strong>Imp. Interno: </strong>{{selectedProduct.impuesto_interno}} %</p>
+          <p class="card-precio"><strong>IVA: </strong>{{selectedProduct.iva}} %</p>
+          <p><strong>Descripción: </strong>{{selectedProduct.descripcion}}</p>
         </div>
       </div>
     </div>
@@ -97,7 +100,7 @@
 
   <div>
   <nav aria-label="Page navigation example" class="container-pages" style="display: flex; justify-content: center;">
-    <div class="pagination justify-content-center" *ngIf="filterArray.length>0">
+    <div class="botones pagination justify-content-center" *ngIf="filterArray.length>0">
       <button *ngIf="visibleFirstPage" class="page-item"><a class="page-link" *ngIf="visibleFirstPage"
           (click)="firstPage(filterArray) ;scroll('productos')"><mat-icon>first_page</mat-icon></a></button>
       <button *ngIf="visibleAfterPage" class="page-item"><a class="page-link " *ngIf="visibleAfterPage"

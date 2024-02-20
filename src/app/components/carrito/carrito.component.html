@@ -8,8 +8,10 @@
 </head>
 <body>
     <div class="carroYcantidad">
-        <a (click)="verCarrito()"><mat-icon style="background-color: lightgray; cursor: pointer;color:#107997;font-weight: bolder">shopping_cart </mat-icon> </a>
-        <span class="nav-link" style="background-color: lightgray;color:#107997;font-weight: bolder;size: 50px;">{{ total }}</span>
+        <a (click)="verCarrito()">
+            <i class="pi pi-shopping-cart p-button-icon" style="font-size: 1.5rem; color: #107997" matTooltip="Ver carrito"></i>
+        </a>
+        <span class="nav-link" style="color:#107997;font-weight: bolder;size: 50px;">{{ total }}</span>
     </div>
     <div class="confirmation-dialog" *ngIf="carritoVacio">
         <div class="modalCarrito">

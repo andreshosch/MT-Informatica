@@ -21,6 +21,10 @@
     margin: 0 5px;
 }
 
+.datos{
+  text-align: center;
+}
+
 .confirmation-dialog {
     z-index: 9;
     position: fixed;
@@ -37,8 +41,9 @@
   .dialog-content {
     background-color: white;
     padding: 20px;
-    border-radius: 4px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    box-shadow: 2px 10px 10px #c7bebe59;
+    /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); */
     width: 40%;
   }
 
