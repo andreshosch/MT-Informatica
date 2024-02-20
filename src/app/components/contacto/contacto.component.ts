@@ -17,8 +17,16 @@ export class ContactoComponent {
   }
 
   submitForm() {
-    this._mailService.sendMails(this.formUrl,this.formData)
-    this._mensaje.snackBar("Mensaje enviado. Pronto nos pondremos en contacto",'green')
-  }
+      this._mailService.sendMails(this.formUrl,this.formData)
+      this._mensaje.snackBar("Mensaje enviado. Pronto nos pondremos en contacto",'green')
+      this.clearForm()
+    }
+
+    clearForm(){
+      this.formData.name=""
+      this.formData.phone=""
+      this.formData.mail=""
+      this.formData.coment=""
+    }
 }
 
