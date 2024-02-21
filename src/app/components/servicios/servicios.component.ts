@@ -48,6 +48,10 @@ export class ServiciosComponent {
 
   constructor() { }
 
+  ngAfterViewInit(){
+    this.mostrarDetalles('Servicio Técnico')
+  }
+
   mostrarServicio(){
     this.venta = false
     this.asesoramiento = false
@@ -68,9 +72,12 @@ export class ServiciosComponent {
 
   mostrarDetalles(opcion: string) {
     this.opcionSeleccionada = opcion;
+
+    console.log(this.opcionSeleccionada)
     switch (opcion) {
       case 'Servicio Técnico':
-        this.imagen = '../../../assets/Logo.png';
+        this.imagen = '../../../assets/service.jpg';
+        console.log('ingrese')
         // this.imagen = '../../../assets/Servicio.png'
         this.mostrarServicio()
         break;
