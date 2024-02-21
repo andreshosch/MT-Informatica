@@ -330,7 +330,7 @@ export class LoginComponent {
       // })
       this._usuarioService.createSolicitud(unaSolicitud)
       this.formRegistro.reset()
-      //enviar mensaje de exito de solicitud
+      this._mensaje.snackBar("Solicitud de registro procesada exitosamente","green")
       this.loginProgress = false
       this.dataService.resetLoginProgress();
       this.login = true

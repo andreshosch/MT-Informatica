@@ -55,17 +55,15 @@ export class GestionPagoComponent {
   }
 
   crearMetodo(){
+    console.log(`metodos: ${JSON.stringify(this.tablaPagos)}`)
     let existe = false
     let newMetodo = {
       metodo: this.formMetodo.get('metodo').value,
       porcentaje: this.formMetodo.get('porcentaje').value,
     }
 
-    console.log(`metodo: ${newMetodo.metodo}`)
-    console.table(`lista metodos: ${JSON.stringify(this.tablaPagos)}`)
-    
     for(let j=0; j< this.tablaPagos.length; j++){
-      if((this.tablaPagos[j].metodo).toLowerCase == (newMetodo.metodo).toLowerCase ){
+      if((this.tablaPagos[j].metodo).toLowerCase() === (newMetodo.metodo).toLowerCase() ){
         existe = true
         j = this.tablaPagos.length
       }

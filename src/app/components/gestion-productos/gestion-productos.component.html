@@ -46,6 +46,16 @@
         </div>
     </div>
     
+    <div class="confirmation-dialog" *ngIf="showConfirmationDelProd">
+        <div class="dialog-content">
+            <h4>¿Está seguro que desea eliminar el producto?</h4>
+            <div style="text-align: center;">
+                <button mat-raised-button color="primary" (click)="confirmDel()">Confirmar</button>
+                <button mat-raised-button color="primary" (click)="cancelProd()">Cancelar</button>
+            </div>
+        </div>
+    </div>
+
     <div class="formAgregar" *ngIf="modalActivo">
         <div class="formularios">
             <h4 style="color: #107997;font-weight: bold;">MODIFICAR PRODUCTOS</h4>

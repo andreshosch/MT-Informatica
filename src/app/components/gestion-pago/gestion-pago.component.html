@@ -52,20 +52,25 @@
         
         <div class="altaPago">
             <h5 style="color: #107997;font-weight: bold;">ALTA MEDIO DE PAGO</h5>
-            <form [formGroup]="formMetodo" (ngSubmit)="crearMetodo()">
-                <mat-form-field>
-                    <mat-label>Metodo</mat-label>
-                    <input matInput formControlName="metodo">
-                    <mat-hint class="matHint" *ngIf="metodoExistente">Metodo existente</mat-hint>
-                </mat-form-field>
-                <mat-form-field>
-                    <mat-label>Porcentaje</mat-label>
-                    <input matInput formControlName="porcentaje">
-                </mat-form-field>
-                <p><button style="background-color: #107997;color: white;" color type="submit" mat-raised-button [disabled]="!formMetodo.valid">Alta metodo</button></p>
-            </form>
+            <div class="altaMedio">
+                <form [formGroup]="formMetodo" (ngSubmit)="crearMetodo()">
+                    <mat-form-field>
+                        <mat-label>Metodo</mat-label>
+                        <input matInput formControlName="metodo">
+                        <mat-hint class="matHint" *ngIf="metodoExistente">Metodo existente</mat-hint>
+                    </mat-form-field>
+                    <mat-form-field>
+                        <mat-label>Porcentaje</mat-label>
+                        <input matInput formControlName="porcentaje">
+                    </mat-form-field>
+                    <p>
+                        <button style="background-color: #107997;color: white;" color type="submit" mat-raised-button [disabled]="!formMetodo.valid">Alta metodo</button>
+                    </p>
+                    
+                </form>
+            </div>
         </div>
-        
+        <div class="gris"></div>
         
         
         <div class="confirmation-dialog" *ngIf="actualizarPago">

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { tr } from 'date-fns/locale';
 import { Producto } from 'src/app/models/producto';
 import { MensajeService } from 'src/app/services/mensaje.service';
 import { ProductosService } from 'src/app/services/productos.service';
@@ -22,6 +23,8 @@ export class GestionProductosComponent {
   losBloqueados: any[] = []
   imagenesArray:string[]=[]
   onlyCategory: any;
+  idAuxiliar: string = ""
+  showConfirmationDelProd: boolean = false
 
     
 
@@ -131,7 +134,19 @@ export class GestionProductosComponent {
   }
 
   borrarPorId(articulo){
-    this._productosService.deleteProduct(articulo)
+    // this._productosService.deleteProduct(articulo)
+    this.idAuxiliar = articulo;
+    this.showConfirmationDelProd = true
+  }
+
+  confirmDel(){
+    this._productosService.deleteProduct(this.idAuxiliar)
+    this.showConfirmationDelProd = false
+    this.idAuxiliar = ""
+  }
+
+  cancelProd(){
+    this.showConfirmationDelProd = false
   }
 
   modificar(articulo){

@@ -19,6 +19,16 @@
     display: flex;
     flex-direction: column;
     margin: 0 5px;
+    text-align: center;
+    /* box-shadow: 2px 10px 20px #b0b3b2;
+    border-radius: 10px;
+    background-color: #fff; */
+}
+
+.login h4{
+  color: #107997;
+  margin-top: 10px;
+  margin-bottom: 15px;
 }
 
 .datos{
@@ -116,4 +126,37 @@
   height: 40px;
   background-color: lightgray;
   border-radius: 50%;
+}
+
+.loginIngreso{
+  width: 70%;
+  margin-left: 15%;
+  box-shadow: 2px 10px 20px #b0b3b2;
+  border-radius: 10px;
+  background-color: #fff;
+  margin-bottom: 25px;
+}
+
+.registroUsr{
+  width: 90%;
+  margin-left: 5%;
+  box-shadow: 2px 10px 20px #b0b3b2;
+  border-radius: 10px;
+  background-color: #ffffff;
+  margin-bottom: 25px;
+  padding-bottom: 25px;
+}
+
+.registro{
+  text-align: center;
+}
+
+.registro h4{
+  color: #107997;
+  margin-top: 10px;
+  margin-bottom: 15px;
+}
+
+.cancel button{
+  width: 40%;
 }

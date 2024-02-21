@@ -165,3 +165,37 @@
 .bordes mat-select{
   border: 1px solid black
 }
+
+.confirmation-dialog {
+  z-index: 9;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.dialog-content {
+  background-color: white;
+  padding: 20px;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  width: 40%;
+  text-align: center;
+}
+
+.dialog-content mat-form-field{
+  margin-right: 5px;
+}
+
+.dialog-content button{
+  margin-right: 5px;
+}
+
+.dialog-content h4{
+  margin-bottom: 10px;
+}
