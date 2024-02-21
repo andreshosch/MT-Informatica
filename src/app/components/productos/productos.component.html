@@ -2,7 +2,7 @@
   <div class="gris"></div>
     <div *ngIf="showProductosDestacados" class="container container-shop">
       <h3 class="titleProductos">PRODUCTOS DESTACADOS</h3>
-      <div class="form-container ordenFiltro"id="productos">
+      <div class="form-container ordenFiltro">
         <ngb-carousel class="container container-card">
           <ng-template class="card" style="width: 18rem" *ngFor="let articulo of productosHot" ngbSlide>
               <img src="{{articulo.imagenes}}" alt="Random first slide" class="card-img-top" alt="..." style="height: 250px;width: 250px;"/>
@@ -25,7 +25,7 @@
 
   <!-- Fin Productos destacados -->
   <div class="container container-shop ">
-    <div class="form-container ordenFiltro"id="productos">
+    <div class="form-container ordenFiltro">
       <div>
         <h4 class="titleProductos">
           BUSQUEDA AVANZADA
@@ -55,8 +55,7 @@
 
   <div class="gris"></div>
 
-
-  <div class="container container-shop"*ngIf="tituloProductos">
+  <div  class="container container-shop"*ngIf="tituloProductos"id="productos">
     <h3 class="titleProductos" >NUESTROS PRODUCTOS</h3>
     <!-- <button (click)="traerTodo()">Traer</button> -->
     <div class="container container-card">
@@ -80,6 +79,7 @@
       </div>
     </div>
   </div>
+
 
   <!-- MODAL PARA MOSTRAR DATOS DE LA CARD -->
   <div class="container container-card">
