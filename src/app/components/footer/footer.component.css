@@ -3,7 +3,7 @@
     flex-direction: row;
     justify-content: center;
     width: 100%;
-    background-color: black;
+    /* background-color: black; */
     text-align: center;
     padding-top: 20px;
 }
@@ -51,6 +51,8 @@
     width: 100%;
     height:auto;
     display: flex;
+    margin: 0;
+    padding: 0;
 }
 
 .whatsapp-container {
@@ -95,3 +97,14 @@ a{
     color: white;
 }
 }
+
+.bodyFooter {
+  position: absolute;
+  margin: 0;
+  width: 100%;
+  text-align: center;
+  font-size: 15px;
+  background-color: black;
+  color: white;
+}
+
