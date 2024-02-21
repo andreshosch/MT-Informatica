@@ -1,13 +1,15 @@
 <app-encabezado></app-encabezado>
 
 <div class="body">
+  <div class="gris"></div>
     <div class="miContenedor container">
         <div class="circulos">
-          <div (click)="mostrarDetalles('Servicio Técnico')" [class.selected]="opcionSeleccionada === 'Servicio Técnico'"><strong>Servicio Técnico</strong></div>
+          <div class="formatoCirculo" (click)="mostrarDetalles('Servicio Técnico')" [class.selected]="opcionSeleccionada === 'Servicio Técnico'"><strong>Servicio Técnico</strong></div>
           <div (click)="mostrarDetalles('Venta')" [class.selected]="opcionSeleccionada === 'Venta'"><strong>Venta</strong></div>
           <div (click)="mostrarDetalles('Asesoramiento')" [class.selected]="opcionSeleccionada === 'Asesoramiento'"><strong>Asesoramiento</strong></div>
         </div>
         <div class="detalles">
+          <!-- <img src="../../../assets/Logo.png" alt="Imagen"> -->
           <img src="../../../assets/Logo.png" alt="Imagen">
           <div class="container infoService" *ngIf="venta">
             <h4 style="color: #107997;">VENTA DE EQUIPOS E INSUMOS</h4>
@@ -42,7 +44,7 @@
                 </H6>
           </div>
 
-          <div *ngIf="servicio"class="infoService">
+          <div *ngIf="servicio" class="infoService">
                 <h4 style="color: #107997;">
                     SERVICIO TECNICO
                 </h4>
@@ -58,6 +60,7 @@
           </div>
         </div>
       </div>
+      <div class="gris"></div>
 </div> 
 
   
