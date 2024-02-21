@@ -2,7 +2,7 @@
   <div class="gris"></div>
     <div *ngIf="showProductosDestacados" class="container container-shop">
       <h3 class="titleProductos">PRODUCTOS DESTACADOS</h3>
-      <div class="form-container ordenFiltro"id="productos">
+      <div class="form-container ordenFiltro">
         <ngb-carousel class="container container-card">
           <ng-template class="card" style="width: 18rem" *ngFor="let articulo of productosHot" ngbSlide>
               <img src="{{articulo.imagenes}}" alt="Random first slide" class="card-img-top" alt="..." style="height: 250px;width: 250px;"/>
@@ -25,14 +25,14 @@
 
   <!-- Fin Productos destacados -->
   <div class="container container-shop ">
-    <div class="form-container ordenFiltro"id="productos">
+    <div class="form-container ordenFiltro">
       <div>
         <h4 class="titleProductos">
           BUSQUEDA AVANZADA
         </h4>
       </div>
       <div>
-        <input type="text" [(ngModel)]="productSearch" placeholder="Ingrese una palabra clave" (input)="updateProductSearch()">
+        <input type="text" [(ngModel)]="productSearch" placeholder="Ingrese producto a buscar" (input)="updateProductSearch()">
         <select [(ngModel)]="categorySearch" (change)="updateSubCategories()">
           <option value="">Selecciona una categoría</option>
           <option *ngFor="let categoria of category" [value]="categoria">{{categoria}}</option>
@@ -55,9 +55,8 @@
 
   <div class="gris"></div>
 
-
-  <div class="container container-shop">
-    <h3 class="titleProductos">NUESTROS PRODUCTOS</h3>
+  <div  class="container container-shop"*ngIf="tituloProductos"id="productos">
+    <h3 class="titleProductos" >NUESTROS PRODUCTOS</h3>
     <!-- <button (click)="traerTodo()">Traer</button> -->
     <div class="container container-card">
       <div class="card" style="width: 18rem" *ngFor="let productos of arrProductsPages">
@@ -80,6 +79,7 @@
       </div>
     </div>
   </div>
+
 
   <!-- MODAL PARA MOSTRAR DATOS DE LA CARD -->
   <div class="container container-card">
@@ -116,7 +116,7 @@
           (click)="firstPage(arrProducts);scroll('productos')"><mat-icon>first_page</mat-icon></a></button>
       <button *ngIf="visibleAfterPage" class="page-item"><a class="page-link " *ngIf="visibleAfterPage"
           (click)="afterPage(arrProducts);scroll('productos')"><mat-icon>chevron_left</mat-icon></a></button>
-      <button class="page-item"><a class="page-link">{{this.numberPages}}</a></button>
+      <button *ngIf="buttonPages" class="page-item"><a class="page-link">{{this.numberPages}}</a></button>
       <button *ngIf="visibleNextPage" class="page-item"><a class="page-link" *ngIf="visibleNextPage"
           (click)="nextPage(arrProducts);scroll('productos')"><mat-icon>chevron_right</mat-icon></a></button>
       <button *ngIf="visibleLastPage" class="page-item"><a class="page-link" *ngIf="visibleLastPage"

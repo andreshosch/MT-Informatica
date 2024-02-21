@@ -1,5 +1,6 @@
 import { Component,Renderer2 } from '@angular/core';
 import { NgbCarouselConfig } from '@ng-bootstrap/ng-bootstrap';
+import { tr } from 'date-fns/locale';
 import { first } from 'rxjs';
 import { Producto } from 'src/app/models/producto';
 import { DataService } from 'src/app/services/data.service';
@@ -42,6 +43,8 @@ export class ProductosComponent {
   subCategorySearch = '';
   categorySearch = ''
   brandSearch = ''
+  tituloProductos:boolean=true
+  buttonPages:boolean=true
   filterArray: any[] = [];
   requestData = {
     "user_id": '22181',
@@ -60,7 +63,7 @@ export class ProductosComponent {
 
 
   constructor(private productosServices: ProductosService, private _config: NgbCarouselConfig, private dataService: DataService,
-  private _mensaje:MensajeService, public _spinner:SppinerService,private renderer: Renderer2) {
+  private _mensaje:MensajeService, public _spinner:SppinerService,private renderer: Renderer2,) {
     _config.interval = 2000;
     _config.pauseOnHover = true;
     _config.showNavigationArrows = false;
@@ -277,7 +280,9 @@ export class ProductosComponent {
       this.filterArray = this.arrProducts.filter((objeto) => {
         return Object.values(objeto).some((product) => {
           if (typeof product === 'string') {
+            this.tituloProductos=true
             return product.toLowerCase().includes(this.productSearch.toLowerCase());
+            
           }
           return false;
         });
@@ -303,7 +308,11 @@ export class ProductosComponent {
       this.visibleFirstPage=false
       this.visibleNextPage=false
       this.visibleLastPage=false
-      console.log("-20")
+    }
+     if(this.filterArray.length==0){
+      this.tituloProductos=false
+      this.buttonPages=false
+      this._mensaje.snackBar("No hay productos que coincidan con los criterios de búsqueda","red")
     }
   }
 
@@ -316,6 +325,8 @@ export class ProductosComponent {
     this.subCategorySearch = ''
     this.brandSearch=''
     this.numberPages = 1
+    this.buttonPages=true
+    this.tituloProductos=true
     this.loadFirstPage(this.arrProducts)
 
   }

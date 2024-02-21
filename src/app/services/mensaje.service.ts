@@ -10,7 +10,7 @@ export class MensajeService {
 
   snackBar(message:string,backgroundColor:string) {
     const snackBarConfig:MatSnackBarConfig={
-      duration:2000,
+      duration:3000,
       panelClass:[...this.getBackgroundColorClasses(backgroundColor)],
       data:{backgroundColor}
   }
