@@ -7,21 +7,29 @@
             <h4 style="color: #107997;font-weight: bold;">GESTION DE CATEGORIAS</h4>
             <div class="estructura">
                 <div class="izquierda">
-                    <div><h6 style="color: #107997; font-weight: bold;">CATEGORIAS DISPONIBLES</h6></div>
+                    <div>
+                        <h6 style="color: #107997; font-weight: bold;">CATEGORIAS DISPONIBLES</h6>
+                    </div>
                     <div class="bordes">
                         <mat-select id="aBloquear" *ngIf="onlyCategory">
-                            <mat-option *ngFor="let category of onlyCategory" [value]="category">{{category}}</mat-option>
+                            <mat-option *ngFor="let category of onlyCategory"
+                                [value]="category">{{category}}</mat-option>
                         </mat-select>
-                        <button style="background-color: #107997;color:  white;" (click)="altaBloqueo()" mat-raised-button color>Bloquear</button>
+                        <button style="background-color: #107997;color:  white;" (click)="altaBloqueo()"
+                            mat-raised-button color>Bloquear</button>
                     </div>
                 </div>
                 <div class="derecha">
-                    <div><h6 style="color: #107997; font-weight: bold;">CATEGORÍAS BLOQUEADAS</h6></div>
+                    <div>
+                        <h6 style="color: #107997; font-weight: bold;">CATEGORÍAS BLOQUEADAS</h6>
+                    </div>
                     <div class="bordes">
                         <mat-select id="aDesbloquear">
-                            <mat-option *ngFor="let bloqueado of losBloqueados" [value]="bloqueado">{{bloqueado.categoria}}</mat-option>
+                            <mat-option *ngFor="let bloqueado of losBloqueados"
+                                [value]="bloqueado">{{bloqueado.categoria}}</mat-option>
                         </mat-select>
-                        <button style="background-color: #107997;color:  white;" (click)="bajaBloqueo()" mat-raised-button>Desbloquear</button>
+                        <button style="background-color: #107997;color:  white;" (click)="bajaBloqueo()"
+                            mat-raised-button>Desbloquear</button>
                     </div>
                 </div>
             </div>
@@ -31,21 +39,23 @@
         <h4 style="color: #107997;font-weight: bold;">ARTICULOS ACTUALES</h4>
         <div class="galeriaCard container">
             <div *ngFor="let articulo of productosHot">
-            
+
                 <div class="card">
                     <img src="{{articulo.imagenes}}">
                     <h6>{{articulo.nombre}}</h6>
                     <h6>Precio: ${{articulo.precio}}</h6>
                     <h6>IVA: {{articulo.iva}}%</h6>
                     <div class="duplaBoton">
-                        <button (click)="modificar(articulo.id)" mat-raised-button style="background-color: #107997;color:  white;">Modificar</button>
-                        <button (click)="borrarPorId(articulo.id)" mat-raised-button style="background-color: #107997;color:  white;">Borrar</button>
+                        <button (click)="modificar(articulo.id)" mat-raised-button
+                            style="background-color: #107997;color:  white;">Modificar</button>
+                        <button (click)="borrarPorId(articulo.id)" mat-raised-button
+                            style="background-color: #107997;color:  white;">Borrar</button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    
+
     <div class="confirmation-dialog" *ngIf="showConfirmationDelProd">
         <div class="dialog-content">
             <h4>¿Está seguro que desea eliminar el producto?</h4>
@@ -61,8 +71,8 @@
             <h4 style="color: #107997;font-weight: bold;">MODIFICAR PRODUCTOS</h4>
             <div>
                 <div class="pseudoCard">
-                    <form [formGroup]="modificarProd" (ngSubmit)="agregarProd('m')"> 
-                
+                    <form [formGroup]="modificarProd" (ngSubmit)="agregarProd('m')">
+
                         <mat-grid-list cols="4" rowHeight="70px" style="margin-top: 8%">
                             <mat-grid-tile [colspan]="2" [rowspan]="1">
                                 <mat-form-field>
@@ -129,20 +139,23 @@
                             </mat-grid-tile>
                         </mat-grid-list>
                         <div class="botonera">
-                            <button  type="submit" mat-raised-button style="float: center;margin-bottom: 40px;background-color: #107997;color:  white;" [disabled]="!modificarProd.valid">Actualizar</button>  
-                            <button  (click)="cerrarModal()" type="text" mat-raised-button style="float: center;margin-bottom: 40px;background-color: #107997;color:  white;">Cancelar</button>  
+                            <button type="submit" mat-raised-button
+                                style="float: center;margin-bottom: 40px;background-color: #107997;color:  white;"
+                                [disabled]="!modificarProd.valid">Actualizar</button>
+                            <button (click)="cerrarModal()" type="text" mat-raised-button
+                                style="float: center;margin-bottom: 40px;background-color: #107997;color:  white;">Cancelar</button>
                         </div>
                     </form>
                 </div>
             </div>
         </div>
     </div>
-    
+
     <div class="formAgregar" *ngIf="!modalActivo">
         <div class="formularios">
             <h4 style="color: #107997;font-weight: bold;">AGREGAR PRODUCTOS</h4>
             <div class="pseudoCard">
-                <form [formGroup]="altaProd" (ngSubmit)="agregarProd('a')"> 
+                <form [formGroup]="altaProd" (ngSubmit)="agregarProd('a')">
                     <mat-grid-list cols="4" rowHeight="70px" style="margin-top: 8%">
                         <mat-grid-tile [colspan]="2" [rowspan]="1">
                             <mat-form-field>
@@ -207,19 +220,20 @@
                             </mat-form-field>
                         </mat-grid-tile>
                     </mat-grid-list>
-                    <button  type="submit" mat-raised-button style="float: center;margin-bottom: 40px ;background-color: #107997;color:  white;" [disabled]="!altaProd.valid">Aceptar</button>  
+                    <button type="submit" mat-raised-button
+                        style="float: center;margin-bottom: 40px ;background-color: #107997;color:  white;"
+                        [disabled]="!altaProd.valid">Aceptar</button>
                 </form>
             </div>
         </div>
-    
+
     </div>
 
     <div *ngIf="_spinner.getSpinner()" class="spinner-container">
         <app-spinner></app-spinner>
-      </div>
+    </div>
     <div class="gris"></div>
 </div>
 
 
 <app-footer></app-footer>
-

@@ -4,6 +4,8 @@ import { MatTableDataSource } from '@angular/material/table';
 import { PagosService } from 'src/app/services/pagos.service';
 import {MensajeService} from 'src/app/services/mensaje.service'
 import { tr } from 'date-fns/locale';
+import { SpinnerComponent } from '../spinner/spinner.component';
+import { SppinerService } from 'src/app/services/sppiner.service';
 
 @Component({
   selector: 'app-gestion-pago',
@@ -22,7 +24,7 @@ export class GestionPagoComponent {
   showConfirmationDelPago: boolean = false
   metodoExistente: boolean = false
 
-  constructor(private _pagosService: PagosService, private fb:FormBuilder, private _mensaje:MensajeService){
+  constructor(private _pagosService: PagosService, private fb:FormBuilder, private _mensaje:MensajeService,public _spinner:SppinerService){
 
     this.dataSourcePagos = new MatTableDataSource(this.tablaPagos);
 
@@ -38,6 +40,7 @@ export class GestionPagoComponent {
   }
 
   ngOnInit() {
+    this._spinner.showSpinner()
     this.getTablaPagos()
   }
 
