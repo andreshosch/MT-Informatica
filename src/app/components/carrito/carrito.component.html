@@ -13,11 +13,13 @@
         </a>
         <span class="nav-link" style="color:#107997;font-weight: bolder;size: 50px;">{{ total }}</span>
     </div>
+
     <div class="confirmation-dialog" *ngIf="carritoVacio">
         <div class="modalCarrito">
-            <img src="../../../assets/carritoVacio.png" alt="">
-            <h3>Actualmente no tienes productos en tu carrito</h3>
-            <button (click)="cerrarAviso()">Aceptar</button>
+            <div>
+                <h3>Actualmente tu carrito está vacío..  <span>Quiero comprar</span></h3>
+                <button (click)="cerrarAviso()">Aceptar</button>
+            </div>
         </div>
     </div>
     
