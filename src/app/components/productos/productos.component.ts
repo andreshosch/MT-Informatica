@@ -57,6 +57,7 @@ export class ProductosComponent {
   elProducto: Producto
   idProducto: string
   showProductosDestacados:boolean=false
+  validadorApi: boolean = false
   // Fin Productos destacados
 
   
@@ -71,10 +72,16 @@ export class ProductosComponent {
 
 
   ngOnInit() {
+    this.getApi()
     this.getBloqueados()
     this._spinner.showSpinner()
-    this.arrayProducts()
     this.getProductos()
+    setTimeout(() => {
+      if (this.validadorApi){
+        this.arrayProducts()
+      }
+    },2000)
+    
     this.dataService.isAuthenticated$.subscribe((isAuthenticated) => {
       this.hayLogueado = isAuthenticated;
     
@@ -464,6 +471,14 @@ modal(producto:any){
       doc.forEach((element: any) => {
         catActual = element.payload.doc.data().categoria
         this.bloqueados.push(catActual)
+      })
+    })
+  }
+
+  getApi(){
+    this.productosServices.getApiElite().subscribe(doc => {
+      doc.forEach((element: any) => {
+        this.validadorApi = element.payload.doc.data().valor
       })
     })
   }

@@ -27,6 +27,24 @@
             </div>
         </div>
     </div>
+
+    <div class="container contenedor">
+        <div class="bloqueosApi">
+            <h4 style="color: #107997;font-weight: bold;">GESTION DE APIs</h4>
+            <div class="formato">
+                <div>
+                    <h6 style="color: #107997; font-weight: bold;">
+                        Estado actual API Elite: <span>{{ estadoApi }}</span>
+                    </h6>
+                </div>
+                <div class="botonesApi">
+                    <button [disabled]=this.validadorApi style="background-color: #107997;color:  white;" (click)="altaApi()" mat-raised-button color>Activar</button>
+                    <button [disabled]=!this.validadorApi style="background-color: #107997;color:  white;" (click)="bajaApi()" mat-raised-button color>Desactivar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="formatoArticulos container">
         <h4 style="color: #107997;font-weight: bold;">ARTICULOS ACTUALES</h4>
         <div class="galeriaCard container">

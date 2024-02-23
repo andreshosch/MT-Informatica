@@ -66,6 +66,18 @@ setBloqueos(categoria: any): Promise<any>{
   return this.firestore.collection('Bloqueos').add(categoria)
 }
 
+getApiElite(): Observable<any> {
+  return this.firestore.collection('ApiElite').snapshotChanges()
+}
+
+setApiElite(valor: any): Promise<any>{
+  return this.firestore.collection('ApiElite').add(valor)
+}
+
+updateApiElite(id: string, nuevoValor: any): Promise<any> {
+  return this.firestore.collection('ApiElite').doc(id).update(nuevoValor);
+}
+
 }
 
 
