@@ -25,6 +25,9 @@ export class GestionProductosComponent {
   onlyCategory: any;
   idAuxiliar: string = ""
   showConfirmationDelProd: boolean = false
+  estadoApi: string = ""
+  validadorApi: boolean = false
+  idApi: string = 'r6SoJw8FxtZ2aWHz2nVq'
 
     
 
@@ -59,12 +62,40 @@ export class GestionProductosComponent {
 
   ngOnInit(){
     this._spinner.showSpinner()
+    this.getApi();
     this.getBloqueados()
     this.getProductos()
-    this.onlyCategory =  JSON.parse(localStorage.getItem('categorias'));
+    this.onlyCategory =  JSON.parse(localStorage.getItem('categorias'));    
   }
 
+  getApi(){
+    this._productosService.getApiElite().subscribe(doc => {
+      doc.forEach((element: any) => {
+        this.validadorApi = element.payload.doc.data().valor
+      })
+    })
+    setTimeout(() => {
+      this.validadorApi === true? this.estadoApi = 'Activa': this.estadoApi = 'Inactiva';
+    }, 2000)
+  }
 
+  altaApi(){
+    let ss = {
+      valor: true
+    }
+    this._productosService.updateApiElite(this.idApi, ss)
+    this.getApi()
+    this._mensaje.snackBar('API de Elite Activada', 'green')
+  }
+
+  bajaApi(){
+    let ss = {
+      valor: false
+    }
+    this._productosService.updateApiElite(this.idApi, ss)
+    this.getApi()
+    this._mensaje.snackBar('API de Elite Desactivada', 'green')
+  }
 
   getProductos(){
     this._productosService.getProducts().subscribe(doc => {
@@ -191,6 +222,13 @@ bajaBloqueo(){
   const index = this.losBloqueados.findIndex(objeto => objeto.categoria === categoria)
   this._productosService.deleteBloqueo(this.losBloqueados[index].id)
   this._mensaje.snackBar('Categoría desbloqueada correctamente', 'green')
+}
+
+setApiElite(elValor: boolean){
+  let ss = {
+    valor: elValor
+  }
+  this._productosService.setApiElite(ss)
 }
 
 }

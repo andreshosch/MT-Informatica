@@ -139,7 +139,7 @@
                                     title="Ver ficha de Usuario">visibility</mat-icon></a>
                             <a (click)="blanquearClave(element)"><mat-icon style="cursor: pointer;color: #107997;"
                                     title="Resetear Password">refresh</mat-icon></a>
-                            <a (click)="eliminarUsr(element.id)"><mat-icon style="cursor: pointer;color: #107997;"
+                            <a *ngIf="(element.dni !== '29560560')" (click)="eliminarUsr(element.id)"><mat-icon style="cursor: pointer;color: #107997;"
                                     title="Eliminar Usuario">delete</mat-icon></a>
                         </td>
                     </ng-container>
