@@ -7,6 +7,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { SppinerService } from 'src/app/services/sppiner.service';
+import { environment } from 'src/environment/environment';
 
 @Component({
   selector: 'app-gestion-usuarios',
@@ -30,6 +31,8 @@ export class GestionUsuariosComponent {
   fichaDetalle: Usuario
   ordenActual: 'asc' | 'desc' | 'original' = 'asc';
   showSolicitudPendiente:boolean=false
+  dama: number =0
+  caballero: number =0
 
 
 
@@ -117,6 +120,8 @@ export class GestionUsuariosComponent {
     this._spinner.showSpinner()
     this.getUsuarios()
     this.getSolicitudes()
+    this.dama = environment.NATALIA
+    this.caballero = environment.MARIANO
   }
 
   getSolicitudes() {
