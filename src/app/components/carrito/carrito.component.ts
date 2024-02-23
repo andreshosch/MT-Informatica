@@ -213,14 +213,7 @@ export class CarritoComponent {
   }
 
   sendEmail() {
-    this._email.sendEmail(this.to, this.subject, this.text).subscribe(
-      response => {
-       
-      },
-      error => {
-        
-      }
-    );
+    this._email.sendEmail(this.to, this.subject, this.text)    
   }
 
 
