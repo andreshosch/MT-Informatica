@@ -10,6 +10,8 @@ export class SendMailsService {
 
   sendEmail(to: string, subject: string, text: string) {
     const emailData = { to, subject, text };
+    console.log(to)
+    console.log(text)
     return this.http.post<any>('https://mt-informatica.web.app/sendEmail/send-email', emailData);
   }
 }
