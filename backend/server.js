@@ -62,49 +62,49 @@
 // 	console.log("The server is now running on Port 8080");
 // });
 
-const express = require('express');
+// const express = require('express');
 
-const nodemailer = require('nodemailer');
-const cors = require('cors');
-const app = express();
-const functions = require('firebase-functions');
-app.use(cors());
-const PORT = process.env.PORT || 3000;
+// const nodemailer = require('nodemailer');
+// const cors = require('cors');
+// const app = express();
+// const functions = require('firebase-functions');
+// app.use(cors());
+// const PORT = process.env.PORT || 3000;
 
-app.use(express.json());
+// app.use(express.json());
 
-// Configura nodemailer
-const transporter = nodemailer.createTransport({
-  service: 'gmail',
-  auth: {
-    user: 'andreshosch114@gmail.com',
-    pass: 'dbmewkfjpoiqtvvw'
-  }
-});
+// // Configura nodemailer
+// const transporter = nodemailer.createTransport({
+//   service: 'gmail',
+//   auth: {
+//     user: 'andreshosch114@gmail.com',
+//     pass: 'dbmewkfjpoiqtvvw'
+//   }
+// });
 
-// Ruta para enviar el correo electrónico
-app.post('/send-email', (req, res) => {
-  const { to, subject, text } = req.body;
+// // Ruta para enviar el correo electrónico
+// app.post('/send-email', (req, res) => {
+//   const { to, subject, text } = req.body;
 
-  const mailOptions = {
-    from: 'andreshosch114@gmail.com',
-    to: to,
-    subject: subject,
-    text: text
-  };
+//   const mailOptions = {
+//     from: 'andreshosch114@gmail.com',
+//     to: to,
+//     subject: subject,
+//     text: text
+//   };
 
-  transporter.sendMail(mailOptions, function(error, info) {
-    if (error) {
-      console.log(error);
-      res.status(500).send('Error al enviar el correo');
-    } else {
-      console.log('Correo enviado: ' + info.response);
-      res.status(200).send('Correo enviado correctamente');
-    }
-  });
-});
-exports.sendEmail = functions.https.onRequest(app);
-// Iniciar el servidor
-app.listen(PORT, () => {
-  console.log(`Servidor corriendo en el puerto ${PORT}`);
-});
+//   transporter.sendMail(mailOptions, function(error, info) {
+//     if (error) {
+//       console.log(error);
+//       res.status(500).send('Error al enviar el correo');
+//     } else {
+//       console.log('Correo enviado: ' + info.response);
+//       res.status(200).send('Correo enviado correctamente');
+//     }
+//   });
+// });
+// exports.sendEmail = functions.https.onRequest(app);
+// // Iniciar el servidor
+// app.listen(PORT, () => {
+//   console.log(`Servidor corriendo en el puerto ${PORT}`);
+// });
