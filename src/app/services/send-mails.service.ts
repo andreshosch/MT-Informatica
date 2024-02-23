@@ -12,7 +12,15 @@ export class SendMailsService {
     const emailData = { to, subject, text };
     console.log(to)
     console.log(text)
-    return this.http.post<any>('https://mt-informatica.web.app/send-email', emailData);
+    return this.http.post<any>('https://mt-informatica.web.app/send-email', emailData)
+    .subscribe(
+      response => {
+        console.log('Correo enviado correctamente:', response);
+      },
+      error => {
+        console.error('Error al enviar el correo:', error);
+      }
+    );
   }
 }
 
