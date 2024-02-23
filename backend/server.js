@@ -63,10 +63,11 @@
 // });
 
 const express = require('express');
+
 const nodemailer = require('nodemailer');
 const cors = require('cors');
 const app = express();
-
+const functions = require('firebase-functions');
 app.use(cors());
 const PORT = process.env.PORT || 3000;
 
@@ -102,7 +103,7 @@ app.post('/send-email', (req, res) => {
     }
   });
 });
-
+exports.sendEmail = functions.https.onRequest(app);
 // Iniciar el servidor
 app.listen(PORT, () => {
   console.log(`Servidor corriendo en el puerto ${PORT}`);
