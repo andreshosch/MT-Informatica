@@ -32,6 +32,7 @@ import { NosotrosComponent } from './components/nosotros/nosotros.component';
 import { ServiciosComponent } from './components/servicios/servicios.component';
 
 
+
 @NgModule({
   declarations: [
     AppComponent,

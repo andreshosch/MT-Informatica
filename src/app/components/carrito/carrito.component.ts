@@ -5,6 +5,7 @@ import { Pedido } from 'src/app/models/pedido';
 import { format } from 'date-fns';
 import {MensajeService} from 'src/app/services/mensaje.service'
 import { PagosService } from 'src/app/services/pagos.service';
+import { SendMailsService } from 'src/app/services/send-mails.service';
 
 
 @Component({
@@ -31,6 +32,9 @@ export class CarritoComponent {
   montoIncremento = 0
   montoIncrementoIva = 0
   usuarioLog: string = ""
+  to: string = 'andreshosch114@gmail.com';
+  subject: string = 'andreshosch114@gmail.com';
+  text: string = 'Tienes un nuevo pedido confirmado';
   
 
   //Traer datos de coleccion... 
@@ -39,7 +43,7 @@ export class CarritoComponent {
   seleccionPago: string = this.metodoPago[0]
   
 
-  constructor(private dataService: DataService, private pedidosService: PedidosService, private _mensaje:MensajeService, private _pagosService: PagosService) {
+  constructor(private dataService: DataService, private pedidosService: PedidosService, private _mensaje:MensajeService, private _pagosService: PagosService, private _email:SendMailsService) {
 
   }
 
@@ -179,6 +183,7 @@ export class CarritoComponent {
       apellido: this.apellido,
       celular: this.celular
     }
+    this.sendEmail()
     this.pedidosService.createPedido(unPedido, 'Pedidos Pendientes')
     for (let i =0; i < this.productos.length; i++){
       this.productos[i].addProducto.cantidad = 1;
@@ -192,6 +197,7 @@ export class CarritoComponent {
     this.dataService.limpiar()
     this.ocultarCarrito();
     localStorage.removeItem(userActual);
+
   }
 
   formatFecha() {
@@ -205,6 +211,18 @@ export class CarritoComponent {
     this.montoIncremento = this.incremento > 0? (this.monto * this.incremento / 100 + this.monto) : this.monto  
     this.montoIncrementoIva = this.incremento > 0? (this.montoIva * this.incremento / 100 + this.montoIva) : this.montoIva
   }
+
+  sendEmail() {
+    this._email.sendEmail(this.to, this.subject, this.text).subscribe(
+      response => {
+       
+      },
+      error => {
+        
+      }
+    );
+  }
+
 
   }
 
