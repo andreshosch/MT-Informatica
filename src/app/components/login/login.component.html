@@ -159,46 +159,79 @@
 <div class="confirmation-dialog" *ngIf="actualizarPass">
     <div class="dialog-content">
         <div class="login">
-
-            <form [formGroup]="updateUsr" (ngSubmit)="actualizarUsr()">
-                <mat-grid-list cols="4" rowHeight="70px" style="margin-top: 8%; margin-right: 6%;">
-                    <mat-grid-tile [colspan]="4" [rowspan]="1">
-                        <mat-form-field>
-                            <mat-label>Usuario</mat-label>
-                            <input matInput formControlName="usuario">
-                        </mat-form-field>
-                    </mat-grid-tile>
-                    <mat-grid-tile [colspan]="4" [rowspan]="1">
-                        <mat-form-field>
-                            <mat-label>Contraseña Actual</mat-label>
-                            <input matInput formControlName="contrasenaOld">
-                        </mat-form-field>
-                    </mat-grid-tile>
-                    <mat-grid-tile [colspan]="4" [rowspan]="1">
-                        <mat-form-field>
-                            <mat-label>Contraseña Nueva</mat-label>
-                            <input matInput formControlName="contrasenaNew">
-                        </mat-form-field>
-                    </mat-grid-tile>
-                    <mat-grid-tile [colspan]="4" [rowspan]="1">
-                        <mat-form-field>
-                            <mat-label>Repita Contraseña nueva</mat-label>
-                            <input matInput formControlName="contrasenaNewFactor">
-                        </mat-form-field>
-                    </mat-grid-tile>
-                </mat-grid-list>
-                <div class="centrado">
-                    <button type="submit" mat-raised-button color="primary"
-                        style="margin-bottom: 40px;">Actualizar</button>
-                </div>
-            </form>
-            <div class="registroycancel">
-                <button (click)="cerrarUpdate()" mat-raised-button color="primary">Cancelar</button>
+            <h4>CAMBIO DE CLAVE</h4>
+            <div class="cambio2">
+                <form [formGroup]="updateUsr" (ngSubmit)="actualizarUsr()">
+                    <mat-grid-list cols="4" rowHeight="70px">
+                        <mat-grid-tile [colspan]="4" [rowspan]="1">
+                            <mat-form-field>
+                                <mat-label>Contraseña Actual</mat-label>
+                                <input matInput formControlName="contrasenaOld">
+                            </mat-form-field>
+                        </mat-grid-tile>
+                        <mat-grid-tile [colspan]="4" [rowspan]="1">
+                            <mat-form-field>
+                                <mat-label>Contraseña Nueva</mat-label>
+                                <input matInput formControlName="contrasenaNew">
+                            </mat-form-field>
+                        </mat-grid-tile>
+                        <mat-grid-tile [colspan]="4" [rowspan]="1">
+                            <mat-form-field>
+                                <mat-label>Repita Contraseña nueva</mat-label>
+                                <input matInput formControlName="contrasenaNewFactor">
+                            </mat-form-field>
+                        </mat-grid-tile>
+                    </mat-grid-list>
+                    <div class="centrado">
+                        <button type="submit" mat-raised-button color="primary">Actualizar</button>
+                        <button (click)="cerrarUpdate()" mat-raised-button color="primary">Cancelar</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
 </div>
 
+
+<div class="confirmation-dialog" *ngIf="actualizarPass2">
+    <div class="dialog-content">
+        <div class="login">
+            <h4>CAMBIO DE CLAVE</h4>
+            <div class="cambio2">
+                <form [formGroup]="updateUsr2" (ngSubmit)="actualizarUsr2()">
+                    <mat-grid-list cols="4" rowHeight="70px">
+                        <mat-grid-tile [colspan]="4" [rowspan]="1">
+                            <mat-form-field>
+                                <mat-label>Contraseña Actual</mat-label>
+                                <input matInput formControlName="contrasenaOld">
+                            </mat-form-field>
+                        </mat-grid-tile>
+                        <mat-grid-tile [colspan]="4" [rowspan]="1">
+                            <mat-form-field>
+                                <mat-label>Contraseña Nueva</mat-label>
+                                <input matInput formControlName="contrasenaNew">
+                            </mat-form-field>
+                        </mat-grid-tile>
+                        <mat-grid-tile [colspan]="4" [rowspan]="1">
+                            <mat-form-field>
+                                <mat-label>Repita Contraseña nueva</mat-label>
+                                <input matInput formControlName="contrasenaNewFactor">
+                            </mat-form-field>
+                        </mat-grid-tile>
+                    </mat-grid-list>
+                    <div class="centrado">
+                        <button type="submit" mat-raised-button color="primary">Actualizar</button>
+                        <button (click)="cerrarUpdate2()" mat-raised-button color="primary">Cancelar</button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- <div class="registroycancel">
+                <button (click)="cerrarUpdate2()" mat-raised-button color="primary">Cancelar</button>
+            </div> -->
+        </div>
+    </div>
+</div>
 
 
 <div class="confirmation-dialog" *ngIf="modalPerfil">
@@ -208,71 +241,75 @@
                 <h3>Actualización de perfil</h3>
                 <h4>{{usuarioAuxiliar.nombre}} {{usuarioAuxiliar.apellido}}</h4>
             </div>
-            <mat-divider></mat-divider>
-            <form [formGroup]="updatePerfil" (ngSubmit)="actualizarPerfil()">
-                <mat-grid-list cols="8" rowHeight="70px" style="margin-top: 8%; margin-right: 6%;">
-                    <mat-grid-tile [colspan]="4" [rowspan]="1">
-                        <mat-form-field>
-                            <mat-label>Domicilio</mat-label>
-                            <input matInput formControlName="domicilio" value="{{usuarioAuxiliar.domicilio}}">
-                        </mat-form-field>
-                    </mat-grid-tile>
-                    <mat-grid-tile [colspan]="4" [rowspan]="1">
-                        <mat-form-field>
-                            <mat-label>Correo</mat-label>
-                            <input matInput formControlName="mail" value="{{usuarioAuxiliar.mail}}">
-                        </mat-form-field>
-                    </mat-grid-tile>
-                    <mat-grid-tile [colspan]="4" [rowspan]="1">
-                        <mat-form-field>
-                            <mat-label>Teléfono</mat-label>
-                            <input matInput formControlName="telefono" value="{{usuarioAuxiliar.celular}}">
-                        </mat-form-field>
-                    </mat-grid-tile>
-                    <mat-grid-tile [colspan]="4" [rowspan]="1">
-                        <mat-form-field>
-                            <mat-label>Provincia</mat-label>
-                            <input matInput formControlName="provincia" value="{{usuarioAuxiliar.provincia}}">
-                        </mat-form-field>
-                    </mat-grid-tile>
-                    <mat-grid-tile [colspan]="4" [rowspan]="1">
-                        <mat-form-field>
-                            <mat-label>Localidad</mat-label>
-                            <input matInput formControlName="localidad" value="{{usuarioAuxiliar.localidad}}">
-                        </mat-form-field>
-                    </mat-grid-tile>
-                    <mat-grid-tile [colspan]="4" [rowspan]="1">
-                        <mat-form-field>
-                            <mat-label>Codigo Postal</mat-label>
-                            <input matInput formControlName="codigoPostal" value="{{usuarioAuxiliar.codigoPostal}}">
-                        </mat-form-field>
-                    </mat-grid-tile>
-                    <mat-grid-tile [colspan]="4" [rowspan]="1">
-                        <mat-form-field>
-                            <mat-label>Situación Fiscal</mat-label>
-                            <mat-select formControlName="estadoFiscal">
-                                <mat-option value="ivaRespInscripto">IVA Responsable Inscripto</mat-option>
-                                <mat-option value="ivaExento">IVA Exento</mat-option>
-                                <mat-option value="monotributista">Monotributista</mat-option>
-                                <mat-option value="consumidorFinal">Consumidor final</mat-option>
-                                <mat-option value="indefinido">No lo sé</mat-option>
-                            </mat-select>
-                        </mat-form-field>
-                    </mat-grid-tile>
-                    <mat-grid-tile [colspan]="4" [rowspan]="1">
-                        <mat-form-field>
-                            <mat-label>Observaciones</mat-label>
-                            <input matInput formControlName="observaciones" value="{{usuarioAuxiliar.observaciones}}">
-                        </mat-form-field>
-                    </mat-grid-tile>
-
-                </mat-grid-list>
-                <div class="registroycancel">
-                    <button type="submit" mat-raised-button color="primary"
-                    [disabled]="!updatePerfil.valid">Actualizar</button>
-                    <button (click)="modalPerfil=false" mat-raised-button color="primary">Cancelar</button>
+            <div class="actualizacion">
+                <div class="cambioPass">
+                    <p (click)="updatePass()">Cambiar clave</p>
                 </div>
-            </form>
+                <form [formGroup]="updatePerfil" (ngSubmit)="actualizarPerfil()">
+                    <mat-grid-list cols="8" rowHeight="70px" style="margin-top: 8%">
+                        <mat-grid-tile [colspan]="4" [rowspan]="1">
+                            <mat-form-field>
+                                <mat-label>Domicilio</mat-label>
+                                <input matInput formControlName="domicilio" value="{{usuarioAuxiliar.domicilio}}">
+                            </mat-form-field>
+                        </mat-grid-tile>
+                        <mat-grid-tile [colspan]="4" [rowspan]="1">
+                            <mat-form-field>
+                                <mat-label>Correo</mat-label>
+                                <input matInput formControlName="mail" value="{{usuarioAuxiliar.mail}}">
+                            </mat-form-field>
+                        </mat-grid-tile>
+                        <mat-grid-tile [colspan]="4" [rowspan]="1">
+                            <mat-form-field>
+                                <mat-label>Teléfono</mat-label>
+                                <input matInput formControlName="telefono" value="{{usuarioAuxiliar.celular}}">
+                            </mat-form-field>
+                        </mat-grid-tile>
+                        <mat-grid-tile [colspan]="4" [rowspan]="1">
+                            <mat-form-field>
+                                <mat-label>Provincia</mat-label>
+                                <input matInput formControlName="provincia" value="{{usuarioAuxiliar.provincia}}">
+                            </mat-form-field>
+                        </mat-grid-tile>
+                        <mat-grid-tile [colspan]="4" [rowspan]="1">
+                            <mat-form-field>
+                                <mat-label>Localidad</mat-label>
+                                <input matInput formControlName="localidad" value="{{usuarioAuxiliar.localidad}}">
+                            </mat-form-field>
+                        </mat-grid-tile>
+                        <mat-grid-tile [colspan]="4" [rowspan]="1">
+                            <mat-form-field>
+                                <mat-label>Codigo Postal</mat-label>
+                                <input matInput formControlName="codigoPostal" value="{{usuarioAuxiliar.codigoPostal}}">
+                            </mat-form-field>
+                        </mat-grid-tile>
+                        <mat-grid-tile [colspan]="4" [rowspan]="1">
+                            <mat-form-field>
+                                <mat-label>Situación Fiscal</mat-label>
+                                <mat-select formControlName="estadoFiscal">
+                                    <mat-option value="ivaRespInscripto">IVA Responsable Inscripto</mat-option>
+                                    <mat-option value="ivaExento">IVA Exento</mat-option>
+                                    <mat-option value="monotributista">Monotributista</mat-option>
+                                    <mat-option value="consumidorFinal">Consumidor final</mat-option>
+                                    <mat-option value="indefinido">No lo sé</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </mat-grid-tile>
+                        <mat-grid-tile [colspan]="4" [rowspan]="1">
+                            <mat-form-field>
+                                <mat-label>Observaciones</mat-label>
+                                <input matInput formControlName="observaciones" value="{{usuarioAuxiliar.observaciones}}">
+                            </mat-form-field>
+                        </mat-grid-tile>
+                    </mat-grid-list>
+                    <div class="registroycancel">
+                        <button type="submit" mat-raised-button color="primary"
+                        [disabled]="!updatePerfil.valid">Actualizar</button>
+                        <button (click)="modalPerfil=false" mat-raised-button color="primary">Cancelar</button>
+                    </div>
+                </form>
+            </div>
+
         </div>
     </div>
 </div>

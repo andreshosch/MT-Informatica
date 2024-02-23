@@ -7,5 +7,9 @@ export const environment = {
         storageBucket: "mt-informatica.appspot.com",
         messagingSenderId: "461895718602",
         appId: "1:461895718602:web:979c7f856000bef65d4633"
-    }
+    },
+    'MARIANO': 27149700,
+    'NATALIA': 29276542
   };
+
+

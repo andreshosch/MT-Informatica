@@ -8,6 +8,7 @@ import { DataService } from 'src/app/services/data.service';
 import { lastValueFrom } from 'rxjs';
 import { MensajeService } from 'src/app/services/mensaje.service';
 import { tr } from 'date-fns/locale';
+import { environment } from 'src/environment/environment'; 
 
 
 @Component({
@@ -23,12 +24,14 @@ export class LoginComponent {
   hayUsuario: boolean = false
   loginProgress: boolean = false
   actualizarPass: boolean = false
+  actualizarPass2: boolean = false
   noRequerido: boolean = true
 
   login: boolean = true
   habilitarIcono:boolean=false
   formRegistro: FormGroup
   updateUsr: FormGroup
+  updateUsr2: FormGroup
   updatePerfil: FormGroup
   listUsuario: Usuario[] = []
   usuariosRegistrados: Usuario[] = []
@@ -69,7 +72,12 @@ export class LoginComponent {
     })
 
     this.updateUsr = this.fb.group({
-      usuario: ['', Validators.required],
+      contrasenaOld: ['', Validators.required],
+      contrasenaNew: ['', Validators.required],
+      contrasenaNewFactor: ['', Validators.required],
+    })
+
+    this.updateUsr2 = this.fb.group({
       contrasenaOld: ['', Validators.required],
       contrasenaNew: ['', Validators.required],
       contrasenaNewFactor: ['', Validators.required],
@@ -212,54 +220,57 @@ export class LoginComponent {
       if ((this.usuario == null) || (this.contrasena == "")) {
         this._mensaje.snackBar("Los campos usuario y contraseña son obligatorios", "red")
       }
-      else
-        if (this.listUsuario[j].dni != this.usuario || this.listUsuario[j].password != this.contrasena) {
-          this._mensaje.snackBar("Error de usuario o contraseña", "red")
-        }
-
-      if (this.listUsuario[j].dni == this.usuario) {
-        if (this.listUsuario[j].password === this.contrasena) {
-          this.usuarioAuxiliar = this.listUsuario[j]
-          if (this.contrasena === 'MTInformatica1') {
-            //Habilitar el cambio
-            this._mensaje.snackBar("Debes cambiar la contraseña", "red")
-            this.actualizarPass = true
-            this.usuarioSoporte = this.listUsuario[j]
-          }
-          else {
-            this._mensaje.snackBar(`Bienvenido/a, ${this.listUsuario[j].apellido.charAt(0).toLocaleUpperCase()+this.listUsuario[j].apellido.slice(1)} ${this.listUsuario[j].nombre.charAt(0).toLocaleUpperCase()+this.listUsuario[j].nombre.slice(1)}!`, "green")
-            this.hayUsuario = true
-            this.habilitar = true
-            this.nombre = this.listUsuario[j].nombre
-            this.apellido = this.listUsuario[j].apellido
-            this.celular = this.listUsuario[j].celular
-            arregloLS.push(this.usuario)
-            j = this.listUsuario.length
-            this.dataService.actualizarEstadoLogin(true)
-            //reemplazar por los DNI de Mariano u Natalia
-            if ((this.usuario == 29560560) || (this.usuario == 29560560)) {
-              this.esAdmin = true
-              this._usuarioService.setAdminStatus(true)
-              arregloLS.push("true")
-            } else {
-              arregloLS.push("false")
+      else{
+        if (this.listUsuario[j].dni === this.usuario) {
+          if (this.listUsuario[j].password === this.contrasena) {
+            this.usuarioAuxiliar = this.listUsuario[j]
+            if (this.contrasena === 'MTInformatica1') {
+              this._mensaje.snackBar("Debes cambiar la contraseña", "red")
+              this.actualizarPass = true
+              this.usuarioSoporte = this.listUsuario[j]
             }
-            this.loginProgress = false
-            this.dataService.resetLoginProgress();
-            this.loginUsr.reset()
-            let fecha = new Date()
-            arregloLS.push(fecha)
-            arregloLS.push(this.nombre)
-            arregloLS.push(this.apellido)
-            localStorage.setItem("hayUsuario", JSON.stringify(arregloLS));
+            else {
+              this.usuarioSoporte = this.listUsuario[j]
+              this._mensaje.snackBar(`Bienvenido/a, ${this.listUsuario[j].apellido.charAt(0).toLocaleUpperCase()+this.listUsuario[j].apellido.slice(1)} ${this.listUsuario[j].nombre.charAt(0).toLocaleUpperCase()+this.listUsuario[j].nombre.slice(1)}!`, "green")
+              this.hayUsuario = true
+              this.habilitar = true
+              this.nombre = this.listUsuario[j].nombre
+              this.apellido = this.listUsuario[j].apellido
+              this.celular = this.listUsuario[j].celular
+              arregloLS.push(this.usuario)
+              j = this.listUsuario.length
+              this.dataService.actualizarEstadoLogin(true)
+              //reemplazar por los DNI de Mariano u Natalia
+              if ((this.usuario == environment.MARIANO) || (this.usuario == environment.NATALIA) ||  (this.usuario == 29560560)) {
+                this.esAdmin = true
+                this._usuarioService.setAdminStatus(true)
+                arregloLS.push("true")
+              } else {
+                arregloLS.push("false")
+              }
+              this.loginProgress = false
+              this.dataService.resetLoginProgress();
+              this.loginUsr.reset()
+              let fecha = new Date()
+              arregloLS.push(fecha)
+              arregloLS.push(this.nombre)
+              arregloLS.push(this.apellido)
+              localStorage.setItem("hayUsuario", JSON.stringify(arregloLS));
+            }
+          }else{
+            this._mensaje.snackBar("Datos de acceso incorrectos", "red")
           }
         }
       }
+        // if (this.listUsuario[j].dni != this.usuario || this.listUsuario[j].password != this.contrasena) {
+        //   this._mensaje.snackBar("Error de usuario o contraseña", "red")
+        // }
+
+
     }
   }
 
-  actualizarUsr(elUsuario) {
-    let unUsuario = this.updateUsr.get('usuario').value
+  actualizarUsr() {
     let unContrasena = this.updateUsr.get('contrasenaOld').value
     let unPassNew = this.updateUsr.get('contrasenaNew').value
     let uncheckPass = this.updateUsr.get('contrasenaNewFactor').value
@@ -274,12 +285,33 @@ export class LoginComponent {
         this._mensaje.snackBar("Usuario actualizado", "green")
         this.actualizarPass = false
       }
+    }
+  }
 
+  actualizarUsr2() {
+    let unContrasena = this.updateUsr2.get('contrasenaOld').value
+    let unPassNew = this.updateUsr2.get('contrasenaNew').value
+    let uncheckPass = this.updateUsr2.get('contrasenaNewFactor').value
+    if (unContrasena != this.usuarioAuxiliar.password) {
+      this._mensaje.snackBar("Clave actual incorrecta", "red")
+    } else {
+      if (unPassNew != uncheckPass) {
+        this._mensaje.snackBar("Clave nueva no coincidente con verificación", "red")
+      } else {
+        this.usuarioSoporte.password = unPassNew
+        this._usuarioService.updateUsr(this.usuarioSoporte.id, this.usuarioSoporte)
+        this._mensaje.snackBar("Clave actualizada", "green")
+        this.actualizarPass2 = false
+      }
     }
   }
 
   cerrarUpdate() {
     this.actualizarPass = false
+  }
+
+  cerrarUpdate2() {
+    this.actualizarPass2 = false
   }
 
   solicitarAlta() {
@@ -372,6 +404,11 @@ export class LoginComponent {
     this._mensaje.snackBar('Actualizaste correctamente tu perfil', 'green')
     this.modalPerfil = false
     this.updatePerfil.reset()
+  }
+
+  updatePass(){
+    this.actualizarPass2 = true
+    this.modalPerfil = false
   }
 
 
