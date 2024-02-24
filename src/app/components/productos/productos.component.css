@@ -58,40 +58,6 @@ text-align: center;
   height: 250px;
 }
 
-/*Efecto*/
-.modalmask {
-  position: fixed;
-  font-family: Arial, sans-serif;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  background: rgba(0,0,0,0.8);
-  z-index: 99999;
-  opacity:0;
-  -webkit-transition: opacity 400ms ease-in;
-  -moz-transition: opacity 400ms ease-in;
-  transition: opacity 400ms ease-in;
-  pointer-events: none;
-}
-.modalmask:target {
-  opacity:1;
-  pointer-events: auto;
-}
-
-/*Formato de la ventana*/
-.modalbox{
-  width: 50%;
-  height: 500px;
-  position: relative;
-  padding: 5px 20px 13px 20px;
-  background: #fff;
-  border-radius:10px;
-  -webkit-transition: all 500ms ease-in;
-  -moz-transition: all 500ms ease-in;
-  transition: all 500ms ease-in;
-   
-}
 
 /*Movimientos*/
 .movedown {
@@ -111,18 +77,7 @@ text-align: center;
   height:0;
 
 }
-.modalmask:target .movedown{       
-  margin:10% auto;
-}
-.modalmask:target .rotate{     
-  transform: rotate(360deg) scale(1,1);
-      -webkit-transform: rotate(360deg) scale(1,1);
-}
 
-.modalmask:target .resize{
-  width:400px;
-  height:200px;
-}
 
 /*Boton de cerrar*/
 .close {
@@ -267,11 +222,18 @@ select option:hover
   background-color: #ebebeb;
 }
 
+.gris2{
+  width: 100%;
+  height: 20px;
+  background-color: #ebebeb;
+}
+
 .ordenFiltro{
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-around;
+  margin-bottom: 10px;
 }
 
 .botonera{
@@ -281,4 +243,58 @@ select option:hover
 
 .botones button mat-icon{
   border-radius: 10px;
+}
+
+.confirmation-dialog {
+  z-index: 9;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.dialog-content {
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 2px 10px 10px #c7bebe59;
+  /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); */
+  width: 40%;
+}
+
+.detalle{
+  display: flex;
+  flex-direction: column;
+  margin: 0 5px;
+  text-align: center;
+  /* box-shadow: 2px 10px 20px #b0b3b2;
+  border-radius: 10px;
+  background-color: #fff; */
+}
+
+.detalle h4{
+color: #107997;
+margin-top: 10px;
+margin-bottom: 15px;
+}
+
+.interno{
+  width: 90%;
+  margin-left: 5%;
+  height: 90%;
+  box-shadow: 2px 10px 20px #b0b3b2;
+  border-radius: 10px;
+  background-color: #fff;
+  margin-bottom: 25px;
+  padding-bottom: 25px;
+}
+
+.datos{
+  margin-left: 10px;
+  margin-right: 10px;
 }

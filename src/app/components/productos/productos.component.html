@@ -53,7 +53,7 @@
     </div>
   </div>
 
-  <div class="gris"></div>
+  <div class="gris2"></div>
 
   <div  class="container container-shop"*ngIf="tituloProductos"id="productos">
     <h3 class="titleProductos" >NUESTROS PRODUCTOS</h3>
@@ -80,22 +80,31 @@
     </div>
   </div>
 
-
-  <!-- MODAL PARA MOSTRAR DATOS DE LA CARD -->
-  <div class="container container-card">
-    <div id="modal1" class="modalmask" *ngIf="selectedProduct">
-      <div class="modalbox movedown">
-        <a href="#close" title="Cerrar" class="close">X</a>
-        <div class="card-body">
-          <h4>{{selectedProduct.nombre}}</h4>
-          <img src={{selectedProduct.imagenes}} class="card-img-top" style="width: 40%;height: 40%;" alt="...">
-          <p class="card-precio"><strong>Imp. Interno: </strong>{{selectedProduct.impuesto_interno}} %</p>
-          <p class="card-precio"><strong>IVA: </strong>{{selectedProduct.iva}} %</p>
-          <p><strong>Descripción: </strong>{{selectedProduct.descripcion}}</p>
+  <div class="confirmation-dialog" *ngIf="selectedProduct">
+    <div class="dialog-content">
+        <div class="detalle">
+            <h4>DETALLE DE PRODUCTO</h4>
+            <div class="interno">
+              <div>
+                <img src={{selectedProduct.imagenes}} style="width: 40%;height: 40%;" alt="...">
+                <div class="datos">
+                  <h4>{{selectedProduct.nombre}}</h4>
+                  <p><strong>Precio: </strong>U$S {{selectedProduct.precio}}</p>
+                  <p><strong>IVA: </strong>{{selectedProduct.iva}} %</p>
+                  <p><strong>Imp. Interno: </strong>{{selectedProduct.impuesto_interno}} %</p>
+                  <p><strong>Descripción: </strong>{{selectedProduct.descripcion}}</p>
+                </div>
+              </div>
+              <div>
+                  <button (click)="cerrarDetalle()" mat-raised-button color="primary">Aceptar</button>
+              </div>
+            </div>
         </div>
-      </div>
     </div>
-  </div>
+</div>
+
+
+
   <!-- ------------------------------------------------ -->
 
   <div>

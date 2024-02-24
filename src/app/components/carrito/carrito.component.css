@@ -38,6 +38,10 @@
     justify-content: center;
   }
 
+  .carritoVacio button{
+    margin-top: 25px;
+  }
+
   
 
   .confirmation-dialog {
