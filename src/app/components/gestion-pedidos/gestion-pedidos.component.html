@@ -286,15 +286,18 @@
         <div class="confirmation-dialog" *ngIf="carritoHabilitado">
             <div class="modalCarrito">
                 <div>
+                    <h1>Pedido de {{pedido.nombre}} {{pedido.apellido}}</h1>
+                    <div class="datosPrimarios">
+                        <h6 style="text-align: left;"><strong>Fecha Pedido: </strong>{{pedido.fecha}}</h6>
+                        <h6 style="text-align: left;"><strong>Nro Contacto: </strong>{{pedido.celular}}</h6>
+                        <h6 *ngIf="showNombreTransporte" style="text-align: left;"><strong>Nombre Transporte: </strong>{{pedido.transporte}}
+                        </h6>
+                        <h6 *ngIf="showCodigoSeguimiento" style="text-align: left;"><strong>Nro Seguimiento: </strong>{{pedido.seguimiento}}
+                        </h6>
+                    </div>
                     <div class="contenedorCart">
                         <div class="losProductos container">
-                            <h2>Pedido de {{pedido.nombre}} {{pedido.apellido}}</h2>
-                            <h6 style="text-align: left;">Fecha Pedido: {{pedido.fecha}}</h6>
-                            <h6 style="text-align: left;">Nro Contacto: {{pedido.celular}}</h6>
-                            <h6 *ngIf="showNombreTransporte" style="text-align: left;">Nombre Transporte: {{pedido.transporte}}
-                            </h6>
-                            <h6 *ngIf="showCodigoSeguimiento" style="text-align: left;">Nro Seguimiento: {{pedido.seguimiento}}
-                            </h6>
+                            <h4>Productos</h4>
                             <div *ngFor="let carro of pedido.carrito ;let i=index" class="card">
         
                                 <div class="carrito">
@@ -322,7 +325,7 @@
                                                         <th>Precio unitario</th>
                                                     </tr>
                                                     <tr>
-                                                        <td>$ {{carro.addProducto.precio}}</td>
+                                                        <td>U$S {{carro.addProducto.precio}}</td>
                                                     </tr>
                                                 </table>
                                             </div>
@@ -349,7 +352,7 @@
                                                         <th>Costo total</th>
                                                     </tr>
                                                     <tr>
-                                                        <td>$ {{(carro.addProducto.precio *
+                                                        <td>U$S {{(carro.addProducto.precio *
                                                             carro.addProducto.cantidad)|number:'1.2-2'}}</td>
                                                     </tr>
                                                 </table>
@@ -360,7 +363,7 @@
                                                         <th>Costo Total con Iva:</th>
                                                     </tr>
                                                     <tr>
-                                                        <td>$ {{ ((carro.addProducto.precio * carro.addProducto.cantidad) * (1 +
+                                                        <td>U$S {{ ((carro.addProducto.precio * carro.addProducto.cantidad) * (1 +
                                                             carro.addProducto.iva / 100)).toFixed(2) | number:'1.2-2' }}</td>
                                                     </tr>
                                                 </table>
@@ -376,41 +379,12 @@
                         </div>
                         <div class="resumenCarrito">
                             <h4 id="product-description">Resumen</h4>
-        
-                            <div class="ordenCeldas">
-                                <table>
-                                    <tr>
-                                        <th>Cantidad Items:</th>
-                                    </tr>
-                                    <tr>
-                                        <td id="unit-price">{{ total }}</td>
-                                    </tr>
-                                </table>
+
+                            <div>
+                                <p><strong>Cantidad Items: </strong>{{ total }}</p>
+                                <p><strong>Costo Total: </strong>U$S {{ monto | number:'1.2-2' }}</p>
+                                <p><strong>Costo Total con Iva: </strong>U$S {{ montoIva.toFixed(2) | number:'1.2-2' }}</p>
                             </div>
-        
-                            <div class="ordenCeldas">
-                                <table>
-                                    <tr>
-                                        <th>Costo Total:</th>
-                                    </tr>
-                                    <tr>
-                                        <td>$ {{ monto |number: '1.2-2' }}</td>
-                                    </tr>
-                                </table>
-                            </div>
-        
-                            <div class="ordenCeldas">
-                                <table>
-                                    <tr>
-                                        <th>Costo Total con IVA:</th>
-                                    </tr>
-                                    <tr>
-                                        <td>$ {{ montoIva.toFixed(2) | number:'1.2-2' }}</td>
-                                    </tr>
-                                </table>
-                            </div>
-        
-                            <br>
         
                         </div>
                     </div>
