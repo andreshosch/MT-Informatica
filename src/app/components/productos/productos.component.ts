@@ -91,20 +91,32 @@ export class ProductosComponent {
   loadFirstPage(products: any) {
     this.arrProductsPages = []
     if (products.length > 20) {
-      for (let i = 0; i < 20; i++) {
-        this.arrProductsPages[i] = products[i]
-      }
-    }
-    else {
-      for (let i = 0; i < products.length; i++) {
-        this.arrProductsPages[i] = products[i]
-      }
-    }
       this.numberPages = 1
       this.visibleFirstPage=false
       this.visibleAfterPage=false
       this.visibleNextPage=true
       this.visibleLastPage=true
+
+      for (let i = 0; i < 20; i++) {
+        this.arrProductsPages[i] = products[i]
+      }
+    }
+    else {
+      this.numberPages = 1
+      this.visibleFirstPage=false
+      this.visibleAfterPage=false
+      this.visibleNextPage=false
+      this.visibleLastPage=false
+
+      for (let i = 0; i < products.length; i++) {
+        this.arrProductsPages[i] = products[i]
+      }
+    }
+      // this.numberPages = 1
+      //  this.visibleFirstPage=false
+      //  this.visibleAfterPage=false
+      //  this.visibleNextPage=true
+      //  this.visibleLastPage=true
   }
 // FUNCION EN CASO DE QUE NO FUNCIONE LA API PARA GENERAR UN ARRAY ALEATORI DE 400 PRODUCTOS
   //   arrayProducts(){
@@ -176,11 +188,12 @@ export class ProductosComponent {
                 if(!this.establoqueada(unProducto.categoria)){
                   this.arrProducts.push(unProducto)
                 }
-
+             
                 //
                 //this.arrProducts.push(unProducto)
               }
               // this.arrProducts.push(...this.arrProductos)
+             
               this.loadFirstPage(this.arrProducts)
               
             })
@@ -362,6 +375,7 @@ getProductos(){
     else{
       this.showProductosDestacados=false
     }
+    
     this.loadFirstPage(this.arrProducts)
   })
 }
@@ -492,7 +506,8 @@ modal(producto:any){
       });
     }
   }
-}
+  }
+
   
 //---------------------------------------------------------------------------------------------
 
