@@ -15,11 +15,9 @@
     </div>
 
     <div class="confirmation-dialog" *ngIf="carritoVacio">
-        <div class="modalCarrito">
-            <div>
-                <h3>Actualmente tu carrito está vacío..  <span>Quiero comprar</span></h3>
-                <button (click)="cerrarAviso()">Aceptar</button>
-            </div>
+        <div class="carritoVacio">
+                <h3>Actualmente tu carrito está vacío..      <b style="color: orange; cursor: pointer;" (click)="cerrarAviso()">Comprar</b></h3>
+                <button mat-raised-button color="primary" (click)="cerrarAviso()">Aceptar</button>
         </div>
     </div>
     
