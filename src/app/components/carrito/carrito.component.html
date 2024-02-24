@@ -25,9 +25,10 @@
     <div class="confirmation-dialog" *ngIf="carritoHabilitado">
         <div class="modalCarrito">
             <div>
-                <h2>Carrito</h2>
+                <h1>Carrito</h1>
                 <div class="contenedorCart">
                     <div class="losProductos container">
+                        <h4>Productos</h4>
                         <div *ngFor="let producto of productos" class="card">
                             <div class="carrito">
                                 <div class="izquierda">
@@ -54,7 +55,7 @@
                                                     <th>Precio unitario</th>
                                                 </tr>
                                                 <tr>
-                                                    <td>{{ producto.addProducto.precio }}</td>
+                                                    <td>U$S {{ producto.addProducto.precio | number:'1.2-2' }}</td>
                                                 </tr>
                                             </table>
                                         </div>
@@ -79,7 +80,7 @@
                                                     <th>Costo total</th>
                                                 </tr>
                                                 <tr>
-                                                    <td>{{ producto.addProducto.precio * producto.addProducto.cantidad }}</td>
+                                                    <td>U$S {{ (producto.addProducto.precio * producto.addProducto.cantidad).toFixed(2) | number:'1.2-2' }}</td>
                                                 </tr>
                                             </table>
                                         </div>
@@ -89,7 +90,7 @@
                                                     <th>Costo total con IVA</th>
                                                 </tr>
                                                 <tr>
-                                                    <td>{{ producto.addProducto.precio * producto.addProducto.cantidad * (1 + producto.addProducto.iva / 100) }}</td>
+                                                    <td>U$S {{ (producto.addProducto.precio * producto.addProducto.cantidad * (1 + producto.addProducto.iva / 100)).toFixed(2) | number:'1.2-2' }}</td>
                                                 </tr>
                                             </table>
                                         </div>
@@ -103,64 +104,41 @@
                     </div>
                     <div class="resumenCarrito">
                         <h4 id="product-description">Resumen</h4>
-    
-                        <div class="ordenCeldas">
-                            <table>
-                                <tr>
-                                    <th>Cantidad Items:</th>
-                                </tr>
-                                <tr>
-                                    <td id="unit-price">{{ total }}</td>
-                                </tr>
-                            </table>
-                        </div>
-    
-                        <div class="ordenCeldas">
-                            <table>
-                                <tr>
-                                    <th>Costo Total:</th>
-                                </tr>
-                                <tr>
-                                    <!-- <td>$ {{ monto }}</td> -->
-                                    <td>$ {{ montoIncremento }}</td>
-                                </tr>
-                            </table>
+
+                        <div>
+                            <p><strong>Cantidad Items: </strong>{{ total }}</p>
+                            <p><strong>Costo Total: </strong>U$S {{ montoIncremento | number:'1.2-2' }}</p>
+                            <p><strong>Costo Total con Iva: </strong>U$S {{ montoIncrementoIva.toFixed(2) | number:'1.2-2' }}</p>
                         </div>
 
-                        <div class="ordenCeldas">
-                            <table>
-                                <tr>
-                                    <th>Costo Total con Iva:</th>
-                                </tr>
-                                <tr>
-                                    <!-- <td>$ {{ monto }}</td> -->
-                                    <td>$ {{ montoIncrementoIva }}</td>
-                                </tr>
-                            </table>
+    
+                        <div class="metodo">
+                            <h6><label id="example-radio-group-label">Seleccione método de pago</label></h6>
+                    
+                            <mat-radio-group aria-labelledby="example-radio-group-label" class="radio-group" [(ngModel)]="seleccionPago" (change)="seleccionCambiada()">
+                                <mat-radio-button class="radio-button" *ngFor="let metodo of metodoPago; let i = index" [value]="metodo.metodo">{{metodo.metodo}}</mat-radio-button>
+                            </mat-radio-group>
+                            <div>Tu selección de pago: {{seleccionPago}}</div>
                         </div>
-    
-                        <br><br>
-
-                        <!-- <button (click)="mostrarMetodos()">
-
-                        </button>
-
-                        <form action=""></form> -->
-                        <label id="example-radio-group-label">Seleccione método de pago</label>
-                        <mat-radio-group aria-labelledby="example-radio-group-label" class="radio-group" [(ngModel)]="seleccionPago" (change)="seleccionCambiada()">
-                            <mat-radio-button class="radio-button" *ngFor="let metodo of metodoPago; let i = index" [value]="metodo.metodo">{{metodo.metodo}}</mat-radio-button>
-                        </mat-radio-group>
-                        <div>Tu selección de pago: {{seleccionPago}}</div>
-
-                        <br>
-                        <button mat-raised-button color="primary" (click)="mostrarCarrito()">Confirmar pedido</button>
-                        <br>
-    
+                        
+                        <div>
+                            <button mat-raised-button color="primary" (click)="confirmPedido()">Confirmar pedido</button>
+                        </div>
                     </div>
                 </div>
             </div>
             <div class="buttonClose">
                 <button (click)="ocultarCarrito()" mat-raised-button color="primary">Cerrar</button>  
+            </div>
+        </div>
+    </div>
+
+    <div class="confirmation-dialog" *ngIf="showConfirmationPedido">
+        <div class="dialog-content">
+            <h4>¿Está seguro que desea confirmar el pedido?</h4>
+            <div style="text-align: center;">
+                <button style="background-color: #107997;color: white;" mat-raised-button (click)="mostrarCarrito()">Confirmar</button>
+                <button  style="background-color: #107997;color: white;" mat-raised-button (click)="cancelPedido()">Cancelar</button>
             </div>
         </div>
     </div>

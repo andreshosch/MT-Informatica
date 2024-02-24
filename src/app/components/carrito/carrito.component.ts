@@ -20,6 +20,7 @@ export class CarritoComponent {
   monto: number = 0
   montoIva: number = 0
   fechaActual: Date = new Date()
+  showConfirmationPedido: boolean = false
 
   @Input() usuario: number
   @Input() nombre: string
@@ -53,6 +54,7 @@ export class CarritoComponent {
     this.usuarioLog = arregloLS[0]
     this.carritoGuardado(this.usuarioLog)
     this.getTablaPagos()
+    this.seleccionPago = "Link de Pago"
   }
 
   getTablaPagos(){
@@ -173,7 +175,17 @@ export class CarritoComponent {
     });
   }
 
+  confirmPedido(){
+    this.showConfirmationPedido = true
+  }
+
+  cancelPedido(){
+    this.showConfirmationPedido = false
+  }
+  
+
   mostrarCarrito() {
+    this.showConfirmationPedido = false
     let userActual: any = this.usuario
     let unPedido: Pedido = {
       carrito: this.productos,
