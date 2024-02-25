@@ -8,18 +8,21 @@
     </div>
     <div class="containerLogin">
         <div class="nombreUser">
-            <p *ngIf="habilitar" class="nav-link userId"><span style="color: #107997; font-weight: bold;">Usuario: {{ this.nombre}} {{this.apellido}} <mat-icon matTooltip="Actualizar perfil" class="hover-pointer" (click)="abrirPerfil()">create</mat-icon></span></p>
+            <p *ngIf="habilitar" class="nav-link userId"><span style="color: #107997; font-weight: bold;">Usuario: {{
+                    this.nombre}} {{this.apellido}} <mat-icon matTooltip="Actualizar perfil" class="hover-pointer"
+                        (click)="abrirPerfil()">create</mat-icon></span></p>
         </div>
-        
+
         <div class="carroYLogin">
-            <app-carrito [usuario]="usuario" [nombre]="nombre" [apellido]="apellido" [celular]="celular" *ngIf="hayUsuario"
-                class="nav-link"></app-carrito>
+            <app-carrito [usuario]="usuario" [nombre]="nombre" [apellido]="apellido" [celular]="celular"
+                *ngIf="hayUsuario" class="nav-link"></app-carrito>
             <a *ngIf="habilitar" class="nav-link" (click)="desloguear()" href="">
-                <i class="pi pi-sign-out p-button-icon" style="font-size: 1.5rem; color: #107997" matTooltip="Logout"></i>
+                <i class="pi pi-sign-out p-button-icon" style="font-size: 1.5rem; color: #107997"
+                    matTooltip="Logout"></i>
             </a>
         </div>
     </div>
-</div>    
+</div>
 
 
 <div class="confirmation-dialog" *ngIf="loginProgress || dataService.loginProgressData">
@@ -38,7 +41,7 @@
                         <mat-grid-tile [colspan]="4" [rowspan]="1">
                             <mat-form-field>
                                 <mat-label>Contraseña</mat-label>
-                                <input matInput formControlName="contrasena">
+                                <input matInput formControlName="contrasena" type="password">
                             </mat-form-field>
                         </mat-grid-tile>
                     </mat-grid-list>
@@ -145,13 +148,15 @@
                             </mat-form-field>
                         </mat-grid-tile>
                     </mat-grid-list>
-                    <button type="submit" mat-raised-button color="primary"
-                        [disabled]="!formRegistro.valid">Registrarme</button>
+                    <div class="centrado">
+                        <button type="submit" mat-raised-button color="primary"
+                            [disabled]="!formRegistro.valid">Registrarme</button> 
+                            <button (click)="irALogin()" mat-raised-button color="primary">Cancelar</button>
+                    </div>
+
                 </form>
             </div>
-            <div class="cancel">
-                <button (click)="irALogin()" mat-raised-button color="primary">Cancelar</button>
-            </div>
+
         </div>
     </div>
 </div>
@@ -298,13 +303,14 @@
                         <mat-grid-tile [colspan]="4" [rowspan]="1">
                             <mat-form-field>
                                 <mat-label>Observaciones</mat-label>
-                                <input matInput formControlName="observaciones" value="{{usuarioAuxiliar.observaciones}}">
+                                <input matInput formControlName="observaciones"
+                                    value="{{usuarioAuxiliar.observaciones}}">
                             </mat-form-field>
                         </mat-grid-tile>
                     </mat-grid-list>
                     <div class="registroycancel">
                         <button type="submit" mat-raised-button color="primary"
-                        [disabled]="!updatePerfil.valid">Actualizar</button>
+                            [disabled]="!updatePerfil.valid">Actualizar</button>
                         <button (click)="modalPerfil=false" mat-raised-button color="primary">Cancelar</button>
                     </div>
                 </form>
@@ -313,5 +319,3 @@
         </div>
     </div>
 </div>
-
-

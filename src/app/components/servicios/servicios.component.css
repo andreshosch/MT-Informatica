@@ -22,7 +22,7 @@
 
   .circulos div.selected {
     /* Estilos para el círculo seleccionado */
-    border-color: blue; /* Puedes cambiar el color del borde aquí */
+    border-color:  #107997; /* Puedes cambiar el color del borde aquí */
   }
 
   .circulos{

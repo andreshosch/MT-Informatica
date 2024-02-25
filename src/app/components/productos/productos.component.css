@@ -256,6 +256,7 @@ select option:hover
   display: flex;
   align-items: center;
   justify-content: center;
+ 
 }
 
 .dialog-content {
@@ -272,6 +273,7 @@ select option:hover
   flex-direction: column;
   margin: 0 5px;
   text-align: center;
+  
   /* box-shadow: 2px 10px 20px #b0b3b2;
   border-radius: 10px;
   background-color: #fff; */
