@@ -4,6 +4,7 @@
     border-radius: 10px;
     box-shadow: 2px 10px 20px #b0b3b2;
     margin-left: 3%;
+    max-height: 600px;
   }
 
   .mat-icon{
@@ -107,6 +108,9 @@
     background-color: white;
     border-radius: 10px;
     box-shadow: 2px 10px 20px #b0b3b2;
+    max-height: 600px;
+    overflow: auto; 
+    padding-bottom: 25px;
   }
 
   .carroYcantidad{
