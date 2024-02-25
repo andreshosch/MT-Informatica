@@ -350,6 +350,7 @@ export class LoginComponent {
         estadoFiscal: this.formRegistro.get('estadoFiscal').value,
         cuit: this.formRegistro.get('cuit').value
       }
+     
       const formData: any = this.formRegistro.value
       const formUrl = 'https://formspree.io/f/maygvrgw'
       this._mailService.sendMails(formUrl, formData)

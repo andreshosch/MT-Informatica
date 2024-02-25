@@ -248,6 +248,7 @@ export class GestionPedidosComponent {
         destinoDocRef.set(datos).then(() => {
           console.log('Elemento copiado exitosamente');
           this.moverPedido(id, coleccionOrigen)
+          this.confirmDel()
         }).catch((error) => {
           console.error('Error al copiar el elemento:', error);
         });
@@ -301,11 +302,10 @@ cerrarTransporte(){
   this.showTransporte=false
 }
   moverPedido(id: string, coleccion: string) {
-   
     this.idAuxiliar = id
     this.coleccionAuxiliar = coleccion
   }
-  deletePedidoPendienteId2(id: string, coleccion: string) {
+  deletePedidoPendienteId(id: string, coleccion: string) {
     this.showConfirmationDelPedido = true
     this.idAuxiliar = id
     this.coleccionAuxiliar = coleccion

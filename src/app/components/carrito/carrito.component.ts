@@ -5,6 +5,8 @@ import { Pedido } from 'src/app/models/pedido';
 import { format } from 'date-fns';
 import {MensajeService} from 'src/app/services/mensaje.service'
 import { PagosService } from 'src/app/services/pagos.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MailsService } from 'src/app/services/mails.service';
 
 
 
@@ -21,7 +23,7 @@ export class CarritoComponent {
   montoIva: number = 0
   fechaActual: Date = new Date()
   showConfirmationPedido: boolean = false
-
+  formPedido:FormGroup
   @Input() usuario: number
   @Input() nombre: string
   @Input() apellido: string
@@ -44,8 +46,15 @@ export class CarritoComponent {
   seleccionPago: string = this.metodoPago[0]
   
 
-  constructor(private dataService: DataService, private pedidosService: PedidosService, private _mensaje:MensajeService, private _pagosService: PagosService) {
- 
+  constructor(private dataService: DataService, private pedidosService: PedidosService, private _mensaje:MensajeService, private _pagosService: PagosService,private fb: FormBuilder,private _mailService:MailsService) {
+   
+    this.formPedido = this.fb.group({
+      nombre: ['', Validators.required],
+      apellido: ['', Validators.required],
+      celular: ['', Validators.required],
+      carrito: ['', Validators.required],
+    })
+
   }
 
  
@@ -197,6 +206,29 @@ export class CarritoComponent {
       apellido: this.apellido,
       celular: this.celular
     }
+     const pedidoNuevo={
+      nombre:this.nombre,
+      apellido:this.apellido,
+      celular:this.celular,
+      carrito:[]
+     }
+      for (let i=0;i<this.productos.length;i++){
+       const carrito=
+          {  
+           Producto: i+1,
+           nombre:this.productos[i].addProducto.nombre,
+           cantidad:this.productos[i].addProducto.cantidad,
+           precio:"U$S "+this.productos[i].addProducto.precio * this.productos[i].addProducto.cantidad
+          }
+        pedidoNuevo.carrito.push(carrito);
+        pedidoNuevo.carrito.push("\n");
+      }
+    
+      console.log(pedidoNuevo)
+      
+      const formData:any=pedidoNuevo
+      const formUrl="https://formspree.io/f/mwkgbeoz"
+       this._mailService.sendMails(formUrl, formData)
     this.pedidosService.createPedido(unPedido, 'Pedidos Pendientes')
     for (let i =0; i < this.productos.length; i++){
       this.productos[i].addProducto.cantidad = 1;
