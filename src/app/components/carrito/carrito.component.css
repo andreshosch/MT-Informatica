@@ -1,8 +1,9 @@
 .resumenCarrito{
     width: 25%;
-    background-color:lemonchiffon;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 2px 10px 20px #b0b3b2;
     margin-left: 3%;
-    margin-top: 25px;
   }
 
   .mat-icon{
@@ -11,10 +12,18 @@
   
   .resumenCarrito h4{
     text-align: center;
+    color: #107997;
+    margin-top: 10px;
+    margin-bottom: 15px;
   }
   .resumenCarrito button{
     margin-top: 5px;
     width: 70%;
+  }
+
+  .resumenCarrito button{
+    margin-top: 30px;
+    margin-bottom: 30px;
   }
   
   .modalCarrito {
@@ -24,6 +33,18 @@
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     width: 90%;
     text-align: center;
+  }
+
+  .modalCarrito h1{
+    color: #107997;
+    margin-top: 10px;
+    margin-bottom: 15px;
+  }
+
+  .modalCarrito h4{
+    color: #107997;
+    margin-top: 10px;
+    margin-bottom: 15px;
   }
 
   .carritoVacio{
@@ -40,6 +61,25 @@
 
   .carritoVacio button{
     margin-top: 25px;
+  }
+  
+  .dialog-content {
+    background-color: white;
+    padding: 20px;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .dialog-content h3 {
+    margin-top: 0;
+  }
+  
+  .dialog-content p {
+    margin-bottom: 10px;
+  }
+  
+  .dialog-content button {
+    margin-right: 10px;
   }
 
   
@@ -64,6 +104,9 @@
   .losProductos{
     width: 70%;
     text-align: center;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 2px 10px 20px #b0b3b2;
   }
 
   .carroYcantidad{
@@ -174,13 +217,12 @@
 .izquierda{
   width: 15%;
   height: 130px;
-  background-color: lightsalmon;
 }
 
 .derecha{
   width: 85%;
   height: 130px;
-  background-color: lightcyan;
+  
 }
 
 .carrito{
@@ -209,4 +251,13 @@
 
 .radio-button {
   margin: 5px;
+}
+
+.metodo{
+  margin-top: 50px;
+}
+
+.metodo h6{
+  margin-top: 25px;
+  color: #107997;
 }

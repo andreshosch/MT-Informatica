@@ -1,8 +1,9 @@
 .resumenCarrito{
     width: 25%;
-    background-color:lemonchiffon;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 2px 10px 20px #b0b3b2;
     margin-left: 3%;
-    margin-top: 25px;
   }
   
   .resumenCarrito h4{
@@ -23,6 +24,18 @@
     text-align: center;
   }
 
+  .modalCarrito h1{
+    color: #107997;
+    margin-top: 10px;
+    margin-bottom: 15px;
+  }
+
+  .modalCarrito h4{
+    color: #107997;
+    margin-top: 10px;
+    margin-bottom: 15px;
+  }
+
   mat-form-field {
     font-size: 14px;
     width: 100%;
@@ -35,6 +48,10 @@
   .losProductos{
     width: 70%;
     text-align: center;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 2px 10px 20px #b0b3b2;
+    padding-bottom: 25px;
   }
 
   .carroYcantidad{
@@ -140,13 +157,11 @@
 .izquierda{
   width: 15%;
   height: 130px;
-  background-color: lightsalmon;
 }
 
 .derecha{
   width: 85%;
   height: 130px;
-  background-color: lightcyan;
 }
 
 .carrito{
@@ -272,5 +287,13 @@
 }
 
 .margen{
+  margin-bottom: 25px;
+}
+
+.datosPrimarios{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  margin-top: 10px;
   margin-bottom: 25px;
 }
