@@ -80,7 +80,7 @@ export class ProductosComponent {
       if (this.validadorApi){
         this.arrayProducts()
       }
-    },2000)
+    },3000)
     
     this.dataService.isAuthenticated$.subscribe((isAuthenticated) => {
       this.hayLogueado = isAuthenticated;
