@@ -69,6 +69,13 @@
     background-color:#107997;
     color: white;  
   }
+
+  .buttonUpload button{
+    width: 40%;
+    margin:0 5px;
+    background-color:#107997;
+    color: white;  
+  }
   
   .carroYLogin{
     display: inline-flex;
@@ -163,8 +170,9 @@
 }
 
 .cambioPass p{
-  color: red;
+  color:#107997;
   font-size: x-small;
+  font-weight: bold;
   cursor: pointer;
   margin-right: 15px;
 }

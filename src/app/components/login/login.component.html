@@ -243,7 +243,7 @@
     <div class="dialog-content">
         <div class="login">
             <div class="datos">
-                <h3>Actualización de perfil</h3>
+                <h3 style="color: #107997;">ACTUALIZACIÓN DE PERFIL</h3>
                 <h4>{{usuarioAuxiliar.nombre}} {{usuarioAuxiliar.apellido}}</h4>
             </div>
             <div class="actualizacion">
@@ -309,9 +309,11 @@
                         </mat-grid-tile>
                     </mat-grid-list>
                     <div class="registroycancel">
-                        <button type="submit" mat-raised-button color="primary"
+                        <div class="buttonUpload">
+                            <button type="submit" mat-raised-button color="primary"
                             [disabled]="!updatePerfil.valid">Actualizar</button>
                         <button (click)="modalPerfil=false" mat-raised-button color="primary">Cancelar</button>
+                        </div>
                     </div>
                 </form>
             </div>

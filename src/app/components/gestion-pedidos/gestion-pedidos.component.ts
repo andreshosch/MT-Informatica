@@ -163,6 +163,7 @@ export class GestionPedidosComponent {
     }
     this._gestionPedido.updatePedido(this.elementoActual,'Pedidos En Transporte',unPedido)
     this._mensaje.snackBar('Se ha actualizado el nro de seguimiento','green')
+    this.cerrarSeguimiento()
   }
 
   updateTransporte()

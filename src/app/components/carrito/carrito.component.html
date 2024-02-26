@@ -17,7 +17,7 @@
     <div class="confirmation-dialog" *ngIf="carritoVacio">
         <div class="carritoVacio">
                 <h3>Actualmente tu carrito está vacío..      <b style="color: orange; cursor: pointer;" (click)="cerrarAviso()">Comprar</b></h3>
-                <button mat-raised-button color="primary" (click)="cerrarAviso()">Aceptar</button>
+                <button style="background-color: #107997;color: white;" mat-raised-button color="primary" (click)="cerrarAviso()">Aceptar</button>
         </div>
     </div>
     
@@ -122,13 +122,13 @@
                         </div>
                         
                         <div>
-                            <button mat-raised-button color="primary" (click)="confirmPedido()">Confirmar pedido</button>
+                            <button style="background-color: #107997;color: white;" mat-raised-button color="primary" (click)="confirmPedido()">Confirmar pedido</button>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="buttonClose">
-                <button (click)="ocultarCarrito()" mat-raised-button color="primary">Cerrar</button>  
+                <button style="background-color: #107997;color: white;" (click)="ocultarCarrito()" mat-raised-button color="primary">Cerrar</button>  
             </div>
         </div>
     </div>
