@@ -415,7 +415,7 @@
                             </mat-grid-tile>
                         </mat-grid-list>
                         <div class="centrado">
-                            <button type="submit" mat-raised-button color="primary">Guardar</button>
+                            <button type="submit" mat-raised-button color="primary"[disabled]="!formSeguimiento.valid">Guardar</button>
                             <button (click)="cerrarSeguimiento()" mat-raised-button color="primary">Cancelar</button>
                         </div>
                     </form>
@@ -437,7 +437,7 @@
                         </mat-grid-list>
                         <div class="centrado">
                             <button (click)="AceptarPedido(this.elementoActual,'Pedidos En Curso','Pedidos En Transporte')"
-                                type="submit" mat-raised-button color="primary">Guardar</button>
+                                type="submit" mat-raised-button color="primary"[disabled]="!formTransporte.valid">Guardar</button>
                             <button (click)="cerrarTransporte()" mat-raised-button color="primary">Cancelar</button>
                         </div>
                     </form>

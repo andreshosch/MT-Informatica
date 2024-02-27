@@ -273,14 +273,12 @@ export class GestionPedidosComponent {
 
   envioTransporte(element:string){
     this.showTransporte=true
-    console.log(element)
     this.elementoActual = element
     // this.AceptarPedido(this.elementoActual,'Pedidos En Curso','Pedidos En Transporte')
   }
 
   envioSeguimiento(element:string){
     this.showSeguimiento=true
-    console.log(element)
     this.elementoActual = element
     // this.AceptarPedido(this.elementoActual,'Pedidos En Curso','Pedidos En Transporte')
   }

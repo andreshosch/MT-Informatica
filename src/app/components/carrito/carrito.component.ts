@@ -228,7 +228,7 @@ export class CarritoComponent {
       
       const formData:any=pedidoNuevo
       const formUrl="https://formspree.io/f/mwkgbeoz"
-       this._mailService.sendMails(formUrl, formData)
+      //  this._mailService.sendMails(formUrl, formData)
     this.pedidosService.createPedido(unPedido, 'Pedidos Pendientes')
     for (let i =0; i < this.productos.length; i++){
       this.productos[i].addProducto.cantidad = 1;
