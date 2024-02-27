@@ -260,12 +260,12 @@ export class LoginComponent {
           }else{
             this._mensaje.snackBar("Datos de acceso incorrectos", "red")
           }
+        } else{
+          if(j === ((this.listUsuario.length) -1)){
+            this._mensaje.snackBar("Usuario no registrado", "red")
+          }
         }
       }
-        // if (this.listUsuario[j].dni != this.usuario || this.listUsuario[j].password != this.contrasena) {
-        //   this._mensaje.snackBar("Error de usuario o contraseña", "red")
-        // }
-
 
     }
   }
