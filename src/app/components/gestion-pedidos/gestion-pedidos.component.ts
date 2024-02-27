@@ -168,7 +168,7 @@ export class GestionPedidosComponent {
 
   updateTransporte()
   {
-    this.showTransporte=false
+      this.showTransporte=false
       const unPedido={
       transporte: this.formTransporte.get('transporte').value,
     }
@@ -300,6 +300,15 @@ cerrarTransporte(){
   this.formTransporte.markAsUntouched();
   this.showTransporte=false
 }
+
+cleanTransporte(){
+    this.formTransporte.patchValue({
+      transporte:''
+    })
+    this.formTransporte.markAsPristine();
+    this.formTransporte.markAsUntouched(); 
+  }
+
   moverPedido(id: string, coleccion: string) {
     this.idAuxiliar = id
     this.coleccionAuxiliar = coleccion

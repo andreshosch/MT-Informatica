@@ -124,7 +124,7 @@
                                         <a (click)="showModalEnCurso(element, pos);actualizarResumen(pos,pedidosEncurso)"><mat-icon
                                                 style="cursor: pointer;color: #107997;"
                                                 title="Ver Pedido">visibility</mat-icon></a>
-                                        <a (click)="envioTransporte(element.id)" title="Envio Transporte"
+                                        <a (click)="envioTransporte(element.id);cleanTransporte()" title="Envio Transporte"
                                             style="cursor: pointer; color: #107997;"><mat-icon>
                                                 local_shipping</mat-icon> </a>
                                         <!-- <a (click)="AceptarPedido(element.id,'Pedidos En Curso','Pedidos En Transporte')"title="Envio Transporte" style="cursor: pointer;"><mat-icon> local_shipping</mat-icon> </a> -->
@@ -436,7 +436,7 @@
                             </mat-grid-tile>
                         </mat-grid-list>
                         <div class="centrado">
-                            <button (click)="AceptarPedido(this.elementoActual,'Pedidos En Curso','Pedidos En Transporte')"
+                            <button (click)="AceptarPedido(this.elementoActual,'Pedidos En Curso','Pedidos En Transporte');"
                                 type="submit" mat-raised-button color="primary"[disabled]="!formTransporte.valid">Guardar</button>
                             <button (click)="cerrarTransporte()" mat-raised-button color="primary">Cancelar</button>
                         </div>
