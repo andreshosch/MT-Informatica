@@ -6,7 +6,10 @@
         <div class="datos">
             <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="center">
                 <mat-tab label="Pedidos Pendientes">
-                    <div class="container">
+                    <div class="pedidosVacios" *ngIf="showPedidoVacioPendiente">
+                        <h3 style="color: #107997;">No se encuentran pedidos en esta sección</h3>
+                    </div>
+                    <div class="container" *ngIf="showPedidosPendientes">
                         <div class="searchPedido">
                             <mat-form-field>
                                 <mat-label>Ingrese pedido a buscar</mat-label>
@@ -78,7 +81,11 @@
                     </div>
                 </mat-tab>
                 <mat-tab label="Pedidos en Curso">
-                    <div class="container">
+                    <div class="pedidosVacios" *ngIf="showPedidoVacioCurso">
+                        <h3 style="color: #107997;">No se encuentran pedidos en esta sección</h3>
+                    </div>
+                    <div class="container" *ngIf="showPedidosEnCurso">
+                        
                         <div class="searchPedido">
                             <mat-form-field>
                                 <mat-label>Ingrese pedido a buscar</mat-label>
@@ -144,7 +151,10 @@
                     </div>
                 </mat-tab>
                 <mat-tab label="Pedidos en Transporte">
-                    <div class="container">
+                    <div class="pedidosVacios" *ngIf="showPedidoVacioTransporte">
+                        <h3 style="color: #107997;">No se encuentran pedidos en esta sección</h3>
+                    </div>
+                    <div class="container"*ngIf="showPedidosEnTransporte">
                         <div class="searchPedido">
                             <mat-form-field>
                                 <mat-label>Ingrese pedido a buscar</mat-label>
@@ -217,7 +227,10 @@
                     </div>
                 </mat-tab>
                 <mat-tab label="Pedidos Finalizados">
-                    <div class="container">
+                    <div class="pedidosVacios" *ngIf="showPedidoVacioFinalizado">
+                        <h3 style="color: #107997;">No se encuentran pedidos en esta sección</h3>
+                    </div>
+                    <div class="container" *ngIf="showPedidosFinalizados">
                         <div class="searchPedido">
                             <mat-form-field>
                                 <mat-label>Ingrese pedido a buscar</mat-label>
@@ -457,7 +470,6 @@
             </div>
         </div>
     </div>
-
 
     <div *ngIf="_spinner.getSpinner()" class="spinner-container">
         <app-spinner></app-spinner>

@@ -40,6 +40,14 @@ export class GestionPedidosComponent {
   showActualizar:boolean=true
   showCodigoSeguimiento:boolean=false
   showNombreTransporte:boolean=false
+  showPedidosPendientes:boolean=true
+  showPedidosEnCurso:boolean=true
+  showPedidosEnTransporte:boolean=true
+  showPedidosFinalizados:boolean=true
+  showPedidoVacioPendiente:boolean=false
+  showPedidoVacioCurso:boolean=false
+  showPedidoVacioTransporte:boolean=false
+  showPedidoVacioFinalizado:boolean=false
   indicePedidoPendiente: number
   elementoActual: string
   loading:boolean=true
@@ -184,9 +192,20 @@ export class GestionPedidosComponent {
           id: element.payload.doc.id,
           ...element.payload.doc.data()
         })
+      
       })
-    })
+      let arrayPedido=this.getPedidoVacio(this.pedidosPendientes,this.showPedidosPendientes,this.showPedidoVacioPendiente)
+      if(arrayPedido.pedidosSinDatos==true){
+        this.showPedidoVacioPendiente=true
+        this.showPedidosPendientes=false
+      }
+        else{
+          this.showPedidoVacioPendiente=false
+        this.showPedidosPendientes=true
+        }
+      })
   }
+    
 
   getPedidosEnCurso() {
     this._gestionPedido.getPedidos('Pedidos En Curso').subscribe(doc => {
@@ -198,6 +217,15 @@ export class GestionPedidosComponent {
           ...element.payload.doc.data()
         })
       })
+      let arrayPedido=this.getPedidoVacio(this.pedidosEncurso,this.showPedidosEnCurso,this.showPedidoVacioCurso)
+      if(arrayPedido.pedidosSinDatos==true){
+        this.showPedidoVacioCurso=true
+        this.showPedidosEnCurso=false
+      }
+        else{
+          this.showPedidoVacioCurso=false
+        this.showPedidosEnCurso=true
+        }
     })
   }
 
@@ -211,6 +239,15 @@ export class GestionPedidosComponent {
           ...element.payload.doc.data()
         })
       })
+      let arrayPedido=this.getPedidoVacio(this.pedidosEnTransporte,this.showPedidosEnTransporte,this.showPedidoVacioTransporte)
+      if(arrayPedido.pedidosSinDatos==true){
+        this.showPedidoVacioTransporte=true
+        this.showPedidosEnTransporte=false
+      }
+        else{
+          this.showPedidoVacioTransporte=false
+        this.showPedidosEnTransporte=true
+        }
     })
   }
 
@@ -232,6 +269,16 @@ export class GestionPedidosComponent {
           ...element.payload.doc.data()
         })
       })
+      let arrayPedido=this.getPedidoVacio(this.pedidosFinalizados,this.showPedidosFinalizados,this.showPedidoVacioFinalizado)
+      console.log(this.pedidosFinalizados)
+      if(arrayPedido.pedidosSinDatos==true){
+        this.showPedidoVacioFinalizado=true
+        this.showPedidosFinalizados=false
+      }
+        else{
+          this.showPedidoVacioFinalizado=false
+        this.showPedidosFinalizados=true
+        }
     })
   }
 
@@ -429,4 +476,16 @@ confirmDel(){
   this.showConfirmationDelPedido = false
 }
 
+getPedidoVacio(pedidos:any[],pedidosConDatos:boolean,pedidosSinDatos:boolean){
+  if (pedidos.length==0)
+  {
+    pedidosConDatos=false
+    pedidosSinDatos=true
+  }
+  else if(pedidos.length>0){
+    pedidosConDatos=true
+    pedidosSinDatos=false
+  }
+  return{pedidosConDatos,pedidosSinDatos}
+}
 }
