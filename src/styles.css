@@ -87,3 +87,15 @@ body {
     margin: 0;
     font-family: Roboto, "Helvetica Neue", sans-serif;
 } */
+
+body{
+  position: relative;
+  min-height: 100vh;
+  padding-bottom: 148px;
+  height: 100%;
+  margin:0;
+}
+
+html{
+  min-height: 100%;
+}
