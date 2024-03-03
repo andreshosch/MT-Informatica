@@ -3,10 +3,12 @@
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    margin: 0 10px
+    margin: 0 10px;
+    
 }
 .menuLogin a{
-  margin: 0 20px 
+  margin: 0 20px;
+  
 }
 
 .fondoLogin{
@@ -79,7 +81,8 @@
   
   .carroYLogin{
     display: inline-flex;
-    margin: 0 50px; 
+     margin: 0 50px;
+    margin-top: 4%;
   }
 
   .containerLogin{
@@ -133,7 +136,7 @@
 .fondoLogin{
   width: 40px;
   height: 40px;
-  background-color: lightgray;
+  /* background-color: lightgray; */
   border-radius: 50%;
 }
 
@@ -199,4 +202,8 @@
 
 .cambio2 mat-label{
   font-size: small;
+}
+
+.nombreUser p{
+  margin-top: 5%;
 }
