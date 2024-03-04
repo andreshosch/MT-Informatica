@@ -12,7 +12,7 @@ import { ServiciosComponent } from './components/servicios/servicios.component';
 const routes: Routes = [
   {path:'',component:IndexComponent},
   {path:'contacto',component:ContactoComponent},
-  {path: 'gestion', component:GestionProductosComponent },
+  {path: 'gestionProducto', component:GestionProductosComponent },
   {path: 'gestionUsr', component: GestionUsuariosComponent }, 
   {path: 'gestionPedido', component: GestionPedidosComponent },
   {path: 'gestionPago', component: GestionPagoComponent },  
