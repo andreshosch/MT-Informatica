@@ -31,7 +31,7 @@
 
   .barra{
     background-color: black;
-    height: 100%;
+     height: 100%;
     display: flex;
     align-items: center;
   }
@@ -51,4 +51,13 @@
 
   .agrupados a{
     width: auto
+  }
+
+  .dropdown-menu{
+    background-color: black;
+  }
+
+  li{
+    background-color: black;
+    z-index: 2;
   }
