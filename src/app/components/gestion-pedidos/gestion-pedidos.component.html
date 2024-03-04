@@ -390,6 +390,12 @@
                                     </div>
                                 </div>
                             </div>
+                            <button style="background-color: #107997; margin-top: 2%;text-align: center;" *ngIf="showActualizar" [disabled]="sinModificaciones" (click)="actualizarPedido()" mat-raised-button
+                        color="primary">Actualizar</button>
+                        <div class="aviso">
+                            <mat-hint class="matHint" *ngIf="!sinModificaciones">Debe "Actualizar" para guardar los cambios o "Cerrar"
+                                para descartarlos</mat-hint>
+                        </div>
                         </div>
                         <div class="resumenCarrito">
                             <h4 id="product-description">Resumen</h4>
@@ -404,14 +410,10 @@
                     </div>
                 </div>
                 <div class="buttonClose">
-                    <button *ngIf="showActualizar" [disabled]="sinModificaciones" (click)="actualizarPedido()" mat-raised-button
-                        color="primary">Actualizar</button>
-                    <button (click)="hideCarrito()" mat-raised-button color="primary">Cerrar</button>
+                 
+                    <button (click)="hideCarrito()"  style="background-color: #107997;" mat-raised-button color="primary">Cerrar</button>
                 </div>
-                <div class="aviso">
-                    <mat-hint class="matHint" *ngIf="!sinModificaciones">Debe "actualizar" para guardar los cambios o "cerrar"
-                        para descartarlos</mat-hint>
-                </div>
+                
             </div>
         </div>
         

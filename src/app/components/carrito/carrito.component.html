@@ -8,15 +8,15 @@
 </head>
     <div class="carroYcantidad">
         <a (click)="verCarrito()">
-            <i class="pi pi-shopping-cart p-button-icon" style="font-size: 1.5rem; color: #107997" matTooltip="Ver carrito"></i>
+            <i class="pi pi-shopping-cart p-button-icon" style="font-size: 1.5rem; color: #107997; cursor: pointer;" matTooltip="Ver carrito"></i>
         </a>
         <span class="nav-link" style="color:#107997;font-weight: bolder;size: 50px;">{{ total }}</span>
     </div>
 
     <div class="confirmation-dialog" *ngIf="carritoVacio">
         <div class="carritoVacio">
-                <h3>Actualmente tu carrito está vacío..      <b style="color: orange; cursor: pointer;" (click)="cerrarAviso()">Comprar</b></h3>
-                <button style="background-color: #107997;color: white;" mat-raised-button color="primary" (click)="cerrarAviso()">Aceptar</button>
+            <h3>Actualmente tu carrito está vacío. <b><a style="color: orange; cursor: pointer;text-decoration: none;" href=''>Comprar</a></b></h3>
+                <button style="background-color: #107997;color: white;" mat-raised-button color="primary" (click)="cerrarAviso()">Cerrar</button>
         </div>
     </div>
     

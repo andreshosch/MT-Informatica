@@ -22,6 +22,8 @@
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     width: 90%;
     text-align: center;
+    max-height: 600px;
+    overflow: auto; 
   }
 
   .modalCarrito h1{
@@ -34,6 +36,7 @@
     color: #107997;
     margin-top: 10px;
     margin-bottom: 15px;
+   
   }
 
   mat-form-field {
@@ -179,7 +182,7 @@
 }
 
 .buttonClose{
-  width: 70%;
+  /* width: 70%; */
   text-align: center;
   justify-content: center;
   margin-top: 25px;
@@ -254,8 +257,9 @@
 }
 
 .aviso{
-  width: 70%;
+
   text-align: center;
+  margin-bottom: 1%;
 }
 
 .matHint{
