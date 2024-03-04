@@ -89,3 +89,35 @@
     box-shadow: 2px 10px 20px #b0b3b2;
     border-radius: 10px;
   }
+
+  .fondoValores {
+    background-color: #f0f0f0;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  .fondoValores h2 {
+    color: #333;
+    font-size: 20px;
+    margin-bottom: 10px;
+  }
+  
+  .fondoValores p {
+    color: #666;
+  }
+  
+  .fondoValores ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .fondoValores li {
+    color: #666;
+    margin-bottom: 5px;
+  }
+
+  .contenedor{
+    width: 90%;
+    margin-left: 5%;
+  }
