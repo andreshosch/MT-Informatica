@@ -26,7 +26,7 @@
 
 
 <div class="confirmation-dialog" *ngIf="loginProgress || dataService.loginProgressData">
-    <div class="dialog-content">
+    <div class="dialog-content medias">
         <div class="login" *ngIf="login">
             <h4>INGRESO</h4>
             <div class="loginIngreso">
@@ -53,8 +53,6 @@
             </div>
             <div class="registroycancel">
                 <p>Aún no tiene cuenta? registrese <a (click)="irARegistro()" class="buttonInvisible">aquí</a></p>
-
-
             </div>
         </div>
         <div class="registro" *ngIf="!login">

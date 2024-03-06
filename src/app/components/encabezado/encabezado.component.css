@@ -1,5 +1,4 @@
 .logo{
-    /* width: 10%; */
     height: 100px;  
     display: flex;
     justify-content: center;
@@ -8,7 +7,6 @@
 }
 
 .navegacion{
-    /* width: 60%; */
     height: 100px;  
 }
 
@@ -19,20 +17,6 @@
     align-items: center;
     height: 100px;  
 }
-
-/* .total{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    background-color: black;
-} */
-
-/* @media (max-width: 990px) {
-    .logo {
-      display: none;
-    }
-  } */
-
 
 .logo {
     display: flex;
