@@ -9,7 +9,9 @@ export const environment = {
         appId: "1:461895718602:web:979c7f856000bef65d4633"
     },
     'MARIANO': 27149700,
-    'NATALIA': 29276542
+    'NATALIA': 29276542,
+    idApi: 'r6SoJw8FxtZ2aWHz2nVq',
+    idPedido: 'hAuyae39a9WLQJ50clFm'
   };
 
 

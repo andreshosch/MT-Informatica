@@ -132,6 +132,25 @@
         </div>
     </div>
 
+    <div class="confirmation-dialog" *ngIf="showBuy">
+        <div class="dialog-content">
+            <div class="top-content">
+                <div class="title">
+                    <h2 mat-dialog-title><i class="pi pi-gift" style="font-size: 2rem"></i>¡Felicitaciones!<i class="pi pi-gift" style="font-size: 2rem"></i></h2>
+                </div>
+                <div class="subtitle">
+                    <p>Ha finalizado su compra correctamente</p>
+                    <p>Numero de pedido #{{numeroPedido}}</p>
+                </div>
+                <div>
+                    <h3>Gracias por su compra</h3>
+                </div>
+                <button style="background-color: #107997;color: white;" mat-raised-button (click)="aceptarBuy()">Aceptar</button>
+            </div>
+        </div>
+    </div>
+
+
     <div class="confirmation-dialog" *ngIf="showConfirmationPedido">
         <div class="dialog-content">
             <h4>¿Está seguro que desea confirmar el pedido?</h4>

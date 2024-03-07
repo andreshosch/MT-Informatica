@@ -7,6 +7,7 @@ import {MensajeService} from 'src/app/services/mensaje.service'
 import { PagosService } from 'src/app/services/pagos.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MailsService } from 'src/app/services/mails.service';
+import { environment } from 'src/environment/environment';
 
 
 
@@ -38,6 +39,8 @@ export class CarritoComponent {
   to: string = 'andreshosch114@gmail.com';
   subject: string = 'andreshosch114@gmail.com';
   text: string = 'Tienes un nuevo pedido confirmado';
+  numeroPedido: number
+  showBuy: boolean = false
   
 
   //Traer datos de coleccion... 
@@ -66,6 +69,14 @@ export class CarritoComponent {
     this.carritoGuardado(this.usuarioLog)
     this.getTablaPagos()
     this.seleccionPago = "Link de Pago"
+  }
+
+  getNumeroPedido(){
+    this.pedidosService.getNumeroPedido().subscribe(doc => {
+      doc.forEach((element: any) => {
+        this.numeroPedido = element.payload.doc.data().actual
+      })
+    })
   }
 
   getTablaPagos(){
@@ -188,6 +199,7 @@ export class CarritoComponent {
 
   confirmPedido(){
     this.showConfirmationPedido = true
+    this.getNumeroPedido()
   }
 
   cancelPedido(){
@@ -196,6 +208,7 @@ export class CarritoComponent {
   
 
   mostrarCarrito() {
+    let numPedido = this.numeroPedido + 1
     this.showConfirmationPedido = false
     let userActual: any = this.usuario
     let unPedido: Pedido = {
@@ -204,7 +217,8 @@ export class CarritoComponent {
       fecha: this.formatFecha(),
       nombre: this.nombre,
       apellido: this.apellido,
-      celular: this.celular
+      celular: this.celular,
+      numero: numPedido
     }
      const pedidoNuevo={
       nombre:this.nombre,
@@ -238,11 +252,18 @@ export class CarritoComponent {
     this.monto = 0
     this.montoIva = 0
     this.incremento = 0
-    this._mensaje.snackBar("Carrito creado correctamente",'green')
     this.dataService.limpiar()
     this.ocultarCarrito();
     localStorage.removeItem(userActual);
+    this.showBuy = true
+    const nuevoPedido = {
+      actual: numPedido
+    }
+    this.pedidosService.updateNumeroPedido(environment.idPedido ,nuevoPedido)
+  }
 
+  aceptarBuy(){
+    this.showBuy = false
   }
 
   formatFecha() {

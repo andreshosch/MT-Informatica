@@ -5,6 +5,7 @@ import { Producto } from 'src/app/models/producto';
 import { MensajeService } from 'src/app/services/mensaje.service';
 import { ProductosService } from 'src/app/services/productos.service';
 import { SppinerService } from 'src/app/services/sppiner.service';
+import { environment } from 'src/environment/environment';
 
 
 @Component({
@@ -27,7 +28,7 @@ export class GestionProductosComponent {
   showConfirmationDelProd: boolean = false
   estadoApi: string = ""
   validadorApi: boolean = false
-  idApi: string = 'r6SoJw8FxtZ2aWHz2nVq'
+  // idApi: string = 'r6SoJw8FxtZ2aWHz2nVq'
 
     
 
@@ -83,7 +84,7 @@ export class GestionProductosComponent {
     let ss = {
       valor: true
     }
-    this._productosService.updateApiElite(this.idApi, ss)
+    this._productosService.updateApiElite(environment.idApi, ss)
     this.getApi()
     this._mensaje.snackBar('API de Elite Activada', 'green')
   }
@@ -92,7 +93,7 @@ export class GestionProductosComponent {
     let ss = {
       valor: false
     }
-    this._productosService.updateApiElite(this.idApi, ss)
+    this._productosService.updateApiElite(environment.idApi, ss)
     this.getApi()
     this._mensaje.snackBar('API de Elite Desactivada', 'green')
   }

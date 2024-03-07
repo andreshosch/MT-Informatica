@@ -19,6 +19,7 @@ export class PedidosService {
   getPedidos(coleccion:string): Observable<any> {
     return this.firestore.collection(coleccion).snapshotChanges()
   }
+
   deletePedidoPorId(id: string, coleccion:string): Promise<any> {
     return this.firestore.collection(coleccion).doc(id).delete();
   }
@@ -30,4 +31,17 @@ export class PedidosService {
   updatePedido(id: string,coleccion:string, pedido: any): Promise<any> {
     return this.firestore.collection(coleccion).doc(id).update(pedido);
   }
+
+  getNumeroPedido(): Observable<any> {
+    return this.firestore.collection('Pedido').snapshotChanges()
+  }
+
+  setNumeroPedido(valor: any): Promise<any>{
+    return this.firestore.collection('Pedido').add(valor)
+  }
+  
+  updateNumeroPedido(id: string, nuevoValor: any): Promise<any> {
+    return this.firestore.collection('Pedido').doc(id).update(nuevoValor);
+  }
+
 }
