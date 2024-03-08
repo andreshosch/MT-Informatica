@@ -13,6 +13,23 @@ text-align: center;
   height: auto;
 }
 
+.container-shop2{
+  width: 60%;
+  margin-left: 10%;
+  margin-right: 10%;
+  border-radius: 10px;
+  background-color: #fff;
+  box-shadow: 2px 10px 10px #c7bebe59;
+  padding-bottom: 25px;
+  padding-top: 25px;
+  margin-bottom: 10px;
+  height: auto;
+}
+
+.prodDol{
+  display: flex;
+  flex-direction: row;
+}
 
 .titleProductos{
   color: #107997;

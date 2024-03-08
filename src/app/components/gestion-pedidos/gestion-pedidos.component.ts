@@ -55,6 +55,8 @@ export class GestionPedidosComponent {
   idAuxiliar: string = ""
 
   displayedColumns: string[] = ['fecha', 'dni', 'apellido', 'nombre', 'acciones'];
+
+  displayedColumns2: string[] = ['fecha', 'idpedido', 'dni', 'apellido', 'nombre', 'acciones'];
   dataSourcePedidosPendientes!: MatTableDataSource<any>;
   dataSourcePedidosEnCurso!: MatTableDataSource<any>;
   dataSourcePedidosEnTransporte!: MatTableDataSource<any>;
