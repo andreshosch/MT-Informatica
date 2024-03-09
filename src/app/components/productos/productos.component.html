@@ -1,6 +1,11 @@
 <div class="body">
   <div class="gris"></div>
-    <div *ngIf="showProductosDestacados" class="container container-shop">
+    <div class="cuadrito">
+      <p>Valor dolar: <span>{{ valorDolarActual }}</span></p>
+      <p>Fuente: Banco Nacion</p>
+    </div>
+
+    <div *ngIf="showProductosDestacados" class="container container-shopDestacado">
       <h3 class="titleProductos">PRODUCTOS DESTACADOS</h3>
       <div class="form-container ordenFiltro">
         <ngb-carousel class="container container-card">

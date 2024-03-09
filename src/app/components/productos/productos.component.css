@@ -13,10 +13,9 @@ text-align: center;
   height: auto;
 }
 
-.container-shop2{
+.container-shopDestacado{
   width: 60%;
-  margin-left: 10%;
-  margin-right: 10%;
+  margin-left: 20%;
   border-radius: 10px;
   background-color: #fff;
   box-shadow: 2px 10px 10px #c7bebe59;
@@ -318,4 +317,27 @@ margin-bottom: 15px;
 .datos{
   margin-left: 10px;
   margin-right: 10px;
+}
+
+.cuadrito {
+  background-color: #f0f0f0;
+  border: 1px solid #ccc;
+  padding: 10px;
+  width: 200px;
+  text-align: center;
+  position: fixed;
+  right: 20px;
+  transform: translateY(-50%);
+}
+
+.cuadrito p {
+  margin: 5px 0;
+}
+
+.cuadrito span {
+  font-weight: bold;
+}
+
+.posCuadrito{
+  width: 100%;
 }

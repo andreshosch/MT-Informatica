@@ -11,7 +11,9 @@ export const environment = {
     'MARIANO': 27149700,
     'NATALIA': 29276542,
     idApi: 'r6SoJw8FxtZ2aWHz2nVq',
-    idPedido: 'hAuyae39a9WLQJ50clFm'
+    idPedido: 'hAuyae39a9WLQJ50clFm',
+    urlDolar: 'https://dolarapi.com/v1/dolares/oficial',
+    urlBase: 'https://clientes.elit.com.ar/v1/api/productos?limit='
   };
 
 

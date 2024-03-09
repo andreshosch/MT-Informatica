@@ -58,6 +58,7 @@ export class ProductosComponent {
   idProducto: string
   showProductosDestacados:boolean=false
   validadorApi: boolean = false
+  valorDolarActual: number = 0
   // Fin Productos destacados
 
   
@@ -86,6 +87,16 @@ export class ProductosComponent {
       this.hayLogueado = isAuthenticated;
     
     });
+
+    this.getCotizacion()
+
+  }
+
+  getCotizacion(){
+    this.productosServices.getCotizacionActual().subscribe(doc => {
+      this.valorDolarActual = doc.venta
+      console.log(`datos: ${JSON.stringify(doc.venta)}`)
+    })
   }
 
   loadFirstPage(products: any) {

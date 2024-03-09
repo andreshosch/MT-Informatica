@@ -4,6 +4,7 @@ import { Observable, of } from 'rxjs';
 
 import { AngularFirestore } from '@angular/fire/compat/firestore'
 import { Producto } from '../models/producto';
+import { environment } from 'src/environment/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -11,6 +12,7 @@ import { Producto } from '../models/producto';
 export class ProductosService {
 
   private baseUrl: string
+  private baseDolar: string
   baseUrl1: string
 
   private onlyCategory: string[] = [];
@@ -25,8 +27,13 @@ export class ProductosService {
   }
 
   constructor(private http:HttpClient, private firestore: AngularFirestore) { 
-    this.baseUrl="https://clientes.elit.com.ar/v1/api/productos?limit="
+    this.baseUrl= environment.urlBase
+    this.baseDolar= environment.urlDolar
         
+  }
+
+  getCotizacionActual():Observable<any>{
+    return this.http.get(`${this.baseDolar}`)
   }
 
 getArrayProducts(data:any,limit:number,offset:number):Observable<any>{
