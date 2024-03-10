@@ -1,5 +1,5 @@
 export class Producto{
-    imagenes: string;
+    imagenes: any[];
     nombre: string;
     categoria: string;
     subcategoria: string;
@@ -14,7 +14,7 @@ export class Producto{
 
 
 
-    constructor(imagenes:string, nombre: string, categoria: string, subcategoria: string, descripcion: string, precio: number, cantidad: number, destacado: boolean, marca: string, iva: number, impuesto_interno: number, id?: string){
+    constructor(imagenes:any[], nombre: string, categoria: string, subcategoria: string, descripcion: string, precio: number, cantidad: number, destacado: boolean, marca: string, iva: number, impuesto_interno: number, id?: string){
         this.descripcion = descripcion;
         this.imagenes = imagenes;
         this.nombre = nombre;

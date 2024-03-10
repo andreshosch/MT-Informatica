@@ -20,6 +20,7 @@ export class GestionProductosComponent {
   altaProd:FormGroup
   modificarProd: FormGroup
   modalActivo: boolean = false
+  modalFormatoArticulos:boolean=true
   idProducto: string
   losBloqueados: any[] = []
   imagenesArray:string[]=[]
@@ -63,6 +64,7 @@ export class GestionProductosComponent {
 
   ngOnInit(){
     this._spinner.showSpinner()
+    this.showModalProductosHot()
     this.getApi();
     this.getBloqueados()
     this.getProductos()
@@ -169,7 +171,7 @@ export class GestionProductosComponent {
     // this._productosService.deleteProduct(articulo)
     this.idAuxiliar = articulo;
     this.showConfirmationDelProd = true
-  }
+    }
 
   confirmDel(){
     this._productosService.deleteProduct(this.idAuxiliar)
@@ -230,6 +232,14 @@ setApiElite(elValor: boolean){
     valor: elValor
   }
   this._productosService.setApiElite(ss)
+}
+showModalProductosHot(){
+  if (this.productosHot.length==0){
+    this.modalFormatoArticulos=false
+  }
+    else{
+      this.modalFormatoArticulos=true
+    }
 }
 
 }
