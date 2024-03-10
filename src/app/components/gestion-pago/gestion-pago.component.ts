@@ -18,6 +18,7 @@ export class GestionPagoComponent {
   dataSourcePagos!: MatTableDataSource<any>;
   displayedColumns: string[] = ['metodo', 'porcentaje', 'acciones'];
   formMetodo: FormGroup
+  formMonto: FormGroup
   updateMetodo: FormGroup
   actualizarPago: boolean = false
   idAuxiliar: string = ""
@@ -33,6 +34,10 @@ export class GestionPagoComponent {
       porcentaje: ['', [Validators.required, Validators.pattern(/^\d*\.?\d+$/)]],
     })
 
+    this.formMonto=this.fb.group({
+      nuevoMonto:['',Validators.required],
+    })
+
     this.updateMetodo = this.fb.group({
       metodo:['',Validators.required],
       porcentaje: ['', [Validators.required, Validators.pattern(/^\d*\.?\d+$/)]],
@@ -42,6 +47,13 @@ export class GestionPagoComponent {
   ngOnInit() {
     this._spinner.showSpinner()
     this.getTablaPagos()
+  }
+
+  crearIva(){
+    const metodoNew = {
+      nuevoMonto: this.formMonto.get('nuevoMonto').value,
+    }
+    this._pagosService.createIva(metodoNew)
   }
 
   getTablaPagos(){
@@ -57,8 +69,20 @@ export class GestionPagoComponent {
     })
   }
 
+  getTablaIva(){
+    this._pagosService.getPagos().subscribe(doc => {
+      this.tablaPagos = []
+      this.dataSourcePagos = new MatTableDataSource(this.tablaPagos)
+      doc.forEach((element: any) => {
+        this.tablaPagos.push({
+          id: element.payload.doc.id,
+          ...element.payload.doc.data()
+        })
+      })
+    })
+  }
+
   crearMetodo(){
-    console.log(`metodos: ${JSON.stringify(this.tablaPagos)}`)
     let existe = false
     let newMetodo = {
       metodo: this.formMetodo.get('metodo').value,

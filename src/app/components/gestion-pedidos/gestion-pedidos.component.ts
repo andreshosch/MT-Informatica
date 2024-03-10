@@ -54,9 +54,9 @@ export class GestionPedidosComponent {
   ordenActual: 'asc' | 'desc' | 'original' = 'asc';
   idAuxiliar: string = ""
 
-  displayedColumns: string[] = ['fecha', 'dni', 'apellido', 'nombre', 'acciones'];
 
-  displayedColumns2: string[] = ['fecha', 'idpedido', 'dni', 'apellido', 'nombre', 'acciones'];
+  displayedColumns: string[] = ['fecha', 'idpedido', 'dni', 'apellido', 'nombre', 'acciones'];
+
   dataSourcePedidosPendientes!: MatTableDataSource<any>;
   dataSourcePedidosEnCurso!: MatTableDataSource<any>;
   dataSourcePedidosEnTransporte!: MatTableDataSource<any>;

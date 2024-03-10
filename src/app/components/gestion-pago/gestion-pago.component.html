@@ -74,8 +74,23 @@
 
         <div class="altaPago">
             <h5 style="color: #107997;font-weight: bold;">MONTOS IVA</h5>
-            <div class="altaMedio">
-             
+            <div class="contenedorIva">
+                <div class="montosActuales">
+                    <h4>montos</h4>
+                </div>
+                <div class="nuevoMonto">
+                    <form [formGroup]="formMonto" (ngSubmit)="crearIva()">
+                        <mat-form-field>
+                            <mat-label>Nuevo monto</mat-label>
+                            <input matInput formControlName="nuevoMonto">
+                        </mat-form-field>
+                        <p>
+                            <button style="background-color: #107997;color: white;" color type="submit" mat-raised-button>Alta monto</button>
+                        </p>
+                        
+                    </form>
+                </div>
+
             </div>
         </div>
         

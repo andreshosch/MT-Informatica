@@ -50,7 +50,7 @@ export class ProductosComponent {
     "user_id": '22181',
     "token": "oyhl04axaro"
   }
-  bloqueados: any[] = ['Notebooks Corporativo', 'Procesadores']
+  bloqueados: any[] = []
   hayLogueado: boolean;
   //Inicio Productos destacados
   productosHot: any[] = []

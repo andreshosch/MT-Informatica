@@ -27,6 +27,19 @@ export class PagosService {
     return this.firestore.collection('tablaPagos').doc(id).update(pago);
   }
 
+  createIva(monto: any): Promise<any>{
+    console.log('llegue')
+    return this.firestore.collection('tablaIva').add(monto)
+
+  }
+
+  getIva(): Observable<any> {
+    return this.firestore.collection('tablaIva').snapshotChanges()
+  }
+
+  deleteIva(id: string): Promise<any> {
+    return this.firestore.collection('tablaIva').doc(id).delete();
+  }
 
 }
 
