@@ -206,12 +206,7 @@ export class ProductosComponent {
               }
               // this.arrProducts.push(...this.arrProductos)
              
-              this.loadFirstPage(this.arrProducts)
-              for (i=0;i<=this.arrProducts.length;i++)
-              {
-                console.log(this.arrProducts[i].imagenes)
-              }
-             
+              this.loadFirstPage(this.arrProducts)          
               
             })
         }
@@ -308,7 +303,6 @@ export class ProductosComponent {
       this.arrProductsPages[i] = products[this.min]
       this.min++
     }
-    console.log(products.length)
   }
 
   filterProducts() {

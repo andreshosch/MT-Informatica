@@ -1,5 +1,5 @@
 export class Producto{
-    imagenes: any[];
+    imagenes?: any[];
     nombre: string;
     categoria: string;
     subcategoria: string;

@@ -29,6 +29,7 @@ export class PedidosService {
   }
 
   updatePedido(id: string,coleccion:string, pedido: any): Promise<any> {
+    console.log("actualizando pedido"+pedido)
     return this.firestore.collection(coleccion).doc(id).update(pedido);
   }
 
