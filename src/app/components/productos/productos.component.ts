@@ -182,9 +182,12 @@ export class ProductosComponent {
             (response => {
               this.arrProductos = response['resultado']
               for (let p=0; p < this.arrProductos.length; p++){
+                let markup = this.arrProductos[p].markup
+                let precioInicial = this.arrProductos[p].precio
+
                 const unProducto: Producto = {
                   nombre: this.arrProductos[p].nombre,
-                  precio: this.arrProductos[p].precio,
+                  precio: markup === 0? precioInicial: precioInicial + precioInicial * markup,
                   categoria: this.arrProductos[p].categoria,
                   subcategoria: this.arrProductos[p].sub_categoria,
                   imagenes: this.arrProductos[p].imagenes,
@@ -196,16 +199,10 @@ export class ProductosComponent {
                   id: this.arrProductos[p].id,
                   cantidad: 1
                 }
-                //Prueba bloqueo de categorias
                 if(!this.establoqueada(unProducto.categoria)){
                   this.arrProducts.push(unProducto)
                 }
-             
-                //
-                //this.arrProducts.push(unProducto)
               }
-              // this.arrProducts.push(...this.arrProductos)
-             
               this.loadFirstPage(this.arrProducts)          
               
             })
