@@ -139,72 +139,6 @@ export class GestionProductosComponent {
     })
   }
 
-  // agregarProd(tipo) {
-  //   let unProducto:Producto
-  //   if (tipo == 'a') {
-  //      unProducto=
-  //     {
-  //       nombre: this.altaProd.get('nombre').value,
-  //       precio: this.altaProd.get('precio').value,
-  //       categoria: this.altaProd.get('categoria').value,
-  //       subcategoria: this.altaProd.get('subcategoria').value,
-  //       imagenes: [this.altaProd.get('imagenes').value],
-  //       descripcion: this.altaProd.get('descripcion').value,
-  //       destacado: this.altaProd.get('destacado').value,
-  //       marca: this.altaProd.get('marca').value,
-  //       iva: this.altaProd.get('iva').value,
-  //       impuesto_interno: this.altaProd.get('impuesto_interno').value,
-  //       cantidad: 1
-  //     }
-  //     this._productosService.createProduct(unProducto)
-  //     this.altaProd.reset()
-  //     this._mensaje.snackBar("Producto dado de alta correctamente", "green")
-  //   } else {
-  //     const nuevasImagenes = [this.modificarProd.get('imagenesM').value];
-  //     console.log(this.productosHot)
-  //     if ( this.sonImagenesDiferentes(nuevasImagenes)) {
-  //        unProducto =
-  //       {
-  //         nombre: this.modificarProd.get('nombreM').value,
-  //         precio: this.modificarProd.get('precioM').value,
-  //         categoria: this.modificarProd.get('categoriaM').value,
-  //         subcategoria: this.modificarProd.get('subcategoriaM').value,
-  //         imagenes: nuevasImagenes,
-  //         descripcion: this.modificarProd.get('descripcionM').value,
-  //         destacado: this.modificarProd.get('destacadoM').value,
-  //         marca: this.modificarProd.get('marcaM').value,
-  //         iva: this.modificarProd.get('ivaM').value,
-  //         impuesto_interno: this.modificarProd.get('impuesto_internoM').value,
-  //         cantidad: 1
-  //       }
-  //     }
-  //     else {
-  //        unProducto =
-  //       {
-  //         nombre: this.modificarProd.get('nombreM').value,
-  //         precio: this.modificarProd.get('precioM').value,
-  //         categoria: this.modificarProd.get('categoriaM').value,
-  //         subcategoria: this.modificarProd.get('subcategoriaM').value,
-  //         descripcion: this.modificarProd.get('descripcionM').value,
-  //         // imagenes: [this.modificarProd.get('imagenesM').value],
-  //         destacado: this.modificarProd.get('destacadoM').value,
-  //         marca: this.modificarProd.get('marcaM').value,
-  //         iva: this.modificarProd.get('ivaM').value,
-  //         impuesto_interno: this.modificarProd.get('impuesto_internoM').value,
-  //         cantidad: 1
-  //       }
-  //     }
-  //   }
-  //   this._productosService.updateProduct(this.idProducto, unProducto)
-  //   this.modalActivo = false
-  //   this._mensaje.snackBar("Producto modificado correctamente", "green")
-  // }
-
-  // sonImagenesDiferentes(nuevasImagenes: string[]): boolean {
-  //   const imagenesActuales = [this.modificarProd.get('imagenesM').value];
-  //   return JSON.stringify(nuevasImagenes) !== JSON.stringify(imagenesActuales);
-  // }
-
   agregarProd(tipo) {
     let unProducto: Producto;
   
@@ -221,13 +155,14 @@ export class GestionProductosComponent {
         iva: this.altaProd.get('iva').value,
         impuesto_interno: this.altaProd.get('impuesto_interno').value,
         cantidad: 1
-      };
+      }
+      this._productosService.createProduct(unProducto)
+      this.modalActivo = false;
+      this._mensaje.snackBar("Producto agregado correctamente", "green");
     } else {
-      const nuevasImagenes = ["hola"];
-      const imagenesActuales = this.modificarProd.get('imagenesM').value;
-  
-      // Verificar si las imágenes son diferentes
-      if (!this.sonImagenesIguales(nuevasImagenes, imagenesActuales)) {
+      let imagenesActuales:any[]=[]
+      imagenesActuales.push(this.modificarProd.get('imagenesM').value)
+      imagenesActuales.push("https://http2.mlstatic.com/D_NQ_NP_952333-MLA54846724845_042023-O.webp")
         unProducto = {
           nombre: this.modificarProd.get('nombreM').value,
           precio: this.modificarProd.get('precioM').value,
@@ -240,27 +175,13 @@ export class GestionProductosComponent {
           iva: this.modificarProd.get('ivaM').value,
           impuesto_interno: this.modificarProd.get('impuesto_internoM').value,
           cantidad: 1
-        };
-      } else {
-        unProducto = {
-          nombre: this.modificarProd.get('nombreM').value,
-          precio: this.modificarProd.get('precioM').value,
-          categoria: this.modificarProd.get('categoriaM').value,
-          subcategoria: this.modificarProd.get('subcategoriaM').value,
-           imagenes: nuevasImagenes,
-          descripcion: this.modificarProd.get('descripcionM').value,
-          destacado: this.modificarProd.get('destacadoM').value,
-          marca: this.modificarProd.get('marcaM').value,
-          iva: this.modificarProd.get('ivaM').value,
-          impuesto_interno: this.modificarProd.get('impuesto_internoM').value,
-          cantidad: 1
-        }
-      }
-    }
-        // unProducto.imagenes=[unProducto.imagenes]
-        this._productosService.updateProduct(this.idProducto, unProducto)
+       }
+       this._productosService.updateProduct(this.idProducto, unProducto)
         this.modalActivo = false;
         this._mensaje.snackBar("Producto modificado correctamente", "green");
+    }
+      
+      
   }
   
   sonImagenesIguales(nuevasImagenes: string[], imagenesActuales: string[]): boolean {
@@ -293,14 +214,14 @@ export class GestionProductosComponent {
   modificar(articulo) {
     this.modalActivo = true
     this.idProducto = articulo
-
     this._productosService.getProductById(articulo).subscribe(data => {
+      console.log(data)
       this.modificarProd.setValue({
         nombreM: data.nombre,
         precioM: data.precio,
         categoriaM: data.categoria,
         subcategoriaM: data.subcategoria,
-        imagenesM: data.imagenes,
+        imagenesM: data.imagenes[0],
         descripcionM: data.descripcion,
         destacadoM: data.destacado,
         marcaM: data.marca,
