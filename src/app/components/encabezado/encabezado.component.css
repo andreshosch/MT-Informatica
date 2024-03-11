@@ -25,18 +25,20 @@
 
 .backg{
     background-color: black;
+    /* width: 100%;
+    position: fixed;
+    z-index: 9; */
 }
 
 .cuadrito {
-    background-color: rgb(240, 240, 240, 0.7);
+    background-color: rgba(255, 255, 255, 0.7);
     border: 1px solid #ccc;
     border-radius: 10px;
-    width: auto;
+    width: 25%;
     text-align:center ;
     right: 20px;
-    transform: translateY(-50%);
-    margin-top: 20px;
     margin-right: 50px;
+    margin-top: 20px;
   }
   
   .cuadrito p {
@@ -47,3 +49,9 @@
     justify-content: flex-end !important;
   }
   
+  .cotizacion{
+    width: 100%;
+    background-color: #ebebeb;
+    display: flex;
+    justify-content: end;
+  }

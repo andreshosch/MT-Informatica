@@ -8,32 +8,67 @@
         <div class="col-sm-6 col-md-6 col-lg-4 col-xl-4 cadaCol">
           <div class="contenedor">
             <h2 style="color: #107997;font-weight: bold;">Venta de equipos e insumos</h2>
-            <p style="color: #107997;">Somos una empresa dedicada a buscar soluciones integrales para satisfacer requerimientos de empresas,
-              emprendedores y particulares en el campo de la tecnología e informática, brindando un servicio profesional y
-              asesoramiento personalizado que permitan lograr el resultado que mejor se adapte a cada caso.</p>
+            <div>
+              <h6>Equipos Informáticos</h6>
+              <ul>
+                <li>Notebooks</li>
+                <li>PC de escritorio</li>
+                <li>Monitores</li>
+                <li>Servidores</li>
+                <li>UPS</li>
+                <li>Impresoras</li>
+              </ul>
+            </div>
+            <div>
+              <h6>Almacenamiento</h6>
+              <ul>
+                <li>Discos externos</li>
+                <li>Memorias</li>
+                <li>Pendrives</li>
+              </ul>
+            </div>
+            <div>
+              <h6>Conectividad</h6>
+              <ul>
+                <li>Routers</li>
+                <li>Placas de red USB</li>
+                <li>Extensores de rango</li>
+              </ul>
+            </div>
+            <div>
+              <h6>Periféricos y accesorios</h6>
+              <ul>
+                <li>Teclados y mouse</li>
+                <li>Auriculares</li>
+                <li>Parlantes</li>
+              </ul>
+            </div>
+
+              
+         
           </div>
         </div>
         <div class="col-sm-6 col-md-6 col-lg-4 col-xl-4 cadaCol">
           <div class="contenedor">
             <h2 style="color: #107997;font-weight: bold;">Servicio técnico</h2>
-            <p  style="color: #107997;">Creemos firmemente que la fuerza que nos hace avanzar son nuestros clientes, por eso son nuestra prioridad, y
-              asumimos el desafío de estar permanentemente capacitados y actualizados, tratando de lograr una óptima
-              solución para cada uno de ellos, sugiriendo el producto o la herramienta más eficiente y eficaz.</p>
+              <ul>
+                <li>- Reparación electronica de Notebooks, PC's de escritorio, monitores, placas madres, etc.</li>
+                <li>- Reparación y mantenimiento de UPS.</li>
+                <li>- Mantenimiento de impresoras.</li>
+                <li>- Instalación y configuración de redes de datos, cableados y puestos de trabajo.</li>
+                <li>- Armado de rack informático.</li>
+                <li>- Recuperación de datos y backup.</li>
+                <li>- Software: Instalación y configuración de sistemas operativos Linux y Windows en notebooks, PC's y servidores.</li>
+              </ul>
           </div>
         </div>
         <div class="col-sm-6 col-md-6 col-lg-4 col-xl-4 cadaCol">
           <div class="contenedor">
             <h2 style="color: #107997;font-weight: bold;">Asesoramiento</h2>
-            <ul>
-              <li style="color: #107997;"><strong>Compromiso:</strong> Nos comprometemos a proporcionar soluciones de alta calidad y a trabajar
-                incansablemente para cumplir con las expectativas de nuestros clientes.</li>
-              <li style="color: #107997;"><strong>Innovación:</strong> Buscamos constantemente nuevas formas de mejorar y adaptarnos a un entorno
-                tecnológico en constante cambio.</li>
-              <li style="color: #107997;"><strong>Confianza:</strong> Fomentamos relaciones sólidas y de confianza con nuestros clientes, basadas en
-                la transparencia y la integridad.</li>
-              <li style="color: #107997;"><strong>Colaboración:</strong> Valoramos el trabajo en equipo y la colaboración, tanto dentro de nuestra
-                empresa como con nuestros clientes y socios. </li>
-            </ul>
+              <ul>
+                <li>- Asesoramiento sobre Software Legal</li>
+                <li>- Presupuestos</li>
+              </ul>
           </div>
         </div>
       </div>
@@ -41,67 +76,5 @@
   
   <div class="gris"></div>
 </div>
-<!-- 
-<div class="body">
-  <div class="gris"></div>
-    <div class="miContenedor container">
-        <div class="circulos">
-          <div class="formatoCirculo" (click)="mostrarDetalles('Servicio Técnico')" [class.selected]="opcionSeleccionada === 'Servicio Técnico'"><strong>Servicio Técnico</strong></div>
-          <div (click)="mostrarDetalles('Venta')" [class.selected]="opcionSeleccionada === 'Venta'"><strong>Venta</strong></div>
-          <div (click)="mostrarDetalles('Asesoramiento')" [class.selected]="opcionSeleccionada === 'Asesoramiento'"><strong>Asesoramiento</strong></div>
-        </div>
-        <div class="detalles">
-          <img src="../../../assets/Logo.png" alt="Imagen">
-          <div class="container infoService" *ngIf="venta">
-            <h4 style="color: #107997;">VENTA DE EQUIPOS E INSUMOS</h4>
-
-              <mat-accordion>
-                <mat-expansion-panel *ngFor="let panel of datosPaneles; let i = index" [expanded]="panelOpenState[i]" (opened)="togglePanel(i)">
-                  <mat-expansion-panel-header>
-                    <mat-panel-title  style="color: #107997;font-weight: bold;">
-                      {{ panel.titulo }}
-                    </mat-panel-title>
-                  </mat-expansion-panel-header>
-                  <mat-expansion-panel-content>
-                    <div *ngFor="let item of panel.contenido" style="color: #107997;">
-                      {{ item }}
-                    </div>
-                  </mat-expansion-panel-content>
-                </mat-expansion-panel>
-              </mat-accordion>
-        
-          
-          </div>
-
-          <div *ngIf="asesoramiento" class="infoService">
-                <h4 style="color: #107997;">
-                    ASESORAMIENTO
-                </h4>
-                <H6>
-                  <P style="color: #107997;">- Asesoramiento sobre Software Legal</P>
-                </H6>
-          </div>
-
-          <div *ngIf="servicio" class="infoService">
-                <h4 style="color: #107997;">
-                    SERVICIO TECNICO
-                </h4>
-                <h6 style="color: #107997;">
-                  <p>- Reparación electronica de Notebooks, PC's de escritorio, monitores, placas madres, etc.</p>
-                  <p>- Reparación y mantenimiento de UPS.</p>
-                  <p>- Mantenimiento de impresoras.</p>
-                  <p>- Instalación y configuración de redes de datos, cableados y puestos de trabajo.</p>
-                  <p>- Armado de rack informático.</p>
-                  <p>- Recuperación de datos y backup.</p>
-                  <p>- Software: Instalación y configuración de sistemas operativos Linux y Windows en notebooks, PC's y servidores.</p>
-                </h6>
-          </div>
-        </div>
-      </div>
-      <div class="gris"></div>
-</div>  -->
-
-  
-
 
 <app-footer></app-footer>
