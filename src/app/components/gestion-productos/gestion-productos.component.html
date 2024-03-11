@@ -156,19 +156,28 @@
                             <mat-grid-tile [colspan]="2" [rowspan]="1">
                                 <mat-form-field>
                                     <mat-label>Imagen</mat-label>
-                                    <input matInput formControlName="imagenesM">
+                                    <div class="input-with-button">
+                                        <input matInput formControlName="imagenesM">
+                                        <button *ngIf="controlImagenesM" class="delete-button" (click)="borrarCampo('imagenesM')">X</button>
+                                    </div>
                                 </mat-form-field>
                             </mat-grid-tile>
                             <mat-grid-tile [colspan]="2" [rowspan]="1">
                                 <mat-form-field>
                                     <mat-label>Imagen</mat-label>
-                                    <input matInput formControlName="imagenesM2">
+                                    <div class="input-with-button">
+                                        <input matInput formControlName="imagenesM2">
+                                        <button *ngIf="controlImagenesM2" class="delete-button" (click)="borrarCampo('imagenesM2')">X</button>
+                                    </div>
                                 </mat-form-field>
                             </mat-grid-tile>
                             <mat-grid-tile [colspan]="2" [rowspan]="1">
                                 <mat-form-field>
                                     <mat-label>Imagen</mat-label>
-                                    <input matInput formControlName="imagenesM3">
+                                    <div class="input-with-button">
+                                        <input matInput formControlName="imagenesM3">
+                                        <button *ngIf="controlImagenesM3" class="delete-button" (click)="borrarCampo('imagenesM3')">X</button>
+                                    </div>
                                 </mat-form-field>
                             </mat-grid-tile>
 
@@ -255,19 +264,28 @@
                         <mat-grid-tile [colspan]="2" [rowspan]="1">
                             <mat-form-field>
                                 <mat-label>Imagen principal</mat-label>
-                                <input matInput formControlName="imagenes">
+                                <div class="input-with-button">
+                                    <input matInput formControlName="imagenes">
+                                    <button *ngIf="controlImagenes" class="delete-button" (click)="borrarCampo('imagenes')">X</button>
+                                </div>
                             </mat-form-field>
                         </mat-grid-tile>
                         <mat-grid-tile [colspan]="2" [rowspan]="1">
                             <mat-form-field>
                                 <mat-label>Imagen secundaria</mat-label>
-                                <input matInput formControlName="imagenes2">
+                                <div class="input-with-button">
+                                    <input matInput formControlName="imagenes2">
+                                    <button *ngIf="controlImagenes2" class="delete-button" (click)="borrarCampo('imagenes2')">X</button>
+                                </div>    
                             </mat-form-field>
                         </mat-grid-tile>
                         <mat-grid-tile [colspan]="2" [rowspan]="1">
                             <mat-form-field>
                                 <mat-label>Imagen secundaria</mat-label>
-                                <input matInput formControlName="imagenes3">
+                                <div class="input-with-button">
+                                    <input matInput formControlName="imagenes3">
+                                    <button *ngIf="controlImagenes3" class="delete-button" (click)="borrarCampo('imagenes3')">X</button>
+                                </div>
                             </mat-form-field>
                         </mat-grid-tile>
                     </mat-grid-list>

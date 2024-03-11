@@ -33,6 +33,12 @@ export class GestionProductosComponent {
   estadoApi: string = ""
   validadorApi: boolean = false
   // idApi: string = 'r6SoJw8FxtZ2aWHz2nVq'
+  controlImagenes: boolean = false
+  controlImagenes2: boolean = false
+  controlImagenes3: boolean = false
+  controlImagenesM: boolean = false
+  controlImagenesM2: boolean = false
+  controlImagenesM3: boolean = false
 
 
 
@@ -76,6 +82,48 @@ export class GestionProductosComponent {
     this.getProductos()
     this.onlyCategory =  JSON.parse(localStorage.getItem('categorias'));  
     this.getTablaIva()
+
+    this.altaProd.controls['imagenes'].valueChanges.subscribe(val => {
+      val?.length === 0? this.controlImagenes = false: this.controlImagenes = true
+    });
+    this.altaProd.controls['imagenes2'].valueChanges.subscribe(val => {
+      val?.length === 0? this.controlImagenes2 = false: this.controlImagenes2 = true
+    });
+    this.altaProd.controls['imagenes3'].valueChanges.subscribe(val => {
+      val?.length === 0? this.controlImagenes3 = false: this.controlImagenes3 = true
+    });
+    this.modificarProd.controls['imagenesM'].valueChanges.subscribe(val => {
+      val?.length === 0? this.controlImagenesM = false: this.controlImagenesM = true
+    });
+    this.modificarProd.controls['imagenesM2'].valueChanges.subscribe(val => {
+      val?.length === 0? this.controlImagenesM2 = false: this.controlImagenesM2 = true
+    });
+    this.modificarProd.controls['imagenesM3'].valueChanges.subscribe(val => {
+      val?.length === 0? this.controlImagenesM3 = false: this.controlImagenesM3 = true
+    });
+  }
+
+  borrarCampo(idCampo: string){
+    switch (idCampo){
+      case 'imagenes': 
+        this.altaProd.controls['imagenes'].setValue('')
+        break;
+      case 'imagenes2':
+        this.altaProd.controls['imagenes2'].setValue('')
+        break;
+        case 'imagenes3':
+        this.altaProd.controls['imagenes3'].setValue('')
+        break;
+        case 'imagenesM': 
+        this.modificarProd.controls['imagenesM'].setValue('')
+        break;
+      case 'imagenesM2':
+        this.modificarProd.controls['imagenesM2'].setValue('')
+        break;
+        case 'imagenesM3':
+        this.modificarProd.controls['imagenesM3'].setValue('')
+        break;
+    }
   }
 
   getTablaIva(){

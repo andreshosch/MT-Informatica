@@ -229,3 +229,23 @@
   display: flex;
   flex-direction: column;
 }
+
+.input-with-button {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.delete-button {
+  position: absolute;
+  right: 8px; /* Ajusta la posición según sea necesario */
+  background-color: lightgrey;
+  border: none;
+  color: black;
+  cursor: pointer;
+
+}
+
+.delete-button:hover {
+  color: #f00; /* Cambia el color al pasar el mouse sobre la "x" */
+}
