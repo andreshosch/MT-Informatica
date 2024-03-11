@@ -9,6 +9,7 @@ import { ProductosService } from 'src/app/services/productos.service';
 import { SppinerService } from 'src/app/services/sppiner.service';
 
 
+
 @Component({
   selector: 'app-productos',
   templateUrl: './productos.component.html',
@@ -186,7 +187,7 @@ export class ProductosComponent {
                   precio: this.arrProductos[p].precio,
                   categoria: this.arrProductos[p].categoria,
                   subcategoria: this.arrProductos[p].sub_categoria,
-                  imagenes: this.arrProductos[p].imagenes[0],
+                  imagenes: this.arrProductos[p].imagenes,
                   descripcion: this.arrProductos[p].descripcion,
                   destacado: false,
                   marca: this.arrProductos[p].marca,
@@ -205,7 +206,7 @@ export class ProductosComponent {
               }
               // this.arrProducts.push(...this.arrProductos)
              
-              this.loadFirstPage(this.arrProducts)
+              this.loadFirstPage(this.arrProducts)          
               
             })
         }
@@ -302,7 +303,6 @@ export class ProductosComponent {
       this.arrProductsPages[i] = products[this.min]
       this.min++
     }
-    console.log(products.length)
   }
 
   filterProducts() {

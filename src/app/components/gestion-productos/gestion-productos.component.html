@@ -53,7 +53,7 @@
         </div>
     </div>
 
-    <div class="formatoArticulos container">
+    <div class="formatoArticulos container" *ngIf="modalFormatoArticulos">
         <h4 style="color: #107997;font-weight: bold;">ARTICULOS ACTUALES</h4>
         <div class="galeriaCard container">
             <div *ngFor="let articulo of productosHot">

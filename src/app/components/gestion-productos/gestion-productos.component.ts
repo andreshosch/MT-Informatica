@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { tr } from 'date-fns/locale';
 import { Producto } from 'src/app/models/producto';
@@ -19,12 +20,13 @@ export class GestionProductosComponent {
   productosHot: any[] = []
   listado: any[] = []
   tablaIva: any[] = []
-  altaProd:FormGroup
+  altaProd: FormGroup
   modificarProd: FormGroup
   modalActivo: boolean = false
+  modalFormatoArticulos: boolean = true
   idProducto: string
   losBloqueados: any[] = []
-  imagenesArray:string[]=[]
+  imagenesArray: string[] = []
   onlyCategory: any;
   idAuxiliar: string = ""
   showConfirmationDelProd: boolean = false
@@ -32,7 +34,7 @@ export class GestionProductosComponent {
   validadorApi: boolean = false
   // idApi: string = 'r6SoJw8FxtZ2aWHz2nVq'
 
-    
+
 
   constructor(private _productosService: ProductosService, private _pagosService: PagosService, private fb: FormBuilder,private _mensaje:MensajeService, public _spinner:SppinerService){
     
@@ -63,7 +65,7 @@ export class GestionProductosComponent {
     })
   }
 
-  ngOnInit(){
+  ngOnInit() {
     this._spinner.showSpinner()
     this.getApi();
     this.getBloqueados()
@@ -84,18 +86,18 @@ export class GestionProductosComponent {
     })
   }
 
-  getApi(){
+  getApi() {
     this._productosService.getApiElite().subscribe(doc => {
       doc.forEach((element: any) => {
         this.validadorApi = element.payload.doc.data().valor
       })
     })
     setTimeout(() => {
-      this.validadorApi === true? this.estadoApi = 'Activa': this.estadoApi = 'Inactiva';
+      this.validadorApi === true ? this.estadoApi = 'Activa' : this.estadoApi = 'Inactiva';
     }, 2000)
   }
 
-  altaApi(){
+  altaApi() {
     let ss = {
       valor: true
     }
@@ -104,7 +106,7 @@ export class GestionProductosComponent {
     this._mensaje.snackBar('API de Elite Activada', 'green')
   }
 
-  bajaApi(){
+  bajaApi() {
     let ss = {
       valor: false
     }
@@ -113,90 +115,182 @@ export class GestionProductosComponent {
     this._mensaje.snackBar('API de Elite Desactivada', 'green')
   }
 
-  getProductos(){
+  getProductos() {
     this._productosService.getProducts().subscribe(doc => {
       this.productosHot = []
       doc.forEach((element: any) => {
         this.productosHot.push({
           id: element.payload.doc.id,
-          ... element.payload.doc.data()
+          ...element.payload.doc.data()
         })
       })
-      console.log(this.productosHot)
     })
   }
 
-  getBloqueados(){
+  getBloqueados() {
     this._productosService.getBloqueos().subscribe(doc => {
       this.losBloqueados = []
       doc.forEach((element: any) => {
-        this.losBloqueados.push({    
+        this.losBloqueados.push({
           id: element.payload.doc.id,
           categoria: element.payload.doc.data().categoria
-      })
+        })
       })
     })
   }
 
-  agregarProd(tipo){
-    if(tipo == 'a'){
-        // this.imagenesArray.push(this.altaProd.get('imagenes').value)
-        const unProducto: Producto = {
+  // agregarProd(tipo) {
+  //   let unProducto:Producto
+  //   if (tipo == 'a') {
+  //      unProducto=
+  //     {
+  //       nombre: this.altaProd.get('nombre').value,
+  //       precio: this.altaProd.get('precio').value,
+  //       categoria: this.altaProd.get('categoria').value,
+  //       subcategoria: this.altaProd.get('subcategoria').value,
+  //       imagenes: [this.altaProd.get('imagenes').value],
+  //       descripcion: this.altaProd.get('descripcion').value,
+  //       destacado: this.altaProd.get('destacado').value,
+  //       marca: this.altaProd.get('marca').value,
+  //       iva: this.altaProd.get('iva').value,
+  //       impuesto_interno: this.altaProd.get('impuesto_interno').value,
+  //       cantidad: 1
+  //     }
+  //     this._productosService.createProduct(unProducto)
+  //     this.altaProd.reset()
+  //     this._mensaje.snackBar("Producto dado de alta correctamente", "green")
+  //   } else {
+  //     const nuevasImagenes = [this.modificarProd.get('imagenesM').value];
+  //     console.log(this.productosHot)
+  //     if ( this.sonImagenesDiferentes(nuevasImagenes)) {
+  //        unProducto =
+  //       {
+  //         nombre: this.modificarProd.get('nombreM').value,
+  //         precio: this.modificarProd.get('precioM').value,
+  //         categoria: this.modificarProd.get('categoriaM').value,
+  //         subcategoria: this.modificarProd.get('subcategoriaM').value,
+  //         imagenes: nuevasImagenes,
+  //         descripcion: this.modificarProd.get('descripcionM').value,
+  //         destacado: this.modificarProd.get('destacadoM').value,
+  //         marca: this.modificarProd.get('marcaM').value,
+  //         iva: this.modificarProd.get('ivaM').value,
+  //         impuesto_interno: this.modificarProd.get('impuesto_internoM').value,
+  //         cantidad: 1
+  //       }
+  //     }
+  //     else {
+  //        unProducto =
+  //       {
+  //         nombre: this.modificarProd.get('nombreM').value,
+  //         precio: this.modificarProd.get('precioM').value,
+  //         categoria: this.modificarProd.get('categoriaM').value,
+  //         subcategoria: this.modificarProd.get('subcategoriaM').value,
+  //         descripcion: this.modificarProd.get('descripcionM').value,
+  //         // imagenes: [this.modificarProd.get('imagenesM').value],
+  //         destacado: this.modificarProd.get('destacadoM').value,
+  //         marca: this.modificarProd.get('marcaM').value,
+  //         iva: this.modificarProd.get('ivaM').value,
+  //         impuesto_interno: this.modificarProd.get('impuesto_internoM').value,
+  //         cantidad: 1
+  //       }
+  //     }
+  //   }
+  //   this._productosService.updateProduct(this.idProducto, unProducto)
+  //   this.modalActivo = false
+  //   this._mensaje.snackBar("Producto modificado correctamente", "green")
+  // }
+
+  // sonImagenesDiferentes(nuevasImagenes: string[]): boolean {
+  //   const imagenesActuales = [this.modificarProd.get('imagenesM').value];
+  //   return JSON.stringify(nuevasImagenes) !== JSON.stringify(imagenesActuales);
+  // }
+
+  agregarProd(tipo) {
+    let unProducto: Producto;
+  
+    if (tipo == 'a') {
+      unProducto = {
         nombre: this.altaProd.get('nombre').value,
         precio: this.altaProd.get('precio').value,
         categoria: this.altaProd.get('categoria').value,
         subcategoria: this.altaProd.get('subcategoria').value,
-        imagenes: this.altaProd.get('imagenes').value,
+        imagenes: [this.altaProd.get('imagenes').value],
         descripcion: this.altaProd.get('descripcion').value,
         destacado: this.altaProd.get('destacado').value,
         marca: this.altaProd.get('marca').value,
         iva: this.altaProd.get('iva').value,
         impuesto_interno: this.altaProd.get('impuesto_interno').value,
         cantidad: 1
+      };
+    } else {
+      const nuevasImagenes = ["hola"];
+      const imagenesActuales = this.modificarProd.get('imagenesM').value;
+  
+      // Verificar si las imágenes son diferentes
+      if (!this.sonImagenesIguales(nuevasImagenes, imagenesActuales)) {
+        unProducto = {
+          nombre: this.modificarProd.get('nombreM').value,
+          precio: this.modificarProd.get('precioM').value,
+          categoria: this.modificarProd.get('categoriaM').value,
+          subcategoria: this.modificarProd.get('subcategoriaM').value,
+          imagenes: imagenesActuales,
+          descripcion: this.modificarProd.get('descripcionM').value,
+          destacado: this.modificarProd.get('destacadoM').value,
+          marca: this.modificarProd.get('marcaM').value,
+          iva: this.modificarProd.get('ivaM').value,
+          impuesto_interno: this.modificarProd.get('impuesto_internoM').value,
+          cantidad: 1
+        };
+      } else {
+        unProducto = {
+          nombre: this.modificarProd.get('nombreM').value,
+          precio: this.modificarProd.get('precioM').value,
+          categoria: this.modificarProd.get('categoriaM').value,
+          subcategoria: this.modificarProd.get('subcategoriaM').value,
+           imagenes: nuevasImagenes,
+          descripcion: this.modificarProd.get('descripcionM').value,
+          destacado: this.modificarProd.get('destacadoM').value,
+          marca: this.modificarProd.get('marcaM').value,
+          iva: this.modificarProd.get('ivaM').value,
+          impuesto_interno: this.modificarProd.get('impuesto_internoM').value,
+          cantidad: 1
+        }
       }
-      this._productosService.createProduct(unProducto) 
-      this.altaProd.reset()
-      this._mensaje.snackBar("Producto dado de alta correctamente","green")
-      console.log(unProducto)
-    }else{
-      //  this.imagenesArray.push(this.modificarProd.get('imagenesM').value)
-       const unProducto: Producto = {
-        nombre: this.modificarProd.get('nombreM').value,
-        precio: this.modificarProd.get('precioM').value,
-        categoria: this.modificarProd.get('categoriaM').value,
-        subcategoria: this.modificarProd.get('subcategoriaM').value,
-        imagenes: this.modificarProd.get('imagenesM').value, 
-        descripcion: this.modificarProd.get('descripcionM').value,
-        destacado: this.modificarProd.get('destacadoM').value,
-        marca: this.modificarProd.get('marcaM').value,
-        iva: this.modificarProd.get('ivaM').value,
-        impuesto_interno: this.modificarProd.get('impuesto_internoM').value,
-        cantidad: 1
-      }
-            
-      this._productosService.updateProduct(this.idProducto, unProducto) 
-      this.modalActivo=false
-      this._mensaje.snackBar("Producto modificado correctamente","green")
     }
+        // unProducto.imagenes=[unProducto.imagenes]
+        this._productosService.updateProduct(this.idProducto, unProducto)
+        this.modalActivo = false;
+        this._mensaje.snackBar("Producto modificado correctamente", "green");
   }
-
-  borrarPorId(articulo){
+  
+  sonImagenesIguales(nuevasImagenes: string[], imagenesActuales: string[]): boolean {
+    if (nuevasImagenes.length !== imagenesActuales.length) {
+      return false; 
+    }
+    for (let i = 0; i < nuevasImagenes.length; i++) {
+      if (nuevasImagenes[i] !== imagenesActuales[i]) {
+        return false;
+      }
+    }
+    return true;
+  }
+  borrarPorId(articulo) {
     // this._productosService.deleteProduct(articulo)
     this.idAuxiliar = articulo;
     this.showConfirmationDelProd = true
   }
 
-  confirmDel(){
+  confirmDel() {
     this._productosService.deleteProduct(this.idAuxiliar)
     this.showConfirmationDelProd = false
     this.idAuxiliar = ""
   }
 
-  cancelProd(){
+  cancelProd() {
     this.showConfirmationDelProd = false
   }
 
-  modificar(articulo){
+  modificar(articulo) {
     this.modalActivo = true
     this.idProducto = articulo
 
@@ -216,35 +310,34 @@ export class GestionProductosComponent {
     })
   }
 
-  cerrarModal(){
-    this.modalActivo=false
+  cerrarModal() {
+    this.modalActivo = false
   }
 
-  altaBloqueo(){
+  altaBloqueo() {
     let categoria = document.getElementById('aBloquear').textContent
 
-    if(categoria){
+    if (categoria) {
       let prueba = {
         categoria
       }
       this._productosService.setBloqueos(prueba)
       this.onlyCategory = this.onlyCategory.filter(category => category !== categoria);
       this._mensaje.snackBar('Categoría bloqueada correctamente', 'green')
-    } 
+    }
   }
 
-bajaBloqueo(){
-  let categoria = document.getElementById('aDesbloquear').textContent
-  const index = this.losBloqueados.findIndex(objeto => objeto.categoria === categoria)
-  this._productosService.deleteBloqueo(this.losBloqueados[index].id)
-  this._mensaje.snackBar('Categoría desbloqueada correctamente', 'green')
-}
-
-setApiElite(elValor: boolean){
-  let ss = {
-    valor: elValor
+  bajaBloqueo() {
+    let categoria = document.getElementById('aDesbloquear').textContent
+    const index = this.losBloqueados.findIndex(objeto => objeto.categoria === categoria)
+    this._productosService.deleteBloqueo(this.losBloqueados[index].id)
+    this._mensaje.snackBar('Categoría desbloqueada correctamente', 'green')
   }
-  this._productosService.setApiElite(ss)
-}
 
+  setApiElite(elValor: boolean) {
+    let ss = {
+      valor: elValor
+    }
+    this._productosService.setApiElite(ss)
+  }
 }

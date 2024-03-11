@@ -5,28 +5,30 @@
       <p>Fuente: Banco Nación</p>
     </div> -->
 
-    <div *ngIf="showProductosDestacados" class="container container-shopDestacado">
-      <h3 class="titleProductos">PRODUCTOS DESTACADOS</h3>
-      <div class="form-container ordenFiltro">
-        <ngb-carousel class="container container-card">
-          <ng-template class="card" style="width: 18rem" *ngFor="let articulo of productosHot" ngbSlide>
-              <img src="{{articulo.imagenes}}" alt="Random first slide" class="card-img-top" alt="..." style="height: 250px;width: 250px;"/>
-              <div class="card-body">
-                <h3 class="title">{{articulo.nombre}}</h3>
-                <p class="card-precio"><strong>Precio: </strong>U$S {{articulo.precio}}</p>
-                <p>Descripcion: {{articulo.descripcion}} </p>    
-              </div>
-            
-            <div class="example-button-row">
-              <button (click)="agregarAlCarrito(articulo, articulo.id)" button style="background-color: #107997;color:  white;margin-bottom: 15px;" mat-raised-button>Agregar al
-                carrito</button>
-            </div>
-          </ng-template>
-        </ngb-carousel>
-      </div>
+  <div *ngIf="showProductosDestacados" class="container container-shopDestacado">
+    <h3 class="titleProductos">PRODUCTOS DESTACADOS</h3>
+    <div class="form-container ordenFiltro">
+      <ngb-carousel class="container container-card">
+        <ng-template class="card" style="width: 18rem" *ngFor="let articulo of productosHot" ngbSlide>
+          <img src="{{articulo.imagenes}}" alt="Random first slide" class="card-img-top" alt="..."
+            style="height: 250px;width: 250px;" />
+          <div class="card-body">
+            <h3 class="title">{{articulo.nombre}}</h3>
+            <p class="card-precio"><strong>Precio: </strong>U$S {{articulo.precio}}</p>
+            <p>Descripcion: {{articulo.descripcion}} </p>
+          </div>
+
+          <div class="example-button-row">
+            <button (click)="agregarAlCarrito(articulo, articulo.id)" button
+              style="background-color: #107997;color:  white;margin-bottom: 15px;" mat-raised-button>Agregar al
+              carrito</button>
+          </div>
+        </ng-template>
+      </ngb-carousel>
     </div>
-  
-    <div class="gris"></div>
+  </div>
+
+  <div class="gris"></div>
 
   <!-- Fin Productos destacados -->
   <div class="container container-shop ">
@@ -37,7 +39,8 @@
         </h4>
       </div>
       <div>
-        <input type="text" [(ngModel)]="productSearch" placeholder="Ingrese producto a buscar" (input)="updateProductSearch()">
+        <input type="text" [(ngModel)]="productSearch" placeholder="Ingrese producto a buscar"
+          (input)="updateProductSearch()">
         <select [(ngModel)]="categorySearch" (change)="updateSubCategories()">
           <option value="">Selecciona una categoría</option>
           <option *ngFor="let categoria of category" [value]="categoria">{{categoria}}</option>
@@ -49,7 +52,7 @@
         <select [(ngModel)]="brandSearch">
           <option value="">Selecciona una Marca</option>
           <option *ngFor="let marca of brandFilter" [value]="marca">{{marca}}</option>
-        </select>  
+        </select>
       </div>
       <div class="botonera">
         <button mat-raised-button (click)="filterProducts()" class="clear">Buscar</button>
@@ -60,12 +63,12 @@
 
   <div class="gris2"></div>
 
-  <div  class="container container-shop"*ngIf="tituloProductos"id="productos">
-    <h3 class="titleProductos" >NUESTROS PRODUCTOS</h3>
+  <div class="container container-shop" *ngIf="tituloProductos" id="productos">
+    <h3 class="titleProductos">NUESTROS PRODUCTOS</h3>
     <!-- <button (click)="traerTodo()">Traer</button> -->
     <div class="container container-card">
       <div class="card" style="width: 18rem" *ngFor="let productos of arrProductsPages">
-        <img src={{productos.imagenes}} class="card-img-top" alt="..." style="height: 250px;width: 250px;">
+        <img src={{productos.imagenes[0]}} class="card-img-top" alt="..." style="height: 250px;width: 250px;">
         <div class="card-body">
           <h6 class="title">{{productos.nombre}}</h6>
           <!-- <p class="card-text">Categoría: {{productos.categoria}}</p> -->
@@ -77,42 +80,40 @@
         </div>
         <div class="example-button-row">
           <button style="background-color: #107997;color: white;margin-bottom: 15px;" *ngIf="this.hayLogueado"
-            (click)="agregarAlCarrito(productos, productos.id)"
-            mat-raised-button>Agregar al carrito</button>
+            (click)="agregarAlCarrito(productos, productos.id)" mat-raised-button>Agregar al carrito</button>
         </div>
         <!-- <button *ngIf="this.hayLogueado" (click)="agregarAlCarrito(productos, productos.id)" style="margin-bottom: 10px; text-align: center;">Agregar al carrito</button> -->
       </div>
     </div>
   </div>
 
+
   <div class="confirmation-dialog" *ngIf="selectedProduct">
-    <div class="dialog-content">
-        <div class="detalle">
-            <h4>DETALLE DE PRODUCTO</h4>
-            <div class="interno">
-              <div>
-                <img src={{selectedProduct.imagenes}} style="width: 40%;height: 40%;" alt="...">
-                <div class="datos">
-                  <h4>{{selectedProduct.nombre}}</h4>
-                  <p><strong>Precio: </strong>U$S {{selectedProduct.precio}}</p>
-                  <p><strong>IVA: </strong>{{selectedProduct.iva}} %</p>
-                  <p><strong>Imp. Interno: </strong>{{selectedProduct.impuesto_interno}} %</p>
-                  <p><strong>Descripción: </strong>{{selectedProduct.descripcion}}</p>
-                </div>
-              </div>
-              <div>
-                  <button (click)="cerrarDetalle()" mat-raised-button style="background-color:#107997;color:white">Cerrar</button>
-              </div>
-            </div>
+  <div class="dialog-content">
+    <div class="detalle">
+      <h4>DETALLE DE PRODUCTO</h4>
+      <div class="interno">
+        <ngb-carousel *ngIf="selectedProduct.imagenes && selectedProduct.imagenes.length > 0">
+          <ng-template ngbSlide *ngFor="let imagen of selectedProduct.imagenes">
+            <img src="{{ imagen }}" style="width: 40%; height: 40%;" alt="...">
+          </ng-template>
+        </ngb-carousel>
+        <div class="datos">
+          <h4>{{selectedProduct.nombre}}</h4>
+          <p><strong>Precio: </strong>U$S {{selectedProduct.precio}}</p>
+          <p><strong>IVA: </strong>{{selectedProduct.iva}} %</p>
+          <p><strong>Imp. Interno: </strong>{{selectedProduct.impuesto_interno}} %</p>
+          <p><strong>Descripción: </strong>{{selectedProduct.descripcion}}</p>
         </div>
+      </div>
+      <div>
+        <button (click)="cerrarDetalle()" mat-raised-button style="background-color:#107997;color:white">Cerrar</button>
+      </div>
     </div>
+  </div>
 </div>
 
-
-
-  <!-- ------------------------------------------------ -->
-
-  <div>
+<div>
   <nav aria-label="Page navigation example" class="container-pages" style="display: flex; justify-content: center;">
     <div class="botones pagination justify-content-center" *ngIf="filterArray.length>0">
       <button *ngIf="visibleFirstPage" class="page-item"><a class="page-link" *ngIf="visibleFirstPage"
