@@ -32,10 +32,9 @@
         <div class="col-12 col-sm-12 col-md-8 col-lg-4 col-xl-4 login">
             <app-login></app-login>
         </div>
-        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 cuadrito">
-            <p>Valor dolar: <span>${{ valorDolarActual }} - <strong>Fuente: </strong>Banco Nación</span></p>
-            <!-- <p>Fuente: Banco Nación</p> -->
+        <div class="cuadrito">
+            <p matTooltip="Fuente: Banco Nación">Cotización dolar: <span>${{ valorDolarActual }}</span></p>
         </div>
     </div>
- 
+    <!-- - <strong>Fuente: </strong>Banco Nación -->
 </div>

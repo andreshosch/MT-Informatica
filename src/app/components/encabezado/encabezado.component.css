@@ -37,7 +37,6 @@
     transform: translateY(-50%);
     margin-top: 20px;
     display: flex;
-    align-items: end;
   }
   
   .cuadrito p {
