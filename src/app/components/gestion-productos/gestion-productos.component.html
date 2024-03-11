@@ -146,12 +146,6 @@
                             </mat-grid-tile>
                             <mat-grid-tile [colspan]="2" [rowspan]="1">
                                 <mat-form-field>
-                                    <mat-label>Imagen</mat-label>
-                                    <input matInput formControlName="imagenesM">
-                                </mat-form-field>
-                            </mat-grid-tile>
-                            <mat-grid-tile [colspan]="2" [rowspan]="1">
-                                <mat-form-field>
                                     <mat-label>Destacado</mat-label>
                                     <mat-select formControlName="destacadoM">
                                         <mat-option value="true">SI</mat-option>
@@ -159,6 +153,25 @@
                                     </mat-select>
                                 </mat-form-field>
                             </mat-grid-tile>
+                            <mat-grid-tile [colspan]="2" [rowspan]="1">
+                                <mat-form-field>
+                                    <mat-label>Imagen</mat-label>
+                                    <input matInput formControlName="imagenesM">
+                                </mat-form-field>
+                            </mat-grid-tile>
+                            <mat-grid-tile [colspan]="2" [rowspan]="1">
+                                <mat-form-field>
+                                    <mat-label>Imagen</mat-label>
+                                    <input matInput formControlName="imagenesM2">
+                                </mat-form-field>
+                            </mat-grid-tile>
+                            <mat-grid-tile [colspan]="2" [rowspan]="1">
+                                <mat-form-field>
+                                    <mat-label>Imagen</mat-label>
+                                    <input matInput formControlName="imagenesM3">
+                                </mat-form-field>
+                            </mat-grid-tile>
+
                         </mat-grid-list>
                         <div class="botonera">
                             <button type="submit" mat-raised-button
@@ -232,17 +245,29 @@
                         </mat-grid-tile>
                         <mat-grid-tile [colspan]="2" [rowspan]="1">
                             <mat-form-field>
-                                <mat-label>Imagen</mat-label>
-                                <input matInput formControlName="imagenes">
-                            </mat-form-field>
-                        </mat-grid-tile>
-                        <mat-grid-tile [colspan]="2" [rowspan]="1">
-                            <mat-form-field>
                                 <mat-label>Destacado</mat-label>
                                 <mat-select formControlName="destacado">
                                     <mat-option value="true">SI</mat-option>
                                     <mat-option value="false">NO</mat-option>
                                 </mat-select>
+                            </mat-form-field>
+                        </mat-grid-tile>
+                        <mat-grid-tile [colspan]="2" [rowspan]="1">
+                            <mat-form-field>
+                                <mat-label>Imagen principal</mat-label>
+                                <input matInput formControlName="imagenes">
+                            </mat-form-field>
+                        </mat-grid-tile>
+                        <mat-grid-tile [colspan]="2" [rowspan]="1">
+                            <mat-form-field>
+                                <mat-label>Imagen secundaria</mat-label>
+                                <input matInput formControlName="imagenes2">
+                            </mat-form-field>
+                        </mat-grid-tile>
+                        <mat-grid-tile [colspan]="2" [rowspan]="1">
+                            <mat-form-field>
+                                <mat-label>Imagen secundaria</mat-label>
+                                <input matInput formControlName="imagenes3">
                             </mat-form-field>
                         </mat-grid-tile>
                     </mat-grid-list>

@@ -45,6 +45,8 @@ export class GestionProductosComponent {
       descripcion: ['', Validators.required],
       precio: ['', [Validators.required, Validators.pattern('^[0-9]+(\.[0-9]{1,2})?$')]],
       imagenes: ['', Validators.required],
+      imagenes2: [''],
+      imagenes3: [''],
       destacado: ['', Validators.required],
       marca: ['', Validators.required],
       iva: ['', Validators.required],
@@ -58,6 +60,8 @@ export class GestionProductosComponent {
       descripcionM: ['', Validators.required],
       precioM: ['', [Validators.required, Validators.pattern('^[0-9]+(\.[0-9]{1,2})?$')]],
       imagenesM: ['', Validators.required],
+      imagenesM2: [''],
+      imagenesM3: [''],
       destacadoM: ['', Validators.required],
       marcaM: ['', Validators.required],
       ivaM: ['', [Validators.required, Validators.pattern('^[0-9]+(\.[0-9]{1,2})?$')]],
@@ -143,12 +147,24 @@ export class GestionProductosComponent {
     let unProducto: Producto;
   
     if (tipo == 'a') {
+      let imagenesActuales:any[]=[]
+      imagenesActuales.push(this.altaProd.get('imagenes').value)
+      let imagen2 = this.altaProd.get('imagenes2').value
+      let imagen3 = this.altaProd.get('imagenes3').value
+
+      if(imagen2){
+        imagenesActuales.push(imagen2)
+      }
+      if(imagen3){
+        imagenesActuales.push(imagen3)
+      }
+
       unProducto = {
         nombre: this.altaProd.get('nombre').value,
         precio: this.altaProd.get('precio').value,
         categoria: this.altaProd.get('categoria').value,
         subcategoria: this.altaProd.get('subcategoria').value,
-        imagenes: [this.altaProd.get('imagenes').value],
+        imagenes: imagenesActuales,
         descripcion: this.altaProd.get('descripcion').value,
         destacado: this.altaProd.get('destacado').value,
         marca: this.altaProd.get('marca').value,
@@ -162,7 +178,15 @@ export class GestionProductosComponent {
     } else {
       let imagenesActuales:any[]=[]
       imagenesActuales.push(this.modificarProd.get('imagenesM').value)
-      imagenesActuales.push("https://http2.mlstatic.com/D_NQ_NP_952333-MLA54846724845_042023-O.webp")
+      let imagen2 = this.modificarProd.get('imagenesM2').value
+      let imagen3 = this.modificarProd.get('imagenesM3').value
+
+      if(imagen2){
+        imagenesActuales.push(imagen2)
+      }
+      if(imagen3){
+        imagenesActuales.push(imagen3)
+      }
         unProducto = {
           nombre: this.modificarProd.get('nombreM').value,
           precio: this.modificarProd.get('precioM').value,
@@ -222,6 +246,11 @@ export class GestionProductosComponent {
         categoriaM: data.categoria,
         subcategoriaM: data.subcategoria,
         imagenesM: data.imagenes[0],
+
+        // imagenesM2: data.imagenes[1],
+        imagenesM2: data.imagenes[1]? data.imagenes[1] : "",
+        imagenesM3: data.imagenes[2]? data.imagenes[2] : "",
+        
         descripcionM: data.descripcion,
         destacadoM: data.destacado,
         marcaM: data.marca,
