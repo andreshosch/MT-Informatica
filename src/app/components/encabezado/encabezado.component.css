@@ -36,11 +36,14 @@
     right: 20px;
     transform: translateY(-50%);
     margin-top: 20px;
-    display: flex;
-    align-items: end;
+    margin-right: 50px;
   }
   
   .cuadrito p {
     margin: 5px 0;
+  }
+
+  .row{
+    justify-content: flex-end !important;
   }
   
