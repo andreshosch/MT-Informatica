@@ -23,14 +23,16 @@ export class PagosService {
     return this.firestore.collection('tablaPagos').doc(id).delete();
   }
 
+  deleteMonto(id: string): Promise<any> {
+    return this.firestore.collection('tablaIva').doc(id).delete();
+  }
+
   updatePago(id: string, pago: any): Promise<any> {
     return this.firestore.collection('tablaPagos').doc(id).update(pago);
   }
 
   createIva(monto: any): Promise<any>{
-    console.log('llegue')
     return this.firestore.collection('tablaIva').add(monto)
-
   }
 
   getIva(): Observable<any> {

@@ -15,19 +15,24 @@ import { SppinerService } from 'src/app/services/sppiner.service';
 export class GestionPagoComponent {
 
   tablaPagos: any[] = []
+  tablaIva: any[] = []
   dataSourcePagos!: MatTableDataSource<any>;
+  dataSourceIva!: MatTableDataSource<any>;
   displayedColumns: string[] = ['metodo', 'porcentaje', 'acciones'];
+  displayedColumns2: string[] = ['monto', 'acciones']
   formMetodo: FormGroup
   formMonto: FormGroup
   updateMetodo: FormGroup
   actualizarPago: boolean = false
   idAuxiliar: string = ""
   showConfirmationDelPago: boolean = false
+  showConfirmationDelMonto: boolean = false
   metodoExistente: boolean = false
 
   constructor(private _pagosService: PagosService, private fb:FormBuilder, private _mensaje:MensajeService,public _spinner:SppinerService){
 
     this.dataSourcePagos = new MatTableDataSource(this.tablaPagos);
+    this.dataSourceIva = new MatTableDataSource(this.tablaIva)
 
     this.formMetodo=this.fb.group({
       metodo:['',Validators.required],
@@ -47,13 +52,16 @@ export class GestionPagoComponent {
   ngOnInit() {
     this._spinner.showSpinner()
     this.getTablaPagos()
+    this.getTablaIva()
   }
 
   crearIva(){
     const metodoNew = {
-      nuevoMonto: this.formMonto.get('nuevoMonto').value,
+      monto: this.formMonto.get('nuevoMonto').value,
     }
     this._pagosService.createIva(metodoNew)
+    this.formMonto.reset()
+    this._mensaje.snackBar("Monto IVA creado correctamente",'green')
   }
 
   getTablaPagos(){
@@ -70,11 +78,11 @@ export class GestionPagoComponent {
   }
 
   getTablaIva(){
-    this._pagosService.getPagos().subscribe(doc => {
-      this.tablaPagos = []
-      this.dataSourcePagos = new MatTableDataSource(this.tablaPagos)
+    this._pagosService.getIva().subscribe(doc => {
+      this.tablaIva = []
+      this.dataSourceIva = new MatTableDataSource(this.tablaIva)
       doc.forEach((element: any) => {
-        this.tablaPagos.push({
+        this.tablaIva.push({
           id: element.payload.doc.id,
           ...element.payload.doc.data()
         })
@@ -118,6 +126,12 @@ export class GestionPagoComponent {
     this._mensaje.snackBar("Método de Pago eliminado correctamente",'green')
   }
 
+  confirmDelMonto(id: string){
+    this._pagosService.deleteMonto(id)
+    this.showConfirmationDelMonto = false
+    this._mensaje.snackBar("Monto IVA eliminado correctamente",'green')
+  }
+
   actualizarMetodoPago(){
     const metodoAuxiliar = {
       metodo: this.updateMetodo.get('metodo').value,
@@ -143,8 +157,17 @@ export class GestionPagoComponent {
     this.idAuxiliar = id
   }
 
+  eliminarUnMonto(id: string){
+    this.showConfirmationDelMonto = true
+    this.idAuxiliar = id
+  }
+
   cancelDel(){
     this.showConfirmationDelPago = false
+  }
+
+  cancelDelMonto(){
+    this.showConfirmationDelMonto = false
   }
 
 }

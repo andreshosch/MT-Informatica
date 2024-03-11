@@ -107,7 +107,11 @@
                             <mat-grid-tile [colspan]="2" [rowspan]="1">
                                 <mat-form-field>
                                     <mat-label>Iva</mat-label>
-                                    <input matInput formControlName="ivaM">
+                                    <mat-select formControlName="ivaM">
+                                        <mat-option *ngFor="let ivaOption of tablaIva" [value]="ivaOption.monto">
+                                            {{ ivaOption.monto }} %
+                                        </mat-option>
+                                    </mat-select>
                                 </mat-form-field>
                             </mat-grid-tile>
                             <mat-grid-tile [colspan]="2" [rowspan]="1">
@@ -150,8 +154,8 @@
                                 <mat-form-field>
                                     <mat-label>Destacado</mat-label>
                                     <mat-select formControlName="destacadoM">
-                                        <mat-option value="true">True</mat-option>
-                                        <mat-option value="false">False</mat-option>
+                                        <mat-option value="true">SI</mat-option>
+                                        <mat-option value="false">NO</mat-option>
                                     </mat-select>
                                 </mat-form-field>
                             </mat-grid-tile>
@@ -189,7 +193,11 @@
                         </mat-grid-tile>. <mat-grid-tile [colspan]="2" [rowspan]="1">
                             <mat-form-field>
                                 <mat-label>Iva</mat-label>
-                                <input matInput formControlName="iva">
+                                <mat-select formControlName="iva">
+                                    <mat-option *ngFor="let ivaOption of tablaIva" [value]="ivaOption.monto">
+                                        {{ ivaOption.monto }} %
+                                    </mat-option>
+                                </mat-select>
                             </mat-form-field>
                         </mat-grid-tile>
                         <mat-grid-tile [colspan]="2" [rowspan]="1">
@@ -232,8 +240,8 @@
                             <mat-form-field>
                                 <mat-label>Destacado</mat-label>
                                 <mat-select formControlName="destacado">
-                                    <mat-option value="true">True</mat-option>
-                                    <mat-option value="false">False</mat-option>
+                                    <mat-option value="true">SI</mat-option>
+                                    <mat-option value="false">NO</mat-option>
                                 </mat-select>
                             </mat-form-field>
                         </mat-grid-tile>

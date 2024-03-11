@@ -26,3 +26,21 @@
 .backg{
     background-color: black;
 }
+
+.cuadrito {
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    width: auto;
+    text-align:center ;
+    /* position: fixed; */
+    right: 20px;
+    transform: translateY(-50%);
+    margin-top: 20px;
+    display: flex;
+    align-items: end;
+  }
+  
+  .cuadrito p {
+    margin: 5px 0;
+  }
+  

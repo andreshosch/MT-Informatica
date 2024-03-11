@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { tr } from 'date-fns/locale';
 import { Producto } from 'src/app/models/producto';
 import { MensajeService } from 'src/app/services/mensaje.service';
+import { PagosService } from 'src/app/services/pagos.service';
 import { ProductosService } from 'src/app/services/productos.service';
 import { SppinerService } from 'src/app/services/sppiner.service';
 import { environment } from 'src/environment/environment';
@@ -17,6 +18,7 @@ export class GestionProductosComponent {
 
   productosHot: any[] = []
   listado: any[] = []
+  tablaIva: any[] = []
   altaProd:FormGroup
   modificarProd: FormGroup
   modalActivo: boolean = false
@@ -32,7 +34,7 @@ export class GestionProductosComponent {
 
     
 
-  constructor(private _productosService: ProductosService, private fb: FormBuilder,private _mensaje:MensajeService, public _spinner:SppinerService){
+  constructor(private _productosService: ProductosService, private _pagosService: PagosService, private fb: FormBuilder,private _mensaje:MensajeService, public _spinner:SppinerService){
     
     this.altaProd = this.fb.group({
       nombre: ['', Validators.required],
@@ -43,7 +45,7 @@ export class GestionProductosComponent {
       imagenes: ['', Validators.required],
       destacado: ['', Validators.required],
       marca: ['', Validators.required],
-      iva: ['', [Validators.required, Validators.pattern('^[0-9]+(\.[0-9]{1,2})?$')]],
+      iva: ['', Validators.required],
       impuesto_interno: ['', [Validators.required, Validators.pattern('^[0-9]+(\.[0-9]{1,2})?$')]],
     });
 
@@ -66,7 +68,20 @@ export class GestionProductosComponent {
     this.getApi();
     this.getBloqueados()
     this.getProductos()
-    this.onlyCategory =  JSON.parse(localStorage.getItem('categorias'));    
+    this.onlyCategory =  JSON.parse(localStorage.getItem('categorias'));  
+    this.getTablaIva()
+  }
+
+  getTablaIva(){
+    this._pagosService.getIva().subscribe(doc => {
+      this.tablaIva = []
+      doc.forEach((element: any) => {
+        this.tablaIva.push({
+          id: element.payload.doc.id,
+          ...element.payload.doc.data()
+        })
+      })
+    })
   }
 
   getApi(){
